@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="{{page.lang}}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, width=device-width">
+    <title>{{page.title | strip_html}} – Sylvain Durand</title>
+    <style type="text/css">{% include styles.css %}</style>
+    {% if page.trans %}<link rel="alternate" hreflang="{% if page.lang != 'fr' %}fr{% else %}en{% endif %}" href="{{ page.trans }}" />{% endif %}
+    {% if page.math %}<script type="text/javascript">{% include mathjax.js %}</script>{% endif %}
+</head>
+<body>
+<div class="nav">
+    <ul>
+        <li class="title"><a href="{{site.nav[page.lang].journal.url}}">sylvain durand</a></li>
+
+        <li class="lang">{% if page.lang != 'fr' %}<span>en</span> {% if page.trans %} | <a href="{{page.trans}}">fr</a>{% endif %}
+                    {% else %}{% if page.trans %} <a href="{{page.trans}}">en</a> | {% endif %}<span>fr</span>{% endif %}</li>
+
+        {% for menu in site.nav[page.lang] %}<li><a href="{{menu[1].url}}" {% if page.url == menu[1].url %}class="active"{% endif %}>{{menu[1].title}}</a>{% endfor %}
+
+    </ul>
+</div>
+
+{% if page.page != true %}
+    <h1>{{ page.title }}
+        <span>
+            {% if page.lang == 'en' %}
+                {{ page.date | date: "%d %B %Y" | englishdate }}
+            {% else %}
+                {{ page.date | date: "%d %B %Y" | frenchdate }}
+            {% endif %}
+        </span>
+    </h1>
+{% endif %}
+
+<div class="main">
+{% if page.lang == 'en' %}
+    {{ content }}
+{% else %}
+    {{ content | typo }}
+{% endif %}
+</div>
+
+</html>

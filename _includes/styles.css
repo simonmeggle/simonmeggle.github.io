@@ -1,0 +1,248 @@
+body{
+    margin:0;
+    font:1em/1.5 Georgia, serif;
+}
+
+@media screen and (min-width: 44em){body{
+        font-size:1.125em}}
+
+a{
+    color:#156f8f;
+    text-decoration:none}
+
+a:hover{
+    color:#0c4255}
+
+p,ul,ol,h3,.nav ul{
+    margin:1.5em auto 0;
+    max-width:33em}
+
+
+
+{% if page.trans == "/journal/" or page.trans == "/" %}
+
+
+.liste{
+    margin:2em auto;
+    max-width:25em;
+    font-size:1.125em;
+    line-height:1.333}
+
+.liste li{
+    margin:0}
+
+.liste li a{
+    display:block;
+    padding:.666em}
+
+.liste li a:hover{
+    background:#fdfdfd}
+
+.liste li + li{
+    box-shadow:0 -1px 0 #eee}
+
+.liste span{
+    display:block;
+    color:#ddd;
+    font-size:.7777em;
+    line-height:1.714}
+
+
+
+
+{% else %}
+
+
+
+img{
+    margin:3em auto;
+    width:100%;
+    border-radius:.6em}
+
+h1{
+    margin:0 0 1.8em;
+    padding:4.5em 1em .9em;
+    background:#252525;
+    color:#fff;
+    text-align:center;
+    letter-spacing:-.04em;
+    font-weight:normal;
+    font-size:1.6667em;
+    line-height:1.8}
+
+h1 span{
+    display:block;
+    margin:0 auto;
+    color:#888;
+    letter-spacing:0;
+    font-size:.5em}
+
+h2{
+    margin:3.3818em auto 1.2272em;
+    max-width:27em;
+    font:bold 1.2222em/1.2272 Arial, sans-serif}
+
+h3{
+    margin:2em auto -1em;
+    font:bold 1em/1.5 Arial, sans-serif}
+
+.caps, sup{
+    font-size:.85em}
+
+.main li{
+    margin-left:1.5em}
+
+.main ul li:before{
+    content:'– '}
+
+
+.large,.large img{
+    max-width:50em}
+    
+{% endif %}
+
+
+
+
+
+
+
+
+ol,ul{
+    margin-top:0;
+    padding:0;
+    list-style-type:none}
+
+
+
+.main, .nav ul{
+    margin:0 auto;
+    padding:1.5em;
+    color:#332}
+
+.nav{
+    position:fixed;
+    width:100%;
+    background:#333;
+    letter-spacing:-.04em;
+    cursor:default}
+
+.nav li a{
+    padding-right:.8em;
+    color:#777}
+
+.nav .lang a{
+    padding:0}
+
+.nav li{
+    display:inline;
+    color:#ccc}
+
+.nav .title{
+    display:block}
+
+.nav .title a{
+    color:#ddd;
+    font-size:1.277em;
+    line-height:.0}
+
+.nav li a:hover,.nav li .active,.nav .title a:hover{
+    color:#fff}
+
+.nav .lang{
+    float:right;
+    color:#4d4d4d}
+
+.nav .lang span{
+    color:#ccc}
+
+
+.main:after{
+    content:"❧";
+    display: block;
+    text-align:center;
+    font-size:5em;
+    color:#EEE;
+    cursor:default}
+
+
+{% if page.page %}
+
+.main{
+    padding-top:6em}
+
+
+{% else %}
+
+
+
+.main p:first-of-type:first-letter{
+    float:left;
+    margin:.13em .05em 0 -.05em;
+    font-size:3.2em;
+    line-height:.5em}
+
+.main p:first-of-type:first-line{
+    letter-spacing:.04em;
+    font-variant:small-caps}
+
+{% endif %}
+
+
+
+
+
+
+
+
+{% if page.code %}
+
+code{
+    background:#f9f9f9;
+    border-radius:.6em;
+    padding:.3em .5em;
+    font-size:.777em;
+    font-family:Monaco,'Lucida Console', monospace}
+
+pre{
+    overflow-x:auto;
+    margin:1.385em auto;
+    padding:1em;
+    max-width:29em;
+    border-radius:.6em;
+    background:#f9f9f9;
+    font-family:monospace,monospace}
+
+pre code{
+    padding:0}
+
+.ge,.gs{
+    color:#93a1a1}
+
+.nb{
+    color:#b58900}
+
+.c,.cm,.c1,.sb{
+    color:#586e75}
+
+.err,.g,.l,.n,.p,.go,.gp,.gt,.ld,.na,.nl,.nn,.nx,.py,.w,.sd,.sh{
+    color:#93a1a1}
+
+.k,.o,.cp,.cs,.gi,.kn,.kp,.ow{
+    color:#859900}
+
+.x,.gh,.gu,.kc,.no,.ni,.ne,.se{
+    color:#cb4b16}
+
+.gd,.m,.s,.mf,.mh,code .mi,code .mo,.sc,.s2,.si,.sx,.s1,.ss,.il{
+    color:#2aa198}
+
+.gr,.kt,.sr{
+    color:#dc322f}
+
+.kd,.kr,.nc,.nd,.nf,.nt,.nv,.bp,.vc,.vg,.vi{
+    color:#268bd2}
+    
+{% endif %}
+
+

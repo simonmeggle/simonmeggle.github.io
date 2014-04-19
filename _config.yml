@@ -1,0 +1,22 @@
+markdown: kramdown
+markdown_ext: foo 
+permalink: /:title/
+
+kramdown:
+  input: GFM
+
+nav:
+  en:
+    journal:
+      title: "journal"
+      url:   "/index.html"
+    about:
+      title: "about"
+      url:   "/about/"
+  fr:
+    journal:
+      title: "journal"
+      url:   "/journal/"
+    about:
+      title: "à propos"
+      url:   "/a-propos/"

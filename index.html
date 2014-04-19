@@ -1,0 +1,15 @@
+---
+layout: default
+title: Journal
+lang: en
+trans: /journal/
+page: yes
+---
+
+<ul class="liste">
+	{% for post in site.posts %}
+		{% if post.lang == page.lang and post.page != true %}
+		<li><a href="{{ post.url }}">{{ post.title | | replace:'<br/>','' }}<span>{{ post.date | date: "%d %B %Y" | englishdate }}</span></a></li>
+		{% endif %}
+	{% endfor %}
+</ul>
