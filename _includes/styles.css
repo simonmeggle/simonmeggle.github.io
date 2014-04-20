@@ -15,7 +15,13 @@ a:hover{
 
 p,ul,ol,h3,.nav ul{
     margin:1.5em auto 0;
-    max-width:33em}
+    max-width:33em;
+    text-align:justify;
+    -moz-hyphens:auto;
+    -ms-hyphens:auto;
+    -webkit-hyphens:auto;
+    hyphens:auto;
+}
 
 
 
