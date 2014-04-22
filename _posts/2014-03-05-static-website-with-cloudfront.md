@@ -2,6 +2,7 @@
 layout: default
 title:  Serve a static website with <em>Cloudfront</em>
 trans: /site-statique-avec-cloudfront/
+desc: Host your static website on S3 and serve it with Cloudfront for a fast, secure, reliable, highly scalable and inexpensive delivery. 
 lang: en
 code: yes
 ---

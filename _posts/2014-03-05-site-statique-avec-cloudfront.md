@@ -2,6 +2,7 @@
 layout: default
 title:  Servir un site statique avec <em>Cloudfront</em>
 trans: /static-website-with-cloudfront/
+desc: Héberger son site statique sur S3 et le servir avec Cloudfront pour obtenir à moindre coût une vitesse, une fiabilité et une sécurité à toute épreuve.
 lang: fr
 code: yes
 ---

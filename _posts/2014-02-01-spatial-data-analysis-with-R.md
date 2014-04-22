@@ -2,6 +2,7 @@
 layout: default
 title:  Spatial Data Analysis with <em>R</em>
 trans: /cartographie-avec-R/
+desc: How to generate different types of maps with R in order to visualize and to represent statistical and cartographic data.
 lang: en
 code: yes
 ---

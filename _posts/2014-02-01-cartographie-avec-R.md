@@ -2,6 +2,7 @@
 layout: default
 title: Éléments de cartographie avec <em>R</em>
 trans: /spatial-data-analysis-with-R/
+desc: Comment générer différentes formes de cartes avec R afin de visualiser et de représenter des données statistiques ou cartographiques.
 lang: fr
 code: yes
 ---

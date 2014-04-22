@@ -2,6 +2,7 @@
 layout: default
 title: Journal
 trans: /
+desc: "Site personnel avec diverses notes d’informatique : TeX, R, Ruby, Python..."
 lang: fr
 page: yes
 ---
@@ -9,7 +10,13 @@ page: yes
 <ul class="liste">
 	{% for post in site.posts %}
 		{% if post.lang == page.lang and post.page != true %}
-		<li><a href="{{ post.url }}">{{ post.title | | replace:'<br/>','' }}<span>{{ post.date | date: "%d %B %Y" | frenchdate }}</span></a></li>
+		<li>
+			<a href="{{ post.url }}">
+				<span class="date">{{ post.date | date: "%d %B %Y" | frenchdate }}</span>
+				{{ post.title | replace:'<br/>','' }}
+				<span class="desc">{{ post.desc }}</span>
+			</a>
+		</li>
 		{% endif %}
 	{% endfor %}
 </ul>

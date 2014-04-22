@@ -28,7 +28,7 @@ p,ul,ol,h3,.nav ul{
 
 .liste{
     margin:2em auto;
-    max-width:25em;
+    max-width:31em;
     font-size:1.125em;
     line-height:1.333}
 
@@ -37,7 +37,7 @@ p,ul,ol,h3,.nav ul{
 
 .liste li a{
     display:block;
-    padding:.666em}
+    padding:1em}
 
 .liste li a:hover{
     background:#fdfdfd}
@@ -45,11 +45,19 @@ p,ul,ol,h3,.nav ul{
 .liste li + li{
     box-shadow:0 -1px 0 #eee}
 
-.liste span{
+.date, .desc{
     display:block;
-    color:#ddd;
     font-size:.7777em;
     line-height:1.714}
+
+.date{
+    float:right;
+    color:#ddd;
+    margin-left:1em}
+
+.desc{
+    margin:.5em 0 .3em 2.5em;
+    color:#999;}
 
 
 

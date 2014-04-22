@@ -2,6 +2,7 @@
 layout: default
 title: Générer un site multilingue avec <em>Jekyll</em> 
 trans: /multilingual-website-with-jekyll/
+desc: 'Grâce à sa syntaxe très flexible, Jekyll peut produire des sites statiques entièrement multilingues : textes, menus, sélecteur de langues, typographie...'
 lang: fr
 code: yes
 ---

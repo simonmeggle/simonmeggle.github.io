@@ -2,6 +2,7 @@
 layout: default
 title:  Synchronize calendars and contacts with <em>OwnCloud</em>
 trans: /synchroniser-calendriers-et-contacts-avec-owncloud/
+desc: How to store your calendars and address books on a Raspberry Pi in order to synchronize them between various devices through OwnCloud.
 lang: en
 code: yes
 ---
