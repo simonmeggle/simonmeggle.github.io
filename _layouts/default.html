@@ -10,10 +10,13 @@
     {% if page.trans %}<link rel="alternate" hreflang="{% if page.lang != 'fr' %}fr{% else %}en{% endif %}" href="{{ page.trans }}" />{% endif %}
     {% if page.math %}<script type="text/javascript">{% include mathjax.js %}</script>{% endif %}
 </head>
-<body>
+<body itemscope itemtype="http://schema.org/Article">
+
 <div class="nav">
     <ul>
-        <li class="title"><a href="{{site.nav[page.lang].journal.url}}">sylvain durand</a></li>
+        <li class="title" itemprop="author">
+            <a href="{{site.nav[page.lang].journal.url}}">Sylvain Durand</a>
+        </li>
 
         <li class="lang">{% if page.lang != 'fr' %}<span>en</span> {% if page.trans %} | <a href="{{page.trans}}">fr</a>{% endif %}
                     {% else %}{% if page.trans %} <a href="{{page.trans}}">en</a> | {% endif %}<span>fr</span>{% endif %}</li>
@@ -24,8 +27,8 @@
 </div>
 
 {% if page.page != true %}
-    <h1>{{ page.title }}
-        <span>
+    <h1><div itemprop="name">{{ page.title }}</div>
+        <span itemprop="datePublished">
             {% if page.lang == 'en' %}
                 {{ page.date | date: "%d %B %Y" | englishdate }}
             {% else %}
@@ -35,7 +38,7 @@
     </h1>
 {% endif %}
 
-<div class="main">
+<div class="main" itemprop="articleBody" >
 {% if page.lang == 'en' %}
     {{ content }}
 {% else %}

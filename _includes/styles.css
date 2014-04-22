@@ -151,7 +151,8 @@ ol,ul{
     color:#ccc}
 
 .nav .title{
-    display:block}
+    display:block;
+    text-transform: lowercase}
 
 .nav .title a{
     color:#ddd;
