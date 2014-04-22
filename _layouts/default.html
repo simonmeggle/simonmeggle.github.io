@@ -11,7 +11,6 @@
     {% if page.math %}<script type="text/javascript">{% include mathjax.js %}</script>{% endif %}
 </head>
 <body itemscope itemtype="http://schema.org/Article">
-
 <div class="nav">
     <ul>
         <li class="title" itemprop="author">
@@ -19,7 +18,7 @@
         </li>
 
         <li class="lang">{% if page.lang != 'fr' %}<span>en</span> {% if page.trans %} | <a href="{{page.trans}}">fr</a>{% endif %}
-                    {% else %}{% if page.trans %} <a href="{{page.trans}}">en</a> | {% endif %}<span>fr</span>{% endif %}</li>
+                         {% else %}{% if page.trans %} <a href="{{page.trans}}">en</a> | {% endif %}<span>fr</span>{% endif %}</li>
 
         {% for menu in site.nav[page.lang] %}<li><a href="{{menu[1].url}}" {% if page.url == menu[1].url %}class="active"{% endif %}>{{menu[1].title}}</a></li>{% endfor %}
 
@@ -29,10 +28,8 @@
 {% if page.page != true %}
     <h1><div itemprop="name">{{ page.title }}</div>
         <span itemprop="datePublished">
-            {% if page.lang == 'en' %}
-                {{ page.date | date: "%d %B %Y" | englishdate }}
-            {% else %}
-                {{ page.date | date: "%d %B %Y" | frenchdate }}
+            {% if page.lang == 'en' %} {{ page.date | date: "%d %B %Y" | englishdate }}
+            {% else %}                 {{ page.date | date: "%d %B %Y" | frenchdate }}
             {% endif %}
         </span>
     </h1>
