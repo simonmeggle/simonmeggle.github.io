@@ -4,7 +4,6 @@ title:  Synchroniser calendriers et contacts avec <em>OwnCloud</em>
 trans: /synchronize-calendars-and-contacts-with-owncloud/
 desc: Comment stocker ses calendriers et ses carnets d'adresses sur un Raspberry Pi, puis les synchroniser entre ses différents périphériques grâce à OwnCloud.
 lang: fr
-code: yes
 ---
 
 Synchroniser ses calendriers, contacts et différents fichiers entre différents périphériques -- ordinateurs, tablettes, téléphones -- est aujourd'hui très courant. Malgré le caractère très personnel, voire sensible, de ces données, la grande majorité utilise les outils proposés par Google, Apple ou Microsoft.

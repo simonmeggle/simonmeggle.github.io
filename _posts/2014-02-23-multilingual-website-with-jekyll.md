@@ -4,7 +4,6 @@ title: Generate a multilingual website with <em>Jekyll</em>
 trans: /site-multilingue-avec-jekyll/
 desc: 'Thanks to its flexible syntax, the static website generator Jekyll can produce fully multilingual static sites: texts, menus, language selector, typography...'
 lang: en
-code: yes
 ---
 
 J<em>ekyll</em> static website generator has a very flexible design that allows a great freedom of choice, allowing the user to simply introduce features that are not integrated into its engine. This is particularly the case when one wants to create a multilingual website: while CMS remain very rigid and often require plugins, few filters are sufficient to achieve it with _Jekyll_.

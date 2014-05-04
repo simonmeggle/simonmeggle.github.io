@@ -208,7 +208,7 @@ ol,ul{
 
 
 
-{% if page.code %}
+{% if content contains "<pre>" %}
 
 code{
     background:#f9f9f9;

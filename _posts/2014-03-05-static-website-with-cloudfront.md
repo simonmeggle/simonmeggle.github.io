@@ -4,7 +4,6 @@ title:  Serve a static website with <em>Cloudfront</em>
 trans: /site-statique-avec-cloudfront/
 desc: Host your static website on S3 and serve it with Cloudfront for a fast, secure, reliable, highly scalable and inexpensive delivery. 
 lang: en
-code: yes
 ---
 
 Long neglected in favor of dynamic languages​, static websites became popular again in recent years with the advent of generators like [_Jekyll_](http://jekyllrb.com), [_Pelican_](http://docs.getpelican.com/) or [_Hyde_](http://hyde.github.io). As they can be stored in the cloud or on very simple servers, they have multiple benefits in terms of lightness, safety and reliability.
