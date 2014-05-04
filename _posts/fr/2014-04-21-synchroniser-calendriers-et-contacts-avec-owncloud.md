@@ -1,6 +1,5 @@
 ---
-lang: fr
-layout: default
+layout: post
 title:  Synchroniser calendriers et contacts avec <em>OwnCloud</em>
 trans: /synchronize-calendars-and-contacts-with-owncloud/
 ---

@@ -1,0 +1,41 @@
+<!doctype html>
+
+{% if page.path contains "/fr/" %}
+    {% assign lang = 'fr' %}
+{% else %}
+    {% assign lang = 'en' %}
+{% endif %}
+
+<html lang="{{lang}}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, width=device-width">
+    <meta name="description" content="{{ page.excerpt | strip_html }}">
+    <title>{{page.title | strip_html}} – Sylvain Durand</title>
+    <style type="text/css">{% include styles.css %}</style>
+    <link rel="icon" href="/favicon.ico" />
+    {% if page.trans %}<link rel="alternate" hreflang="{% if lang != 'fr' %}fr{% else %}en{% endif %}" href="{{ page.trans }}" />{% endif %}
+    {% if page.math %}<script type="text/javascript">{% include mathjax.js %}</script>{% endif %}
+</head>
+<body itemscope itemtype="http://schema.org/Article">
+<div class="nav">
+    <ul>
+        <li class="title" itemprop="author">
+            <a href="{{site.nav[lang].journal.url}}">Sylvain Durand</a>
+        </li>
+
+        <li class="lang">{% if lang != 'fr' %}<span>en</span> {% if page.trans %} | <a href="{{page.trans}}">fr</a>{% endif %}
+                         {% else %}{% if page.trans %} <a href="{{page.trans}}">en</a> | {% endif %}<span>fr</span>{% endif %}</li>
+
+        {% for menu in site.nav[lang] %}<li><a href="{{menu[1].url}}" {% if page.url == menu[1].url %}class="active"{% endif %}>{{menu[1].title}}</a></li>{% endfor %}
+
+    </ul>
+</div>
+
+{% if lang == 'en' %}
+    {{ content }}
+{% else %}
+    {{ content | typo }}
+{% endif %}
+
+</html>

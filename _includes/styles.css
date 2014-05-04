@@ -23,8 +23,9 @@ p,ul,ol,h3,.nav ul{
 
 
 
-{% if page.trans == "/journal/" or page.trans == "/" %}
 
+
+{% if content contains 'class="liste"' %}
 
 .liste{
     margin:2em auto;
@@ -52,7 +53,6 @@ p,ul,ol,h3,.nav ul{
     float:right;
     color:#ddd;
     margin-left:1em}
-
 
 
 
@@ -95,10 +95,10 @@ h3{
 .caps, sup{
     font-size:.85em}
 
-.main li{
+.post li{
     margin-left:1.5em}
 
-.main ul li:before{
+.post ul li:before{
     content:'– '}
 
 
@@ -121,7 +121,7 @@ ol,ul{
 
 
 
-.main, .nav ul{
+.post, .page, .nav ul{
     margin:0 auto;
     padding:1.5em;
     color:#332}
@@ -164,7 +164,7 @@ ol,ul{
     color:#ccc}
 
 
-.main:after{
+.post:after, .page:after{
     content:"❧";
     display: block;
     text-align:center;
@@ -172,28 +172,20 @@ ol,ul{
     color:#eee;
     cursor:default}
 
-
-{% if page.page %}
-
-.main{
+.page{
     padding-top:6em}
 
 
-{% else %}
-
-
-
-.main p:first-of-type:first-letter{
+.post p:first-of-type:first-letter{
     float:left;
     margin:.13em .05em 0 -.05em;
     font-size:3.2em;
     line-height:.5em}
 
-.main p:first-of-type:first-line{
+.post p:first-of-type:first-line{
     letter-spacing:.04em;
     font-variant:small-caps}
 
-{% endif %}
 
 
 

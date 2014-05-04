@@ -1,7 +1,6 @@
 ---
-lang: fr
-layout: default
-title: Éléments de cartographie avec <em>R</em>
+layout: post
+title:  Éléments de cartographie avec <em>R</em>
 trans: /spatial-data-analysis-with-R/
 ---
 

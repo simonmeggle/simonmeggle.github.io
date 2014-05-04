@@ -1,14 +1,12 @@
 ---
-lang: en
-layout: default
+layout: page
 title: Journal
 trans: /journal/
-page: yes
 ---
 
 <ul class="liste">
 	{% for post in site.posts %}
-		{% if post.lang == page.lang and post.page != true %}
+		{% if post.layout == "post" and post.path contains "/en/" %}
 		<li>
 			<a href="{{ post.url }}">
 				<span>{{ post.date | date: "%d %B %Y" | englishdate }}</span>

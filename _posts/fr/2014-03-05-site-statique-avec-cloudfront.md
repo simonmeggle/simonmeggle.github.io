@@ -1,6 +1,5 @@
 ---
-lang: fr
-layout: default
+layout: post
 title:  Servir un site statique avec <em>Cloudfront</em>
 trans: /static-website-with-cloudfront/
 ---
