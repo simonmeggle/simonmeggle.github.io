@@ -2,7 +2,6 @@
 layout: default
 title: Journal
 trans: /journal/
-desc: "Personnal website mainly about programming: TeX, R, Ruby, Python..." 
 lang: en
 page: yes
 ---
@@ -12,9 +11,8 @@ page: yes
 		{% if post.lang == page.lang and post.page != true %}
 		<li>
 			<a href="{{ post.url }}">
-				<span class="date">{{ post.date | date: "%d %B %Y" | englishdate }}</span>
+				<span>{{ post.date | date: "%d %B %Y" | englishdate }}</span>
 				{{ post.title | replace:'<br/>','' }}
-				<span class="desc">{{ post.desc }}</span>
 			</a>
 		</li>
 		{% endif %}

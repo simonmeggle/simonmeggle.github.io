@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, width=device-width">
-    {% if page.desc %}<meta name="description" content="{{ page.desc }}">{% endif %}
+    <meta name="description" content="{{ page.excerpt | strip_html }}">
     <title>{{page.title | strip_html}} – Sylvain Durand</title>
     <style type="text/css">{% include styles.css %}</style>
     <link rel="icon" href="/favicon.ico" />
