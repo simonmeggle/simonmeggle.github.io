@@ -12,7 +12,7 @@ page: yes
 		<li>
 			<a href="{{ post.url }}">
 				<span>{{ post.date | date: "%d %B %Y" | frenchdate }}</span>
-				{{ post.title | replace:'<br/>','' }}
+				{{ post.title }}
 			</a>
 		</li>
 		{% endif %}
