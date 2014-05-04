@@ -102,7 +102,7 @@ h3{
     content:'– '}
 
 
-.large,.large img{
+.wide,.wide img{
     max-width:50em}
     
 {% endif %}
@@ -288,7 +288,7 @@ pre code{
   background:#8EBC73}
 
 
-.barre+pre, .barre+img{
+.barre+pre, .barre+img, .wide{
   max-width:41em;
   border-radius:0;
   margin:0 auto 4em;
