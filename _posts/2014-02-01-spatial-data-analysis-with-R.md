@@ -1,8 +1,8 @@
 ---
+lang: en
 layout: default
 title:  Spatial Data Analysis with <em>R</em>
 trans: /cartographie-avec-R/
-lang: en
 ---
 
 If _R_ language has already become a reference in statistical analysis and data processing, it may be thanks to its hability to represent and visualize data. They can be used in order to visualize spatial data in the form of cartographic representations which, combined with its other features, makes it an excellent geographic information system. This article sets out to show, through the provision of relevant example, how _R_ can handle spatial data by creating maps.

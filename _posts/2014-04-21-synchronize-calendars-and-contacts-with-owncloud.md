@@ -1,8 +1,8 @@
 ---
+lang: en
 layout: default
 title:  Synchronize calendars and contacts with <em>OwnCloud</em>
 trans: /synchroniser-calendriers-et-contacts-avec-owncloud/
-lang: en
 ---
 
 Synchronize calendars, contacts and files between different devices - computers, tablets, phones - is very common today. Despite these data can be very personal, sometimes sensitive, most people use the tools provided by Google, Apple or Microsoft.
