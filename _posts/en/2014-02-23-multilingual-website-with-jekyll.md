@@ -187,6 +187,7 @@ However, long formats display English months,regardless of Ruby configuration.  
 
 In fact, strings replacements are enough. It gives us the following `date.rb` plugin, located in `_plugins/`:
 
+{% include barre.html titre="_plugins/date.rb" %}
 
 ```ruby
 module Date
@@ -230,6 +231,7 @@ end
 
 Liquid::Template.register_filter Date
 ```
+{:.wide}
 
 We choose the format depending of the lang:
 
@@ -271,6 +273,7 @@ The thin space is given by `&thinsp;`, surrounded with a `span` with the style `
 These substitutions may be made ​​using simple replacements chains, using `.gsub` with _Liquid_ filters. However, we must take care not to make substitutions in blocks of code `pre` et `code`. The following plugin `typo.rb` provides the desired result:
 
 
+{% include barre.html titre="_plugins/typo.rb" %}
 
 ```ruby
 class Typography < String
@@ -312,6 +315,7 @@ module Typo
 end
 Liquid::Template.register_filter Typo
 ```
+{:.wide}
 
 We use this filter only on the French version:
 

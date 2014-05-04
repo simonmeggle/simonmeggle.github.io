@@ -177,6 +177,7 @@ s3cmd --delete-removed --cf-invalidate-default-index \
 
 Stockons l'intégralité des opérations précédentes en un seul fichier `_deploy.sh`, que nous plaçons à la racine de _Jekyll_ :
 
+{% include barre.html titre="_deploy.sh" %}
 ```sh
 #!/bin/sh
 # Compilation de Jekyll
@@ -273,6 +274,7 @@ Les statistiques sont désormais lisibles depuis le fichier `awstats.www.domain.
 
 Pour automatiser la génération de statistiques à intervalles réguliers, créons un fichier `stats.sh` avec `nano ~/awstats/stats.sh` qui récupère les logs et génère les statistiques :
 
+{% include barre.html titre="stats.sh" %}
 ```sh
 #!/bin/sh
 # Récupération des logs

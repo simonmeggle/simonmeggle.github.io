@@ -245,3 +245,115 @@ pre code{
 {% endif %}
 
 
+
+{% if content contains 'class="barre"' %}
+
+.barre{
+  max-width:55.38em;
+  overflow: auto;
+  text-align:center;
+  font:.7222em/2.692 Arial, sans-serif;
+  margin:4em auto 0;
+  height:2.692em;
+  color:#999;
+  padding-right:7em;
+  background:#E8E8E8;
+  border-top-left-radius:.5em;
+  border-top-right-radius:.5em;
+}
+
+.barre a{
+ color:#999;
+}
+
+.barre a:hover{
+  color:#555;
+}
+
+.rouge,.jaune,.vert{
+  border-radius:50%;
+  height:1em;
+  width:1em;
+  margin:.85em 1em;
+  float:left}
+
+.rouge{
+  background:#CC7B7A}
+
+.jaune{
+  background:#D0BC74;
+  margin:.85em 0}
+
+.vert{
+  background:#8EBC73}
+
+
+.barre+pre, .barre+img{
+  max-width:41em;
+  border-radius:0;
+  margin:0 auto 4em;
+  border-bottom-left-radius:.5em;
+  border-bottom-right-radius:.5em}
+
+{% endif %}
+
+
+
+
+{% if content contains 'class="barre"' and content contains "<pre>" %}
+ 
+.barre+pre{
+  padding:1em 2em;}
+
+.barre+pre,.barre+pre code{
+    background:#3D3D3D;
+    color:#CCC}
+
+.barre+pre .ge{
+    font-style:italic}
+
+.barre+pre .gh{
+    color:#ccc;
+    font-weight:700}
+
+.barre+pre .gp{
+    color:#999;
+    font-weight:700}
+
+.barre+pre .gs{
+    font-weight:700}
+
+.barre+pre .gu{
+    color:#6cc;
+    font-weight:700}
+
+.barre+pre .c,.barre+pre .cm,.barre+pre .cp,.barre+pre .c1,.barre+pre .cs,.barre+pre .sd{
+    color:#999}
+
+.barre+pre .err,.barre+pre .gd,.barre+pre .no,.barre+pre .ne,.barre+pre .nv,.barre+pre .vc,.barre+pre .vg,.barre+pre .vi{
+    color:#f2777a}
+
+.barre+pre .k,.barre+pre .kc,.barre+pre .kd,.barre+pre .kp,.barre+pre .kr{
+    color:#c9c}
+
+.barre+pre .l,.barre+pre .m,.barre+pre .mf,.barre+pre .mh,.barre+pre .mi,.barre+pre .mo,.barre+pre .se,.barre+pre .si,.barre+pre .il{
+    color:#f99157}
+
+.barre+pre .n,.barre+pre .p,.barre+pre .nb,.barre+pre .ni,.barre+pre .nl,.barre+pre .py,.barre+pre .w,.barre+pre .sc,.barre+pre .bp{
+    color:#ccc}
+
+.barre+pre .o,.barre+pre .kn,.barre+pre .nd,.barre+pre .nt,.barre+pre .ow{
+    color:#6cc}
+
+.barre+pre .gi,.barre+pre .ld,.barre+pre .s,.barre+pre .sb,.barre+pre .s2,.barre+pre .sh,.barre+pre .sx,.barre+pre .sr,.barre+pre .s1,.barre+pre .ss{
+    color:#9c9}
+
+.barre+pre .kt,.barre+pre .nc,.barre+pre .nn{
+    color:#fc6}
+
+.barre+pre .na,.barre+pre .nf,.barre+pre .nx{
+    color:#69c}
+
+{% endif %}
+
+
