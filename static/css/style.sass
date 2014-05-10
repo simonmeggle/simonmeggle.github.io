@@ -1,0 +1,277 @@
+---
+---
+
+$serif: Georgia, serif
+$sans: Arial, sans-serif
+
+body
+  margin: 0
+  font: 1.125em / 1.5 $serif
+
+// Éléments de base
+
+a
+  color: #156f8f
+  text-decoration: none
+  &:hover
+    color: #0c4255
+
+p
+  margin: 1.5em auto 0
+  max-width: 33em
+
+img
+  margin: 3em auto
+  width: 100%
+  border-radius: 0.6em
+
+ul,ol
+  @extend p
+  margin-top: 0
+  padding: 0
+  list-style-type: none
+
+// Titres
+
+h1
+  margin: 0 0 1.8em
+  padding: 4.5em 1em 0.9em
+  background: #252525
+  color: white
+  text-align: center
+  letter-spacing: -0.04em
+  font-weight: normal
+  font-size: 1.6667em
+  line-height: 1.8
+  span
+    display: block
+    margin: 0 auto
+    color: #888888
+    letter-spacing: 0
+    font-size: 0.5em
+
+h2
+  margin: 3.3818em auto 1.2272em
+  max-width: 27em
+  font: bold 1.2222em / 1.2272 $sans
+
+h3
+  @extend p
+  margin: 2em auto -1em
+  font: bold 1em / 1.5 $sans
+
+.caps, sup
+  font-size: 0.85em
+
+.wide,.wide img
+  max-width: 50em
+
+// Barre de navigation
+
+.nav
+  position: fixed
+  width: 100%
+  background: #333333
+  letter-spacing: -0.04em
+  cursor: default
+  padding: 1.5em
+  li
+    display: inline
+    color: #cccccc
+    a
+      padding-right: 0.8em
+      color: #777777
+      &:hover, &:active
+        color: white
+  .lang
+    float: right
+    color: #4d4d4d
+    span
+      color: #cccccc
+    a
+      padding: 0
+  .title
+    display: block
+    text-transform: lowercase
+    a
+      color: #dddddd
+      font-size: 1.277em
+      line-height: 0
+      &:hover, &:active
+        color: white
+
+// Liste des articles
+
+.liste
+  margin: 2em auto
+  max-width: 31em
+  font-size: 1.125em
+  line-height: 1.333
+  li
+    margin: 0
+    a
+      display: block
+      padding: 1em
+      &:hover
+        background: #fdfdfd
+    li + li
+      box-shadow: 0 -1px 0 #eeeeee
+    span
+      display: block
+      font-size: 0.7777em
+      line-height: 1.714
+      float: right
+      color: #dddddd
+      margin-left: 1em
+
+.post
+  *:first-child:first-letter
+    float: left
+    margin: 0.13em 0.05em 0 -0.05em
+    font-size: 3.2em
+    line-height: 0.5em
+  *:first-child:first-line
+    letter-spacing: 0.04em
+    font-variant: small-caps
+  li
+    margin-left: 1.5em
+    &:before
+      content: "– "
+
+.post, .page
+  &:after
+    content: "❧"
+    display: block
+    text-align: center
+    font-size: 5em
+    color: #eeeeee
+    cursor: default
+
+.page
+  padding-top: 6em
+
+// Code
+
+code
+  background: #f9f9f9
+  border-radius: 0.6em
+  padding: 0.3em 0.5em
+  font-size: 0.777em
+  font-family: Monaco, "Lucida Console", monospace
+
+pre
+  overflow-x: auto
+  margin: 1.385em auto
+  padding: 1em
+  max-width: 29em
+  border-radius: 0.6em
+  background: #f9f9f9
+  font-family: monospace, monospace
+  code
+    padding: 0
+
+.ge,.gs
+  color: #93a1a1
+
+.nb
+  color: #b58900
+
+.c,.cm,.c1,.sb
+  color: #586e75
+
+.err,.g,.l,.n,.p,.go,.gp,.gt,.ld,.na,.nl,.nn,.nx,.py,.w,.sd,.sh
+  color: #93a1a1
+
+.k,.o,.cp,.cs,.gi,.kn,.kp,.ow
+  color: #859900
+
+.x,.gh,.gu,.kc,.no,.ni,.ne,.se
+  color: #cb4b16
+
+.gd,.m,.s,.mf,.mh,code .mi,code .mo,.sc,.s2,.si,.sx,.s1,.ss,.il
+  color: #2aa198
+
+.gr,.kt,.sr
+  color: #dc322f
+
+.kd,.kr,.nc,.nd,.nf,.nt,.nv,.bp,.vc,.vg,.vi
+  color: #268bd2
+
+// Barre
+
+.barre
+  max-width: 55.38em
+  overflow: auto
+  text-align: center
+  font: 0.7222em / 2.692 $sans
+  margin: 4em auto 0
+  height: 2.692em
+  color: #999999
+  padding-right: 7em
+  background: #e8e8e8
+  border-top-left-radius: 0.5em
+  border-top-right-radius: 0.5em
+  a
+    color: #999999
+    &:hover
+      color: #555555
+
+.rouge,.jaune,.vert
+  border-radius: 50%
+  height: 1em
+  width: 1em
+  margin: 0.85em 1em
+  float: left
+
+.rouge
+  background: #cc7b7a
+
+.jaune
+  background: #d0bc74
+  margin: 0.85em 0
+
+.vert
+  background: #8ebc73
+
+.barre+pre, .barre+img, .wide
+  max-width: 41em
+  border-radius: 0
+  margin: 0 auto 4em
+  border-bottom-left-radius: 0.5em
+  border-bottom-right-radius: 0.5em
+
+.barre+pre
+  padding: 1em 2em
+  background: #3d3d3d
+  color: #cccccc
+  .ge
+    font-style: italic
+  .gh
+    color: #cccccc
+    font-weight: 700
+  .gp
+    color: #999999
+    font-weight: 700
+  .gs
+    font-weight: 700
+  .gu
+    color: #66cccc
+    font-weight: 700
+  .c,.cm,.cp,.c1,.cs,.sd
+    color: #999999
+  .err,.gd,.no,.ne,.nv,.vc,.vg,.vi
+    color: #f2777a
+  .k,.kc,.kd,.kp,.kr
+    color: #cc99cc
+  .l,.m,.mf,.mh,.mi,.mo,.se,.si,.il
+    color: #f99157
+  .n,.p,.nb,.ni,.nl,.py,.w,.sc,.bp
+    color: #cccccc
+  .o,.kn,.nd,.nt,.ow
+    color: #66cccc
+  .gi,.ld,.s,.sb,.s2,.sh,.sx,.sr,.s1,.ss
+    color: #99cc99
+  .kt,.nc,.nn
+    color: #ffcc66
+  .na,.nf,.nx
+    color: #6699cc
