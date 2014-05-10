@@ -178,7 +178,6 @@ s3cmd --delete-removed --cf-invalidate-default-index \
 
 We put those command in one single file, named `_deploy.sh`, located in _Jekyll_ folder:
 
-{% include barre.html titre="_deploy.sh" %}
 ```sh
 #!/bin/sh
 # Building Jekyll
@@ -208,6 +207,7 @@ s3cmd --acl-public --cf-invalidate -M \
 s3cmd --delete-removed --cf-invalidate-default-index \
       sync _site/ s3://www.domain.tld/ 
 ```
+{:.wide}
 
 You only have to execute `sh _deploy.sh` to update the website. A few minutes may be required in order to update _CloudFront_ data.
 
@@ -275,7 +275,6 @@ The statistics are now readable from the `awstats.www.domain.tld.html` file. It 
 
 To automate the generation of statistics at regular intervals, creating a `stats.sh` with `nano ~ / awstats / stats.sh` that retrieves logs and generates statistics:
 
-{% include barre.html titre="stats.sh" %}
 ```sh
 #!/bin/sh
 # Retrieving logs
@@ -285,6 +284,7 @@ s3cmd del --recursive --force s3://statistics/
 /usr/share/awstats/tools/awstats_buildstaticpages.pl \
     -dir=~/awstats/ -update -config=www.domain.tld \
 ```
+{:.wide}
 
 We give the rights to this file so it can be executed, and then create a cron task:
 

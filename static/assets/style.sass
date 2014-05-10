@@ -37,7 +37,7 @@ h1
   margin: 0 0 1.8em
   padding: 4.5em 1em 0.9em
   background: #252525
-  color: white
+  color: #fff
   text-align: center
   letter-spacing: -0.04em
   font-weight: normal
@@ -62,9 +62,6 @@ h3
 
 .caps, sup
   font-size: 0.85em
-
-.wide,.wide img
-  max-width: 50em
 
 // Barre de navigation
 
@@ -124,6 +121,8 @@ h3
       color: #dddddd
       margin-left: 1em
 
+// Main
+
 .post
   *:first-child:first-letter
     float: left
@@ -138,6 +137,9 @@ h3
     &:before
       content: "– "
 
+.page
+  padding-top: 6em
+
 .post, .page
   &:after
     content: "❧"
@@ -146,9 +148,6 @@ h3
     font-size: 5em
     color: #eeeeee
     cursor: default
-
-.page
-  padding-top: 6em
 
 // Code
 
@@ -199,64 +198,26 @@ pre
 
 // Barre
 
-.barre
-  max-width: 55.38em
-  overflow: auto
-  text-align: center
-  font: 0.7222em / 2.692 $sans
-  margin: 4em auto 0
-  height: 2.692em
-  color: #999999
-  padding-right: 7em
-  background: #e8e8e8
-  border-top-left-radius: 0.5em
-  border-top-right-radius: 0.5em
-  a
-    color: #999999
-    &:hover
-      color: #555555
-
-.rouge,.jaune,.vert
-  border-radius: 50%
-  height: 1em
-  width: 1em
-  margin: 0.85em 1em
-  float: left
-
-.rouge
-  background: #cc7b7a
-
-.jaune
-  background: #d0bc74
-  margin: 0.85em 0
-
-.vert
-  background: #8ebc73
-
-.barre+pre, .barre+img, .wide
-  max-width: 41em
-  border-radius: 0
-  margin: 0 auto 4em
-  border-bottom-left-radius: 0.5em
-  border-bottom-right-radius: 0.5em
-
-.barre+pre
+.wide
+  max-width: 40em
+  margin: 4em auto
   padding: 1em 2em
   background: #3d3d3d
   color: #cccccc
-  .ge
-    font-style: italic
-  .gh
-    color: #cccccc
-    font-weight: 700
+  &:before
+    display: block
+    margin: -1.2em -2em 1em
+    height: 1.9em
+    background: #e8e8e8
+    content: url(/static/assets/barre.svg)
+  code
+    background: #3d3d3d
+  img
+    max-width: 40em
   .gp
-    color: #999999
-    font-weight: 700
-  .gs
-    font-weight: 700
+    color: #999
   .gu
-    color: #66cccc
-    font-weight: 700
+    color: #6cc
   .c,.cm,.cp,.c1,.cs,.sd
     color: #999999
   .err,.gd,.no,.ne,.nv,.vc,.vg,.vi

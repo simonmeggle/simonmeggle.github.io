@@ -186,8 +186,6 @@ En revanche, les formats longs affichent le nom des mois en anglais, indépendam
 
 En réalité, des remplacements de chaînes suffisent. On obtient le plugin `date.rb`, à placer dans `_plugins/` :
 
-{% include barre.html titre="_plugins/date.rb" %}
-
 ```ruby
 module Date
 
@@ -269,8 +267,6 @@ Le français possède de nombreuses règles typographiques très différentes de
 L'espace fine s'obtient avec le code HTML `&thinsp;`, que l'on entoure d'un `span` doté du style `white-space:nowrap` pour lui donner un caractère insécable. L'espace insécable est obtenue avec `&nbsp;`. 
 
 Ces remplacements pourraient être effectués à l'aide de simple remplacements de chaînes, à l'aide de `.gsub` dans un plugin ou à l'aide d'un filtre _Liquid_. Néanmoins, il faut prendre garde de ne pas effectuer de remplacements au sein des blocs de code `pre` et `code`. Le plugin `typo.rb` suivant, à placer dans `_plugins/`, offre le résultat recherché :
-
-{% include barre.html titre="_plugins/typo.rb" %}
 
 ```ruby
 class Typography < String
