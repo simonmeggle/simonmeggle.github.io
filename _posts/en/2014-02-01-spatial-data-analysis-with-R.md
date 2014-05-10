@@ -71,7 +71,7 @@ plot(bounderies,  col="#666666", lwd=1, add=TRUE)
 dev.off() 
 ```
 
-[![France blank map](/static/carto/france.jpg)](/static/carto/france.pdf)
+[![France blank map](/static/media/carto/france.jpg)](/static/media/carto/france.pdf)
 
 ## Visualizing a data: population density
 
@@ -130,15 +130,15 @@ legend(-10000,6387500,fill=attr(leg, "palette"),
 dev.off() 
 ```
 
-[![Population density in France](/static/carto/density.jpg)](/static/carto/density.pdf)
+[![Population density in France](/static/media/carto/density.jpg)](/static/media/carto/density.pdf)
 
 ## Visualizing an external data : incomes 
-The main value is to plot data provided by external files. We will plot the median taxable income per consumption unit ([provided by INSEE](http://www.insee.fr/fr/themes/detail.asp?reg_id=99&ref_id=base-cc-rev-fisc-loc-menage)). [We convert it in CSV](/static/carto/revenus.csv).
+The main value is to plot data provided by external files. We will plot the median taxable income per consumption unit ([provided by INSEE](http://www.insee.fr/fr/themes/detail.asp?reg_id=99&ref_id=base-cc-rev-fisc-loc-menage)). [We convert it in CSV](/static/media/carto/revenus.csv).
 
 ### Reading and supplementing data
 
 
-Unfortunately, data is missing for more than 5 000 communes, due to tax secrecy. We can "cheat" in order to improve the global render by assigning to those communes the canton (a larger administrative level) median income, given in the [same file](http://www.insee.fr/fr/themes/detail.asp?reg_id=99&ref_id=base-cc-rev-fisc-loc-menage), [converted in CSV](/static/carto/cantons.csv).
+Unfortunately, data is missing for more than 5 000 communes, due to tax secrecy. We can "cheat" in order to improve the global render by assigning to those communes the canton (a larger administrative level) median income, given in the [same file](http://www.insee.fr/fr/themes/detail.asp?reg_id=99&ref_id=base-cc-rev-fisc-loc-menage), [converted in CSV](/static/media/carto/cantons.csv).
 
 
 
@@ -192,7 +192,7 @@ legend(-10000,6337500,fill=attr(leg, "palette"),
 dev.off() 
 ```
 
-[![Median taxable income per consumption unit in France in 2010](/static/carto/incomes.jpg)](/static/carto/incomes.pdf)
+[![Median taxable income per consumption unit in France in 2010](/static/media/carto/incomes.jpg)](/static/media/carto/incomes.pdf)
 
 
 ## Visualizing map data: the road network
@@ -222,7 +222,7 @@ plot(boundaries,  col="#666666", lwd=1, add=TRUE)
 dev.off() 
 ```
 
-[![French roads network](/static/carto/routes.jpg)](/static/carto/routes.pdf)
+[![French roads network](/static/media/carto/routes.jpg)](/static/media/carto/routes.pdf)
 
 
 
@@ -260,13 +260,13 @@ plot(graticules, col="#CCCCCC33", lwd=1, add=TRUE)
 dev.off()                          # Saving file
 ```
 
-[![Carte du monde projetée en Winkel Tripel](/static/carto/monde.jpg)](/static/carto/monde.pdf)
+[![Carte du monde projetée en Winkel Tripel](/static/media/carto/monde.jpg)](/static/media/carto/monde.pdf)
 
 
 
 ## Visualizing data: Human Development Index
 
-Most frequent usage consists of visualizing data with a color scale. Let's plot the HDI, provided by the [UNDP](https://data.undp.org/dataset/Human-Development-Index-HDI-value/8ruz-shxu) in a [CSV file](/static/carto/hdi.csv). The procedure is as described above:
+Most frequent usage consists of visualizing data with a color scale. Let's plot the HDI, provided by the [UNDP](https://data.undp.org/dataset/Human-Development-Index-HDI-value/8ruz-shxu) in a [CSV file](/static/media/carto/hdi.csv). The procedure is as described above:
 
 ```r
 # Loading data and merging dataframes
@@ -301,7 +301,7 @@ legend(-15000000,-3000000,fill=attr(leg, "palette"),
 dev.off() 
 ```
 
-[![Human Development Index (HDI) in 2012](/static/carto/hdi.jpg)](/static/carto/hdi.pdf)
+[![Human Development Index (HDI) in 2012](/static/media/carto/hdi.jpg)](/static/media/carto/hdi.pdf)
 
 ## Circles visualization: most populated cities
 
@@ -341,7 +341,7 @@ plot(graticules,col="#CCCCCC33",lwd=1, add=TRUE)
 dev.off() 
 ```
 
-[![Most populated cities in the world](/static/carto/villes.jpg)](/static/carto/villes.pdf)
+[![Most populated cities in the world](/static/media/carto/villes.jpg)](/static/media/carto/villes.pdf)
 
 
 ## Visualizing map data: urban areas
@@ -361,7 +361,7 @@ plot(areas,  col="#FFFFFF",  border="#FFFFFF66",lwd=1.5, add=TRUE)
 dev.off() 
 ```
 
-[![World map (Winkel Tripel projection)](/static/carto/urbain.jpg)](/static/carto/urbain.pdf)
+[![World map (Winkel Tripel projection)](/static/media/carto/urbain.jpg)](/static/media/carto/urbain.pdf)
 
 
 *[IGN]:   National Geographic Institute
