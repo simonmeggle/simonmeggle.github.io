@@ -6,7 +6,7 @@
     <meta name="description" content="{{ page.excerpt | strip_html | strip_newlines }}">
     <title>{{page.title | strip_html}} – Sylvain Durand</title>
     <link rel="stylesheet" href="/static/assets/style.css">
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" href="/static/design/favicon.ico" />
     {% if page.trans %}<link rel="alternate" hreflang="{% if lang != 'fr' %}fr{% else %}en{% endif %}" href="{{ page.trans }}" />{% endif %}{% if page.math %}
     <script type="text/javascript">{% include mathjax.js %}</script>{% endif %}
 </head>
