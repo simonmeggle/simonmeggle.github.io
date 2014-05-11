@@ -5,6 +5,14 @@ permalink: /:title/
 kramdown:
   input: GFM
 
+defaults:
+  -
+    scope:
+      path: ""
+      type: "post"
+    values:
+      layout: "default"
+
 nav:
   en:
     journal:

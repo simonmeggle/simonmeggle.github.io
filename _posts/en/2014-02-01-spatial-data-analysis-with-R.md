@@ -1,5 +1,4 @@
 ---
-layout: post
 title:  Spatial Data Analysis with <em>R</em>
 trans: /cartographie-avec-R/
 ---

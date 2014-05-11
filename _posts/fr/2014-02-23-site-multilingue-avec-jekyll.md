@@ -1,5 +1,4 @@
 ---
-layout: post
 title:  Générer un site multilingue avec <em>Jekyll</em> 
 trans: /multilingual-website-with-jekyll/
 ---
