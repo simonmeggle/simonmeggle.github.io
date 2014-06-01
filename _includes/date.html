@@ -3,7 +3,7 @@
 
 {% if include.lang == 'fr' %}
 
-  {{ d }}<sup>{% if d == "1" %}er{% endif %}</sup>
+  {{ d }}{% if d == "1" %}<sup>er</sup>{% endif %}
   {% case m %}
     {% when '1' %}janvier
     {% when '2' %}février
