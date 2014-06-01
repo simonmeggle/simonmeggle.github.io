@@ -14,7 +14,7 @@
 <div class="nav">
   <ul>
     <li class="title" itemprop="author"><a href="{{site.nav[lang].journal.url}}">Sylvain Durand</a></li>
-    
+
     <li class="lang">
       {% if lang != 'fr' %}<span>en</span> {% if page.trans %} | <a href="{{page.trans}}">fr</a>{% endif %}
       {% else %}{% if page.trans %} <a href="{{page.trans}}">en</a> | {% endif %}<span>fr</span>{% endif %}</li>
@@ -31,7 +31,10 @@
 </h1>
 <div class="post" itemprop="articleBody" >
 {% endif %}
-{% if lang == 'en' %}{{ content }}{% else %}{{ content | typo }}{% endif %}
+{% if lang == 'en' %}
+  {{ content }}
+  {% else %}
+  {{ content | replace: '“', '«&#160;' | replace: '”', '&#160;»' }}
+{% endif %}
 </div>
-
 </html>
