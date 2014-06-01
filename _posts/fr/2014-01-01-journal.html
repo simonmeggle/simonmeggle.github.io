@@ -9,7 +9,7 @@ page: true
 		{% if post.page or post.path contains "/en/" %}{% else %}
 		<li>
 			<a href="{{ post.url }}">
-				<span>{{ post.date | date: "%d %B %Y" | frenchdate }}</span>
+				<span>{% include date.html date=post.date lang='fr' %}</span>
 				{{ post.title }}
 			</a>
 		</li>
