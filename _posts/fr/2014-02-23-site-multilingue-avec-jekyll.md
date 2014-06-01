@@ -20,7 +20,7 @@ Toutes les URL seront de la forme `domain.tld/nom-de-la-page/`. La racine `domai
 
 L'organisation de nos fichiers va être très simple. La page d'accueil `index.html`, listant les articles en version anglaise, est stockée à la racine afin d'être accessible depuis `domain.tld`. En dehors de ce fichier, l'intégralité des pages et articles (y compris la liste des articles en français) va être stockée dans `_posts/` :
 
-```r
+{% highlight r %}
 .  
 ├── index.html                       # Page d'accueil anglaise
 |
@@ -29,16 +29,16 @@ L'organisation de nos fichiers va être très simple. La page d'accueil `index.h
     |
     ├── 2014-03-05-hello-world.md    # Article en anglais
     └── 2014-03-05-bonjour-monde.md  # Article en français
-```
+{% endhighlight %}
 
 
 ### Gestion des URL
 
 Plutôt que d'avoir des URL de la forme `/2014/03/05/bonjour-monde.html`, nous nous contenterons de simples `/bonjour-monde/`. Il suffit pour cela d'indiquer dans `_config.yml` :
 
-```ruby
+{% highlight ruby %}
 permalink: /:title/
-```
+{% endhighlight %}
 
 ### Métadonnées dans les articles
 
@@ -46,31 +46,31 @@ Chaque page ou article possédera une variable `lang`, qui peut valoir `en` ou `
 
 Par exemple, un article français `_posts/2014-03-05-bonjour-monde.md` accessible à l'adresse `domain.tld/bonjour-monde/`, s'il n'a pas de traduction, comportera les métadonnées suivantes :
 
-```ruby
+{% highlight ruby %}
 ---
 layout: post
 title:  "Bonjour monde !"
 lang:   fr
 ---
-```
+{% endhighlight %}
 
 S'il existe une traduction `_posts/2014-03-15-hello-world.md`, qui sera donc accessible à l'adresse `domain.tld/hello-world/`, alors les métadonnées de notre page française deviendront :
 
-```ruby
+{% highlight ruby %}
 ---
 layout: post
 title:  "Bonjour monde !"
 lang:   fr
 trans:  /hello-world/
 ---
-```
+{% endhighlight %}
 
 ### Traduction des éléments du site
 En dehors du contenu des articles, il est également nécessaire de traduire les différents éléments qui composent le site : textes des menus, du haut et du bas de page, certains titres... 
 
 Il est possible pour cela d'enregistrer les traductions sous forme de variables dans `_config.yml`. Ainsi, `{% raw %}{{ site.t[page.lang].home }}{% endraw %}` génèrera `Accueil` ou `Home` selon la valeur de `page.lang` :
 
-```ruby
+{% highlight ruby %}
 t:
   fr:
     home:  "Accueil"
@@ -78,7 +78,7 @@ t:
   en:
     home:  "Home"
     about: "About"
-```
+{% endhighlight %}
 
 
 
@@ -88,9 +88,8 @@ t:
 
 Les pages affichant la liste des articles ne doivent afficher que ceux qui sont dans la bonne langue, ce qui peut être atteint facilement grâce à la métadonnée `lang`. Par exemple, pour les articles anglais :
 
+{% highlight html %}
 {% raw %}
-
-```html
 <ul>
   {% for post in site.posts %}
     {% if post.lang == 'en' %}
@@ -98,16 +97,13 @@ Les pages affichant la liste des articles ne doivent afficher que ceux qui sont 
     {% endif %}
   {% endfor %}
 </ul>
-```
-
 {% endraw %}
-
+{% endhighlight %}
 
 Dans le cas des articles français, il faut prendre garde de ne pas afficher la page française listant les articles. Le code précédent devient donc :
 
+{% highlight html %}
 {% raw %}
-
-```html
 <ul>
   {% for post in site.posts %}
     {% if post.lang == 'fr' and post.trans != '/' %}
@@ -115,40 +111,37 @@ Dans le cas des articles français, il faut prendre garde de ne pas afficher la 
     {% endif %}
   {% endfor %}
 </ul>
-```
-
 {% endraw %}
+{% endhighlight %}
+
 
 
 ### Afficher un lien vers la traduction de la page en cours
 Pour proposer directement à un visiteur le lien vers la traduction d'un article, si elle existe, il suffit de regarder si la variable `trans` existe et, le cas échéant, sa valeur :
 
+{% highlight html %}
 {% raw %}
-
-```html
 {% if page.trans %}
     <a href="{{page.trans}}">{{ site.t[page.lang].translation }}</a>
 {% endif %}
-```
-
 {% endraw %}
+{% endhighlight %}
 
 Comme détaillé dans la partie précédente, on définit alors dans `_config.yml` :
 
-```ruby
+{% highlight ruby %}
 t:
   fr:
     translation: "read in English"
   en:
     translation: "lire en français"
-```
+{% endhighlight %}
 
 ### Sélecteur de langue
 Pour créer un sélecteur de langue, comme celui présent en haut à droite de cette page, la démarche est très similaire à celle présentée au paragraphe précédent. Utiliser `!= 'fr'` plutôt que `== 'en'` permet de faire fonctionner ce sélecteur sur la page d'accueil également, où `page.lang` n'est pas défini.
 
+{% highlight html %}
 {% raw %}
-
-```html
 {% if page.lang != 'fr'%}  <span class="active">en</span> | 
     {% if page.trans %}    <a href="{{page.trans}}">fr</a>
     {% else %}             <span class="inactive">fr</span>
@@ -158,10 +151,8 @@ Pour créer un sélecteur de langue, comme celui présent en haut à droite de c
     {% else %}             <span class="inactive">en</span>
     {% endif %}          | <span class="active">fr</span>
 {% endif %}
-```
-
 {% endraw %}
-
+{% endhighlight %}
 
 
 ## Peaufinage
@@ -169,23 +160,22 @@ Pour créer un sélecteur de langue, comme celui présent en haut à droite de c
 ### Traduction des dates
 À ce stade, tout peut être traduit sur le site à l'exception des dates,  générées par _Jekyll_. Les formats courts, composés uniquement de chiffres, peuvent être adaptés sans difficulté :
 
+{% highlight html %}
 {% raw %}
-
-```html
 {% if page.lang == 'fr' %}
     {{ post.date | date: "%d/%m/%Y" }}
 {% else %}
     {{ post.date | date: "%Y-%m-%d" }}
 {% endif %}
-```
-
 {% endraw %}
+{% endhighlight %}
+
 
 En revanche, les formats longs affichent le nom des mois en anglais, indépendamment de la configuration de _Ruby_.  Le plugin `i18n-filter`, prévu pour combler cette lacune, ne traduit que le nom du mois et n'adapte pas le chiffre : _1_, _2_ ou _3_ doivent devenir _1<sup>st</sup>_, _2<sup>nd</sup>_ et _3<sup>rd</sup>_ en anglais, _1_ doit devenir _1<sup>er</sup>_ en français.
 
 En réalité, des remplacements de chaînes suffisent. On obtient le plugin `date.rb`, à placer dans `_plugins/` :
 
-```ruby
+{% highlight ruby %}
 module Date
 
   def englishdate(date)
@@ -226,32 +216,28 @@ module Date
 end
 
 Liquid::Template.register_filter Date
-```
+{% endhighlight %}
 {:.wide}
 
 La date s'affiche ainsi selon la langue :
 
+{% highlight r %}
 {% raw %}
-
-```r
 {% if page.lang == 'en' %}
     {{page.date | date: "%d %B %Y" | englishdate }}
 {% else %}
     {{page.date | date: "%d %B %Y" | frenchdate}}
 {% endif %}
-```
-
 {% endraw %}
+{% endhighlight %}
 
 Il est possible d'obtenir le même résultat sans passer par un plugin grâce la syntaxe _Liquid_ ; cela est peu lisible, mais permet de compiler _Jekyll_ en mode `safe` et donc d'héberger le site sur [GitHub Pages](http://pages.github.com), où les plugins sont désactivés.
 
+{% highlight r %}
 {% raw %}
-
-```r
 {{page.date | date:"%d %B %Y" | replace:'01 ','1<sup>er</sup> ' |... }}
-```
-
 {% endraw %}
+{% endhighlight %}
 
 ### Respect des règles typographiques
 Afin de respecter la typographie anglaise et d'améliorer la typographie française (et notamment améliorer le rendu des guillements ou apostrophes), il est possible d'utiliser selon les préférences [_RedCarpet_ avec _SmartyPants_](https://github.com/vmg/redcarpet), ou alors [_Kramdown_ avec _Typogruby_](https://github.com/navarroj/krampygs).
@@ -267,7 +253,7 @@ L'espace fine s'obtient avec le code HTML `&thinsp;`, que l'on entoure d'un `spa
 
 Ces remplacements pourraient être effectués à l'aide de simple remplacements de chaînes, à l'aide de `.gsub` dans un plugin ou à l'aide d'un filtre _Liquid_. Néanmoins, il faut prendre garde de ne pas effectuer de remplacements au sein des blocs de code `pre` et `code`. Le plugin `typo.rb` suivant, à placer dans `_plugins/`, offre le résultat recherché :
 
-```ruby
+{% highlight ruby %}
 class Typography < String
   def to_html
     ar = [] 
@@ -306,22 +292,20 @@ module Typo
   end
 end
 Liquid::Template.register_filter Typo
-```
+{% endhighlight %}
 {:.wide}
 
 On utilise ce filtre uniquement sur la version française :
 
+{% highlight r %}
 {% raw %}
-
-```r
 {% if page.lang == 'fr' %}
   {{ content | typo }}
 {% else %}
   {{ content }}
 {% endif %}
-```
-
 {% endraw %}
+{% endhighlight %}
 
 
 ## Accès au site et référencement
@@ -334,18 +318,16 @@ Pour ce faire, deux solutions sont possibles : [intégrer une balise `<link>`](h
 
 Il suffit d'indiquer dans la partie `<head>` chaque page, si elle possède une traduction, un lien de la forme `<link rel="alternate" hreflang="fr" href="/francais.html" ` [en faisant attention d'utiliser les bons codes de langue utilisés](https://support.google.com/webmasters/answer/189077?hl=fr). Il suffit pour cela d'utiliser le code suivant :
 
+{% highlight html %}
 {% raw %}
-
-```html
 {% if page.trans %}
 <link
   rel="alternate" 
   hreflang="{% if page.lang != 'fr' %}fr{% else %}en{% endif %}"
   href="{{ page.trans }}" />
 {% endif %}
-```
-
 {% endraw %}
+{% endhighlight %}
 
 ### Avec un fichier `sitemaps.xml`
 
@@ -353,7 +335,7 @@ Le fichier `sitemaps.xml`, qui permet aux moteurs de recherche de connaître les
 
 Pour cela, il suffit d'indiquer l'intégralité des pages du site (quelle que soit leur langue) dans des éléments `<url>` et pour chacun d'entre eux l'ensemble des versions qui existent, `y compris celle que l'on est en train de décrire`. Par exemple, dans le cas de deux pages `francais.html` et `english.html` qui sont les traductions d'un même contenu, on indique :
 
-```xml
+{% highlight xml %}
 <url>
   <loc>http://www.domain.tld/francais.html</loc>
   <xhtml:link rel="alternate" hreflang="fr"
@@ -369,13 +351,12 @@ Pour cela, il suffit d'indiquer l'intégralité des pages du site (quelle que so
   <xhtml:link rel="alternate" hreflang="en "
     href="http://www.domain.tld/english.html" />
 </url>
-```
+{% endhighlight %}
 
 Ce fichier peut (bien sûr !) être généré automatiquement par Jekyll. Il suffit pour cela de créer un fichier `sitemaps.xml` à la racine du site contenant :
 
+{% highlight xml %}
 {% raw %}
-
-```xml
 ---
 ---
 <?xml version="1.0" encoding="UTF-8"?>
@@ -398,8 +379,8 @@ Ce fichier peut (bien sûr !) être généré automatiquement par Jekyll. Il suf
   </url>
   {% endfor %}
 </urlset>
-```
 {% endraw %}
+{% endhighlight %}
 
 
 *[CMS]: Système de gestion de contenu

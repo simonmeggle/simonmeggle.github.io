@@ -1,9 +1,4 @@
-markdown: kramdown
-markdown_ext: foo 
 permalink: /:title/
-
-kramdown:
-  input: GFM
 
 defaults:
   -

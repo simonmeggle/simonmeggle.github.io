@@ -89,19 +89,19 @@ We will use `s3cmd` in order to sync our bucket with our local files. Install th
 
 On Mac OS, with Homebrew, install `s3cmd` with `--devel` option, and `gnupg` for secured transfers:
 
-```bat
+{% highlight bat %}
 brew install --devel s3cmd
 brew install gpg
-```
+{% endhighlight %}
 
 Now we have to gives `s3cmd` the ability to deal with our AWS account. In [Security Credentials](https://console.aws.amazon.com/iam/home?#security_credential), go to `Access Key` and generate one access key and its secret Key. Then configure `s3cmd` with  `s3cmd --configure`.
 
 In order to optimize images, we will install `jpegoptim` and `optipng`:
 
-```bat 
+{% highlight bat  %}
 sudo brew install jpegoptim
 sudo brew install optipng
-```
+{% endhighlight %}
 
 
 
@@ -112,24 +112,24 @@ sudo brew install optipng
 
 We first build _Jekyll_ into the `_site` folder:
 
-```bat
+{% highlight bat %}
 jekyll build
-```
+{% endhighlight %}
 
 Using `jekyll-press` plugin will optimize HTML, CSS and JS files. If `jpegoptim` and `optipng` are installed, we can optimize images:
 
-```bat
+{% highlight bat %}
 find _site -name '*.jpg' -exec jpegoptim --strip-all -m80 {} \;
 find _site -name '*.png' -exec optipng -o5 {} \;
-```
+{% endhighlight %}
 
 
 Then, in order to improve performances, we compress HTML, CSS and JS files with Gzip, that is to say all files out of `static/` folder:
 
-```bat
+{% highlight bat %}
 find _site -path _site/static -prune -o -type f \
 -exec gzip -n "{}" \; -exec mv "{}.gz" "{}" \;
-```
+{% endhighlight %}
 
 
 
@@ -145,30 +145,30 @@ We use `s3cmd` to upload the website; only the updated files will be sent. We us
 
 We first send static files, stored in `static/`, assigning them a 10 weeks cache duration:
 
-```bat
+{% highlight bat %}
 s3cmd --acl-public --cf-invalidate -M \
       --add-header="Cache-Control: max-age=6048000" \
       --cf-invalidate \
       sync _site/static s3://www.domain.tld/ 
-```
+{% endhighlight %}
 
 Then we send the other files (HTML, CSS, JS...) with a 48 hours cache duration:
 
-```bat
+{% highlight bat %}
 s3cmd --acl-public --cf-invalidate -M \
       --add-header 'Content-Encoding:gzip' \
       --add-header="Cache-Control: max-age=604800" \
       --cf-invalidate \
       --exclude="/static/*" \
       sync _site/ s3://www.domain.tld/ 
-```
+{% endhighlight %}
 
 Finally we clean the bucket by deleting files which have been deleted in the local folder, and we invalidate the home page on Cloudfront (`cf-invalidate` doesn't do it): 
 
-```bat
+{% highlight bat %}
 s3cmd --delete-removed --cf-invalidate-default-index \
       sync _site/ s3://www.domain.tld/ 
-```
+{% endhighlight %}
 
 
 
@@ -177,7 +177,7 @@ s3cmd --delete-removed --cf-invalidate-default-index \
 
 We put those command in one single file, named `_deploy.sh`, located in _Jekyll_ folder:
 
-```sh
+{% highlight sh %}
 #!/bin/sh
 # Building Jekyll
 jekyll build
@@ -205,7 +205,7 @@ s3cmd --acl-public --cf-invalidate -M \
 # Delete removed files
 s3cmd --delete-removed --cf-invalidate-default-index \
       sync _site/ s3://www.domain.tld/ 
-```
+{% endhighlight %}
 {:.wide}
 
 You only have to execute `sh _deploy.sh` to update the website. A few minutes may be required in order to update _CloudFront_ data.
@@ -221,27 +221,27 @@ Let's start by activating logs creation on our Cloudfront distribution. In the A
 
 We create locally a folder that will retrieve these logs, then we can then retrieve the logs and then delete the _bucket_ using `s3cmd`:
 
-```bat
+{% highlight bat %}
 mkdir ~/awstats
 mkdir ~/awstats/logs
 s3cmd get --recursive s3://statistics/ ~/awstats/logs/
 s3cmd del --recursive --force s3://statistics/ 
-```
+{% endhighlight %}
 
 ### Installing and configuring Awstats
 
 We begin by installing and copy Awstats (where `www.domain.tld` is your domain name):
 
-```bat
+{% highlight bat %}
 sudo apt-get install awstats
 sudo cp /etc/awstats/awstats.conf \
         /etc/awstats/awstats.www.domain.tld.conf
 sudo nano /etc/awstats/awstats.www.domain.tld.conf
-```
+{% endhighlight %}
 
 In this configuration file, change the following settings to specify how to treat Awstats logs Cloudfront (where `user` is your username):
 
-```bat
+{% highlight bat %}
 # Processing multiple gzip logs files
 LogFile="/usr/share/awstats/tools/logresolvemerge.pl /home/user/awstats/logs/* |"
 # Formating Cloudfront generated logs
@@ -250,22 +250,22 @@ LogSeparator="\t"
 # Domain names (website and Cloudfront)
 SiteDomain="www.domain.tld"
 HostAliases="REGEX[.cloudfront\.net]"
-```
+{% endhighlight %}
 
 Finally, we copy the images which will be displayed in the reports:
 
-```bat
+{% highlight bat %}
 sudo cp -r /usr/share/awstats/icon/ ~/awstats/awstats-icon/
-```
+{% endhighlight %}
 
 ### Generating stats
 
 Once this configuration is done, it is possible to generate statistics as a static HTML file using:
 
-```bat
+{% highlight bat %}
 /usr/share/awstats/tools/awstats_buildstaticpages.pl \
     -dir=~/awstats/ -update -config=www.domain.tld \
-```
+{% endhighlight %}
 
 The statistics are now readable from the `awstats.www.domain.tld.html` file. It is then possible to publish it, send it to a server or email for example.
 
@@ -274,7 +274,7 @@ The statistics are now readable from the `awstats.www.domain.tld.html` file. It 
 
 To automate the generation of statistics at regular intervals, creating a `stats.sh` with `nano ~ / awstats / stats.sh` that retrieves logs and generates statistics:
 
-```sh
+{% highlight sh %}
 #!/bin/sh
 # Retrieving logs
 s3cmd get --recursive s3://statistics/ ~/awstats/logs/
@@ -282,21 +282,21 @@ s3cmd del --recursive --force s3://statistics/
 # Generating stats
 /usr/share/awstats/tools/awstats_buildstaticpages.pl \
     -dir=~/awstats/ -update -config=www.domain.tld \
-```
+{% endhighlight %}
 {:.wide}
 
 We give the rights to this file so it can be executed, and then create a cron task:
 
-```bat 
+{% highlight bat  %}
 sudo chmod 711 ~/awstats/stats.sh
 sudo crontab -e
-```
+{% endhighlight %}
 
 To generate statistics of every six hours for example:
 
-```r
+{% highlight r %}
 0 */6 * * * ~/awstats/stats.sh
-```
+{% endhighlight %}
 
 
 
