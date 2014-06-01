@@ -1,4 +1,3 @@
-require "jekyll-press"
 require 'kramdown'
 require 'pygments'
 require 'typogruby'

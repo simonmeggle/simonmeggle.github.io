@@ -14,11 +14,7 @@
 <div class="nav">
   <ul>
     <li class="title" itemprop="author"><a href="{{site.nav[lang].journal.url}}">Sylvain Durand</a></li>
-
-    <li class="lang">
-      {% if lang != 'fr' %}<span>en</span> {% if page.trans %} | <a href="{{page.trans}}">fr</a>{% endif %}
-      {% else %}{% if page.trans %} <a href="{{page.trans}}">en</a> | {% endif %}<span>fr</span>{% endif %}</li>
-
+    <li class="lang">{% if lang != 'fr' %}<span>en</span> {% if page.trans %} | <a href="{{page.trans}}">fr</a>{% endif %}{% else %}{% if page.trans %} <a href="{{page.trans}}">en</a> | {% endif %}<span>fr</span>{% endif %}</li>
     {% for menu in site.nav[lang] %}<li><a href="{{menu[1].url}}" {% if page.url == menu[1].url %}class="active"{% endif %}>{{menu[1].title}}</a></li>{% endfor %}
   </ul>
 </div>
@@ -29,12 +25,7 @@
   <div itemprop="name">{{ page.title }}</div>
   <span itemprop="datePublished">{% include date.html date=page.date lang=lang %}</span>
 </h1>
-<div class="post" itemprop="articleBody" >
-{% endif %}
-{% if lang == 'en' %}
-  {{ content }}
-  {% else %}
-  {{ content | replace: '“', '«&#160;' | replace: '”', '&#160;»' }}
-{% endif %}
+<div class="post" itemprop="articleBody" >{% endif %}
+{% if lang == 'en' %}{{ content }}{% else %}{{ content | replace: '“', '«&#160;' | replace: '”', '&#160;»' }}{% endif %}
 </div>
 </html>
