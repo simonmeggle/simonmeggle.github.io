@@ -12,6 +12,7 @@ Notre site possède deux versions : anglais et en français. Sur une même page,
 
 Toutes les URL seront de la forme `domain.tld/nom-de-la-page/`. La racine `domain.tld` affichera la liste des articles anglais, et `domain.tld/articles/` celle des articles français. Le sélecteur de langue ne doit pas renvoyer vers la page d'accueil de l'autre version mais bien vers la traduction de la page _en cours_.
 
+Tout cela fonctionnera sans plugin, afin de pouvoir générer le site en mode `safe` et donc de l'héberger sur [GitHub Pages](https://pages.github.com/).
 
 
 ## Principe
@@ -158,7 +159,7 @@ Pour créer un sélecteur de langue, comme celui présent en haut à droite de c
 ## Peaufinage
 
 ### Traduction des dates
-À ce stade, tout peut être traduit sur le site à l'exception des dates,  générées par _Jekyll_. Les formats courts, composés uniquement de chiffres, peuvent être adaptés sans difficulté :
+À ce stade, tout peut être traduit sur le site à l'exception des dates,  générées automatiquement par _Jekyll_. Les formats courts, composés uniquement de chiffres, peuvent être adaptés sans difficulté :
 
 {% highlight html %}
 {% raw %}
@@ -170,139 +171,57 @@ Pour créer un sélecteur de langue, comme celui présent en haut à droite de c
 {% endraw %}
 {% endhighlight %}
 
+Pour les dates longues, il est possible d'utiliser astucieusement les filtres de date et les remplacements pour obtenir n'importe quel format. Par exemple, pour traduire la date en anglais et en français, on peut utiliser :
 
-En revanche, les formats longs affichent le nom des mois en anglais, indépendamment de la configuration de _Ruby_.  Le plugin `i18n-filter`, prévu pour combler cette lacune, ne traduit que le nom du mois et n'adapte pas le chiffre : _1_, _2_ ou _3_ doivent devenir _1<sup>st</sup>_, _2<sup>nd</sup>_ et _3<sup>rd</sup>_ en anglais, _1_ doit devenir _1<sup>er</sup>_ en français.
-
-En réalité, des remplacements de chaînes suffisent. On obtient le plugin `date.rb`, à placer dans `_plugins/` :
-
-{% highlight ruby %}
-module Date
-
-  def englishdate(date)
-    date = date.gsub('01 ', '1<sup>th</sup> ')
-    date = date.gsub('02 ', '2<sup>nd</sup> ')
-    date = date.gsub('03 ', '3<sup>rd</sup> ')
-    date = date.gsub('04 ', '4 ')
-    date = date.gsub('05 ', '5 ')
-    date = date.gsub('06 ', '6 ')
-    date = date.gsub('07 ', '7 ')
-    date = date.gsub('08 ', '8 ')
-    date = date.gsub('09 ', '9 ')
-  end
-
-  def frenchdate(date)
-    date = date.gsub('01 ', '1<sup>er</sup> ')
-    date = date.gsub('02 ', '2 ')
-    date = date.gsub('03 ', '3 ')
-    date = date.gsub('04 ', '4 ')
-    date = date.gsub('05 ', '5 ')
-    date = date.gsub('06 ', '6 ')
-    date = date.gsub('07 ', '7 ')
-    date = date.gsub('08 ', '8 ')
-    date = date.gsub('09 ', '9 ')    
-    date = date.gsub('January',  'janvier')
-    date = date.gsub('February', 'février')
-    date = date.gsub('March',    'mars')
-    date = date.gsub('April',    'avril')
-    date = date.gsub('May',      'mai')
-    date = date.gsub('June',     'juin')
-    date = date.gsub('July',     'juillet')
-    date = date.gsub('August',   'août')
-    date = date.gsub('September','septembre')
-    date = date.gsub('October',  'octobre')
-    date = date.gsub('November', 'novembre')
-    date = date.gsub('December', 'décembre')
-  end
-end
-
-Liquid::Template.register_filter Date
-{% endhighlight %}
-{:.wide}
-
-La date s'affiche ainsi selon la langue :
-
-{% highlight r %}
+{% highlight html %}
 {% raw %}
-{% if page.lang == 'en' %}
-    {{page.date | date: "%d %B %Y" | englishdate }}
+{% assign d = page.date | date: "%-d" %}
+{% assign m = page.date | date: "%-m" %}
+
+{% if page.lang == 'fr' %}
+
+{{ d }}{% if d == "1" %}<sup>er</sup>{% endif %}
+ 
+{% case m %}
+  {% when '1' %}janvier
+  {% when '2' %}février
+  {% when '3' %}mars
+  {% when '4' %}avril
+  {% when '5' %}mai
+  {% when '6' %}juin
+  {% when '7' %}juillet
+  {% when '8' %}août
+  {% when '9' %}septembre
+  {% when '10' %}octobre
+  {% when '11' %}novembre
+  {% when '12' %}décembre
+{% endcase %} 
+{{ page.date | date: "%Y"}}
+
 {% else %}
-    {{page.date | date: "%d %B %Y" | frenchdate}}
+
+{{ d }}<sup>{% case d %}
+  {% when '1' or '21' or '31' %}st
+  {% when '2' or '22' %}nd
+  {% when '3' or '23' %}rd
+{% else %}th
+{% endcase %}</sup> 
+{{ page.date | date: "%B %Y"}}
+
 {% endif %}
 {% endraw %}
 {% endhighlight %}
 
-Il est possible d'obtenir le même résultat sans passer par un plugin grâce la syntaxe _Liquid_ ; cela est peu lisible, mais permet de compiler _Jekyll_ en mode `safe` et donc d'héberger le site sur [GitHub Pages](http://pages.github.com), où les plugins sont désactivés.
-
-{% highlight r %}
-{% raw %}
-{{page.date | date:"%d %B %Y" | replace:'01 ','1<sup>er</sup> ' |... }}
-{% endraw %}
-{% endhighlight %}
 
 ### Respect des règles typographiques
-Afin de respecter la typographie anglaise et d'améliorer la typographie française (et notamment améliorer le rendu des guillements ou apostrophes), il est possible d'utiliser selon les préférences [_RedCarpet_ avec _SmartyPants_](https://github.com/vmg/redcarpet), ou alors [_Kramdown_ avec _Typogruby_](https://github.com/navarroj/krampygs).
+Depuis Jekyll 2, le moteur de rendu Kramdown est utilisé par défaut et améliore le rendu des guillements, apostrophes et tirets longs. Pour utiliser des guillemets français à la place des guillemets anglais, il suffit de remplacer la chaîne : 
 
-Le français possède de nombreuses règles typographiques très différentes de l'anglais :
-
-* `!`, `?` et `;` sont précédées d'une espace fine insécable ;
-* `;` et `%` sont précédées d'une espace insécable pleine ;
-* les citations sont encadrées par `«` et `»` ;
-* `« »` sont respectivement suivi et précédé d'une espace insécable.
-
-L'espace fine s'obtient avec le code HTML `&thinsp;`, que l'on entoure d'un `span` doté du style `white-space:nowrap` pour lui donner un caractère insécable. L'espace insécable est obtenue avec `&nbsp;`. 
-
-Ces remplacements pourraient être effectués à l'aide de simple remplacements de chaînes, à l'aide de `.gsub` dans un plugin ou à l'aide d'un filtre _Liquid_. Néanmoins, il faut prendre garde de ne pas effectuer de remplacements au sein des blocs de code `pre` et `code`. Le plugin `typo.rb` suivant, à placer dans `_plugins/`, offre le résultat recherché :
-
-{% highlight ruby %}
-class Typography < String
-  def to_html
-    ar = [] 
-    scan(/([^<]*)(<[^>]*>)/) {
-      ar << [:text, $1] if $1 != ""
-      ar << [:tag, $2] }
-    pre = false
-    text = ""
-    ar.each { |t|
-      if t.first == :tag
-        text << t[1]
-        if t[1] =~ %r!<(/?)(?:pre|code)[\s>]!
-          pre = ($1 != "/")
-        end
-      else
-        s = t[1]
-        unless pre
-          thin = '<span style="white-space:nowrap">&thinsp;</span>'
-          s = s.gsub('“', '«&#160;').
-                gsub('”', '&#160;»').
-                gsub(' ?', thin+'?').
-                gsub(' !', thin+'!').
-                gsub(' ;', thin+';').
-                gsub(' :', '&#160;:').
-                gsub(' %', '&#160;%').
-                gsub(/(?<=\d)+[ ]/, '&#160;')
-        end
-        text << s
-      end }
-    text
-  end
-end
-module Typo
-  def typo(text)
-    Typography.new(text).to_html
-  end
-end
-Liquid::Template.register_filter Typo
-{% endhighlight %}
-{:.wide}
-
-On utilise ce filtre uniquement sur la version française :
-
-{% highlight r %}
+{% highlight html %}
 {% raw %}
-{% if page.lang == 'fr' %}
-  {{ content | typo }}
-{% else %}
+{% if lang == 'en' %}
   {{ content }}
+{% else %}
+  {{ content | replace: '“', '«&#160;' | replace: '”', '&#160;»' }}
 {% endif %}
 {% endraw %}
 {% endhighlight %}
