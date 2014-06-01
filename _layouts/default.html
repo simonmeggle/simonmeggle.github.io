@@ -23,7 +23,7 @@
 {% else %}
 <h1>
   <div itemprop="name">{{ page.title }}</div>
-  <span itemprop="datePublished">{% include date.html date=page.date lang=lang %}</span>
+  <span itemprop="datePublished" class="date">{% include date.html date=page.date lang=lang %}</span>
 </h1>
 <div class="post" itemprop="articleBody" >{% endif %}
 {% if lang == 'en' %}{{ content }}{% else %}{{ content | replace: '“', '«&#160;' | replace: '”', '&#160;»' }}{% endif %}
