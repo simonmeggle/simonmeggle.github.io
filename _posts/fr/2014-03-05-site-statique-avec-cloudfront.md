@@ -204,8 +204,7 @@ s3cmd --acl-public --cf-invalidate -M \
 # Suppression des fichiers retirés en local
 s3cmd --delete-removed --cf-invalidate-default-index \
       sync _site/ s3://www.domain.tld/ 
-{% endhighlight %}
-{:.wide}
+{% endhighlight %}{:.wide}
 
 Il suffit alors d'exécuter la commande `sh _deploy.sh` pour mettre à jour notre site en une seule commande. Quelques minutes peuvent s'écouler avant que la mise à jour ne soit effective sur _Cloudfront_.
 
@@ -281,8 +280,7 @@ s3cmd del --recursive --force s3://statistiques/
 # Génération des logs
 /usr/share/awstats/tools/awstats_buildstaticpages.pl \
     -dir=~/awstats/ -update -config=www.domain.tld \
-{% endhighlight %}
-{:.wide}
+{% endhighlight %}{:.wide}
 
 Nous donnons à ce fichier les droits pour qu'il puisse être exécuté, puis créons une tâche `cron` :
 

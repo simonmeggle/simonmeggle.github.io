@@ -1,3 +1,4 @@
+
 ---
 title:  Serve a static website with <em>Cloudfront</em>
 trans: /site-statique-avec-cloudfront/
@@ -205,8 +206,7 @@ s3cmd --acl-public --cf-invalidate -M \
 # Delete removed files
 s3cmd --delete-removed --cf-invalidate-default-index \
       sync _site/ s3://www.domain.tld/ 
-{% endhighlight %}
-{:.wide}
+{% endhighlight %}{:.wide}
 
 You only have to execute `sh _deploy.sh` to update the website. A few minutes may be required in order to update _CloudFront_ data.
 
