@@ -1,4 +1,3 @@
-
 ---
 title:  Serve a static website with <em>Cloudfront</em>
 trans: /site-statique-avec-cloudfront/
