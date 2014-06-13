@@ -10,22 +10,22 @@
   {% if page.trans %}<link rel="alternate" hreflang="{% if lang != 'fr' %}fr{% else %}en{% endif %}" href="{{ page.trans }}" />{% endif %}{% if page.math %}
   <script type="text/javascript">{% include mathjax.js %}</script>{% endif %}
 </head>
-<body itemscope itemtype="http://schema.org/Article">
+<body>
 <div class="nav">
   <ul>
-    <li class="title" itemprop="author"><a href="{{site.nav[lang].journal.url}}">Sylvain Durand</a></li>
+    <li class="title"><a href="{{site.nav[lang].journal.url}}">Sylvain Durand</a></li>
     <li class="lang">{% if lang != 'fr' %}<span>en</span> {% if page.trans %} | <a href="{{page.trans}}">fr</a>{% endif %}{% else %}{% if page.trans %} <a href="{{page.trans}}">en</a> | {% endif %}<span>fr</span>{% endif %}</li>
     {% for menu in site.nav[lang] %}<li><a href="{{menu[1].url}}" {% if page.url == menu[1].url %}class="active"{% endif %}>{{menu[1].title}}</a></li>{% endfor %}
   </ul>
 </div>
 {% if page.page %}
-<div class="page" itemprop="articleBody" >
+<div class="page">
 {% else %}
 <h1>
-  <div itemprop="name">{{ page.title }}</div>
-  <span itemprop="datePublished" class="date">{% include date.html date=page.date lang=lang %}</span>
+  <div>{{ page.title }}</div>
+  <span>{% include date.html date=page.date lang=lang %}</span>
 </h1>
-<div class="post" itemprop="articleBody" >{% endif %}
+<div class="post">{% endif %}
 {% if lang == 'en' %}{{ content }}{% else %}{{ content | replace: '“', '«&#160;' | replace: '”', '&#160;»' }}{% endif %}
 </div>
 </html>
