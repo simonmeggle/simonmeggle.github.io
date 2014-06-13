@@ -5,7 +5,8 @@ $serif: Georgia, serif
 $sans: Arial, sans-serif
 
 body
-  margin: 0
+  margin: 4em 0 0 0
+  background: #EFEEF4
   font: 1.125em / 1.5 $serif
 
 // Éléments de base
@@ -18,24 +19,21 @@ a
 
 p
   margin: 1.5em auto 0
-  max-width: 33em
 
 img
   margin: 3em auto
   width: 100%
-  border-radius: 0.6em
 
 ul,ol
-  @extend p
-  margin-top: 0
+  margin: 0 auto
   padding: 0
   list-style-type: none
 
 // Titres
 
 h1
-  margin: 0 0 -4em
-  padding: 4.5em 1em 0.9em
+  padding: 2em 1em 0.9em
+  margin: 0
   background: #252525
   color: #fff
   text-align: center
@@ -43,21 +41,21 @@ h1
   font-weight: normal
   font-size: 1.6667em
   line-height: 1.8
+
   span
     display: block
     margin: 0 auto
-    color: #888888
+    color: #888
     letter-spacing: 0
     font-size: 0.5em
 
 h2
-  margin: 3.3818em auto 1.2272em
-  max-width: 27em
+  margin: 3.3818em 0 1.2272em
   font: bold 1.2222em / 1.2272 $sans
+  text-align: center
 
 h3
-  @extend p
-  margin: 2em auto -1em
+  margin: 2em 0 -1em 4em
   font: bold 1em / 1.5 $sans
 
 .caps, sup
@@ -67,35 +65,67 @@ h3
 
 .nav
   position: fixed
+  top: 0
   width: 100%
-  background: #333333
+  padding: 1.5em 0
+  background: #333
   letter-spacing: -0.04em
   cursor: default
-  padding: 1.5em
+  ul
+    width: 80%
   li
     display: inline
-    color: #cccccc
+    color: #ccc
     a
       padding-right: 0.8em
-      color: #777777
+      color: #777
       &:hover, &:active
-        color: white
+        color: #fff
   .lang
     float: right
     color: #4d4d4d
     span
-      color: #cccccc
+      color: #ccc
     a
       padding: 0
   .logo
     display: block
-    text-transform: lowercase
     a
-      color: #dddddd
+      color: #ddd
       font-size: 1.277em
       line-height: 0
       &:hover, &:active
-        color: white
+        color: #fff
+
+// Main
+
+.main
+  background: #fff
+  margin: 0 auto
+  padding: 3em 0
+  max-width: 40em
+
+  box-shadow: 0 0 0.2em #aaa
+
+  &>p
+    padding: 0 5% 0 10%
+
+  &>p:first-child:first-letter
+    float: left
+    margin: 0.13em 0.05em 0 -0.05em
+    font-size: 3.2em
+    line-height: 0.5em
+
+  &>p:first-child:first-line
+    letter-spacing: 0.04em
+    font-variant: small-caps
+
+  li
+    margin: 0 1em 0 5.5em 
+
+    &:before
+      content: "– "
+
 
 // Liste des articles
 
@@ -104,63 +134,43 @@ h3
   max-width: 31em
   font-size: 1.125em
   line-height: 1.333
+
   li
     margin: 0
+
+    &:before
+      content: ""
+
     a
       display: block
       padding: 1em
+
       &:hover
         background: #fdfdfd
+
     li + li
-      box-shadow: 0 -1px 0 #eeeeee
+      box-shadow: 0 -1px 0 #eee
+
     span
       display: block
       font-size: 0.7777em
       line-height: 1.714
       float: right
-      color: #dddddd
+      color: #ddd
       margin-left: 1em
-
-// Article
-
-.main
-  padding-top: 10em
-  p:first-child:first-letter
-    float: left
-    margin: 0.13em 0.05em 0 -0.05em
-    font-size: 3.2em
-    line-height: 0.5em
-  p:first-child:first-line
-    letter-spacing: 0.04em
-    font-variant: small-caps
-  li
-    margin-left: 1.5em
-    &:before
-      content: "– "
-  &:after
-    content: "❧"
-    display: block
-    text-align: center
-    font-size: 5em
-    color: #eeeeee
-    cursor: default
-  
 
 // Code
 
 code
   background: #f9f9f9
-  border-radius: 0.6em
   padding: 0.3em 0.5em
   font-size: 0.777em
   font-family: Monaco, "Lucida Console", monospace
 
 pre
   overflow-x: auto
-  margin: 1.385em auto
-  padding: 1em
-  max-width: 29em
-  border-radius: 0.6em
+  margin: 1.385em 0
+  padding: 1em 0 1em 4em
   background: #f9f9f9
   font-family: monospace, monospace
   code
