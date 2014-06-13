@@ -18,14 +18,11 @@
     {% for menu in site.nav[lang] %}<li><a href="{{menu[1].url}}" {% if page.url == menu[1].url %}class="active"{% endif %}>{{menu[1].title}}</a></li>{% endfor %}
   </ul>
 </div>
-{% if page.page %}
-<div class="page">
-{% else %}
-<h1>
+{% if page.title != "Journal" %}<h1>
   <div>{{ page.title }}</div>
   <span>{% include date.html date=page.date lang=lang %}</span>
-</h1>
-<div class="post">{% endif %}
+</h1>{% endif %}
+<div class="post">
 {% if lang == 'en' %}{{ content }}{% else %}{{ content | replace: '“', '«&#160;' | replace: '”', '&#160;»' }}{% endif %}
 </div>
 </html>

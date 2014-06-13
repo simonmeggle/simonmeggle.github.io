@@ -34,7 +34,7 @@ ul,ol
 // Titres
 
 h1
-  margin: 0 0 1.8em
+  margin: 0 0 -4em
   padding: 4.5em 1em 0.9em
   background: #252525
   color: #fff
@@ -100,7 +100,7 @@ h3
 // Liste des articles
 
 .liste
-  margin: 2em auto
+  padding: 0 auto
   max-width: 31em
   font-size: 1.125em
   line-height: 1.333
@@ -121,9 +121,10 @@ h3
       color: #dddddd
       margin-left: 1em
 
-// Main
+// Article
 
 .post
+  padding-top: 10em
   p:first-child:first-letter
     float: left
     margin: 0.13em 0.05em 0 -0.05em
@@ -136,11 +137,6 @@ h3
     margin-left: 1.5em
     &:before
       content: "– "
-
-.page
-  padding-top: 6em
-
-.post, .page
   &:after
     content: "❧"
     display: block
@@ -148,6 +144,7 @@ h3
     font-size: 5em
     color: #eeeeee
     cursor: default
+  
 
 // Code
 
