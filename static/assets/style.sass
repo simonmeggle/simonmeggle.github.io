@@ -1,15 +1,33 @@
 ---
 ---
 
+// Fonts
 $serif: Georgia, serif
-$sans: Arial, sans-serif
+$sans: Arial, sans
+$mono: Monaco, "Lucida Console", monospace
 
-body
-  margin: 4em 0 0 0
-  background: #EFEEF4
-  font: 1.125em / 1.5 $serif
+// Sizes
+$main: 20
+$line: 1.5
+$pad: 10%
+
+// Vertical rhythm
+=vertical($size, $font:"", $top:"", $bottom:"", $style:"", $margin:0, $lh:$line)
+  font: #{$style} #{$size/$main}em / #{$lh/$size*$main} $font
+  @if $top != "" and $bottom != "" 
+    padding: $top*$lh/$size*$main+em $pad $bottom*$lh/$size*$main+em $pad
+    @if $margin == 0
+      margin: 0
+    @else
+      margin: #{$margin*$lh/$size*$main+em} 0
+
 
 // Éléments de base
+
+body
+  margin: 4*$line+em 0 0 0
+  background: #efeef4
+  font: #{$main/16}em / $line $serif
 
 a
   color: #156f8f
@@ -17,49 +35,10 @@ a
   &:hover
     color: #0c4255
 
-p
-  margin: 1.5em auto 0
-
-img
-  margin: 3em auto
-  width: 100%
-
 ul,ol
   margin: 0 auto
   padding: 0
   list-style-type: none
-
-// Titres
-
-h1
-  padding: 2em 1em 0.9em
-  margin: 0
-  background: #252525
-  color: #fff
-  text-align: center
-  letter-spacing: -0.04em
-  font-weight: normal
-  font-size: 1.6667em
-  line-height: 1.8
-
-  span
-    display: block
-    margin: 0 auto
-    color: #888
-    letter-spacing: 0
-    font-size: 0.5em
-
-h2
-  margin: 3.3818em 0 1.2272em
-  font: bold 1.2222em / 1.2272 $sans
-  text-align: center
-
-h3
-  margin: 2em 0 -1em 4em
-  font: bold 1em / 1.5 $sans
-
-.caps, sup
-  font-size: 0.85em
 
 // Barre de navigation
 
@@ -67,7 +46,7 @@ h3
   position: fixed
   top: 0
   width: 100%
-  padding: 1.5em 0
+  padding: $line+em 0
   background: #333
   letter-spacing: -0.04em
   cursor: default
@@ -75,40 +54,41 @@ h3
     width: 80%
   li
     display: inline
-    color: #ccc
+    color: #cccccc
     a
       padding-right: 0.8em
-      color: #777
+      color: #777777
       &:hover, &:active
-        color: #fff
+        color: white
   .lang
     float: right
     color: #4d4d4d
     span
-      color: #ccc
+      color: #cccccc
     a
       padding: 0
   .logo
     display: block
+    text-transform: lowercase
     a
-      color: #ddd
+      color: #dddddd
       font-size: 1.277em
       line-height: 0
       &:hover, &:active
-        color: #fff
-
+        color: white
 // Main
 
 .main
   background: #fff
-  margin: 0 auto
-  padding: 3em 0
+  margin: auto
+  padding: 2*$line+em 0
   max-width: 40em
 
   box-shadow: 0 0 0.2em #aaa
 
   &>p
-    padding: 0 5% 0 10%
+    padding: 0 $pad 
+    margin: 0
 
   &>p:first-child:first-letter
     float: left
@@ -120,12 +100,34 @@ h3
     letter-spacing: 0.04em
     font-variant: small-caps
 
+  img
+    margin: 3em auto
+    width: 100%
+
   li
-    margin: 0 1em 0 5.5em 
+    padding: 0 1em 0 5.5em 
 
     &:before
       content: "– "
 
+  .caps, sup
+    font-size: 0.85em
+
+// Titres
+
+h1
+  +vertical(34,$serif,2,2)
+  background: #252525
+  color: #fff
+  text-align: center
+  letter-spacing: -0.04em
+
+h2
+  +vertical(25,$sans,3,1,bold)
+  text-align: center
+
+h3
+  +vertical(20,$sans,1,1,bold)
 
 // Liste des articles
 
@@ -164,15 +166,12 @@ h3
 code
   background: #f9f9f9
   padding: 0.3em 0.5em
-  font-size: 0.777em
-  font-family: Monaco, "Lucida Console", monospace
+  +vertical(15,$mono,"","","",0,0)
 
 pre
   overflow-x: auto
-  margin: 1.385em 0
-  padding: 1em 0 1em 4em
   background: #f9f9f9
-  font-family: monospace, monospace
+  +vertical(20,$mono,1,1,bold,1)
   code
     padding: 0
 
