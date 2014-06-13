@@ -4,7 +4,7 @@ trans: /
 ---
 
 
-<ul class="liste">{% for post in site.posts %}{% if post.page or post.path contains "/en/" %}{% else %}
+<ul class="liste">{% for post in site.posts %}{% if post.title == "Journal" or post.title == "À propos" or post.path contains "/en/" %}{% else %}
   <li>
     <a href="{{ post.url }}">
       <span>{% include date.html date=post.date lang='fr' %}</span>
