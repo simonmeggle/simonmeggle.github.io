@@ -7,8 +7,9 @@
   <title>{{page.title | strip_html}} – Sylvain Durand</title>
   <link rel="stylesheet" href="/static/assets/style.css">
   <link rel="icon" href="/static/design/favicon.ico" />
-  {% if page.trans %}<link rel="alternate" hreflang="{% if lang != 'fr' %}fr{% else %}en{% endif %}" href="{{ page.trans }}" />{% endif %}{% if page.math %}
-  <script type="text/javascript">{% include mathjax.js %}</script>{% endif %}
+  {% if page.trans %}<link rel="alternate" hreflang="{% if lang != 'fr' %}fr{% else %}en{% endif %}" href="{{ page.trans }}" />{% endif %}
+  <script src="/static/assets/marginalia.js"></script>{% if page.math %}
+  <script src="/static/assets/mathjax.js"></script>{% endif %}
 </head>
 <body>
 <div class="nav">

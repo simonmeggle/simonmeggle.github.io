@@ -13,7 +13,7 @@ $pad: 10%
 
 // Vertical rhythm
 =vertical($size, $font:"", $top:"", $bottom:"", $style:"", $margin:0, $lh:$line)
-  font: #{$style} #{$size/$main}em / #{$lh/$size*$main} $font
+  font: #{$style} #{$size/$main}em / #{$lh/$size*$main} #{$font}
   @if $top != "" and $bottom != "" 
     padding: $top*$lh/$size*$main+em $pad $bottom*$lh/$size*$main+em $pad
     @if $margin == 0
@@ -35,60 +35,35 @@ a
   &:hover
     color: #0c4255
 
-ul,ol
+p,ul,ol
   margin: 0 auto
   padding: 0
   list-style-type: none
 
-// Barre de navigation
 
-.nav
-  position: fixed
-  top: 0
-  width: 100%
-  padding: $line+em 0
-  background: #333
-  letter-spacing: -0.04em
-  cursor: default
-  ul
-    width: 80%
-  li
-    display: inline
-    color: #cccccc
-    a
-      padding-right: 0.8em
-      color: #777777
-      &:hover, &:active
-        color: white
-  .lang
-    float: right
-    color: #4d4d4d
-    span
-      color: #cccccc
-    a
-      padding: 0
-  .logo
-    display: block
-    text-transform: lowercase
-    a
-      color: #dddddd
-      font-size: 1.277em
-      line-height: 0
-      &:hover, &:active
-        color: white
 // Main
 
 .main
   background: #fff
   margin: auto
   padding: 2*$line+em 0
-  max-width: 40em
-
+  max-width: 38em
   box-shadow: 0 0 0.2em #aaa
+
+  img
+    margin: 3em auto
+    width: 100%
+
+  p+ul li
+    padding: 0 $pad 0 1.5*$pad 
+
+    &:before
+      content: "– "
 
   &>p
     padding: 0 $pad 
-    margin: 0
+
+  // Lettrine
 
   &>p:first-child:first-letter
     float: left
@@ -100,20 +75,12 @@ ul,ol
     letter-spacing: 0.04em
     font-variant: small-caps
 
-  img
-    margin: 3em auto
-    width: 100%
 
-  li
-    padding: 0 1em 0 5.5em 
+.caps, sup
+  font-size: 0.85em
 
-    &:before
-      content: "– "
 
-  .caps, sup
-    font-size: 0.85em
-
-// Titres
+// Titles
 
 h1
   +vertical(34,$serif,2,2)
@@ -129,6 +96,43 @@ h2
 h3
   +vertical(20,$sans,1,1,bold)
 
+
+// Footnotes
+
+.footnotes
+  li
+    +vertical(18,$serif,0,1)
+    list-style-type: decimal
+    list-style-position: inside
+
+    p
+      display: inline
+
+  &:before
+    content: "Notes"
+    display: block
+    text-align: center
+    +vertical(25,$serif,3,1)
+
+  .reversefootnote
+    display: none
+
+
+.marginalia
+  li
+    position: absolute
+    left: 60%
+    right: .5em
+    margin-left: 21em
+    max-width: 14em
+    color: #bbb
+    +vertical(14,$serif,"","",italic)
+    padding: 0
+
+  &:before
+    display: none
+
+
 // Liste des articles
 
 .liste
@@ -137,29 +141,69 @@ h3
   font-size: 1.125em
   line-height: 1.333
 
-  li
-    padding: 0
+  a
+    display: block
+    padding: 1em
 
-    &:before
-      content: ""
+    &:hover
+      background: #fdfdfd
+
+  span
+    display: block
+    font-size: 0.7777em
+    line-height: 1.714
+    float: right
+    color: #ddd
+    margin-left: 1em
+
+
+// Navbar
+
+.nav
+  position: fixed
+  top: 0
+  width: 100%
+  padding: $line+em 0
+  background: #333
+  letter-spacing: -0.04em
+  cursor: default
+  z-index: 1
+
+  ul
+    width: 80%
+
+  li
+    display: inline
+    color: #ccc
 
     a
-      display: block
-      padding: 1em
+      padding-right: 0.8em
+      color: #777
 
-      &:hover
-        background: #fdfdfd
-
-    li + li
-      box-shadow: 0 -1px 0 #eee
+      &:hover, &:active
+        color: white
+  .lang
+    float: right
+    color: #4d4d4d
 
     span
-      display: block
-      font-size: 0.7777em
-      line-height: 1.714
-      float: right
+      color: #ccc
+
+    a
+      padding: 0
+
+  .logo
+    display: block
+    text-transform: lowercase
+
+    a
       color: #ddd
-      margin-left: 1em
+      font-size: 1.277em
+      line-height: 0
+
+      &:hover, &:active
+        color: #fff
+
 
 // Code
 
@@ -172,6 +216,7 @@ pre
   overflow-x: auto
   background: #f9f9f9
   +vertical(20,$mono,1,1,bold,1)
+
   code
     padding: 0
 
