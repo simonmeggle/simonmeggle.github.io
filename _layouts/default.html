@@ -12,15 +12,15 @@
   <script src="/static/assets/mathjax.js"></script>{% endif %}
 </head>
 <body>
-<div class="nav">
+<nav>
   <ul>
     <li class="logo"><a href="{{site.nav[lang].journal.url}}">sylvain durand</a></li>
     <li class="lang">{% if lang != 'fr' %}<span>en</span> {% if page.trans %} | <a href="{{page.trans}}">fr</a>{% endif %}{% else %}{% if page.trans %} <a href="{{page.trans}}">en</a> | {% endif %}<span>fr</span>{% endif %}</li>
     {% for menu in site.nav[lang] %}<li><a href="{{menu[1].url}}" {% if page.url == menu[1].url %}class="active"{% endif %}>{{menu[1].title}}</a></li>{% endfor %}
   </ul>
-</div>
+</nav>
 {% if page.title != "Journal" %}<h1>{{ page.title }}</h1>{% endif %}
-<div class="main">
+<article>
 {% if lang == 'en' %}{{ content }}{% else %}{{ content | replace: '“', '«&#160;' | replace: '”', '&#160;»' | replace: ' :', '&#160;:' | replace: ' ;', '&#160;;' }}{% endif %}
-</div>
+</article>
 </html>

@@ -1,7 +1,7 @@
 var $ = function(el){return document.querySelectorAll(el);};
 
 function marginalia(){
-    if(window.innerWidth > 1100){
+    if(window.innerWidth > 1000){
         $('.footnotes')[0].className="footnotes marginalia";
         var nodes = $('.marginalia ol li'); var end = 0;
         for(var i=0;i<nodes.length;i++){

@@ -2,32 +2,33 @@
 ---
 
 // Fonts
-$serif: Georgia, serif
-$sans: Arial, sans
-$mono: Monaco, "Lucida Console", monospace
+$serif: PT Serif, Georgia, serif
+$sans: PT Sans, Arial, sans
+$mono: "Lucida Console", monospace
 
 // Sizes
-$main: 20
-$line: 1.5
-$pad: 10%
+$main: 18
+$size: $main
+$line: 30/$main
+$width: 35em
 
-// Vertical rhythm
-=vertical($size, $font:"", $top:"", $bottom:"", $style:"", $margin:0, $lh:$line)
-  font: #{$style} #{$size/$main}em / #{$lh/$size*$main} #{$font}
-  @if $top != "" and $bottom != "" 
-    padding: $top*$lh/$size*$main+em $pad $bottom*$lh/$size*$main+em $pad
-    @if $margin == 0
-      margin: 0
-    @else
-      margin: #{$margin*$lh/$size*$main+em} 0
+// Mixins
+
+=font($font:$serif, $style:"", $height:$line, $size:$size)
+  font: #{$style} #{$size/$main}em / #{$height/$size*$main} #{$font}
+
+=padding($top, $bottom, $size:$size)
+  padding: $top*$line/$size*$main+em $line/$size*$main+em $bottom*$line/$size*$main+em
+
+=width($width:$width, $size:$size)
+  max-width: $width/$size*$main
 
 
 // Éléments de base
 
 body
-  margin: 4*$line+em 0 0 0
-  background: #efeef4
   font: #{$main/16}em / $line $serif
+  margin: 4*$line+em 0 0 0
 
 a
   color: #156f8f
@@ -35,45 +36,41 @@ a
   &:hover
     color: #0c4255
 
-p,ul,ol
-  margin: 0 auto
-  padding: 0
-  list-style-type: none
+
 
 
 // Main
 
-.main
-  background: #fff
-  margin: auto
-  padding: 2*$line+em 0
-  max-width: 38em
-  box-shadow: 0 0 0.2em #aaa
 
-  img
-    margin: 3em auto
-    width: 100%
+img
+  margin: 3em auto
+  width: 100%
 
-  p+ul li
-    padding: 0 $pad 0 1.5*$pad 
+p,ul,ol
+  margin: 0 auto
+  list-style-type: none
+  padding: $line+em $line+em 0
+  max-width: 35em
+  text-align: justify
 
-    &:before
-      content: "– "
+p+ul li
+  padding: 0 $line+em 0 1.5*$line+em 
 
-  &>p
-    padding: 0 $pad 
+  &:before
+    content: "– "
 
-  // Lettrine
 
-  &>p:first-child:first-letter
-    float: left
-    margin: 0.13em 0.05em 0 -0.05em
-    font-size: 3.2em
-    line-height: 0.5em
+// Lettrine
 
-  &>p:first-child:first-line
-    letter-spacing: 0.04em
-    font-variant: small-caps
+p:first-child:first-letter
+  float: left
+  margin: 0.13em 0.05em 0 -0.05em
+  font-size: 3.2em
+  line-height: 0.5em
+
+p:first-child:first-line
+  letter-spacing: 0.04em
+  font-variant: small-caps
 
 
 .caps, sup
@@ -82,37 +79,52 @@ p,ul,ol
 
 // Titles
 
+h1, h2, h3
+  margin: 0 auto
+
 h1
-  +vertical(34,$serif,2,2)
+  $size: 32 !global
+  +font
+  +padding(2,2)
   background: #252525
   color: #fff
   text-align: center
   letter-spacing: -0.04em
 
 h2
-  +vertical(25,$sans,3,1,bold)
+  $size: 25 !global
+  +font($sans,bold)
+  +padding(3,1)
   text-align: center
 
 h3
-  +vertical(20,$sans,1,1,bold)
+  $size: 20 !global
+  +font($sans,bold)
+  +padding(1,0)
+  +width
 
 
 // Footnotes
 
 .footnotes
   li
-    +vertical(18,$serif,0,1)
+    $size: 18 !global
+    +font
+    +padding(0,1)
     list-style-type: decimal
     list-style-position: inside
 
     p
       display: inline
+      padding: 0
 
   &:before
+    $size: 25 !global
+    +font
+    +padding(3,1)
     content: "Notes"
     display: block
     text-align: center
-    +vertical(25,$serif,3,1)
 
   .reversefootnote
     display: none
@@ -120,14 +132,16 @@ h3
 
 .marginalia
   li
+    $size: 14 !global
+    +font($serif,italic)
     position: absolute
     left: 60%
     right: .5em
-    margin-left: 21em
-    max-width: 14em
-    color: #bbb
-    +vertical(14,$serif,"","",italic)
     padding: 0
+    margin-left: 17em
+    max-width: 16em
+    text-align: left
+    color: #bbb
 
   &:before
     display: none
@@ -159,7 +173,7 @@ h3
 
 // Navbar
 
-.nav
+nav
   position: fixed
   top: 0
   width: 100%
@@ -170,7 +184,9 @@ h3
   z-index: 1
 
   ul
-    width: 80%
+    max-width: 40em
+    padding: 0 $line+em
+
 
   li
     display: inline
@@ -208,12 +224,27 @@ h3
 // Code
 
 code
-  +vertical(16,$mono,"","","",0,0)
+  $size: $main !global
+  +font($sans,"",0)
+  color: #555
 
 pre
-  overflow-x: auto
-  background: #f9f9f9
-  +vertical(20,$mono,1,1,bold,1)
+  $size: $main !global
+  +font($sans,bold)
+  +padding(1,1)
+  +width(32em)
+  margin: $line/$size*$main+em auto
+  white-space: pre-wrap
+  background: #fafafa
+  border-radius: .5em
+
+  code
+    $size: 15 !global
+    +font($mono)
+    display: block
+    line-height: $line/$size*$main
+    margin: auto
+    +width
 
 
 // Coloration syntaxique 
@@ -244,3 +275,4 @@ pre
 
 .kd,.kr,.nc,.nd,.nf,.nt,.nv,.bp,.vc,.vg,.vi
   color: #268bd2
+
