@@ -10,7 +10,7 @@ $mono: "Lucida Console", monospace
 $main: 18
 $size: $main
 $line: 30/$main
-$width: 35em
+$width: 32em
 
 // Mixins
 
@@ -50,8 +50,12 @@ p,ul,ol
   margin: 0 auto
   list-style-type: none
   padding: $line+em $line+em 0
-  max-width: 35em
+  max-width: $width
   text-align: justify
+  hyphens: auto
+  -moz-hyphens: auto
+  -ms-hyphens: auto
+  -webkit-hyphens: auto
 
 p+ul li
   padding: 0 $line+em 0 1.5*$line+em 
@@ -135,12 +139,11 @@ h3
     $size: 14 !global
     +font($serif,italic)
     position: absolute
-    left: 60%
+    left: 58%
     right: .5em
     padding: 0
-    margin-left: 17em
-    max-width: 16em
-    text-align: left
+    margin-left: $width/2
+    max-width: $width/2
     color: #bbb
 
   &:before
@@ -184,7 +187,7 @@ nav
   z-index: 1
 
   ul
-    max-width: 40em
+    max-width: $width * 1.25
     padding: 0 $line+em
 
 
@@ -226,25 +229,27 @@ nav
 code
   $size: $main !global
   +font($sans,"",0)
-  color: #555
+  color: #666
+  hyphens: none
+  -moz-hyphens: none
+  -ms-hyphens: none
+  -webkit-hyphens: none
 
 pre
   $size: $main !global
   +font($sans,bold)
   +padding(1,1)
-  +width(32em)
+  +width($width - 3em)
   margin: $line/$size*$main+em auto
-  white-space: pre-wrap
+  overflow-x: auto
   background: #fafafa
   border-radius: .5em
 
   code
     $size: 15 !global
     +font($mono)
-    display: block
-    line-height: $line/$size*$main
-    margin: auto
     +width
+    color: #111
 
 
 // Coloration syntaxique 
