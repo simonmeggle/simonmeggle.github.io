@@ -50,14 +50,14 @@ p,ul,ol
   margin: 0 auto
   list-style-type: none
   padding: $line+em $line+em 0
-  max-width: $width
+  +width
   text-align: justify
   hyphens: auto
   -moz-hyphens: auto
   -ms-hyphens: auto
   -webkit-hyphens: auto
 
-p+ul li
+p+ul li, p+ol li
   padding: 0 $line+em 0 1.5*$line+em 
 
   &:before
@@ -66,14 +66,13 @@ p+ul li
 
 // Lettrine
 
-p:first-child:first-letter
+header+p:first-letter
   float: left
   margin: 0.13em 0.05em 0 -0.05em
-  font-size: 3.2em
+  font-size: 3.333em
   line-height: 0.5em
 
-p:first-child:first-line
-  letter-spacing: 0.04em
+header+p:first-line
   font-variant: small-caps
 
 
@@ -86,23 +85,31 @@ p:first-child:first-line
 h1, h2, h3
   margin: 0 auto
 
-h1
-  $size: 32 !global
-  +font
-  +padding(2,2)
+header
+  +padding(1.5,1)
   background: #252525
   color: #fff
   text-align: center
   letter-spacing: -0.04em
 
+  span
+    color: #444
+    font-style: italic
+
+h1
+  $size: 36 !global
+  +font
+  +padding(0,.5)
+
+
 h2
-  $size: 25 !global
+  $size: 27 !global
   +font($sans,bold)
   +padding(3,1)
   text-align: center
 
 h3
-  $size: 20 !global
+  $size: 21 !global
   +font($sans,bold)
   +padding(1,0)
   +width
@@ -123,7 +130,7 @@ h3
       padding: 0
 
   &:before
-    $size: 25 !global
+    $size: 27 !global
     +font
     +padding(3,1)
     content: "Notes"
@@ -134,27 +141,43 @@ h3
     display: none
 
 
-.marginalia
-  li
-    $size: 14 !global
-    +font($serif,italic)
-    position: absolute
-    left: 58%
-    right: .5em
-    padding: 0
-    margin-left: $width/2
-    max-width: $width/2
-    color: #bbb
+// Large screen
 
-  &:before
-    display: none
+.marginalia
+  .footnotes 
+    li
+      $size: 14 !global
+      +font($serif,italic)
+      position: absolute
+      left: 58%
+      right: 1em
+      padding: 0
+      margin-left: $width/2+1em
+      max-width: $width/2
+      color: #ccc
+
+      em 
+        font-style: normal
+
+      code
+        color: #ccc
+        font-style: italic
+
+      a
+        color: #bbb
+        &:hover
+          color: #aaa
+
+    &:before
+      display: none
 
 
 // Liste des articles
 
 .liste
+  $size: 18 !global
   padding: 0 auto
-  max-width: 31em
+  +width
   font-size: 1.125em
   line-height: 1.333
 
