@@ -1,5 +1,5 @@
 ---
-title:  Servir un site statique avec <em>Cloudfront</em>
+title:  Site statique avec <em>Cloudfront</em>
 trans: /static-website-with-cloudfront/
 ---
 

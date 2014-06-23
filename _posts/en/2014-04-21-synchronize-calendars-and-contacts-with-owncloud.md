@@ -1,5 +1,5 @@
 ---
-title:  Synchronize calendars and contacts with <em>OwnCloud</em>
+title:  Calendars and contacts with <em>OwnCloud</em>
 trans: /synchroniser-calendriers-et-contacts-avec-owncloud/
 ---
 

@@ -1,6 +1,7 @@
 ---
-title:  Générer un site multilingue avec <em>Jekyll</em> 
+title:  Site multilingue avec <em>Jekyll</em> 
 trans: /multilingual-website-with-jekyll/
+update: 2014-05-24
 ---
 
 J _ekyll_ est un générateur de sites statiques dont la conception très flexible laisse une grande liberté de choix à l'utilisateur en lui permettant de mettre simplement en place des fonctionnalités qui ne sont pas intégrées à son moteur. C'est notamment le cas lorsque l'on souhaite proposer son site en plusieurs langues : alors que les CMS sont très rigides ou nécessitent des plugins, quelques filtres suffisent pour obtenir le résultat désiré sous _Jekyll_. 
@@ -300,6 +301,3 @@ Ce fichier peut (bien sûr !) être généré automatiquement par Jekyll. Il suf
 </urlset>
 {% endraw %}
 {% endhighlight %}
-
-
-*[CMS]: Système de gestion de contenu
