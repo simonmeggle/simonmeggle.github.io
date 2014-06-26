@@ -4,7 +4,6 @@
 // Fonts
 $serif: PT Serif, Georgia, serif
 $sans: PT Sans, Arial, sans
-$mono: "Lucida Console", monospace
 
 // Sizes
 $main: 18
@@ -265,12 +264,10 @@ pre
   +width($width - 3em)
   margin: $line/$size*$main+em auto
   overflow-x: auto
-  background: #fafafa
+  background: #f5f5f5
   border-radius: .5em
 
   code
-    $size: 15 !global
-    +font($mono)
     +width
     color: #111
 
