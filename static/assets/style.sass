@@ -102,15 +102,26 @@ h1
 
 
 h2
-  $size: 27 !global
-  +font($sans,bold)
-  +padding(3,1)
+  $size: 25 !global
+  +font($serif,italic)
+  +padding(2.5,0)
+  +width($width - 4em)
+  color: #666
   text-align: center
+  border-bottom: 1px solid #ddd
+  margin: -1px auto 1.5*$line/$size*$main+em
+
+  span
+    position: relative
+    top: .5em
+    background: #fff
+    padding: 0 .4em
 
 h3
   $size: 21 !global
-  +font($sans,bold)
-  +padding(1,0)
+  +font($serif)
+  +padding(2,0)
+  color: #888
   +width
 
 

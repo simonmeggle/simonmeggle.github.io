@@ -1,5 +1,8 @@
 permalink: /:title/
 
+kramdown:
+  auto_ids: false
+
 defaults:
   -
     scope:
