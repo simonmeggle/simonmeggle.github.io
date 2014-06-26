@@ -23,3 +23,8 @@ nav:
     about:
       title: "à propos"
       url:   "/a-propos/"
+
+cat:
+  jekyll: "Jekyll"
+  pi:     "Raspberry Pi"
+  r:      "R"

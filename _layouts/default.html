@@ -22,11 +22,12 @@
 </nav>
 
 <article>
-{% if page.title != "Journal" and page.title != "À propos" and page.title != "About" %}<header>
+{% for cat in site.cat %}{% capture path %}/{{lang}}/{{cat[1]}}/{% endcapture %}{% if page.path contains path %}
+<header>
 <h1>{{ page.title }}</h1>
 <span>{% include date.html date=page.date lang=lang %}</span>
 </header>
-{% endif %}
+{% endif %}{% endfor %}
 {% if lang == 'en' %}{{ content }}{% else %}{{ content | replace: '“', '«&#160;' | replace: '”', '&#160;»' | replace: ' :', '&#160;:' | replace: ' ;', '&#160;;' }}{% endif %}
 </article>
 

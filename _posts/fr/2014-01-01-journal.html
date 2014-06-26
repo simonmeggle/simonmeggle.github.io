@@ -3,12 +3,11 @@ title:  Journal
 trans: /
 ---
 
-
-<ul class="liste">{% for post in site.posts %}{% if post.title == "Journal" or post.title == "À propos" or post.path contains "/en/" %}{% else %}
+<ul class="liste">{% for post in site.posts %}{% for cat in site.cat %}{% capture path %}/fr/{{cat[1]}}/{% endcapture %}{% if post.path contains path %}
   <li>
     <a href="{{ post.url }}">
-      <span>{% include date.html date=post.date lang='fr' %}</span>
+      <span>{% include date.html date=post.date lang="en" %}</span>
       {{ post.title }}
     </a>
-  </li>{% endif %}{% endfor %}
+  </li>{% endif %}{% endfor %}{% endfor %}
 </ul>
