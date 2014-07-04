@@ -1,10 +1,6 @@
 ---
 ---
 
-// Fonts
-$serif: PT Serif, Georgia, serif
-$sans: PT Sans, Arial, sans
-
 // Sizes
 $main: 18
 $size: $main
@@ -13,8 +9,9 @@ $width: 32em
 
 // Mixins
 
-=font($font:$serif, $style:"", $height:$line, $size:$size)
-  font: #{$style} #{$size/$main}em / #{$height/$size*$main} #{$font}
+=font
+  font-size: #{$size/$main}em
+  line-height: #{$line/$size*$main}
 
 =padding($top, $bottom, $size:$size)
   padding: $top*$line/$size*$main+em $line/$size*$main+em $bottom*$line/$size*$main+em
@@ -26,8 +23,8 @@ $width: 32em
 // Éléments de base
 
 body
-  font: #{$main/16}em / $line $serif
-  margin: 4*$line+em 0 0 0
+  font: #{$main/16}em / $line "PT Serif", Georgia, serif
+  margin: 4*$line+em 0
 
 a
   color: #156f8f
@@ -48,7 +45,7 @@ img
 p,ul,ol
   margin: 0 auto
   list-style-type: none
-  padding: $line+em $line+em 0
+  +padding(1,0)
   +width
   text-align: justify
   hyphens: auto
@@ -56,8 +53,11 @@ p,ul,ol
   -ms-hyphens: auto
   -webkit-hyphens: auto
 
+ul, ol
+  +padding(0,0)
+
 p+ul li, p+ol li
-  padding: 0 $line+em 0 1.5*$line+em 
+  padding: 0 0 0 1.5*$line+em 
 
   &:before
     content: "– "
@@ -83,6 +83,7 @@ header+p:first-line
 
 h1, h2, h3
   margin: 0 auto
+  font-weight: normal
 
 header
   +padding(1.5,1)
@@ -103,7 +104,8 @@ h1
 
 h2
   $size: 25 !global
-  +font($serif,italic)
+  +font
+  font-style: italic
   +padding(2.5,0)
   +width($width - 4em)
   color: #666
@@ -119,7 +121,7 @@ h2
 
 h3
   $size: 21 !global
-  +font($serif)
+  +font
   +padding(2,0)
   color: #888
   +width
@@ -157,7 +159,8 @@ h3
   .footnotes 
     li
       $size: 14 !global
-      +font($serif,italic)
+      +font
+      font-style: italic
       position: absolute
       left: 58%
       right: 1em
@@ -185,23 +188,22 @@ h3
 // Liste des articles
 
 .liste
-  $size: 18 !global
-  padding: 0 auto
+  $size: 21 !global
+  +padding(1.5,0)
   +width
-  font-size: 1.125em
-  line-height: 1.333
+  +font
 
   a
     display: block
-    padding: 1em
+    +padding(.5,.5)
 
     &:hover
       background: #fdfdfd
 
   span
+    $size: 14 !global
+    +font
     display: block
-    font-size: 0.7777em
-    line-height: 1.714
     float: right
     color: #ddd
     margin-left: 1em
@@ -260,8 +262,8 @@ nav
 // Code
 
 code
-  $size: $main !global
-  +font($sans,"",0)
+  line-height: 0
+  font-family: "Myriad Pro", "PT Sans", Arial, sans
   color: #666
   hyphens: none
   -moz-hyphens: none
@@ -270,7 +272,8 @@ code
 
 pre
   $size: $main !global
-  +font($sans,bold)
+  +font
+  font-family: monospace, monospace
   +padding(1,1)
   +width($width - 3em)
   margin: $line/$size*$main+em auto
