@@ -29,7 +29,7 @@
 <span>{% include date.html date=page.date lang=lang %}</span>
 </header>
 {% endif %}{% endfor %}
-{% if lang == 'en' %}{{ content | replace: '<h2>', '<h2><span>' | replace: '</h2>', '</span></h2>' }}{% else %}{{ content | replace: '“', '«&#160;' | replace: '”', '&#160;»' | replace: ' :', '&#160;:' | replace: ' ;', '&#160;;' | replace: '<h2>', '<h2><span>' | replace: '</h2>', '</span></h2>' }}{% endif %}
+{% include typo.html content=content lang=lang %}
 </article>
 
 </html>
