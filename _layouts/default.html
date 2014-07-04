@@ -7,6 +7,7 @@
   <title>{{page.title | strip_html}} – Sylvain Durand</title>
   <link rel="stylesheet" href="/static/assets/style.css">
   <link rel="icon" href="/static/design/favicon.ico" />
+  <link rel="alternate" href="/static/rss/{% if lang != 'fr' %}feed{% else %}flux{% endif %}.xml" type="application/rss+xml">
   {% if page.trans %}<link rel="alternate" hreflang="{% if lang != 'fr' %}fr{% else %}en{% endif %}" href="{{ page.trans }}" />{% endif %}
   <script src="/static/assets/marginalia.js"></script>{% if page.math %}
   <script src="/static/assets/mathjax.js"></script>{% endif %}
@@ -28,7 +29,7 @@
 <span>{% include date.html date=page.date lang=lang %}</span>
 </header>
 {% endif %}{% endfor %}
-{% if lang == 'en' %}{{ content  | replace: '<h2>', '<h2><span>' | replace: '</h2>', '</span></h2>' }}{% else %}{{ content | replace: '“', '«&#160;' | replace: '”', '&#160;»' | replace: ' :', '&#160;:' | replace: ' ;', '&#160;;' | replace: '<h2>', '<h2><span>' | replace: '</h2>', '</span></h2>' }}{% endif %}
+{% if lang == 'en' %}{{ content | replace: '<h2>', '<h2><span>' | replace: '</h2>', '</span></h2>' }}{% else %}{{ content | replace: '“', '«&#160;' | replace: '”', '&#160;»' | replace: ' :', '&#160;:' | replace: ' ;', '&#160;;' | replace: '<h2>', '<h2><span>' | replace: '</h2>', '</span></h2>' }}{% endif %}
 </article>
 
 </html>
