@@ -14,22 +14,22 @@
 </head>
 <body>
 
-<nav>
+<div class="nav">
   <ul>
     <li class="logo"><a href="{{site.nav[lang].journal.url}}">sylvain durand</a></li>
     <li class="lang">{% if lang != 'fr' %}<span>en</span> {% if page.trans %} | <a href="{{page.trans}}">fr</a>{% endif %}{% else %}{% if page.trans %} <a href="{{page.trans}}">en</a> | {% endif %}<span>fr</span>{% endif %}</li>
     {% for menu in site.nav[lang] %}<li><a href="{{menu[1].url}}" {% if page.url == menu[1].url %}class="active"{% endif %}>{{menu[1].title}}</a></li>{% endfor %}
   </ul>
-</nav>
+</div>
 
-<article>
+<div class="article">
 {% for cat in site.cat %}{% capture path %}/{{lang}}/{{cat[1]}}/{% endcapture %}{% if page.path contains path %}
-<header>
+<div class="header">
 <h1>{{ page.title }}</h1>
 <span>{% include date.html date=page.date lang=lang %}</span>
-</header>
+</div>
 {% endif %}{% endfor %}
 {% include typo.html content=content lang=lang %}
-</article>
+</div>
 
 </html>

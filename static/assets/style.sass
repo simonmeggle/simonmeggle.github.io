@@ -25,7 +25,6 @@ $width: 32em
 body
   font: #{$main/16}em / $line "PT Serif", Georgia, serif
   margin: 4*$line+em 0
-
 a
   color: #156f8f
   text-decoration: none
@@ -65,13 +64,13 @@ p+ul li, p+ol li
 
 // Lettrine
 
-header+p:first-letter
+.header+p:first-letter
   float: left
   margin: 0.13em 0.05em 0 -0.05em
   font-size: 3.333em
   line-height: 0.5em
 
-header+p:first-line
+.header+p:first-line
   font-variant: small-caps
 
 
@@ -85,7 +84,7 @@ h1, h2, h3
   margin: 0 auto
   font-weight: normal
 
-header
+.header
   +padding(1.5,1)
   background: #252525
   color: #fff
@@ -211,7 +210,7 @@ h3
 
 // Navbar
 
-nav
+.nav
   position: fixed
   top: 0
   width: 100%
