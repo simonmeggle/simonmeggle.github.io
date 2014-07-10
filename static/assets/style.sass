@@ -24,7 +24,7 @@ $width: 32em
 
 body
   font: #{$main/16}em / $line "PT Serif", Georgia, serif
-  margin: 4*$line+em 0
+  margin: 2*$line+em 0
 a
   color: #156f8f
   text-decoration: none
@@ -32,10 +32,7 @@ a
     color: #0c4255
 
 
-
-
 // Main
-
 
 img
   margin: 3em auto
@@ -214,48 +211,31 @@ h3
   position: fixed
   top: 0
   width: 100%
-  padding: $line+em 0
   background: #333
   letter-spacing: -0.04em
-  cursor: default
-  z-index: 1
 
   ul
     max-width: $width * 1.25
-    padding: 0 $line+em
+    padding: $line/2+em $line+em
+    height: 1*$line+em
 
+  a
+    display: block
+    float: left
+    padding: 0 .5em 
+    color: #777
 
-  li
-    display: inline
-    color: #ccc
+    &:hover, &:active
+      color: white
 
-    a
-      padding-right: 0.8em
-      color: #777
-
-      &:hover, &:active
-        color: white
   .lang
     float: right
-    color: #4d4d4d
+    .active
+      color: white
 
-    span
-      color: #ccc
 
-    a
-      padding: 0
-
-  .logo
-    display: block
-    text-transform: lowercase
-
-    a
-      color: #ddd
-      font-size: 1.277em
-      line-height: 0
-
-      &:hover, &:active
-        color: #fff
+  .logo a
+    color: #ddd
 
 
 // Code

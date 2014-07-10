@@ -14,14 +14,6 @@
 </head>
 <body>
 
-<div class="nav">
-  <ul>
-    <li class="logo"><a href="{{site.nav[lang].journal.url}}">sylvain durand</a></li>
-    <li class="lang">{% if lang != 'fr' %}<span>en</span> {% if page.trans %} | <a href="{{page.trans}}">fr</a>{% endif %}{% else %}{% if page.trans %} <a href="{{page.trans}}">en</a> | {% endif %}<span>fr</span>{% endif %}</li>
-    {% for menu in site.nav[lang] %}<li><a href="{{menu[1].url}}" {% if page.url == menu[1].url %}class="active"{% endif %}>{{menu[1].title}}</a></li>{% endfor %}
-  </ul>
-</div>
-
 <div class="article">
 {% for cat in site.cat %}{% capture path %}/{{lang}}/{{cat[1]}}/{% endcapture %}{% if page.path contains path %}
 <div class="header">
@@ -30,6 +22,17 @@
 </div>
 {% endif %}{% endfor %}
 {% include typo.html content=content lang=lang %}
+</div>
+
+<div class="nav">
+  <ul>
+    <li class="logo"><a href="{{site.nav[lang].journal.url}}">sylvain durand</a></li>
+    <li class="lang">{% if lang != 'en' %}{% if page.trans %}<a href="{{page.url}}" class="active">fr</a>
+    <li class="lang">{% endif %}<a href="{{page.trans}}">en</a>{% else %}<a href="{{page.trans}}">fr</a>{% if page.trans %}</li>
+    <li class="lang"><a href="{{page.url}}" class="active">en</a>{% endif %}{% endif %}</li>
+
+    {% for menu in site.nav[lang] %}<li><a href="{{menu[1].url}}" {% if page.url == menu[1].url %}class="active"{% endif %}>{{menu[1].title}}</a></li>{% endfor %}
+  </ul>
 </div>
 
 </html>
