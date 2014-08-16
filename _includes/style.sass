@@ -1,6 +1,3 @@
----
----
-
 // Sizes
 $main: 18
 $size: $main
@@ -287,4 +284,83 @@ pre
 
 .kd,.kr,.nc,.nd,.nf,.nt,.nv,.bp,.vc,.vg,.vi
   color: #268bd2
+
+
+
+// Éléments larges
+
+.barre
+  +width($width + 10em)
+  overflow: auto
+  text-align: center
+  margin: 4em auto 0
+  height: 1.8em
+  color: #999999
+  padding-right: 7em
+  background: #e8e8e8
+  border-top-left-radius: 0.5em
+  border-top-right-radius: 0.5em
+
+  a
+    color: #999999
+    &:hover
+      color: #555555
+
+.rouge,.jaune,.vert
+  border-radius: 50%
+  height: .8em
+  width: .8em
+  margin: 0.5em
+  float: left
+
+.rouge
+  background: #cc7b7a
+
+.jaune
+  background: #d0bc74
+  margin: 0.5em 0
+
+.vert
+  background: #8ebc73
+
+.barre+div pre, .barre+div img
+  +width($width + 10em)
+  margin: 0 auto 4em
+  border-top-left-radius: 0
+  border-top-right-radius: 0
+
+.barre+div pre
+  background: #3d3d3d
+  color: #cccccc
+  .ge
+    font-style: italic
+  .gh
+    color: #cccccc
+    font-weight: 700
+  .gp
+    color: #999999
+    font-weight: 700
+  .gs
+    font-weight: 700
+  .gu
+    color: #66cccc
+    font-weight: 700
+  .c,.cm,.cp,.c1,.cs,.sd
+    color: #999999
+  .err,.gd,.no,.ne,.nv,.vc,.vg,.vi
+    color: #f2777a
+  .k,.kc,.kd,.kp,.kr
+    color: #cc99cc
+  .l,.m,.mf,.mh,.mi,.mo,.se,.si,.il
+    color: #f99157
+  .n,.p,.nb,.ni,.nl,.py,.w,.sc,.bp
+    color: #cccccc
+  .o,.kn,.nd,.nt,.ow
+    color: #66cccc
+  .gi,.ld,.s,.sb,.s2,.sh,.sx,.sr,.s1,.ss
+    color: #99cc99
+  .kt,.nc,.nn
+    color: #ffcc66
+  .na,.nf,.nx
+    color: #6699cc
 
