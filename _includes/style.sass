@@ -56,39 +56,12 @@ p+ul li, p+ol li
     content: "– "
 
 
-// Lettrine
-
-.header+p:first-letter
-  float: left
-  margin: 0.13em 0.05em 0 -0.05em
-  font-size: 3.333em
-  line-height: 0.75em
-
-.caps, sup
-  font-size: 0.85em
-
 
 // Titles
 
 h1, h2, h3
   margin: 0 auto
   font-weight: normal
-
-.header
-  +padding(1.5,1)
-  background: #252525
-  color: #fff
-  text-align: center
-
-  span
-    color: #444
-    font-style: italic
-
-h1
-  $size: 26 !global
-  +font
-  +padding(0,.5)
-
 
 h2
   $size: 25 !global
@@ -117,6 +90,9 @@ h3
 
 // Footnotes
 
+
+{% if page.content contains "[^" %}
+
 .footnotes
   li
     $size: 18 !global
@@ -139,9 +115,6 @@ h3
 
   .reversefootnote
     display: none
-
-
-// Large screen
 
 .marginalia
   .footnotes 
@@ -172,8 +145,11 @@ h3
     &:before
       display: none
 
+{% endif %}
 
-// Liste des articles
+{% if page.title == "Journal" %}
+
+// Articles list
 
 .liste
   $size: 21 !global
@@ -196,6 +172,40 @@ h3
     color: #ddd
     margin-left: 1em
 
+{% else %}
+
+// Lettrine
+
+.header+p:first-letter
+  float: left
+  margin: 0.13em 0.05em 0 -0.05em
+  font-size: 3.333em
+  line-height: 0.75em
+
+.caps, sup
+  font-size: 0.85em
+
+
+// Black title
+
+
+
+.header
+  +padding(1.5,1)
+  background: #252525
+  color: #fff
+  text-align: center
+
+  span
+    color: #444
+    font-style: italic
+
+h1
+  $size: 26 !global
+  +font
+  +padding(0,.5)
+
+{% endif %}
 
 // Navbar
 
@@ -228,8 +238,9 @@ h3
   .logo a
     color: #ddd
 
-
 // Code
+
+{% if page.content contains "highlight" %}
 
 code
   line-height: 0
@@ -254,9 +265,6 @@ pre
   code
     +width
     color: #111
-
-
-// Coloration syntaxique 
 
 .ge,.gs
   color: #93a1a1
@@ -285,82 +293,4 @@ pre
 .kd,.kr,.nc,.nd,.nf,.nt,.nv,.bp,.vc,.vg,.vi
   color: #268bd2
 
-
-
-// Éléments larges
-
-.barre
-  +width($width + 10em)
-  overflow: auto
-  text-align: center
-  margin: 4em auto 0
-  height: 1.8em
-  color: #999999
-  padding-right: 7em
-  background: #e8e8e8
-  border-top-left-radius: 0.5em
-  border-top-right-radius: 0.5em
-
-  a
-    color: #999999
-    &:hover
-      color: #555555
-
-.rouge,.jaune,.vert
-  border-radius: 50%
-  height: .8em
-  width: .8em
-  margin: 0.5em
-  float: left
-
-.rouge
-  background: #cc7b7a
-
-.jaune
-  background: #d0bc74
-  margin: 0.5em 0
-
-.vert
-  background: #8ebc73
-
-.barre+div pre, .barre+div img
-  +width($width + 10em)
-  margin: 0 auto 4em
-  border-top-left-radius: 0
-  border-top-right-radius: 0
-
-.barre+div pre
-  background: #3d3d3d
-  color: #cccccc
-  .ge
-    font-style: italic
-  .gh
-    color: #cccccc
-    font-weight: 700
-  .gp
-    color: #999999
-    font-weight: 700
-  .gs
-    font-weight: 700
-  .gu
-    color: #66cccc
-    font-weight: 700
-  .c,.cm,.cp,.c1,.cs,.sd
-    color: #999999
-  .err,.gd,.no,.ne,.nv,.vc,.vg,.vi
-    color: #f2777a
-  .k,.kc,.kd,.kp,.kr
-    color: #cc99cc
-  .l,.m,.mf,.mh,.mi,.mo,.se,.si,.il
-    color: #f99157
-  .n,.p,.nb,.ni,.nl,.py,.w,.sc,.bp
-    color: #cccccc
-  .o,.kn,.nd,.nt,.ow
-    color: #66cccc
-  .gi,.ld,.s,.sb,.s2,.sh,.sx,.sr,.s1,.ss
-    color: #99cc99
-  .kt,.nc,.nn
-    color: #ffcc66
-  .na,.nf,.nx
-    color: #6699cc
-
+{% endif %}
