@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1.0, width=device-width">
   <meta name="description" content="{{ page.excerpt | strip_html | strip_newlines }}">
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="alternate" href="/rss.xml" type="application/rss+xml">
   <title>{{page.title | strip_html}} – Sylvain Durand</title>
   <style>
   {% capture sass %}{% include style.sass %}{% endcapture %}{{ sass | sassify }}
   </style>
-  <link rel="icon" href="/static/design/favicon.ico" />
-  <link rel="alternate" href="/static/rss/{% if lang != 'fr' %}feed{% else %}flux{% endif %}.xml" type="application/rss+xml">
   {% if page.trans %}<link rel="alternate" hreflang="{% if lang != 'fr' %}fr{% else %}en{% endif %}" href="{{ page.trans }}" />{% endif %}
   {% include script.html %}
 </head>
