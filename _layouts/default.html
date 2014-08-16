@@ -11,8 +11,7 @@
   <link rel="icon" href="/static/design/favicon.ico" />
   <link rel="alternate" href="/static/rss/{% if lang != 'fr' %}feed{% else %}flux{% endif %}.xml" type="application/rss+xml">
   {% if page.trans %}<link rel="alternate" hreflang="{% if lang != 'fr' %}fr{% else %}en{% endif %}" href="{{ page.trans }}" />{% endif %}
-  <script src="/static/assets/marginalia.js"></script>{% if page.math %}
-  <script src="/static/assets/mathjax.js"></script>{% endif %}
+  {% include script.html %}
 </head>
 <body>
 
