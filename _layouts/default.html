@@ -10,27 +10,21 @@
   <link rel="alternate" hreflang="{% if lang != 'fr' %}fr{% else %}en{% endif %}" href="{{ page.trans }}" />{% endif %}
   <style>{% capture sass %}{% include style.sass %}{% endcapture %}{{ sass | sassify | strip_newlines | remove: '  ' }}</style>{% include script.js %}
 </head>
-<body>
+<body>{% for cat in site.cat %}{% capture path %}/{{lang}}/{{cat[1]}}/{% endcapture %}{% if page.path contains path %}
 
-<div class="article">
-{% for cat in site.cat %}{% capture path %}/{{lang}}/{{cat[1]}}/{% endcapture %}{% if page.path contains path %}
 <div class="header">
-<h1>{{ page.title }}</h1>
-<span>{% include date.html date=page.date lang=lang %}</span>
-</div>
-{% endif %}{% endfor %}
+  <h1>{{ page.title }}</h1>
+  <span>{% include date.html date=page.date lang=lang %}</span>
+</div>{% endif %}{% endfor %}
 {% include typo.html content=content lang=lang %}
-</div>
-
 <div class="nav">
   <ul>
     <li class="logo"><a href="{{site.nav[lang].journal.url}}">sylvain durand</a></li>
     <li class="lang">{% if lang != 'en' %}{% if page.trans %}<a href="{{page.url}}" class="active">fr</a>
     <li class="lang">{% endif %}<a href="{{page.trans}}">en</a>{% else %}<a href="{{page.trans}}">fr</a>{% if page.trans %}</li>
     <li class="lang"><a href="{{page.url}}" class="active">en</a>{% endif %}{% endif %}</li>
-
-    {% for menu in site.nav[lang] %}<li><a href="{{menu[1].url}}" {% if page.url == menu[1].url %}class="active"{% endif %}>{{menu[1].title}}</a></li>{% endfor %}
-  </ul>
+  {% for menu in site.nav[lang] %}  <li><a href="{{menu[1].url}}" {% if page.url == menu[1].url %}class="active"{% endif %}>{{menu[1].title}}</a></li>
+  {% endfor %}</ul>
 </div>
 
 </html>
