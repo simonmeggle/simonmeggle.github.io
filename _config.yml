@@ -3,6 +3,12 @@ permalink: /:title/
 kramdown:
   auto_ids: false
 
+collections:
+  pages:
+    output: true
+  medias:
+    output: true
+
 defaults:
   -
     scope:
@@ -26,15 +32,9 @@ defaults:
       lang: "fr"
   -
     scope:
-      path: "_pages/fr"
+      path: "pages/fr"
     values:
       lang: "fr"
-
-collections:
-  pages:
-    output: true
-  medias:
-    output: true
 
 nav:
   en:
