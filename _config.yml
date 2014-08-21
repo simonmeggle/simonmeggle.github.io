@@ -22,6 +22,8 @@ collections:
   pages:
     output: true
     permalink: /:path/
+  medias:
+    output: true
 
 nav:
   en:

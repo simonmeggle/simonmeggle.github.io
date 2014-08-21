@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=450, maximum-scale=1.0, user-scalable=no">
   <meta name="description" content="{{ page.excerpt | strip_html | strip_newlines }}">
   <title>{{page.title | strip_html}} – Sylvain Durand</title>
-  <link rel="icon" href="/media/design/favicon.ico" />
+  <link rel="icon" href="/medias/design/favicon.ico" />
   <link rel="alternate" href="/rss.xml" type="application/rss+xml">{% if page.trans %}
   <link rel="alternate" hreflang="{% if page.lang != 'fr' %}fr{% else %}en{% endif %}" href="{{ page.trans }}" />{% endif %}
   <style>{% capture sass %}{% include style.sass %}{% endcapture %}{{ sass | sassify | strip_newlines | remove: '  ' }}</style>{% include script.js %}
