@@ -1,6 +1,7 @@
 ---
 title:  À propos
 trans: /about/
+lang: fr
 ---
 
 ## À propos

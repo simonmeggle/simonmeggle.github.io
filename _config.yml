@@ -7,8 +7,14 @@ defaults:
   -
     scope:
       path: ""
+
     values:
       layout: "default"
+
+collections:
+  pages:
+    output: true
+    permalink: /:path/
 
 nav:
   en:
