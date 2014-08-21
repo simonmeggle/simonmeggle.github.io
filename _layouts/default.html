@@ -10,10 +10,10 @@
   <link rel="alternate" hreflang="{% if page.lang != 'fr' %}fr{% else %}en{% endif %}" href="{{ page.trans }}" />{% endif %}
   <style>{% capture sass %}{% include style.sass %}{% endcapture %}{{ sass | sassify | strip_newlines | remove: '  ' }}</style>{% include script.js %}
 </head>
-<body>{% if page.type == "posts" %}
+<body>{% if page.path contains "posts" %}
 
 <div class="header">
-  <h1>{{ page.title }}}</h1>
+  <h1>{{ page.title }}</h1>
   <span>{% include date.html date=page.date %}</span>
 </div>{% endif %}
 {% include typo.html content=content %}
