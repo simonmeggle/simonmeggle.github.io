@@ -4,11 +4,11 @@ trans: /journal/
 ---
 
 <h2>Articles</h2>
-<ul class="liste">{% for post in site.posts %}{% for cat in site.cat %}{% capture path %}/en/{{cat[1]}}/{% endcapture %}{% if post.path contains path %}
+<ul class="liste">{% for post in site.posts %}{% if post.lang == page.lang %}
   <li>
     <a href="{{ post.url }}">
-      <span>{% include date.html date=post.date lang="en" %}</span>
+      <span>{% include date.html date=post.date %}</span>
       {{ post.title }}
     </a>
-  </li>{% endif %}{% endfor %}{% endfor %}
+  </li>{% endif %}{% endfor %}
 </ul>

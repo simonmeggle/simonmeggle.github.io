@@ -7,14 +7,14 @@
 		<description>{% if site.description %}{{ site.description | xml_escape }}{% endif %}</description>
 		<link>{{ site.url }}</link>
 		<atom:link href="{{ site.url }}/rss.xml" rel="self" type="application/rss+xml" />
-		{% for post in site.posts %}{% for cat in site.cat %}{% capture path %}/en/{{cat[1]}}/{% endcapture %}{% if post.path contains path %}
+		{% for post in site.posts %}{% if post.lang == page.lang %}
 			<item>
 				<title>{{ post.title | strip_html }}</title>
-				<description>{% include typo.html content=post.content lang=lang rss='yes' %}</description>
+				<description>{% include typo.html content=post.content rss='yes' %}</description>
 				<pubDate>{{ post.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
 				<link>{{ site.url }}{{ post.url }}</link>
 				<guid isPermaLink="true">https://sylvain.durand.tf{{ post.url }}</guid>
 			</item>
-		{% endif %}{% endfor %}{% endfor %}
+		{% endif %}{% endfor %}
 	</channel>
 </rss>

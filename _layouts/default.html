@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{% if page.path contains '/fr/' %}{% assign lang = 'fr' %}{% else %}{% assign lang = 'en' %}{% endif %}{{lang}}">
+<html lang="{{ page.lang }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=450, maximum-scale=1.0, user-scalable=no">
@@ -7,23 +7,23 @@
   <title>{{page.title | strip_html}} – Sylvain Durand</title>
   <link rel="icon" href="/favicon.ico" />
   <link rel="alternate" href="/rss.xml" type="application/rss+xml">{% if page.trans %}
-  <link rel="alternate" hreflang="{% if lang != 'fr' %}fr{% else %}en{% endif %}" href="{{ page.trans }}" />{% endif %}
+  <link rel="alternate" hreflang="{% if page.lang != 'fr' %}fr{% else %}en{% endif %}" href="{{ page.trans }}" />{% endif %}
   <style>{% capture sass %}{% include style.sass %}{% endcapture %}{{ sass | sassify | strip_newlines | remove: '  ' }}</style>{% include script.js %}
 </head>
 <body>{% for cat in site.cat %}{% capture path %}/{{lang}}/{{cat[1]}}/{% endcapture %}{% if page.path contains path %}
 
 <div class="header">
-  <h1>{{ page.title }}</h1>
-  <span>{% include date.html date=page.date lang=lang %}</span>
+  <h1>{{ page.title }}}</h1>
+  <span>{% include date.html date=page.date %}</span>
 </div>{% endif %}{% endfor %}
-{% include typo.html content=content lang=lang %}
+{% include typo.html content=content %}
 <div class="nav">
   <ul>
-    <li class="logo"><a href="{{site.nav[lang].journal.url}}">sylvain durand</a></li>
-    <li class="lang">{% if lang != 'en' %}{% if page.trans %}<a href="{{page.url}}" class="active">fr</a>
+    <li class="logo"><a href="{{site.nav[page.lang].journal.url}}">sylvain durand</a></li>
+    <li class="lang">{% if page.lang != 'en' %}{% if page.trans %}<a href="{{page.url}}" class="active">fr</a>
     <li class="lang">{% endif %}<a href="{{page.trans}}">en</a>{% else %}<a href="{{page.trans}}">fr</a>{% if page.trans %}</li>
     <li class="lang"><a href="{{page.url}}" class="active">en</a>{% endif %}{% endif %}</li>
-  {% for menu in site.nav[lang] %}  <li><a href="{{menu[1].url}}" {% if page.url == menu[1].url %}class="active"{% endif %}>{{menu[1].title}}</a></li>
+  {% for menu in site.nav[page.lang] %}  <li><a href="{{menu[1].url}}" {% if page.url == menu[1].url %}class="active"{% endif %}>{{menu[1].title}}</a></li>
   {% endfor %}</ul>
 </div>
 

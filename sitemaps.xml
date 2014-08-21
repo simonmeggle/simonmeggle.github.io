@@ -7,7 +7,7 @@
     <loc>http://sylvain.durand.tf{{ post.url }}</loc>
     {% if post.trans %}
       <xhtml:link rel="alternate" hreflang="{{ post.lang }}" href="http://sylvain.durand.tf{{ post.url }}" />
-      <xhtml:link rel="alternate" hreflang="{% if page.lang != 'fr' %}fr{% else %}en{% endif %}" href="http://sylvain.durand.tf{{ post.trans }}" />
+      <xhtml:link rel="alternate" hreflang="{% if post.lang != 'fr' %}fr{% else %}en{% endif %}" href="http://sylvain.durand.tf{{ post.trans }}" />
     {% endif %}
     <lastmod>{{ post.date | date_to_xmlschema }}</lastmod>
     <changefreq>weekly</changefreq>

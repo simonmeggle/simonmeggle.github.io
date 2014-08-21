@@ -10,6 +10,13 @@ defaults:
 
     values:
       layout: "default"
+      lang: "en"
+  -
+    scope:
+      path: "_posts/fr"
+
+    values:
+      lang: "fr"
 
 collections:
   pages:
