@@ -1,7 +1,7 @@
 ---
 title:  À propos
 trans: /about/
-lang: fr
+permalink: /a-propos/
 ---
 
 ## À propos

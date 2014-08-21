@@ -1,7 +1,7 @@
 ---
 title:  Journal
 trans: /
-lang: fr
+permalink: /journal/
 ---
 
 ## Articles

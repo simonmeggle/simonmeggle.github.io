@@ -1,6 +1,7 @@
 ---
 title:  About
 trans: /a-propos/
+permalink: /about/
 ---
 
 ## About

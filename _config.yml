@@ -7,21 +7,32 @@ defaults:
   -
     scope:
       path: ""
-
     values:
-      layout: "default"
       lang: "en"
   -
     scope:
+      type: "posts"
+    values:
+      layout: "default"
+  -
+    scope:
+      type: "pages"
+    values:
+      layout: "default"
+  -
+    scope:
       path: "_posts/fr"
-
+    values:
+      lang: "fr"
+  -
+    scope:
+      path: "_pages/fr"
     values:
       lang: "fr"
 
 collections:
   pages:
     output: true
-    permalink: /:path/
   medias:
     output: true
 
