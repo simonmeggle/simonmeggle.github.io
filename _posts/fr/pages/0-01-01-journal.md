@@ -1,6 +1,6 @@
 ---
-title:  Journal
-trans: /
+title: Journal
+name:  index
 ---
 
 ## Articles

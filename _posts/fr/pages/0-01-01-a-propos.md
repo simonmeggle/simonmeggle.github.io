@@ -1,6 +1,6 @@
 ---
-title:  À propos
-trans: /about/
+title: À propos
+name:  about
 ---
 
 ## À propos

@@ -1,6 +1,6 @@
 ---
-title:  Calendriers et contacts avec <em>OwnCloud</em>
-trans: /synchronize-calendars-and-contacts-with-owncloud/
+title: Calendriers et contacts avec <em>OwnCloud</em>
+name:  owncloud
 ---
 
 Synchroniser ses calendriers, contacts et différents fichiers entre différents périphériques -- ordinateurs, tablettes, téléphones -- est aujourd'hui très courant. Malgré le caractère très personnel, voire sensible, de ces données, la grande majorité utilise les outils proposés par Google, Apple ou Microsoft.

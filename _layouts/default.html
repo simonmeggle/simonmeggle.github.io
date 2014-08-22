@@ -6,8 +6,7 @@
   <meta name="description" content="{{ page.excerpt | strip_html | strip_newlines }}">
   <title>{{page.title | strip_html}} – Sylvain Durand</title>
   <link rel="icon" href="/medias/design/favicon.ico" />
-  <link rel="alternate" href="/rss.xml" type="application/rss+xml">{% if page.trans %}
-  <link rel="alternate" hreflang="{% if page.lang != 'fr' %}fr{% else %}en{% endif %}" href="{{ page.trans }}" />{% endif %}
+  <link rel="alternate" href="/rss.xml" type="application/rss+xml">
   <style>{% capture sass %}{% include style.sass %}{% endcapture %}{{ sass | sassify | strip_newlines | remove: '  ' }}</style>{% include script.js %}
 </head>
 <body>{% if page.type != "pages" %}
@@ -20,11 +19,8 @@
 <div class="nav">
   <ul>
     <li class="logo"><a href="{{site.nav[page.lang].journal.url}}">sylvain durand</a></li>
-    <li class="lang">{% if page.lang != 'en' %}{% if page.trans %}<a href="{{page.url}}" class="active">fr</a>
-    <li class="lang">{% endif %}<a href="{{page.trans}}">en</a>{% else %}<a href="{{page.trans}}">fr</a>{% if page.trans %}</li>
-    <li class="lang"><a href="{{page.url}}" class="active">en</a>{% endif %}{% endif %}</li>
+    <li class="lang">{% assign posts=site.posts|where:"name",page.name|sort: 'path' %}{% for post in posts %}<a href="{{ post.url }}" class="{{ post.lang }}">{{ post.lang }}</a>{% endfor %}</li>  
   {% for menu in site.nav[page.lang] %}  <li><a href="{{menu[1].url}}" {% if page.url == menu[1].url %}class="active"{% endif %}>{{menu[1].title}}</a></li>
   {% endfor %}</ul>
 </div>
-
 </html>
