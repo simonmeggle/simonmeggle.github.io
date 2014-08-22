@@ -9,10 +9,6 @@ defaults:
       path: ""
     values:
       lang: "en"
-  -
-    scope:
-      type: "posts"
-    values:
       layout: "default"
   -
     scope:
