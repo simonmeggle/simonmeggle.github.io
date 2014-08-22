@@ -1,6 +1,6 @@
 {% capture js %}
 
-{% if page.content contains "[^" %}
+{% if page.content contains "[^1" %}
 
 var $ = function(el){return document.querySelectorAll(el);};
 
