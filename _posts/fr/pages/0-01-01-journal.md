@@ -1,11 +1,10 @@
 ---
 title:  Journal
 trans: /
-permalink: /journal/
 ---
 
 ## Articles
-<ul class="liste">{% for post in site.posts %}{% if post.lang == page.lang %}
+<ul class="liste">{% for post in site.posts %}{% if post.lang == page.lang and post.type != "pages" %}
   <li>
     <a href="{{ post.url }}">
       <span>{% include date.html date=post.date %}</span>

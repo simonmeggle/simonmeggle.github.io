@@ -4,8 +4,6 @@ kramdown:
   auto_ids: false
 
 collections:
-  pages:
-    output: true
   medias:
     output: true
 
@@ -22,19 +20,19 @@ defaults:
       layout: "default"
   -
     scope:
-      type: "pages"
-    values:
-      layout: "default"
-  -
-    scope:
       path: "_posts/fr"
     values:
       lang: "fr"
   -
     scope:
-      path: "pages/fr"
+      path: "_posts/fr/pages"
     values:
-      lang: "fr"
+      type: "pages"
+  -
+    scope:
+      path: "_posts/en/pages"
+    values:
+      type: "pages"
 
 nav:
   en:
