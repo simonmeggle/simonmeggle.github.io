@@ -3,10 +3,6 @@ permalink: /:title/
 kramdown:
   auto_ids: false
 
-collections:
-  medias:
-    output: true
-
 defaults:
   -
     scope:
