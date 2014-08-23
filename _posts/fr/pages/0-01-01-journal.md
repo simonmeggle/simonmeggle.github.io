@@ -1,7 +1,6 @@
 ---
-title: Journal
+title: Articles
 name:  index
 ---
 
-## Articles
 {% include list.html %}

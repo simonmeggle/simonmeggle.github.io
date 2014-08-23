@@ -24,7 +24,7 @@ html
   
 body
   font: #{$main/16}em / $line "PT Serif", Georgia, serif
-  margin: 2*$line+em 0
+  margin: 0
 a
   color: #156f8f
   text-decoration: none
@@ -90,7 +90,7 @@ h3
 
 
 
-{% if page.title == "Journal" %}
+{% if page.title == "Articles" %}
 
 // Articles list
 
@@ -128,27 +128,23 @@ h3
 .caps, sup
   font-size: 0.85em
 
+{% endif %}
+
 
 // Black title
 
 
 
-.header
-  +padding(1.5,1)
-  background: #252525
-  color: #fff
-  text-align: center
-
-  span
-    color: #444
-    font-style: italic
-
 h1
   $size: 26 !global
+  +padding(4,3)
+  background: #252525 url(/medias/headers/{{page.name}}.jpg) no-repeat center
+  background-size: cover
+  color: #fff
+  text-align: center
+  text-shadow: 0 0 0 #000,  0 0 .3em #000
   +font
-  +padding(0,.5)
 
-{% endif %}
 
 // Navbar
 
@@ -156,7 +152,8 @@ h1
   position: fixed
   top: 0
   width: 100%
-  background: #333
+  background: #222
+  background: rgba(30,30,30,.92)
 
   ul
     max-width: $width * 1.25

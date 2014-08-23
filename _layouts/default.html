@@ -10,12 +10,8 @@
   {% endif %}{% endfor %}<link rel="alternate" href="/rss.xml" type="application/rss+xml">
   <style>{% capture sass %}{% include style.sass %}{% endcapture %}{{ sass | sassify | strip_newlines | remove: '  ' }}</style>{% include script.js %}
 </head>
-<body>{% if page.type != "pages" %}
-
-<div class="header">
-  <h1>{{ page.title }}</h1>
-  <span>{% include date.html date=page.date %}</span>
-</div>{% endif %}
+<body>
+<h1>{{ page.title }}</h1>
 {% include typo.html content=content %}
 <div class="nav">
   <ul>
