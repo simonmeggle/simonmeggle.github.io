@@ -4,12 +4,4 @@ name:  index
 ---
 
 ## Articles
-<ul class="liste">{% assign posts=site.posts | where:"lang", page.lang | where:"type", posts %}
-{% for post in posts %}
-  <li>
-    <a href="{{ post.url }}">
-      <span>{% include date.html date=post.date %}</span>
-      {{ post.title }}
-    </a>
-  </li>{% endfor %}
-</ul>
+{% include list.html %}
