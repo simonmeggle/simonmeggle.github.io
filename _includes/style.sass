@@ -87,64 +87,6 @@ h3
   +width
 
 
-// Footnotes
-
-
-{% if page.content contains "[^1" %}
-
-.footnotes
-  li
-    $size: 18 !global
-    +font
-    +padding(0,1)
-    list-style-type: decimal
-    list-style-position: inside
-
-    p
-      display: inline
-      padding: 0
-
-  &:before
-    $size: 27 !global
-    +font
-    +padding(3,1)
-    content: "Notes"
-    display: block
-    text-align: center
-
-  .reversefootnote
-    display: none
-
-.marginalia
-  .footnotes 
-    li
-      $size: 14 !global
-      +font
-      font-style: italic
-      position: absolute
-      left: 58%
-      right: 1em
-      padding: 0
-      margin-left: $width/2+1em
-      max-width: $width/2
-      color: #ddd
-
-      em 
-        font-style: normal
-
-      code
-        color: #ddd
-        font-style: italic
-
-      a
-        color: #ccc
-        &:hover
-          color: #aaa
-
-    &:before
-      display: none
-
-{% endif %}
 
 {% if page.title == "Journal" %}
 
@@ -291,6 +233,66 @@ pre
 
 .kd,.kr,.nc,.nd,.nf,.nt,.nv,.bp,.vc,.vg,.vi
   color: #268bd2
+
+{% endif %}
+
+
+// Footnotes
+
+
+{% if page.content contains "[^1" %}
+
+.footnotes
+  li
+    $size: 18 !global
+    +font
+    +padding(0,1)
+    list-style-type: decimal
+    list-style-position: inside
+
+    p
+      display: inline
+      padding: 0
+
+  &:before
+    $size: 27 !global
+    +font
+    +padding(3,1)
+    content: "Notes"
+    display: block
+    text-align: center
+
+  .reversefootnote
+    display: none
+
+.marginalia
+  .footnotes 
+    li
+      $size: 14 !global
+      +font
+      font-style: italic
+      position: absolute
+      left: 58%
+      right: 1em
+      padding: 0
+      margin-left: $width/2+1em
+      max-width: $width/2
+      color: #ddd
+
+      em 
+        font-style: normal
+
+      code
+        color: #ddd
+        font-style: italic
+
+      a
+        color: #ccc
+        &:hover
+          color: #aaa
+
+    &:before
+      display: none
 
 {% endif %}
 
