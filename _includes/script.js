@@ -16,8 +16,8 @@ function marginalia(){
   else{ $('body')[0].className=""}}
 
 document.addEventListener('DOMContentLoaded', function(){marginalia();});
-window.onresize = function(event){marginalia();}
-window.onload = function(event){marginalia();}
+window.onresize = function(event){marginalia();};
+window.onload = function(event){marginalia();};
 
 {% endif %}
 {% if page.content contains "$$" %}
