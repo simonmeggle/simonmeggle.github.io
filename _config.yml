@@ -8,23 +8,23 @@ defaults:
     scope:
       path: ""
     values:
-      lang: "en"
-      layout: "default"
+      lang: en
+      layout: default
   -
     scope:
-      path: "_posts/fr"
+      path: _posts/fr
     values:
-      lang: "fr"
+      lang: fr
   -
     scope:
-      path: "_posts/fr/pages"
+      path: _posts/fr/pages
     values:
-      type: "pages"
+      type: pages
   -
     scope:
-      path: "_posts/en/pages"
+      path: _posts/en/pages
     values:
-      type: "pages"
+      type: pages
 
 nav:
   en:
