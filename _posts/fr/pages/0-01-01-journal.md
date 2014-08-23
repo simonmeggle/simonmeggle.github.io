@@ -4,11 +4,12 @@ name:  index
 ---
 
 ## Articles
-<ul class="liste">{% for post in site.posts %}{% if post.lang == page.lang and post.type != "pages" %}
+<ul class="liste">{% assign posts=site.posts | where:"lang", page.lang | where:"type", posts %}
+{% for post in posts %}
   <li>
     <a href="{{ post.url }}">
       <span>{% include date.html date=post.date %}</span>
       {{ post.title }}
     </a>
-  </li>{% endif %}{% endfor %}
+  </li>{% endfor %}
 </ul>
