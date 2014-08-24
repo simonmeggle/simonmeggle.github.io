@@ -3,7 +3,7 @@
   <li>
     <a href="{{ post.url }}">
       <span>{% include date.html date=post.date %}</span>
-      {{ post.title }}
+      {{ post.title | replace: '<br/>', '' }}
     </a>
   </li>{% endfor %}
 </ul>

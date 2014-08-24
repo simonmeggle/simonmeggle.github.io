@@ -1,5 +1,5 @@
 ---
-title: Calendars and contacts with <em>OwnCloud</em>
+title: Calendars and contacts <br/> with <em>OwnCloud</em>
 ---
 
 Synchronize calendars, contacts and files between different devices - computers, tablets, phones - is very common today. Despite these data can be very personal, sometimes sensitive, most people use the tools provided by Google, Apple or Microsoft.
