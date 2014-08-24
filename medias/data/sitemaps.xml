@@ -7,7 +7,7 @@ permalink: /sitemaps.xml
   {% for post in site.posts %}
   <url>
     <loc>http://sylvain.durand.tf{{ post.url }}</loc>
-    {% assign versions=site.posts|where:"name",post.name %}{% for version in versions %}<xhtml:link rel="alternate" hreflang="{{ version.lang }}" href="http://sylvain.durand.tf{{ version.url }}" />
+    {% assign versions=site.posts|where:"date",post.date %}{% for version in versions %}<xhtml:link rel="alternate" hreflang="{{ version.lang }}" href="http://sylvain.durand.tf{{ version.url }}" />
     {% endfor %}<lastmod>{{ post.date | date_to_xmlschema }}</lastmod>
     <changefreq>weekly</changefreq>
   </url>

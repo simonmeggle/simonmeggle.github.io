@@ -1,6 +1,5 @@
 ---
 title: Cartographie avec <em>R</em>
-name:  spatial
 ---
 
 Si le langage _R_ est devenu une référence en analyse statistiques et en traitement de données, c'est sans doute en partie grâce à ses fonctionnalités graphiques. Celles-ci peuvent également être utilisées pour représenter des données sous forme de cartes, ce qui, combiné avec ses autres fonctionnalités, en fait un système d'information géographique à part entière. L'objectif de cet article est de montrer, à travers quelques exemples, comment représenter simplement des données sur des cartes.

@@ -1,6 +1,5 @@
 ---
 title: Site statique avec <em>Cloudfront</em>
-name:  cloudfront
 ---
 
 Longtemps délaissés au profit des langages dynamiques, les sites statiques ont pourtant retrouvé une grande popularité ces dernières années avec l'apparition de générateurs tels que [_Jekyll_](http://jekyllrb.com), [_Pelican_](http://docs.getpelican.com/) ou encore [_Hyde_](http://hyde.github.io). Puisqu'ils peuvent être stockés dans le nuage ou sur des serveurs très simples, les avantages sont multiples en termes de légèreté, de sécurité et de fiabilité.

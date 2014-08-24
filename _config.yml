@@ -6,13 +6,6 @@ kramdown:
 prose:
   siteurl: 'http://sylvain.durand.tf'
   media: "medias"
-  metadata:
-    _posts:
-      - name: "name"
-        field:
-          label: "Identifiant"
-          element: "text"
-          value: ""
 
 defaults:
   -
