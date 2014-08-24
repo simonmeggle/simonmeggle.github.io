@@ -4,7 +4,7 @@ name:  about
 ---
 
 ## Colophon
-Ce site est entièrement [statique](https://fr.wikipedia.org/wiki/Page_web_statique) : il ne nécessite pas de code dynamique ou de bibliothèque javascript. Chaque page est conçue pour être aussi légère que possible. Une attention particulière est portée à la [typographie](http://webtypography.net/) et au [rythme vertical](http://webtypography.net/2.2.2).
+Ce site est entièrement [statique](https://fr.wikipedia.org/wiki/Page_web_statique) : il ne nécessite pas de code dynamique ou de bibliothèque javascript. Chaque page est légère que possible. Une attention particulière est portée à la [typographie](http://webtypography.net/) et au [rythme vertical](http://webtypography.net/2.2.2).
 
 Pour obtenir ce résultat, les articles sont rédigés en [Kramdown](http://kramdown.gettalong.org/) et les pages sont produites à l'aide du générateur de sites statiques [Jekyll](http://jekyllrb.com/). Le site est ensuite directement généré puis servi grâce à [GitHub Pages](https://pages.github.com/). 
 
