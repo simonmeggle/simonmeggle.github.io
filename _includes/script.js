@@ -43,5 +43,4 @@ window.onload = function(event){marginalia();};
 
 {% endif %}
 
-{% endcapture %}
-  <script>{{ js | strip_newlines | remove: '  ' }}</script>{% endif %}
+{% endcapture %}{{ js | strip_newlines | remove: '  ' }}
