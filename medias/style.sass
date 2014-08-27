@@ -59,7 +59,7 @@ p+ul li, p+ol li
 
 abbr
   font-size: .8em
-
+  border-bottom: .1em solid #DDD
 
 // Titles
 
@@ -91,8 +91,18 @@ h3
   color: #888
   +width
 
+hr
+  $size: 24 !global
+  border: 0
+  margin: 0
+  +font
+  +padding(2,2)
+  text-align: center
+  color: #ccc
 
-
+hr:before
+  content: "*\a*    *"
+  white-space: pre
 
 // Articles list
 
@@ -126,8 +136,8 @@ h1+p:first-letter
   font-size: 3.333em
   line-height: 0.75em
 
-.caps, sup
-  font-size: 0.85em
+sup
+  font-size: 0.8em
 
 
 
