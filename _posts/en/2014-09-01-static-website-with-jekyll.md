@@ -1,10 +1,10 @@
 ---
-title: Site statique <br/> avec <em>Jekyll</em>
+title: Static website <br/> with <em>Jekyll</em>
 ---
 
-Au commencement d'Internet étaient les **sites statiques** : chaque page web était rédigée "à la main" à l'aide d'un éditeur de texte, puis mise en ligne. Les inconvénients étaient nombreux, en particulier la nécessité de dupliquer une même modification sur chaque page concernée[^dupliquer], de connaître le HTML pour le rédacteur et d'avoir son ordinateur à disposition pour éditer les pages. L'apparition du CSS, permettant de séparer la forme du fond et de mutualiser celle-ci pour l'ensemble d'un même site n'a guère changé cet état de fait[^css].
+At the beginning of the Internet, there were **static sites**: each web page was written "by hand" using a text editor, and then put online. The disadvantages are many, especially the need to duplicate the same changes on any pages[^dupliquer], to know HTML and to have his computer available to edit pages. The advent of CSS, which allows to separate actual content from its presentation format and to share it between pages has not changed this fact[^css].
 
-C'est alors que sont apparus les **sites dynamiques** : les langages de programmation exécutés côté serveur, tels que PHP, ont permis de voir apparaître les [CMS](https://fr.wikipedia.org/wiki/Syst%C3%A8me_de_gestion_de_contenu), qui rendaient possible la création de sites et la modification de leur contenu directement depuis un navigateur, permettant ainsi l'émergence de sites, blogs, forums accessibles au plus grand nombre. C'est par exemple le cas de [*Spip*](http://www.spip.net/), [*Dotclear*](http://fr.dotclear.org/) ou [*WordPress*](https://fr.wordpress.com/). Pourtant, ces systèmes ne sont pas dénués d'inconvénients :
+It was then that appeared **dynamic sites**: programming languages ​​running on the server side, such as PHP, helped the rise of [CMS](https://en.wikipedia.org/wiki/Content_management_system), which made it possible to create sites and change their content directly from a browser, thus allowing the emergence of sites, blogs, forums accessible to the greatest number. This is for example the case of [*Spip*](http://www.spip.net/), [*Dotclear*](http://dotclear.org/) or [*WordPress*](https://wordpress.com/). Pourtant, ces systèmes ne sont pas dénués d'inconvénients :
 
 - ils sont très sensibles aux failles de sécurité, ce qui implique de surveiller attentivement les mises à jour et les logs ;
 - ils sont consommateurs de ressources serveur, nécessitant des hébergements spécifiques pour les gros volumes de visiteurs ;
@@ -76,7 +76,7 @@ monsite/
 
 ## Utilisation de *Jekyll*
 
-Maintenant ce premier site créé, nous allons voir comment le faire évoluer en rédigeant des articles et en utilisant leurs métadonnées. 
+Maintenant un premier site de base créé, nous allons très brièvement voir comment le faire évoluer en rédigeant des articles et en utilisant leurs métadonnées. 
 
 Pour créer un article, il suffit de créer dans le dossier `_posts` un fichier dont le nom est au format `aaaa-mm-jj-nom-du-post.md`[^drafts]. Ce fichier se compose de deux parties : l'**en-tête** où sont situées les métadonnées de l'article, et le **contenu** de l'article à proprement parler.
 
@@ -106,16 +106,14 @@ defaults:
 
 ### Écriture des articles avec Markdown
 
-Par défaut, les articles s'écrivent en [*Markdown*](http://daringfireball.net/projects/markdown/basics). L'objectif de ce langage est de proposer une syntaxe très simple permettant de rédiger les articles en évitant les balises HTML les plus courantes. Ainsi, "*italique*" s'obtient `*italique*`, et "**gras**" avec `**gras**`. Il reste cependant toujours possible d'utiliser HTML au sein des articles.
+Par défaut, les articles s'écrivent en [*Markdown*](http://daringfireball.net/projects/markdown/basics). L'objectif de ce langage est de proposer une syntaxe très simple permettant de rédiger les articles en évitant les balises HTML les plus courantes. Ainsi, "*italique*" s'obtient `*italique*`, et "**gras**" avec `**gras**`. Il reste cependant toujours possible d'insérer du code HTML au sein des articles.
 
 Depuis sa deuxième version, *Jekyll* utilise [*Kramdown*](http://kramdown.gettalong.org/) qui ajoute de nombreuses fonctionnalités telles que la possibilité d'attribuer des classes aux éléments, les notes de bas de page, les listes de définition, les tableaux[^kramdown]... 
 
 
 ### Utilisation des métadonnées
 
-Toute métadonnée "`variable`" déclarée dans l'entête peut être appelée, dans n'importe quel fichier, à l'aide d'une balise `{%raw%}{{page.variable}}{%endraw%}` qui retournera alors sa valeur. 
-
-Il est également possible d'effectuer des tests :
+Toute métadonnée `variable` déclarée dans l'entête peut être appelée, dans n'importe quel fichier, à l'aide d'une balise `{%raw%}{{page.variable}}{%endraw%}` qui renverra alors sa valeur. Il est également possible d'effectuer des tests sur ces variables :
 {% highlight r %}{% raw %}
 {% if page.variable == 'value' %}
     banane
@@ -124,8 +122,7 @@ Il est également possible d'effectuer des tests :
 {% endif %}
 {%endraw%}
 {% endhighlight %} 
-
-Nous pouvons aussi, par exemple, effectuer des boucles sur l'ensemble des articles répondant à certaines conditions :
+Il est aussi possible d'effectuer des boucles sur l'ensemble des articles répondant à une certaine condition sur les variables :
 
 {% highlight r %}{% raw %}
 {% assign posts=site.posts | where: "variable", "value" %}
@@ -135,22 +132,22 @@ Nous pouvons aussi, par exemple, effectuer des boucles sur l'ensemble des articl
 {% endraw %}
 {% endhighlight %} 
 
-Bien que la [syntaxe](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers)[^liquid] ne soit pas toujours très élégante à utiliser, le grande nombre de [variables disponibles](http://jekyllrb.com/docs/variables/), auxquelles s'ajoutent les métadonnées personnalisées que vous créerez ainsi que les nombreux [filtres et commandes](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers), peuvent être extrêmement efficaces.
+Bien que la [syntaxe](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers)[^liquid] ne soit pas toujours très élégante à utiliser, le grande nombre de [variables disponibles](http://jekyllrb.com/docs/variables/), auxquelles s'ajoutent les variables que vous créerez, ainsi que les nombreux [filtres et commandes](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers) peuvent être extrêmement efficaces.
 
 
 ---
 
 ### Et bien plus...
 
-Cet article n'a pas prétention à constituer davantage qu'une très brève introduction à *Jekyll*. Pour personnaliser votre site davantage, lisez en priorité l'[excellente documentation de *Jekyll*](http://jekyllrb.com/docs/home/), bien tenue à jour, ainsi que les nombreuses références que vous trouverez sur Internet. 
+Pour personnaliser votre site davantage, ou en créer un correspondant parfaitement à vos besoins, consultez en priorité l'[excellente documentation de _Jekyll_](http://jekyllrb.com/docs/home/) perpétuellement mise à jour, et que les très nombreuses références que vous trouverez sur Internet. 
 
-Vous pouvez également consulter sur ce site trois autres articles à propos de *Jekyll* :
+Consulter les [codes sources des sites utilisant *Jekyll*](https://github.com/jekyll/jekyll/wiki/Sites)[^source] pour vous inspirer ne peut être qu'une excellente idée. 
+
+Pour aller plus loin, vous pouvez consulter trois autres articles rédigés sur ce site concernant *Jekyll* :
 
 - [créer un site multilingue avec *Jekyll*](/site-multilingue-avec-jekyll/) comme cela a été réalisé ici ;
 - [servir un site statique à l'aide de CloudFront](/site-statique-avec-cloudfront/) pour obtenir des performances maximales en termes de disponibilité et de vitesse ;
 - **héberger _Jekyll_ sur GitHub** (article à venir) pour pouvoir suivre et modifier votre site en ligne, en le générant à la volée.
-
-Enfin, parcourir les [codes sources de sites utilisant *Jekyll*](https://github.com/jekyll/jekyll/wiki/Sites)[^source], pour vous inspirer, ne peut être qu'une excellente idée. 
 
 [^dupliquer]: Il en découlait une  réelle difficulté à faire évoluer un site sur le long terme.
 [^css]: De surcroît, la très faible interopérabilité entre navigateurs et le très mauvais support de CSS par Microsoft Internet Explorer, alors très dominant, ont fortement retardé son utilisation.
@@ -168,7 +165,7 @@ Enfin, parcourir les [codes sources de sites utilisant *Jekyll*](https://github.
 [^source]: Vous êtes notamment libres de consulter le [code source du présent site](https://github.com/sylvaindurand/sylvaindurand.github.io) pour voir comment celui-ci est conçu.
 [^variable]: Il existe malgré tout des variables spécifique à *Jekyll* dont le rôle est particulier : `permalink` permet par exemple d'indiquer l'adresse à laquelle l'article sera accessible.
 [^kramdown]: La [documentation de Kramdown](http://kramdown.gettalong.org/quickref.html) présente efficacement l'ensemble des possibilités offertes par le moteur et la syntaxe permettant d'y parvenir.
-[^liquid]: La [documentation officielle de liquid](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers) permet de rendre compte des possibilités offertes par le langage.
+[^liquid]: La [documentation officielle](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers), plutôt complète, permet de rendre compte des possibilités offertes par le langage, même si la syntaxe n'est pas toujours très élégante ou efficace.
 [^meta]: Cf. *infra*.
 
 
