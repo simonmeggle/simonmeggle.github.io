@@ -41,9 +41,9 @@ gem install jekyll
 
 ### Création d'un nouveau site
 
-La commande `jekyll new monsite` permet de créer le code source d'un site fonctionnel dans le dossier `monsite`. Dans ce dossier, vous pouvez générer le site avec `jekyll build`. Le site est produit dans le dossier `_site/`.
+La commande `jekyll new monsite` permet d'obtenir le code source d'un site fonctionnel dans le dossier `monsite`. Dans ce dossier, vous pouvez le générer avec `jekyll build`. Le site est alors créé dans `_site/`.
 
-En une commande, il est possible de générer le site et de créer un serveur local pour visualiser le site produit : utilisez `jekyll serve` pour pouvoir l'observer à l'adresse `http://localhost:4000`. Il est également possible de regénérer le site à chaque modification du code source[^serve] avec `jekyll serve -w`[^commandes], qui sera de loin la commande la plus utile lorsque vous utiliserez régulièrement *Jekyll*.
+En une commande, il est possible de générer le site et de créer un serveur local pour visualiser le site produit : utilisez `jekyll serve` pour pouvoir l'observer à l'adresse `http://localhost:4000`. Il est également possible de regénérer le site à chaque modification du code source[^serve] avec `jekyll serve -w`, qui sera de loin la commande la plus utile lorsque vous utiliserez régulièrement *Jekyll*.
 
 
 ### Arborescence
@@ -54,7 +54,7 @@ Le code source d'un site *Jekyll* s'organise selon plusieurs dossiers :
 - **`_layouts/`** qui va contenir la maquette du site, c'est-à-dire tout ce qui entourera nos articles ;
 -  **`_includes/`**, qui contiendra des codes que vous pouvez inclure[^include] dans différentes pages si vous en avez besoin régulièrement.
 
-Vous pouvez inclure n'importe quel autre dossier, ou fichier, dans le répertoire de votre site. Tant qu'ils ne commencent pas par un tiret bas, ceux-ci seront directement générés au même emplacement par *Jekyll*. Le répertoire de votre site pourra alors ressembler à :
+Le répertoire de votre site pourra alors ressembler à :
 
 {% highlight r %}
 monsite/
@@ -73,6 +73,8 @@ monsite/
        ├──  rss.xml
        └──  _config.yml
 {% endhighlight %} 
+
+Vous pouvez ajouter n'importe quel autre dossier, ou fichier, dans le répertoire de votre site. Tant qu'ils ne commencent pas par un tiret bas, ceux-ci seront directement générés au même emplacement par *Jekyll*. 
 
 ## Utilisation de *Jekyll*
 
@@ -160,10 +162,9 @@ Enfin, parcourir les [codes sources de sites utilisant *Jekyll*](https://github.
 [^cloudfront]: Les façons d'héberger un site statique sur [*Amazon S3*](http://aws.amazon.com/fr/s3/) et [*Cloudfront*](http://aws.amazon.com/fr/cloudfront/) sont détaillés dans "[Site statique avec *Cloudfront*](/site-statique-avec-cloudfront/)".
 [^rvm]: Il est également possible d'installer [Ruby version manager](http://rvm.io/).
 [^xcode]: Si vous ne les avez pas déjà, une fenêtre vous proposera d'installer les "outils en ligne de commande Xcode", ce qu'il faut accepter pour continuer.
-[^serve]: Cette option ne fonctionne cependant pas en cas de modification de `_config.yml` ; il sera alors nécessaire de relancer la génération du site.
+[^serve]: Cette option ne prend cependant pas pas en compte les modifications de `_config.yml`.
 [^arborescence]: L'arborence interne du dossier `_post` est laissée entièrement libre.
 [^include]: En plaçant un fichier dans `_includes`, il vous sera possible de l'importer n'importe où avec `{%raw%}{{include nom-du-fichier}}{%endraw%}`. Il est même possible de lui passer des variables.
-[^commandes]: La documentation de *Jekyll* [liste utilement](http://jekyllrb.com/docs/usage/) les commandes possibles.
 [^drafts]: Il est également possible de créer des articles dans le dossier `_drafts` sans date dans le nom de fichier : cela permet de créer des brouillons d'article, qui n'apparaîtront pas dans la liste des articles disponibles mais restent accessibles depuis leur adresse directe.
 [^source]: Vous êtes notamment libres de consulter le [code source du présent site](https://github.com/sylvaindurand/sylvaindurand.github.io) pour voir comment celui-ci est conçu.
 [^variable]: Il existe malgré tout des variables spécifique à *Jekyll* dont le rôle est particulier : `permalink` permet par exemple d'indiquer l'adresse à laquelle l'article sera accessible.

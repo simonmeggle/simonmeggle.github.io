@@ -4,12 +4,12 @@ title: Static website <br/> with <em>Jekyll</em>
 
 At the beginning of the Internet, there were **static sites**: each web page was written "by hand" using a text editor, and then put online. The disadvantages are many, especially the need to duplicate the same changes on any pages[^dupliquer], to know HTML and to have his computer available to edit pages. The advent of CSS, which allows to separate actual content from its presentation format and to share it between pages has not changed this fact[^css].
 
-It was then that appeared **dynamic sites**: programming languages ​​running on the server side, such as PHP, helped the rise of [CMS](https://en.wikipedia.org/wiki/Content_management_system), which made it possible to create sites and change their content directly from a browser, thus allowing the emergence of sites, blogs, forums accessible to the greatest number. This is for example the case of [*Spip*](http://www.spip.net/), [*Dotclear*](http://dotclear.org/) or [*WordPress*](https://wordpress.com/). Pourtant, ces systèmes ne sont pas dénués d'inconvénients :
+It was then that appeared **dynamic sites**: programming languages ​​running on the server side, such as PHP, helped the rise of [CMS](https://en.wikipedia.org/wiki/Content_management_system), which made it possible to create sites and change their content directly from a browser, thus allowing the emergence of sites, blogs, forums accessible to the greatest number. This is for example the case of [*Spip*](http://www.spip.net/), [*Dotclear*](http://dotclear.org/) or [*WordPress*](https://wordpress.com/). However, these systems are not without disadvantages:
 
-- ils sont très sensibles aux failles de sécurité, ce qui implique de surveiller attentivement les mises à jour et les logs ;
-- ils sont consommateurs de ressources serveur, nécessitant des hébergements spécifiques pour les gros volumes de visiteurs ;
-- ils supportent mal les montées en charge, et sont ainsi très sensibles aux attaques DDoS ou aux affluences de visiteurs[^affluence] ;
-- ils constituent souvent de vraies usines à gaz, surdimensionnées vis-à-vis des besoins et nécessitant des bases de données.
+- they are very sensitive to security vulnerabilities, which involves carefully monitor updates and logs;
+- they are consumers of server resources, requiring specific accommodations for large volumes of visitors;
+- they resent the increased workload, and are thus highly susceptible to DDoS attacks or crowds of visitors[^affluence] ;
+- they are often real gasworks, oversized vis-a-vis the needs and requiring databases.
 
 Depuis quelques années, les **sites statiques** font leur retour en grâce avec l'apparition des *générateurs de sites statiques*. Sur la base de simples fichiers textes, un programme génère un site composé uniquement de pages statiques qu'il suffit ensuite d'héberger. Ainsi, les problèmes de sécurité sont presque inexistants, il est possible de s'héberger sur un serveur très modeste[^raspberry] ou au contraire d'obtenir d'excellentes performances et de supporter de très fortes montées en charge en utilisant un [CDN](https://fr.wikipedia.org/wiki/Content_delivery_network) comme [*Cloudflare*](https://www.cloudflare.com/) ou [*Cloudfront*](http://aws.amazon.com/fr/cloudfront/)[^cloudfront]. 
 
