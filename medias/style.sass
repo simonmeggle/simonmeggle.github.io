@@ -13,8 +13,11 @@ $width: 32em
   font-size: #{$size/$main}em
   line-height: #{$line/$size*$main}
 
-=padding($top, $bottom, $size:$size)
-  padding: $top*$line/$size*$main+em $line/$size*$main+em $bottom*$line/$size*$main+em
+=padding($top, $bottom, $hor:0)
+  padding: $top*$line/$size*$main+em $hor $bottom*$line/$size*$main+em
+
+=margin($top, $bottom, $size:$size)
+  margin: $top*$line/$size*$main+em auto $bottom*$line/$size*$main+em
 
 =width($width:$width, $size:$size)
   max-width: $width/$size*$main
@@ -27,7 +30,7 @@ html
   
 body
   font: #{$main/16}em / $line "PT Serif", Georgia, serif
-  margin: 0 0 3*$line+em
+  margin: 10*$line/$size*$main+em 1em 3*$line+em
 a
   color: #156f8f
   text-decoration: none
@@ -146,6 +149,10 @@ sup
 
 
 h1
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
   $size: 26 !global
   +padding(4,2)
   background: #252525 no-repeat center
@@ -163,6 +170,7 @@ h1
 .nav
   position: fixed
   top: 0
+  left: 0
   width: 100%
   background: #222
   background: rgba(30,30,30,.92)
@@ -196,17 +204,12 @@ h1
 code
   line-height: 0
   font-family: "PT Sans", Arial, sans
-  color: #666
-  hyphens: none
-  -moz-hyphens: none
-  -ms-hyphens: none
-  -webkit-hyphens: none
 
 pre
   $size: $main !global
   +font
   font-family: monospace, monospace
-  +padding(1,1)
+  +padding(1,1,$line/$size*$main+em)
   +width($width - 3em)
   margin: $line/$size*$main+em auto
   overflow-x: auto
@@ -303,6 +306,56 @@ pre
     &:before
       display: none
 
+// Wide
+
+
+.barre
+  $size: $main !global
+  +font
+  +width($width + 25em - 8em)
+  +margin(2,0)
+  font-family: "PT Sans", Arial, sans
+  padding: 0 7em 0 1em
+  overflow: auto
+  text-align: center
+  color: #999
+  background: #E8E8E8
+  border-top-left-radius: .3em
+  border-top-right-radius: .3em
+
+  .rouge,.jaune,.vert
+    width: .8em
+    height: .8em
+    margin: .45em .2em
+    border-radius: 50%
+    float: left
+
+  .rouge
+    background: #CC7B7A
+
+  .jaune
+    background: #D0BC74
+
+  .vert
+    background: #8EBC73
+
+.barre+div pre 
+  +width($width + 25em - 2*$line/$size*$main)
+  +margin(0,1)
+  border-radius: 0
+  border-bottom-left-radius: .3em
+  border-bottom-right-radius: .3em
+
+.barre+p, .barre+p img
+  padding: 0
+  +width($width + 25em)
+  +margin(0,1)
+  border-radius: 0
+  border-bottom-left-radius: .3em
+  border-bottom-right-radius: .3em
+
+
+// Fonts
 
 @font-face
   font-family: 'PT Serif'
