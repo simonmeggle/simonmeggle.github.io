@@ -11,14 +11,16 @@
   <link rel="stylesheet" type="text/css" href="/medias/style.css">
   <script>{% include script.js %}</script>
 </head>
-<body>
-<h1 style="background-image: url(/medias/headers/{{ page.date | date:'%Y-%m-%d' }}.jpg)">{{ page.title }}</h1>
-{% include typo.html content=content %}
-<div class="nav">
+<body itemscope itemtype="http://schema.org/Article">
+<header>
+  <h1 style="background-image: url(/medias/headers/{{ page.date | date:'%Y-%m-%d' }}.jpg)" itemprop="name">{{ page.title }}</h1>
+</header>
+<article itemprop="articleBody">{% include typo.html content=content %}</article>
+<nav>
   <ul>
-    <li class="logo"><a href="{{site.nav[page.lang].journal.url}}">sylvain durand</a></li>
+    <li class="logo" itemprop="author" itemscope itemtype="http://schema.org/Person"><a href="{{site.nav[page.lang].journal.url}}" itemprop="name">sylvain durand</a></li>
   {% assign posts=site.posts|where:"date",page.date|sort: 'path'| reverse %}{% for post in posts %}  <li class="lang"><a href="{{ post.url }}" class="{{ post.lang }}">{{ post.lang }}</a></li>
   {% endfor %}{% for menu in site.nav[page.lang] %}  <li><a href="{{menu[1].url}}">{{menu[1].title}}</a></li>
   {% endfor %}</ul>
-</div>
+</nav>
 </html>
