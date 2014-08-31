@@ -4,4 +4,6 @@
   <li><span>{% include month.html date=post.date %}{{ post.date | date: "%Y"}}</span>
     <ul>{% capture year %}{{currentyear}}{% endcapture %}{% endif %}
 	  <li><a href="{{ post.url }}"><span>{% include day.html date=post.date %}</span> {{ post.title | replace: '<br/>', '' }}</a></li>{% endfor %}
+    </ul>
+  </li>
 </ul>
