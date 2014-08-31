@@ -168,7 +168,7 @@ Lastly, browsing [website using *Jekyll* source codes](https://github.com/jekyll
 [^drafts]: It is also possible to create articles in the folder `_drafts`, without any date in the file name: thus, it will create drafts invisible in the posts list but available with their URL.
 [^source]: Feel free to browse the [source code of this website](https://github.com/sylvaindurand/sylvaindurand.github.io) to find out how it works.
 [^variable]: Some variables are reserved by *Jekyll* with a particuliar behaviour: `permalink` for exemple specifies the final URL of a file.
-[^kramdown]: [*Kramdown* documentataion](http://kramdown.gettalong.org/quickref.html) shows all possibilities this language offers, and the syntax to do it.
+[^kramdown]: [*Kramdown* documentation](http://kramdown.gettalong.org/quickref.html) shows all possibilities this language offers, and the syntax to do it.
 [^meta]: See below.
 
 
