@@ -13,8 +13,8 @@ $width: 32em
   font-size: #{$size/$main}em
   line-height: #{$line/$size*$main}
 
-=padding($top, $bottom, $size:$size)
-  padding: $top*$line/$size*$main+em $line/$size*$main+em $bottom*$line/$size*$main+em
+=padding($top, $bottom, $hor:0)
+  padding: $top*$line/$size*$main+em $hor $bottom*$line/$size*$main+em
 
 =margin($top, $bottom, $size:$size)
   margin: $top*$line/$size*$main+em auto $bottom*$line/$size*$main+em
@@ -30,7 +30,7 @@ html
   
 body
   font: #{$main/16}em / $line "PT Serif", Georgia, serif
-  margin: 0 0 3*$line+em
+  margin: 10*$line/$size*$main+em 1em 3*$line+em
 a
   color: #156f8f
   text-decoration: none
@@ -149,6 +149,10 @@ sup
 
 
 h1
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
   $size: 26 !global
   +padding(4,2)
   background: #252525 no-repeat center
@@ -166,6 +170,7 @@ h1
 .nav
   position: fixed
   top: 0
+  left: 0
   width: 100%
   background: #222
   background: rgba(30,30,30,.92)
@@ -204,7 +209,7 @@ pre
   $size: $main !global
   +font
   font-family: monospace, monospace
-  +padding(1,1)
+  +padding(1,1,$line/$size*$main+em)
   +width($width - 3em)
   margin: $line/$size*$main+em auto
   overflow-x: auto
@@ -343,7 +348,7 @@ pre
 
 .barre+p, .barre+p img
   padding: 0
-  +width($width + 25em )
+  +width($width + 25em)
   +margin(0,1)
   border-radius: 0
   border-bottom-left-radius: .3em
