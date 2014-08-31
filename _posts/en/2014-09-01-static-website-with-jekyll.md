@@ -2,34 +2,34 @@
 title: Static website <br/> with <em>Jekyll</em>
 ---
 
-At the beginning of the Internet, there were **static sites**: each web page was written "by hand" using a text editor, and then put online. The disadvantages are many, especially the need to duplicate the same changes on any pages[^dupliquer], to know HTML and to have his computer available to edit pages. The advent of CSS, which allows to separate actual content from its presentation format and to share it between pages has not changed this fact[^css].
+At the beginning of the Internet, there were **static sites**: each web page was written "by hand" using a text editor, and then put online. The disadvantages are many, especially the need to duplicate the same changes on some pages[^duplicate], to know HTML and to have his computer available to edit pages. The advent of CSS, which allows to separate actual content from its presentation format and to share it between the pages has not changed this fact[^css].
 
 It was then that appeared **dynamic sites**: programming languages ​​running on the server side, such as PHP, helped the rise of [CMS](https://en.wikipedia.org/wiki/Content_management_system), which made possible to create sites and change their content directly from a browser, thus allowing the emergence of sites, blogs, forums accessible to the greatest number. This is for example the case of [*Spip*](http://www.spip.net/), [*Dotclear*](http://dotclear.org/) or [*WordPress*](https://wordpress.com/). However, these systems are not without disadvantages:
 
-- ils sont très sensibles aux failles de sécurité, ce qui implique de surveiller attentivement les mises à jour et les logs ;
-- ils sont consommateurs de ressources serveur, nécessitant des hébergements spécifiques pour les gros volumes de visiteurs ;
-- ils supportent mal les montées en charge, et sont ainsi très sensibles aux attaques DDoS ou aux affluences de visiteurs[^affluence] ;
-- ils constituent souvent de vraies usines à gaz, surdimensionnées vis-à-vis des besoins et nécessitant des bases de données.
+- they are very sensitive to security gaps, which implies that you need to  monitor carefully updates and logs;
+- they are server ressource intensive, and need specific hostings for large volume of visitors;
+- they badly handle significant increases in workload, so they are very sensitive to DDoS attacks or huge influx of visitors[^peak];
+- they tend to be a labyrinthine system, largely overkill for their use and needing databases.
 
-Depuis quelques années, les **sites statiques** font leur retour en grâce avec l'apparition des *générateurs de sites statiques*. Sur la base de simples fichiers textes, un programme génère un site composé uniquement de pages statiques qu'il suffit ensuite d'héberger. Ainsi, les problèmes de sécurité sont presque inexistants, il est possible de s'héberger sur un serveur très modeste[^raspberry] ou au contraire d'obtenir d'excellentes performances et de supporter de très fortes montées en charge en utilisant un [CDN](https://fr.wikipedia.org/wiki/Content_delivery_network) comme [*Cloudflare*](https://www.cloudflare.com/) ou [*Cloudfront*](http://aws.amazon.com/fr/cloudfront/)[^cloudfront]. 
+For a couple of years, **static websites** has come back into favor with the emergence of the *static website generators*. With simple text files, a program generates a website made entirely from static pages you just have to host. Security problems are thus virtually non-existent, it is possible to host your website on a very modest server[^raspberry] or rather the opposite, to get excellent performances and handle huge increases in workload using a [CDN](https://en.wikipedia.org/wiki/Content_delivery_network) like [*Cloudflare*](https://www.cloudflare.com/) or [*Cloudfront*](http://aws.amazon.com/cloudfront/)[^cloudfront]. 
 
-Il est de plus possible de suivre toutes les modifications et de travailler collaborativement grâce à `git`[^git], de rédiger ses articles en ligne et de générer son site à la volée à l'aide de services comme [*GitHub*](https://pages.github.com/) et [*Prose*](http://prose.io), ou d'avoir un système de commentaires avec [*Disqus*](https://disqus.com/). 
+In addition, it is possible to follow the changes and to work collaboratively thanks to `git`[^git], to write the articles online and to generate the website on the fly with services like [*GitHub*](https://pages.github.com/) and [*Prose*](http://prose.io), or to have a commenting system with [*Disqus*](https://disqus.com/). 
 
-Dans cet article, nous allons voir comment installer (I) et utiliser (II) le générateur de site statiques [*Jekyll*](http://jekyllrb.com/) pour créer et modifier un site simple.
+This article will show how to install (I) and use (II) the [*Jekyll*](http://jekyllrb.com/) website static generator to create and modify a simple website.
 
-## Premier site avec *Jekyll*
+## First website with *Jekyll*
 
-Dans un premier temps, nous allons voir comment installer *Jekyll* sur votre machine, pour créer votre premier site et obtenir un serveur local permettant de l'observer dans votre navigateur.
+As a first step, we will see how to install *Jekyll* on your computer, in order to create your first website and get a local host allowing us to watch it in your browser.
 
-### Installation de *Jekyll* 
+### Installation of *Jekyll* 
 
-**Sur *Linux***, installez directement la dernière version stable de [*Ruby*](https://packages.debian.org/stable/ruby)[^rvm], accompagné de ses [outils de développement](https://packages.debian.org/stable/ruby-dev) et de [gem](https://packages.debian.org/stable/rubygems). Sous *Debian*, il suffit d'installer les paquets suivants :
+**On *Linux***, directly install the last stable version of [*Ruby*](https://packages.debian.org/stable/ruby)[^rvm], with its [developpement tools](https://packages.debian.org/stable/ruby-dev) and [gem](https://packages.debian.org/stable/rubygems). On *Debian*, you just have to install the following packages:
 {% highlight sh %}
 sudo apt-get install ruby ruby-dev libgsl-ruby rubygems
 sudo gem install jekyll
 {% endhighlight %}
 
-**Sur *Mac OS X***, commencez par installer [*Homebrew*](http://brew.sh/)[^xcode] puis [*Ruby version manager*](http://rvm.io/) avec la dernière version stable de *Ruby*, pour pouvoir ensuite installer *Jekyll* :
+**On *Mac OS X***, first install [*Homebrew*](http://brew.sh/)[^xcode] and [*Ruby version manager*](http://rvm.io/) with the last stable version of *Ruby*, then install *Jekyll*:
 {% highlight sh %}
 ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 \curl -L https://get.rvm.io | bash -s stable --ruby
@@ -37,34 +37,34 @@ source ~/.rvm/scripts/rvm
 gem install jekyll
 {% endhighlight %}
 
-**Sur *Windows*** enfin, l'installation est moins aisée : cependant, [Julian Thilo](http://jekyll-windows.juthilo.com/) a écrit un [guide très détaillé](http://jekyll-windows.juthilo.com/) sur les façons d'y installer *Jekyll*.
+**On *Windows***, it is less easy to install *Jekyll*. However, [Julian Thilo](http://jekyll-windows.juthilo.com/) wrote a [very detailed guide](http://jekyll-windows.juthilo.com/) about how to do it.
 
-### Création d'un nouveau site
+### Creation of a new website
 
-La commande `jekyll new monsite` permet d'obtenir le code source d'un site fonctionnel dans le dossier `monsite`. Dans ce dossier, vous pouvez le générer avec `jekyll build`. Le site est alors créé dans `_site/`.
+The command `jekyll new mysite` will create the source code of a working website in the `mysite` folder. In this folder, you can generate the website with `jekyll build`. The output can then be seen in the `_site/` folder.
 
-En une commande, il est possible de générer le site et de créer un serveur local pour visualiser le site produit : utilisez `jekyll serve` pour pouvoir l'observer à l'adresse `http://localhost:4000`. Il est également possible de regénérer le site à chaque modification du code source[^serve] avec `jekyll serve -w`, qui sera de loin la commande la plus utile lorsque vous utiliserez régulièrement *Jekyll*.
+With a single command, it is possible to generate the website and create a local host in order to watch the produced website: use `jekyll serve` in order to get your website available on `http://localhost:4000`. You can also automatically regenerate the website each time you change something in the source code[^serve] with `jekyll serve -w`, which will be by far the most useful command when you'll start to play with *Jekyll*.
 
 
-### Arborescence
+### Tree structure
 
-Le code source d'un site *Jekyll* s'organise selon plusieurs dossiers :
+*Jekyll* uses several folders: 
 
-- **`_posts/`** dans lequel seront placés[^arborescence] tous les articles de votre site, au format `aaaa-mm-jj-nom-du-post.md` ;
-- **`_layouts/`** qui va contenir la maquette du site, c'est-à-dire tout ce qui entourera nos articles ;
--  **`_includes/`**, qui contiendra des codes que vous pouvez inclure[^include] dans différentes pages si vous en avez besoin régulièrement.
+- **`_posts/`** in which the articles are stored[^tree], with names such as `yyyy-mm-dd-post-name.md`;
+- **`_layouts/`** which contains the layout of the website, that is to say everythin that will surround the articles;
+-  **`_includes/`**, which contains small page fragments that you wish to include in multiple places on your site[^include].
 
-Le répertoire de votre site pourra alors ressembler à :
+The tree structure may then looks like:
 
 {% highlight r %}
-monsite/
+mysite/
        ├──  _includes/
        ├──  _layouts/
         │           ├── default.html
         │           ├── page.html
         │           └── post.html
        ├──  _posts/
-        │           └── 2014-08-24-site-statique-avec-jekyll.md
+        │           └── 2014-08-24-static-website-with-jekyll.md
        ├──  medias/
         │           ├── style.sass
         │           ├── script.js
@@ -74,28 +74,28 @@ monsite/
        └──  _config.yml
 {% endhighlight %} 
 
-Vous pouvez ajouter n'importe quel autre dossier, ou fichier, dans le répertoire de votre site. Tant qu'ils ne commencent pas par un tiret bas, ceux-ci seront directement générés au même emplacement par *Jekyll*. 
+You can add any folder or file in your website folder. If they don't start with an underscore, *Jekyll* will generate them on the same location. 
 
-## Utilisation de *Jekyll*
+## Using *Jekyll*
 
-Maintenant ce premier site créé, nous allons voir comment le faire évoluer en rédigeant des articles et en utilisant leurs métadonnées. 
+Now that the first website is created, we will see how to make it evolve, how to write articles and use metadata. 
 
-Pour créer un article, il suffit de créer dans le dossier `_posts` un fichier dont le nom est au format `aaaa-mm-jj-nom-du-post.md`[^drafts]. Ce fichier se compose de deux parties : l'**en-tête** où sont situées les métadonnées de l'article, et le **contenu** de l'article à proprement parler.
+In order to create an article, juste create in `_posts` folder a file with a name with the following format: `yyyy-mm-dd-post-name.md`[^drafts]. This file is divided into two sections: the **frontmatter** where the metadata are stored, and the **content** of the article.
 
-### Déclarer les métadonnées des fichiers
+### Frontmatter and metadata
 
-L'en-tête permet de déclarer les métadonnées de l'article ; celles-ci pourront par la suite être appelées ou testées dans le reste du site[^meta]. Elle est présente en début de fichier, sous la forme suivante :
+The frontmatter allows us to declare metadata, which will be called or tested in the website[^meta]. It is set into the top of the file, under the following format:
 
 {% highlight r %}
 ---
 layout: default
-title: Mon titre
+title: My title
 ---
 {% endhighlight %} 
 
-Seule la variable `layout` est obligatoire : elle définit le fichier que *Jekyll* doit utiliser dans le dossier `_layouts/` pour construire la page autour de l'article. Il est également usuel de définir `title` qui permet de définir le titre de l'article[^variable].
+Only the `layout` variable is required: it defines which file in `_layouts/` *Jekyll* should use to build the page. It is also usual to define a `title` variable in order to provide a title to our article[^variable].
 
-Il est également possible de définir des variables "par défaut" qui concerneront tous les articles d'un dossier. Par exemple, pour ne pas avoir à indiquer `layout: default` au sein de tous les articles placés dans `_posts/`, il est possible de la définir par défaut dans `_config.yml` :
+It is also possible to define default variables, declared once for all or parts of the articles. For instance, instead of declare `layout: default` in each article stored in `_posts/`, you may declare it once in `_config.yml`:
 
 {% highlight ruby %}
 defaults:
@@ -106,28 +106,28 @@ defaults:
       layout: "default"
 {% endhighlight %} 
 
-### Écriture des articles avec Markdown
+### Writing articles with *Markdown*
 
-Par défaut, les articles s'écrivent en [*Markdown*](http://daringfireball.net/projects/markdown/basics). L'objectif de ce langage est de proposer une syntaxe très simple permettant de rédiger les articles en évitant les balises HTML les plus courantes. Ainsi, "*italique*" s'obtient `*italique*`, et "**gras**" avec `**gras**`. Il reste cependant toujours possible d'utiliser HTML au sein des articles.
+By default, *Jekyll* use [*Markdown*](http://daringfireball.net/projects/markdown/basics). The purpose of this language is to provide a very simple syntax to replace the most commons HTML tags. For example, `*italic` gives "*italic*" and `**bold**` gives "**bold**". It is however still quite possible to use HTML in posts.
 
-Depuis sa deuxième version, *Jekyll* utilise [*Kramdown*](http://kramdown.gettalong.org/) qui ajoute de nombreuses fonctionnalités telles que la possibilité d'attribuer des classes aux éléments, les notes de bas de page, les listes de définition, les tableaux[^kramdown]... 
+From its second version, *Jekyll* uses [*Kramdown*](http://kramdown.gettalong.org/) which add many features like the possibility of giving CSS classes to elements, footnotes, definition lists, tables[^kramdown]... 
 
 
-### Utilisation des métadonnées
+### Using metadata
 
-Toute métadonnée "`variable`" déclarée dans l'entête peut être appelée, dans n'importe quel fichier, à l'aide d'une balise `{%raw%}{{page.variable}}{%endraw%}` qui retournera alors sa valeur. 
+Any metadata "`variable`", declared in the frontmatter or as a default, can be called anywhere in the website, with the tag `{%raw%}{{page.variable}}{%endraw%}`, which returns its value. 
 
-Il est également possible d'effectuer des tests :
+It is also possible to do some tests: 
 {% highlight r %}{% raw %}
 {% if page.variable == 'value' %}
-    banane
+    banana
 {% else %}
-    noix de coco
+    coconut
 {% endif %}
 {%endraw%}
 {% endhighlight %} 
 
-Nous pouvons aussi, par exemple, effectuer des boucles sur l'ensemble des articles répondant à certaines conditions :
+We can also, for example, make loops on each article satisfying some conditions:
 
 {% highlight r %}{% raw %}
 {% assign posts=site.posts | where: "variable", "value" %}
@@ -137,40 +137,39 @@ Nous pouvons aussi, par exemple, effectuer des boucles sur l'ensemble des articl
 {% endraw %}
 {% endhighlight %} 
 
-Bien que la [syntaxe](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers)[^liquid] ne soit pas toujours très élégante à utiliser, le grande nombre de [variables disponibles](http://jekyllrb.com/docs/variables/), auxquelles s'ajoutent les métadonnées personnalisées que vous créerez ainsi que les nombreux [filtres et commandes](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers), peuvent être extrêmement efficaces.
+Although the [syntax](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers) may not be very elegant to use, the large number of [available variables](http://jekyllrb.com/docs/variables/), plus the custom metadata, combined with the [filters et commands](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers), may become highly effective.
 
 
 ---
 
-### Et bien plus...
+### And much more...
 
-Cet article n'a pas prétention à constituer davantage qu'une très brève introduction à *Jekyll*. Pour personnaliser votre site davantage, lisez en priorité l'[excellente documentation de *Jekyll*](http://jekyllrb.com/docs/home/), bien tenue à jour, ainsi que les nombreuses références que vous trouverez sur Internet. 
+This article doesn't claim to be more than a very short introduction to *Jekyll*. To go further, read the [*Jekyll* excellent documentation](http://jekyllrb.com/docs/home/) first, regularly updated, and the numerous references you will find on the web. 
 
-Vous pouvez également consulter sur ce site trois autres articles à propos de *Jekyll* :
+You may also read three other articles written on this website about *Jekyll*:
 
-- [créer un site multilingue avec *Jekyll*](/site-multilingue-avec-jekyll/) comme cela a été réalisé ici ;
-- [servir un site statique à l'aide de CloudFront](/site-statique-avec-cloudfront/) pour obtenir des performances maximales en termes de disponibilité et de vitesse ;
-- **héberger _Jekyll_ sur GitHub** (article à venir) pour pouvoir suivre et modifier votre site en ligne, en le générant à la volée.
+- [create a multilingual website](/multilingual-website-with-jekyll/) as it has been done here;
+- [serve a static website with *CloudFront*](/site-statique-avec-cloudfront/) in order to get excellent performances and handle huge increases in workload;
+- **host _Jekyll_ on GitHub** (article coming soon) in order to edit your website online and generate it on the fly.
 
-Enfin, parcourir les [codes sources de sites utilisant *Jekyll*](https://github.com/jekyll/jekyll/wiki/Sites)[^source], pour vous inspirer, ne peut être qu'une excellente idée. 
+Lastly, browsing [website using *Jekyll* source codes](https://github.com/jekyll/jekyll/wiki/Sites)[^source], in order to find inspiration, can only be a good idea. 
 
-[^dupliquer]: Il en découlait une  réelle difficulté à faire évoluer un site sur le long terme.
-[^css]: De surcroît, la très faible interopérabilité entre navigateurs et le très mauvais support de CSS par Microsoft Internet Explorer, alors très dominant, ont fortement retardé son utilisation.
-[^git]: En effet, les sources ne sont constituées que de fichiers textes.
-[^affluence]: Il n'est pas rare qu'un site devienne indisponible, par exemple lors d'un événement important ou en raison d'un lien publié sur un site d'actualités.
-[^raspberry]: Par exemple, un [Raspberry Pi](http://www.raspberrypi.org/) avec nginx peut répondre à plusieurs centaines de connexions par seconde, ce qui est impensable avec un site dynamique.
-[^cloudfront]: Les façons d'héberger un site statique sur [*Amazon S3*](http://aws.amazon.com/fr/s3/) et [*Cloudfront*](http://aws.amazon.com/fr/cloudfront/) sont détaillés dans "[Site statique avec *Cloudfront*](/site-statique-avec-cloudfront/)".
-[^rvm]: Il est également possible d'installer [Ruby version manager](http://rvm.io/).
-[^xcode]: Si vous ne les avez pas déjà, une fenêtre vous proposera d'installer les "outils en ligne de commande Xcode", ce qu'il faut accepter pour continuer.
-[^serve]: Cette option ne prend cependant pas pas en compte les modifications de `_config.yml`.
-[^arborescence]: L'arborence interne du dossier `_post` est laissée entièrement libre.
-[^include]: En plaçant un fichier dans `_includes`, il vous sera possible de l'importer n'importe où avec `{%raw%}{{include nom-du-fichier}}{%endraw%}`. Il est même possible de lui passer des variables.
-[^drafts]: Il est également possible de créer des articles dans le dossier `_drafts` sans date dans le nom de fichier : cela permet de créer des brouillons d'article, qui n'apparaîtront pas dans la liste des articles disponibles mais restent accessibles depuis leur adresse directe.
-[^source]: Vous êtes notamment libres de consulter le [code source du présent site](https://github.com/sylvaindurand/sylvaindurand.github.io) pour voir comment celui-ci est conçu.
-[^variable]: Il existe malgré tout des variables spécifique à *Jekyll* dont le rôle est particulier : `permalink` permet par exemple d'indiquer l'adresse à laquelle l'article sera accessible.
-[^kramdown]: La [documentation de Kramdown](http://kramdown.gettalong.org/quickref.html) présente efficacement l'ensemble des possibilités offertes par le moteur et la syntaxe permettant d'y parvenir.
-[^liquid]: La [documentation officielle de liquid](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers) permet de rendre compte des possibilités offertes par le langage.
-[^meta]: Cf. *infra*.
+[^duplicate]: This is why it was sometimes really hard to maintain a website.
+[^css]: Moreover, the inexistant interoperability between browsers and the poor support of CSS with Microsoft Internet Explorer, have delayed its use.
+[^git]: Indeed, the source is only constitued with text files.
+[^peak]:It is not uncommon that a website become unavailable because of an important event or a link from a news website.
+[^raspberry]: For instance, a [Raspberry Pi](http://www.raspberrypi.org/) with *nginx* peut répondre à plusieurs centaines de connexions par seconde, ce qui est impensable avec un site dynamique.
+[^cloudfront]: Ways to host a static website on [*Amazon S3*](http://aws.amazon.com/s3/) and [*Cloudfront*](http://aws.amazon.com/cloudfront/) are explained in "[Static website with *Cloudfront*](/static-website-with-cloudfront/)".
+[^rvm]: It is also possible to install [Ruby version manager](http://rvm.io/).
+[^xcode]: If you don't already have them, a window will ask you to install the "Command Line Tools": you need to install them.
+[^serve]: However, this option doesn't detect the changes provided in `_config.yml`.
+[^tree]: You can freely organize your files in `_post`.
+[^include]: When you put a fil in `_includes`, it is possible to include it anywhere with the tag `{%raw%}{{include filename}}{%endraw%}`. Il is also possible to provide it [parameters](http://jekyllrb.com/docs/templates/#includes).
+[^drafts]: It is also possible to create articles in the folder `_drafts`, without any date in the file name: thus, it will create drafts invisible in the posts list but available with their URL.
+[^source]: Feel free to browse the [source code of this website](https://github.com/sylvaindurand/sylvaindurand.github.io) to find out how it works.
+[^variable]: Some variables are reserved by *Jekyll* with a particuliar behaviour: `permalink` for exemple specifies the final URL of a file.
+[^kramdown]: [*Kramdown* documentataion](http://kramdown.gettalong.org/quickref.html) shows all possibilities this language offers, and the syntax to do it.
+[^meta]: See below.
 
 
 *[HTML]: HyperText Markup Language
