@@ -31,7 +31,7 @@ html
   
 body
   font: #{$main/16}em / $line "PT Serif", Georgia, serif
-  margin: 10*$line/$size*$main+em 1em 3*$line+em
+  margin: 10*$line/$size*$main+em 1em 0
 a
   color: #156f8f
   text-decoration: none
@@ -108,8 +108,17 @@ hr:before
   content: "*\a*    *"
   white-space: pre
 
-time
-  display: none
+// Footer
+
+footer
+  $size: 16 !global
+  +font
+  +padding(3,1)
+  text-align: center
+  color: #ccc
+
+time, span
+  color: #aaa
 
 // Articles list
 
@@ -158,7 +167,7 @@ time
 
 // Lettrine
 
-time+p:first-letter
+header+p:first-letter
   float: left
   margin: 0.13em 0.05em 0 -0.05em
   font-size: 3.333em

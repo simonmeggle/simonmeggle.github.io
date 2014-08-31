@@ -38,6 +38,10 @@ nav:
     about:
       title: "about"
       url:   "/about/"
+    created: "Published on"
+    of: "of"
+    modified: "generated on"
+    author: "Written by"
   fr:
     journal:
       title: "journal"
@@ -45,3 +49,7 @@ nav:
     about:
       title: "à propos"
       url:   "/a-propos/"
+    created: "Publié le"
+    of: ""
+    modified: "modifié le"
+    author: "Rédigé par"
