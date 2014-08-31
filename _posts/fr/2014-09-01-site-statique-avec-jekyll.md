@@ -37,13 +37,13 @@ source ~/.rvm/scripts/rvm
 gem install jekyll
 {% endhighlight %}
 
-**Sur *Windows*** enfin, l'installation est moins aisée : cependant, [Julian Thilo](http://jekyll-windows.juthilo.com/) a écrit un [guide très détaillé](http://jekyll-windows.juthilo.com/) sur les façons d'y installer *Jekyll*.
+**Sur *Windows*** enfin, l'installation est moins aisée. Cependant, [Julian Thilo](http://jekyll-windows.juthilo.com/) a écrit un [guide très détaillé](http://jekyll-windows.juthilo.com/) sur les façons d'y installer *Jekyll*.
 
 ### Création d'un nouveau site
 
 La commande `jekyll new monsite` permet d'obtenir le code source d'un site fonctionnel dans le dossier `monsite`. Dans ce dossier, vous pouvez le générer avec `jekyll build`. Le site est alors créé dans `_site/`.
 
-En une commande, il est possible de générer le site et de créer un serveur local pour visualiser le site produit : utilisez `jekyll serve` pour pouvoir l'observer à l'adresse `http://localhost:4000`. Il est également possible de regénérer le site à chaque modification du code source[^serve] avec `jekyll serve -w`, qui sera de loin la commande la plus utile lorsque vous utiliserez régulièrement *Jekyll*.
+En une seule commande, il est possible de générer le site et de créer un serveur local pour visualiser le site produit : utilisez `jekyll serve` pour pouvoir l'observer à l'adresse `http://localhost:4000`. Il est également possible de regénérer le site à chaque modification du code source[^serve] avec `jekyll serve -w`, qui sera de loin la commande la plus utile lorsque vous utiliserez régulièrement *Jekyll*.
 
 
 ### Arborescence
@@ -106,9 +106,9 @@ defaults:
       layout: "default"
 {% endhighlight %} 
 
-### Écriture des articles avec Markdown
+### Écriture des articles avec *Markdown*
 
-Par défaut, les articles s'écrivent en [*Markdown*](http://daringfireball.net/projects/markdown/basics). L'objectif de ce langage est de proposer une syntaxe très simple permettant de rédiger les articles en évitant les balises HTML les plus courantes. Ainsi, "*italique*" s'obtient `*italique*`, et "**gras**" avec `**gras**`. Il reste cependant toujours possible d'utiliser HTML au sein des articles.
+Par défaut, les articles s'écrivent en [*Markdown*](http://daringfireball.net/projects/markdown/basics). L'objectif de ce langage est de proposer une syntaxe très simple permettant de rédiger les articles en évitant les balises HTML les plus courantes. Ainsi, "*italique*" s'obtient avec `*italique*`, et "**gras**" avec `**gras**`. Il reste cependant toujours possible d'utiliser HTML au sein des articles.
 
 Depuis sa deuxième version, *Jekyll* utilise [*Kramdown*](http://kramdown.gettalong.org/) qui ajoute de nombreuses fonctionnalités telles que la possibilité d'attribuer des classes aux éléments, les notes de bas de page, les listes de définition, les tableaux[^kramdown]... 
 
@@ -137,7 +137,7 @@ Nous pouvons aussi, par exemple, effectuer des boucles sur l'ensemble des articl
 {% endraw %}
 {% endhighlight %} 
 
-Bien que la [syntaxe](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers)[^liquid] ne soit pas toujours très élégante à utiliser, le grande nombre de [variables disponibles](http://jekyllrb.com/docs/variables/), auxquelles s'ajoutent les métadonnées personnalisées que vous créerez ainsi que les nombreux [filtres et commandes](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers), peuvent être extrêmement efficaces.
+Bien que la [syntaxe](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers) ne soit pas toujours très élégante à utiliser, le grande nombre de [variables disponibles](http://jekyllrb.com/docs/variables/), auxquelles s'ajoutent les métadonnées personnalisées que vous créerez ainsi que les nombreux [filtres et commandes](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers), peuvent être extrêmement efficaces.
 
 
 ---
@@ -149,7 +149,7 @@ Cet article n'a pas prétention à constituer davantage qu'une très brève intr
 Vous pouvez également consulter sur ce site trois autres articles à propos de *Jekyll* :
 
 - [créer un site multilingue avec *Jekyll*](/site-multilingue-avec-jekyll/) comme cela a été réalisé ici ;
-- [servir un site statique à l'aide de CloudFront](/site-statique-avec-cloudfront/) pour obtenir des performances maximales en termes de disponibilité et de vitesse ;
+- [servir un site statique à l'aide de *CloudFront*](/site-statique-avec-cloudfront/) pour obtenir des performances maximales en termes de disponibilité et de vitesse ;
 - **héberger _Jekyll_ sur GitHub** (article à venir) pour pouvoir suivre et modifier votre site en ligne, en le générant à la volée.
 
 Enfin, parcourir les [codes sources de sites utilisant *Jekyll*](https://github.com/jekyll/jekyll/wiki/Sites)[^source], pour vous inspirer, ne peut être qu'une excellente idée. 
@@ -158,18 +158,17 @@ Enfin, parcourir les [codes sources de sites utilisant *Jekyll*](https://github.
 [^css]: De surcroît, la très faible interopérabilité entre navigateurs et le très mauvais support de CSS par Microsoft Internet Explorer, alors très dominant, ont fortement retardé son utilisation.
 [^git]: En effet, les sources ne sont constituées que de fichiers textes.
 [^affluence]: Il n'est pas rare qu'un site devienne indisponible, par exemple lors d'un événement important ou en raison d'un lien publié sur un site d'actualités.
-[^raspberry]: Par exemple, un [Raspberry Pi](http://www.raspberrypi.org/) avec nginx peut répondre à plusieurs centaines de connexions par seconde, ce qui est impensable avec un site dynamique.
+[^raspberry]: Par exemple, un [Raspberry Pi](http://www.raspberrypi.org/) avec *nginx* peut répondre à plusieurs centaines de connexions par seconde, ce qui est impensable avec un site dynamique.
 [^cloudfront]: Les façons d'héberger un site statique sur [*Amazon S3*](http://aws.amazon.com/fr/s3/) et [*Cloudfront*](http://aws.amazon.com/fr/cloudfront/) sont détaillés dans "[Site statique avec *Cloudfront*](/site-statique-avec-cloudfront/)".
 [^rvm]: Il est également possible d'installer [Ruby version manager](http://rvm.io/).
 [^xcode]: Si vous ne les avez pas déjà, une fenêtre vous proposera d'installer les "outils en ligne de commande Xcode", ce qu'il faut accepter pour continuer.
 [^serve]: Cette option ne prend cependant pas pas en compte les modifications de `_config.yml`.
 [^arborescence]: L'arborence interne du dossier `_post` est laissée entièrement libre.
-[^include]: En plaçant un fichier dans `_includes`, il vous sera possible de l'importer n'importe où avec `{%raw%}{{include nom-du-fichier}}{%endraw%}`. Il est même possible de lui passer des variables.
+[^include]: En plaçant un fichier dans `_includes`, il vous sera possible de l'importer n'importe où avec `{%raw%}{{include nom-du-fichier}}{%endraw%}`. Il est même possible de lui passer des [paramètres](http://jekyllrb.com/docs/templates/#includes).
 [^drafts]: Il est également possible de créer des articles dans le dossier `_drafts` sans date dans le nom de fichier : cela permet de créer des brouillons d'article, qui n'apparaîtront pas dans la liste des articles disponibles mais restent accessibles depuis leur adresse directe.
 [^source]: Vous êtes notamment libres de consulter le [code source du présent site](https://github.com/sylvaindurand/sylvaindurand.github.io) pour voir comment celui-ci est conçu.
 [^variable]: Il existe malgré tout des variables spécifique à *Jekyll* dont le rôle est particulier : `permalink` permet par exemple d'indiquer l'adresse à laquelle l'article sera accessible.
-[^kramdown]: La [documentation de Kramdown](http://kramdown.gettalong.org/quickref.html) présente efficacement l'ensemble des possibilités offertes par le moteur et la syntaxe permettant d'y parvenir.
-[^liquid]: La [documentation officielle de liquid](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers) permet de rendre compte des possibilités offertes par le langage.
+[^kramdown]: La [documentation de *Kramdown*](http://kramdown.gettalong.org/quickref.html) présente efficacement l'ensemble des possibilités offertes par le moteur et la syntaxe permettant d'y parvenir.
 [^meta]: Cf. *infra*.
 
 
