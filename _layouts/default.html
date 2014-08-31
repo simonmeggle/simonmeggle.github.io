@@ -18,13 +18,14 @@
 </header>{% include typo.html content=content %}</article>
 <nav>
   <ul>
-    <li class="logo" itemprop="author" itemscope itemtype="http://schema.org/Person"><a href="{{site.nav[page.lang].journal.url}}" itemprop="name">sylvain durand</a></li>
+    <li class="logo"><a href="{{site.nav[page.lang].journal.url}}">sylvain durand</a></li>
   {% assign posts=site.posts|where:"date",page.date|sort: 'path'| reverse %}{% for post in posts %}  <li class="lang"><a href="{{ post.url }}" class="{{ post.lang }}">{{ post.lang }}</a></li>
   {% endfor %}{% for menu in site.nav[page.lang] %}  <li><a href="{{menu[1].url}}">{{menu[1].title}}</a></li>
   {% endfor %}</ul>
 </nav>
 <hr/>
-<footer>{{ site.nav[page.lang].created }} <time datetime="{{ page.date }}" itemprop="datePublished">{% include day.html date=page.date %} {{ site.nav[page.lang].of }} {% include month.html date=page.date %} {{ page.date | date: "%Y" }}</time>, {{ site.nav[page.lang].modified }} <time datetime="{{ page.date }}" itemprop="datePublished">{% include day.html date=site.time %} {{ site.nav[page.lang].of }} {% include month.html date=site.time %} {{ site.time | date: "%Y" }}</time>.<br/>
-{{ site.nav[page.lang].author }} <span>Sylvain Durand</span>.
+<footer itemprop="author" itemscope itemtype="http://schema.org/Person">
+  {{ site.t[page.lang].created }} <time datetime="{{ page.date }}" itemprop="dateCreated">{% include day.html date=page.date %} {{ site.t[page.lang].of }} {% include month.html date=page.date %} {{ page.date | date: "%Y" }}</time>, {{ site.t[page.lang].modified }} <time datetime="{{ site.time }}" itemprop="dateModified">{% include day.html date=site.time %} {{ site.t[page.lang].of }} {% include month.html date=site.time %} {{ site.time | date: "%Y" }}</time>.<br/>
+  {{ site.t[page.lang].author }} <span itemprop="name">Sylvain Durand</span>.
 </footer>
 </html>
