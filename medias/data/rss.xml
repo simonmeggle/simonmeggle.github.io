@@ -15,7 +15,7 @@ permalink: /rss.xml
 				<description>{% include typo.html content=post.content rss='yes' %}</description>
 				<pubDate>{{ post.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
 				<link>{{ site.url }}{{ post.url }}</link>
-				<guid isPermaLink="true">https://sylvain.durand.tf{{ post.url }}</guid>
+				<guid isPermaLink="true">{{site.url}}{{ post.url }}</guid>
 			</item>
 		{% endif %}{% endfor %}
 	</channel>
