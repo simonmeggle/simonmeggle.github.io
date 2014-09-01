@@ -18,8 +18,20 @@
   <h1 style="background-image: url(/medias/headers/{{ page.date | date:'%Y-%m-%d' }}.jpg)" itemprop="name">{{ page.title }}</h1>
 </header>{% include typo.html content=content %}<hr/>
 <footer>
-  {{ site.t[page.lang].created }} <time datetime="{{ page.date | date:'%Y-%m-%d'}}" itemprop="dateCreated" class="date">{% include day.html date=page.date %} {{ site.t[page.lang].of }} {% include month.html date=page.date %}</time>.<br/>
-  {{ site.t[page.lang].author }} <a href="https://github.com/sylvaindurand/" itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Sylvain Durand</span></a>.
+  <div class="arianne">
+    <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+      <a href="http://sylvain.durand.tf{{site.nav[page.lang].journal.url}}" itemprop="url">
+        <span itemprop="title">{% if page.type != "pages" %}Journal{%else%}Pages{% endif %}</span>
+      </a>
+    </span> › 
+    <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+      <a href="http://sylvain.durand.tf{{page.url}}" itemprop="url">
+        <span itemprop="title">{{ page.title }}</span>
+      </a>
+    </span>
+  </div>
+  <div>{{ site.t[page.lang].created }} <time datetime="{{ page.date | date:'%Y-%m-%d'}}" itemprop="dateCreated" class="date">{% include day.html date=page.date %} {{ site.t[page.lang].of }} {% include month.html date=page.date %}</time>.</div>
+  <div>{{ site.t[page.lang].author }} <a href="https://github.com/sylvaindurand/" itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Sylvain Durand</span></a>.</div>
 </footer>
 </article>
 <nav>
