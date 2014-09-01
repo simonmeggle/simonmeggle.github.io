@@ -111,14 +111,22 @@ hr:before
 // Footer
 
 footer
+  position: absolute
+  left: 0
+  width: 100%
   $size: 16 !global
   +font
-  +padding(3,1)
+  +margin(2,0)
+  +padding(1,1)
   text-align: center
   color: #ddd
+  background: #fcfcfc
 
-time, span
-  color: #ccc
+  time, span, a
+    color: #ccc
+
+  a:hover
+    color: #000
 
 // Articles list
 
