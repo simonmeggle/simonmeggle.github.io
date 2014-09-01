@@ -49,10 +49,8 @@ t:
   en:
     created: "Published on the"
     of: "of"
-    modified: "generated on the"
     author: "Written by"
   fr:
     created: "Publié le"
     of: ""
-    modified: "généré le"
     author: "Rédigé par"
