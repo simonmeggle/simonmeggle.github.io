@@ -45,3 +45,14 @@ nav:
     about:
       title: "à propos"
       url:   "/a-propos/"
+t:
+  en:
+    created: "Published on"
+    of: "of"
+    modified: "generated on"
+    author: "Written by"
+  fr:
+    created: "Publié le"
+    of: ""
+    modified: "généré le"
+    author: "Rédigé par"

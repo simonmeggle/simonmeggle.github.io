@@ -6,6 +6,7 @@ $main: 18
 $size: $main
 $line: 30/$main
 $width: 32em
+$sans: "PT Sans", Arial, sans
 
 // Mixins
 
@@ -14,7 +15,7 @@ $width: 32em
   line-height: #{$line/$size*$main}
 
 =padding($top, $bottom, $hor:0)
-  padding: $top*$line/$size*$main+em $hor $bottom*$line/$size*$main+em
+  padding: $top*$line/$size*$main+em $hor+em $bottom*$line/$size*$main+em
 
 =margin($top, $bottom, $size:$size)
   margin: $top*$line/$size*$main+em auto $bottom*$line/$size*$main+em
@@ -30,7 +31,7 @@ html
   
 body
   font: #{$main/16}em / $line "PT Serif", Georgia, serif
-  margin: 10*$line/$size*$main+em 1em 3*$line+em
+  margin: 10*$line/$size*$main+em 1em 0
 a
   color: #156f8f
   text-decoration: none
@@ -107,33 +108,66 @@ hr:before
   content: "*\a*    *"
   white-space: pre
 
+// Footer
+
+footer
+  $size: 16 !global
+  +font
+  +padding(3,1)
+  text-align: center
+  color: #ddd
+
+time, span
+  color: #ccc
+
 // Articles list
 
-.liste
-  $size: 21 !global
-  +padding(0.5,0)
-  +width
-  +font
-
-  a
-    display: block
-    +padding(.5,.5)
-
-    &:hover
-      background: #fdfdfd
-
-  span
-    $size: 14 !global
+.list
+  &>li
+    $size: 18 !global
     +font
-    display: block
-    float: right
-    color: #ddd
-    margin-left: 1em
+    +padding(0,.5,.5)
+    text-align: center
+    color: #ccc
+    border-top: 1px solid #f5f5f5
+    margin: -2px auto 1.5*$line/$size*$main+em
 
+    &>span
+      font-style: italic
+      position: relative
+      bottom: 1em
+      background: #fff
+      padding: 0 .4em 0
+  ul
+    $size: 19 !global
+    +font
+    +padding(0,0)
+    +width
+    text-align: left
+
+    a
+      display: block
+      +font
+      +width($width - 10em)
+      margin: 0 auto
+
+      &:hover
+        background: #fdfdfd
+
+      span
+        $size: 13 !global
+        +font
+        font-family: $sans
+        text-align: center
+        display: block
+        float: left 
+        clear: both
+        width: 3em
+        color: #ddd
 
 // Lettrine
 
-h1+p:first-letter
+header+p:first-letter
   float: left
   margin: 0.13em 0.05em 0 -0.05em
   font-size: 3.333em
@@ -167,7 +201,7 @@ h1
 
 // Navbar
 
-.nav
+nav
   position: fixed
   top: 0
   left: 0
@@ -203,13 +237,13 @@ h1
 
 code
   line-height: 0
-  font-family: "PT Sans", Arial, sans
+  font-family: $sans
 
 pre
   $size: $main !global
   +font
   font-family: monospace, monospace
-  +padding(1,1,$line/$size*$main+em)
+  +padding(1,1,$line/$size*$main)
   +width($width - 3em)
   margin: $line/$size*$main+em auto
   overflow-x: auto
