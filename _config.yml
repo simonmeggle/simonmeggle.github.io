@@ -49,8 +49,8 @@ t:
   en:
     created: "Published on the"
     of: "of"
-    author: "Written by"
+    author: "by"
   fr:
     created: "Publié le"
     of: ""
-    author: "Rédigé par"
+    author: "par"

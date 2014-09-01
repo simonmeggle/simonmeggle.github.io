@@ -20,8 +20,8 @@
 <footer>
   <div class="arianne">
     <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-      <a href="http://sylvain.durand.tf{{site.nav[page.lang].journal.url}}" itemprop="url">
-        <span itemprop="title">{% if page.type != "pages" %}Journal{%else%}Pages{% endif %}</span>
+      <a href="http://sylvain.durand.tf/" itemprop="url">
+        <span itemprop="title">Journal</span>
       </a>
     </span> › 
     <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
@@ -30,8 +30,7 @@
       </a>
     </span>
   </div>
-  <div>{{ site.t[page.lang].created }} <time datetime="{{ page.date | date:'%Y-%m-%d'}}" itemprop="dateCreated" class="date">{% include day.html date=page.date %} {{ site.t[page.lang].of }} {% include month.html date=page.date %}</time>.</div>
-  <div>{{ site.t[page.lang].author }} <a href="https://github.com/sylvaindurand/" itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Sylvain Durand</span></a>.</div>
+  <div>{{ site.t[page.lang].created }} <time datetime="{{ page.date | date:'%Y-%m-%d'}}" itemprop="dateCreated" class="date">{% include day.html date=page.date %} {{ site.t[page.lang].of }} {% include month.html date=page.date %}</time> {{ site.t[page.lang].author }} <a href="https://github.com/sylvaindurand/" itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Sylvain Durand</span></a>.</div>
 </footer>
 </article>
 <nav>
