@@ -47,9 +47,9 @@ nav:
       url:   "/a-propos/"
 t:
   en:
-    created: "Published on"
+    created: "Published on the"
     of: "of"
-    modified: "generated on"
+    modified: "generated on the"
     author: "Written by"
   fr:
     created: "Publié le"
