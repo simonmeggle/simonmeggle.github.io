@@ -6,6 +6,7 @@
   <meta name="description" content="{{ page.excerpt | strip_html | strip_newlines }}">
   <title>{{page.title | strip_html}} – Sylvain Durand</title>
   <link rel="icon" href="/medias/design/favicon.ico" />
+  <link rel="canonical" href="http://sylvain.durand.tf{{page.url}}" />
 {% assign posts=site.posts|where:"date",page.date %}{% for post in posts %}{% if post.lang != page.lang %}  <link rel="alternate" hreflang="{{post.lang}}" href="{{post.url}}" />
   {% endif %}{% endfor %}<link rel="alternate" href="/rss.xml" type="application/rss+xml">
   <link rel="stylesheet" type="text/css" href="/medias/style.css">
