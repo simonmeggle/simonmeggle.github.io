@@ -15,7 +15,12 @@
 <article itemprop="articleBody">
 <header>
   <h1 style="background-image: url(/medias/headers/{{ page.date | date:'%Y-%m-%d' }}.jpg)" itemprop="name">{{ page.title }}</h1>
-</header>{% include typo.html content=content %}</article>
+</header>{% include typo.html content=content %}<hr/>
+<footer itemprop="author" itemscope itemtype="http://schema.org/Person">
+  {{ site.t[page.lang].created }} <time datetime="{{ page.date }}" itemprop="dateCreated" class="date">{% include day.html date=page.date %} {{ site.t[page.lang].of }} {% include month.html date=page.date %} {{ page.date | date: "%Y" }}</time>, {{ site.t[page.lang].modified }} <time datetime="{{ site.time }}" itemprop="dateModified">{% include day.html date=site.time %} {{ site.t[page.lang].of }} {% include month.html date=site.time %} {{ site.time | date: "%Y" }}</time>.<br/>
+  {{ site.t[page.lang].author }} <span itemprop="name">Sylvain Durand</span>.
+</footer>
+</article>
 <nav>
   <ul>
     <li class="logo"><a href="{{site.nav[page.lang].journal.url}}">sylvain durand</a></li>
@@ -23,9 +28,5 @@
   {% endfor %}{% for menu in site.nav[page.lang] %}  <li><a href="{{menu[1].url}}">{{menu[1].title}}</a></li>
   {% endfor %}</ul>
 </nav>
-<hr/>
-<footer itemprop="author" itemscope itemtype="http://schema.org/Person">
-  {{ site.t[page.lang].created }} <time datetime="{{ page.date }}" itemprop="dateCreated">{% include day.html date=page.date %} {{ site.t[page.lang].of }} {% include month.html date=page.date %} {{ page.date | date: "%Y" }}</time>, {{ site.t[page.lang].modified }} <time datetime="{{ site.time }}" itemprop="dateModified">{% include day.html date=site.time %} {{ site.t[page.lang].of }} {% include month.html date=site.time %} {{ site.time | date: "%Y" }}</time>.<br/>
-  {{ site.t[page.lang].author }} <span itemprop="name">Sylvain Durand</span>.
-</footer>
+</body>
 </html>
