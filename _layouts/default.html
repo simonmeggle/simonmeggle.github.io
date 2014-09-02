@@ -6,7 +6,7 @@
   <meta name="description" content="{{ page.excerpt | strip_html | strip_newlines }}">
   <title>{{page.title | strip_html}} – Sylvain Durand</title>
   <link rel="icon" href="/medias/design/favicon.ico" />
-  <link rel="canonical" href="http://sylvain.durand.tf{{page.url}}" />
+  <link rel="canonical" href="{{site.url}}{{page.url}}" />
 {% assign posts=site.posts|where:"date",page.date %}{% for post in posts %}{% if post.lang != page.lang %}  <link rel="alternate" hreflang="{{post.lang}}" href="{{post.url}}" />
   {% endif %}{% endfor %}<link rel="alternate" href="/rss.xml" type="application/rss+xml">
   <link rel="stylesheet" type="text/css" href="/medias/style.css">
@@ -17,9 +17,20 @@
 <header>
   <h1 style="background-image: url(/medias/headers/{{ page.date | date:'%Y-%m-%d' }}.jpg)" itemprop="name">{{ page.title }}</h1>
 </header>{% include typo.html content=content %}<hr/>
-<footer itemprop="author" itemscope itemtype="http://schema.org/Person">
-  {{ site.t[page.lang].created }} <time datetime="{{ page.date }}" itemprop="dateCreated" class="date">{% include day.html date=page.date %} {{ site.t[page.lang].of }} {% include month.html date=page.date %} {{ page.date | date: "%Y" }}</time>, {{ site.t[page.lang].modified }} <time datetime="{{ site.time }}" itemprop="dateModified">{% include day.html date=site.time %} {{ site.t[page.lang].of }} {% include month.html date=site.time %} {{ site.time | date: "%Y" }}</time>.<br/>
-  {{ site.t[page.lang].author }} <span itemprop="name">Sylvain Durand</span>.
+<footer>
+  <div class="arianne">
+    <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+      <a href="{{site.url}}/" itemprop="url">
+        <span itemprop="title">Journal</span>
+      </a>
+    </span> › 
+    <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+      <a href="{{site.url}}{{page.url}}" itemprop="url">
+        <span itemprop="title">{{ page.title }}</span>
+      </a>
+    </span>
+  </div>
+  <div>{{ site.t[page.lang].created }} <time datetime="{{ page.date | date:'%Y-%m-%d'}}" itemprop="dateCreated" class="date">{% include day.html date=page.date %} {{ site.t[page.lang].of }} {% include month.html date=page.date %}</time> {{ site.t[page.lang].author }} <a href="https://github.com/sylvaindurand/" itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Sylvain Durand</span></a>.</div>
 </footer>
 </article>
 <nav>

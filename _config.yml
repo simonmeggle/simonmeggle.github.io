@@ -1,5 +1,5 @@
 permalink: /:title/
-
+url: 'http://sylvain.durand.tf'
 kramdown:
   auto_ids: false
 
@@ -47,12 +47,10 @@ nav:
       url:   "/a-propos/"
 t:
   en:
-    created: "Published on"
+    created: "Published on the"
     of: "of"
-    modified: "generated on"
-    author: "Written by"
+    author: "by"
   fr:
     created: "Publié le"
     of: ""
-    modified: "généré le"
-    author: "Rédigé par"
+    author: "par"
