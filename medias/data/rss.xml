@@ -9,7 +9,7 @@ permalink: /rss.xml
 		<description>{% if site.description %}{{ site.description | xml_escape }}{% endif %}</description>
 		<link>{{ site.url }}</link>
 		<atom:link href="{{ site.url }}/rss.xml" rel="self" type="application/rss+xml" />
-		{% for post in site.posts %}{% if post.lang == page.lang %}
+		{% assign posts=site.posts | where:"lang", "en"| where:"type", posts %}{% for post in posts %}
 			<item>
 				<title>{{ post.title | strip_html }}</title>
 				<description>{% include typo.html content=post.content rss='yes' %}</description>
@@ -17,6 +17,6 @@ permalink: /rss.xml
 				<link>{{ site.url }}{{ post.url }}</link>
 				<guid isPermaLink="true">{{site.url}}{{ post.url }}</guid>
 			</item>
-		{% endif %}{% endfor %}
+		{% endfor %}
 	</channel>
 </rss>
