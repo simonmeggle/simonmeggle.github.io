@@ -49,14 +49,15 @@ layout: compress
 
 <nav>
   <ul>
-    <li class="logo"><a href="{{ site.nav[page.lang].journal.url }}">sylvain durand</a></li>
-    {% assign posts=site.posts|where:"date",page.date|sort: 'path'| reverse %}
-    {% for post in posts %}
-      <li class="lang"><a href="{{ post.url }}" class="{{ post.lang }}">{{ post.lang }}</a></li>
-    {% endfor %}
     {% for menu in site.nav[page.lang] %}
       <li><a href="{{ menu[1].url }}">{{ menu[1].title }}</a></li>
     {% endfor %}
+    <li class="lang">
+      {% assign posts=site.posts|where:"date",page.date|sort: 'path' %}
+      {% for post in posts %}
+        <a href="{{ post.url }}" class="{{ post.lang }}">{{ post.lang }}</a>
+      {% endfor %}
+    </li>
   </ul>
 </nav>
 

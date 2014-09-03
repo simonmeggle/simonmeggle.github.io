@@ -32,6 +32,9 @@ defaults:
 
 nav:
   en:
+    logo:
+      title: "sylvain durand"
+      url:   "/"
     journal:
       title: "journal"
       url:   "/index.html"
@@ -39,6 +42,9 @@ nav:
       title: "about"
       url:   "/about/"
   fr:
+    logo:
+      title: "sylvain durand"
+      url:   "/journal/"
     journal:
       title: "journal"
       url:   "/journal/"
