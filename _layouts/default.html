@@ -9,8 +9,7 @@ layout: compress
   <meta name="description" content="{{ page.excerpt | strip_html }}">
   <title>{{page.title | strip_html}} – Sylvain Durand</title>
   <link rel="icon" href="/medias/design/favicon.ico" />
-  <link rel="canonical" href="{{site.url}}{{page.url}}" />
-  {% assign posts=site.posts|where:"date",page.date %}
+  {% assign posts=site.posts | where:"date",p age.date %}
   {% for post in posts %}
     {% if post.lang != page.lang %} 
       <link rel="alternate" hreflang="{{post.lang}}" href="{{post.url}}" />
@@ -26,7 +25,7 @@ layout: compress
 
 <article>
   <header>
-    <h1 style="background-image: url(/medias/headers/{{ page.date | date:'%Y-%m-%d' }}.jpg)" itemprop="name">
+    <h1 style="background-image: url(/medias/headers/{{ page.date | date:'%Y-%m-%d' }}.jpg)">
       {{ page.title }}
     </h1>
   </header>
@@ -43,9 +42,7 @@ layout: compress
       {{ site.t[page.lang].author }}
       <a href="https://github.com/sylvaindurand/">Sylvain Durand</a>.
   </footer>
-
 </article>
-
 
 <nav>
   <ul>
@@ -53,14 +50,13 @@ layout: compress
       <li><a href="{{ menu[1].url }}">{{ menu[1].title }}</a></li>
     {% endfor %}
     <li class="lang">
-      {% assign posts=site.posts|where:"date",page.date|sort: 'path' %}
+      {% assign posts=site.posts | where:"date", page.date | sort: 'path' %}
       {% for post in posts %}
         <a href="{{ post.url }}" class="{{ post.lang }}">{{ post.lang }}</a>
       {% endfor %}
     </li>
   </ul>
 </nav>
-
 
 </body>
 </html>
