@@ -1,2 +1,11 @@
 {% capture content %}
-{% if page.lang == 'fr' %}{{ include.content | replace: '“', '«&#160;' | replace: '”', '&#160;»' | replace: ' :', '&#160;:' | replace: ' ;', '&#160;;' | replace: '<h2>', '<h2><span>' | replace: '</h2>', '</span></h2>' | replace: '~', '&nbsp;' }}{% else %}{{ include.content | replace: '<h2>', '<h2><span>' | replace: '</h2>', '</span></h2>' | replace: '~', '&nbsp;' }}{% endif %}{% endcapture %}{% if include.rss == 'yes' %}{{ content | xml_escape }}{% else %}{{ content }}{% endif %}
+	{% if page.lang == 'fr' %}
+		{{ include.content | replace: '“', '«&#160;' | replace: '”', '&#160;»' | replace: ' :', '&#160;:' | replace: ' ;', '&#160;;' | replace: '<h2>', '<h2><span>' | replace: '</h2>', '</span></h2>' | replace: '~', '&nbsp;' }}{% else %}{{ include.content | replace: '<h2>', '<h2><span>' | replace: '</h2>', '</span></h2>' | replace: '~', '&nbsp;' }}
+	{% endif %}
+{% endcapture %}
+
+{% if include.rss == 'yes' %}
+	{{ content | xml_escape }}
+{% else %}
+	{{ content }}
+{% endif %}
