@@ -9,14 +9,14 @@
         </ul></li>
       {% endunless %}
 
-      <li><span>{% include month.html date=post.date %}</span>
+      <li><span>{% include date.html date=post.date mode="month"%}</span>
       <ul>{% capture year %}{{currentyear}}{% endcapture %}
 
     {% endif %}
 
       <li>
         <a href="{{ post.url }}">
-          <span>{% include day.html date=post.date %}</span>
+          <span>{% include date.html date=post.date mode="day" %}</span>
           {{ post.title | replace: '<br/>', '' }}
         </a>
       </li>

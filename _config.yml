@@ -54,9 +54,7 @@ nav:
 t:
   en:
     created: "Published on the"
-    of: "of"
     author: "by"
   fr:
     created: "Publié le"
-    of: ""
     author: "par"
