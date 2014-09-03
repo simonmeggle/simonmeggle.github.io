@@ -1,15 +1,15 @@
 ---
-title: Site multilingue <br/> avec <em>Jekyll</em> 
+title: Rendre <em>Jekyll</em> <br/> multilingue 
 ---
 
-J<em>ekyll</em> est un générateur de sites statiques qui laisse une grande liberté de choix à l'utilisateur, en lui permettant de mettre simplement en place des fonctionnalités qui ne sont pas prévues par son moteur. C'est notamment le cas lorsque l'on souhaite proposer son site en plusieurs langues : alors que la plupart des CMS sont très rigides ou nécessitent des plugins, quelques filtres suffisent ici pour obtenir le résultat désiré. 
+J<em>ekyll</em> laisse une grande liberté de choix en permettant de mettre simplement en place des fonctionnalités qui ne sont pas prévues par son moteur. C'est notamment le cas lorsque l'on souhaite proposer son site en plusieurs langues : alors que la plupart des CMS sont très rigides ou nécessitent des plugins, quelques filtres suffisent ici pour obtenir le résultat désiré. 
 
-Cet article a pour objectif de présenter une façon de créer un site multilingue avec _Jekyll_. Il suppose que _Jekyll_ est bien installé[^1] et que vous savez l'utiliser pour générer un site simple[^new].
+Cet article a pour objectif de présenter une façon de créer un site multilingue avec _Jekyll_. Il suppose que celui-ci est bien installé[^installation] et que vous savez l'utiliser pour générer un site simple.
 
 ### Objectifs
 Notre site pourra être traduit en autant de langues que souhaité ; dans les exemples qui suivront, il comptera trois langues : anglais, français et chinois. Chaque page pourra elle-même être traduite ou non dans ces différentes langues[^traductions]. Quelle que soit la page affichée, l'intégralité du contenu --- article, date, menus, URL --- doit être dans la même langue.
 
-Un sélecteur de langue tel que celui présent en haut à droite de ce site permet pour chaque page d'indiquer la langue en cours et les autres traductions disponibles [^selecteur].
+Un sélecteur de langue tel que celui présent en haut à droite de ce site permettra pour chaque page d'indiquer la langue en cours et ses traductions disponibles [^selecteur].
 
 Tout cela fonctionnera sans plugin, afin d'assurer une meilleure compatibilité avec les futures versions de _Jekyll_ et de pouvoir générer le site en mode `safe` et donc l'héberger sur [GitHub Pages](https://pages.github.com/).
 
@@ -70,7 +70,7 @@ Par défaut, _Jekyll_ génère les URL à partir du nom des fichiers, de la form
 permalink: /:title/
 {% endhighlight %}
 
-Il est également possible de spécifier individuellement une adresse pour chaque fichier en indiquant la variable `permalink` dans son entête[^index].
+Nous pouvons également spécifier individuellement une adresse pour chaque fichier en indiquant la variable `permalink` dans son entête[^index].
 
 
 
@@ -97,7 +97,7 @@ name: hello
 
 ### Liste des articles par langue
 
-Les pages affichant la liste des articles ne doivent afficher que ceux qui sont dans la bonne langue, ce qui peut être atteint facilement grâce à la métadonnée `lang`. Le code suivant permet d'afficher l'ensemble des posts de la bonne langue, selon le dossier dans lequel il est placé :
+Les pages affichant la liste des articles ne doivent afficher que ceux qui sont dans la bonne langue, ce qui peut être atteint facilement grâce à la métadonnée `lang`. Le code suivant permet d'afficher l'ensemble des articles de la bonne langue :
 
 {% highlight html %}
 {% raw %}
@@ -112,12 +112,12 @@ Les pages affichant la liste des articles ne doivent afficher que ceux qui sont 
 {% endraw %}
 {% endhighlight %}
 
-Pour ne pas afficher certaines pages, comme par exemple celles qui listent les articles, il suffit de leur donner un `type: pages` et de rajouter dans notre `assign` précédant la condition `| where:"type", "pages"`.
+Pour ne pas afficher certaines pages, comme par exemple celles qui listent les articles, il suffit de leur donner un "`type: pages`" dans leurs métadonnées et de rajouter dans `assign` la condition "`| where:"type", "posts"`".
 
 
 ### Sélecteur de langue
 
-Pour créer un sélecteur de langue, comme celui présent en haut à droite de cette page, la démarche est très similaire à celle présentée au paragraphe précédent. On affiche la langue de toutes les versions existantes, y compris l'article en cours :
+Pour créer un sélecteur de langue, comme celui présent en haut à droite de cette page, la démarche est très similaire à celle présentée au paragraphe précédent. On affiche la langue de toutes les versions existantes, y compris l'article en cours, en triant par dossier pour toujours avoir le même ordre :
 
 {% highlight html %}
 {% raw %}
@@ -320,9 +320,7 @@ permalink: /sitemaps.xml
 {% endhighlight %}
 
 
-[^1]: Commencez par [installer RVM](http://rvm.io/rvm/install) stable avec Ruby, puis [installez Jekyll](http://jekyllrb.com/docs/installation/) à l'aide de `gem install jekyll`. 
-
-[^new]: La commande `jekyll new` suffit pour générer un site où appliquer ces exemples. Utiliser `jekyll serve` permet de générer le site et de le servir à l'adresse `localhost:4000`.
+[^installation]: L'article [Site statique avec *Jekyll*](/site-statique-avec-Jekyll) décrit comment installer et utiliser *Jekyll* pour obtenir un site simple.
 
 [^rangement]: Il est tout à fait possible de ranger différemment les articles, mais il sera alors nécessaire de spécifier manuellement la langue de chaque article par la suite dans chaque entête.
 
@@ -334,7 +332,7 @@ permalink: /sitemaps.xml
 
 [^index]: C'est par exemple le cas pour la page d'accueil, que l'on place à la racine en indiquant `permalink: /` dans l'entête.
 
-[^selecteur]: Les différents liens de ce sélecteur doivent renvoyer vers la traduction de la page en cours, et non vers la page d'accueil du site traduit.
+[^selecteur]: Les différents liens de ce sélecteur doivent renvoyer vers la traduction de la page en cours, et non vers la page d'accueil traduite.
 
 [^css]: Pour cela, il faut bien déclarer l'attribut `lang` de la balise `html` en indiquant `<html lang="{{ page.lang }}">` dans le _layout_.
 
