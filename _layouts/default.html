@@ -11,7 +11,7 @@ layout: compress
   <link rel="icon" href="/medias/design/favicon.ico" />
   {% assign posts=site.posts | where:"date", page.date %}
   {% for post in posts %}
-    {% if post.lang != page.lang %} 
+    {% if post.lang != page.lang %}
       <link rel="alternate" hreflang="{{post.lang}}" href="{{post.url}}" />
     {% endif %}
   {% endfor %}
@@ -20,23 +20,19 @@ layout: compress
   <script>{% include script.js %}</script>
 </head>
 
-
 <body>
 
 <article>
   <header>
-    <h1 style="background-image: url(/medias/headers/{{ page.date | date:'%Y-%m-%d' }}.jpg)">
-      {{ page.title }}
-    </h1>
+    <h1 style="background-image: url(/medias/headers/{{ page.date | date:'%Y-%m-%d' }}.jpg)">{{ page.title }}</h1>
   </header>
 
   {% include typo.html %}
-
   <hr/>
 
   <footer>
-      {{ site.t[page.lang].created }} <time datetime="{{ page.date | date:'%Y-%m-%d' }}">{% include date.html date=page.date %}</time>
-      {{ site.t[page.lang].author }}  <a href="https://github.com/sylvaindurand/">Sylvain Durand</a>.
+    {{ site.t[page.lang].created }} <time datetime="{{ page.date | date:'%Y-%m-%d' }}">{% include date.html date=page.date %}</time>
+    {{ site.t[page.lang].author }}  <a href="https://github.com/sylvaindurand/">Sylvain Durand</a>.
   </footer>
 
 </article>
