@@ -9,7 +9,7 @@ layout: compress
   <meta name="description" content="{{ page.excerpt | strip_html }}">
   <title>{{page.title | strip_html}} – Sylvain Durand</title>
   <link rel="icon" href="/medias/design/favicon.ico" />
-  {% assign posts=site.posts | where:"date",p age.date %}
+  {% assign posts=site.posts | where:"date", page.date %}
   {% for post in posts %}
     {% if post.lang != page.lang %} 
       <link rel="alternate" hreflang="{{post.lang}}" href="{{post.url}}" />
