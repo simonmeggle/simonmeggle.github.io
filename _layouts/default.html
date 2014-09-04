@@ -35,7 +35,7 @@ layout: compress
   <hr/>
 
   <footer>
-      {{ site.t[page.lang].created }} <time>{% include date.html date=page.date %}</time>
+      {{ site.t[page.lang].created }} <time datetime="{{ page.date | date:'%Y-%m-%d' }}">{% include date.html date=page.date %}</time>
       {{ site.t[page.lang].author }}  <a href="https://github.com/sylvaindurand/">Sylvain Durand</a>.
   </footer>
 
