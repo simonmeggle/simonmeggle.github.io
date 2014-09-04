@@ -30,7 +30,7 @@ layout: compress
     </h1>
   </header>
 
-  {% include typo.html content=content %}
+  {% include typo.html %}
 
   <hr/>
 
@@ -38,7 +38,7 @@ layout: compress
       {{ site.t[page.lang].created }} <time>{% include date.html date=page.date mode="all" %}</time>
       {{ site.t[page.lang].author }}  <a href="https://github.com/sylvaindurand/">Sylvain Durand</a>.
   </footer>
-  
+
 </article>
 
 <nav>
