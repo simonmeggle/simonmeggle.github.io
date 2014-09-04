@@ -1,4 +1,4 @@
-{% if include.mode == 'all' or include.mode == 'day' %}
+{% if include.mode != 'month' %}
 
   {% assign d = include.date | date: "%-d" %}
 
@@ -19,7 +19,7 @@
 
 {% endif %}
 
-{% if include.mode == 'all' or include.mode == 'month' %}
+{% if include.mode != 'day' %}
 
   {% if page.lang == 'fr' %}
 
@@ -42,7 +42,7 @@
 
   {% else %}
 
-    {% if include.mode == 'all' %}
+    {% if include.mode == '' %}
       of
     {% endif %}
 
