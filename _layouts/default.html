@@ -1,7 +1,7 @@
 ---
 layout: compress
 ---
-<!doctype html>
+<!doctype html>{% capture styles %}{% include style.sass %}{% endcapture %}
 <html lang="{{ page.lang }}">
 <head>
   <meta charset="utf-8">
@@ -15,8 +15,8 @@ layout: compress
       <link rel="alternate" hreflang="{{post.lang}}" href="{{post.url}}" />
     {% endif %}
   {% endfor %}
-  <link rel="alternate" href="/rss.xml" type="application/rss+xml">
-  <link rel="stylesheet" type="text/css" href="/medias/style.css">
+  <link rel="alternate" href="/rss.xml" type="application/rss+xml" />
+  <style>{{ styles | sassify }}</style>
   <script>{% include script.js %}</script>
 </head>
 
