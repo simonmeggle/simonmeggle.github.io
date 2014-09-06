@@ -56,10 +56,6 @@ p+ul li, p+ol li
   &:before
     content: "– "
 
-abbr
-  font-size: .8em
-  border-bottom: .1em solid #DDD
-
 // Titles
 
 h1, h2, h3
@@ -117,9 +113,6 @@ hr
   color: #ddd
   background: #fcfcfc
 
-  .arianne
-    display: none
-
   time, span, a
     color: #ccc
 
@@ -127,6 +120,8 @@ hr
     color: #000
 
 // Articles list
+
+{% if page.title == "Articles" %}
 
 .list
   &>li
@@ -173,6 +168,8 @@ hr
 
 // Lettrine
 
+{% else %}
+
 h1+p:first-letter
   float: left
   margin: 0.13em 0.05em 0 -0.05em
@@ -182,11 +179,14 @@ h1+p:first-letter
 sup
   font-size: 0.8em
 
+abbr
+  font-size: .8em
+  border-bottom: .1em solid #DDD
+
+{% endif %}
 
 
-// Black title
-
-
+// Main title
 
 h1
   position: absolute
@@ -240,6 +240,7 @@ h1
 
 // Code
 
+{% if page.content contains "highlight" %}
 
 code
   line-height: 0
@@ -287,11 +288,11 @@ pre
 .kd,.kr,.nc,.nd,.nf,.nt,.nv,.bp,.vc,.vg,.vi
   color: #268bd2
 
-
+{% endif %}
 
 // Footnotes
 
-
+{% if page.content contains "[^" %}
 
 .footnotes
   li
@@ -346,8 +347,11 @@ pre
     &:before
       display: none
 
+{% endif %}
+
 // Wide
 
+{% if page.content contains '="barre"' %}
 
 .barre
   $size: $main !global
@@ -393,6 +397,8 @@ pre
   border-radius: 0
   border-bottom-left-radius: .3em
   border-bottom-right-radius: .3em
+
+{% endif %}
 
 
 // Fonts
