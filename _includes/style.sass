@@ -45,7 +45,7 @@ p,ul,ol
   list-style-type: none
   +padding(1,0)
   +width
-  *width: $width/$size*$main
+  *width: $width/$size*$main // IE < 7
   text-align: justify
 
 ul, ol
@@ -174,7 +174,7 @@ hr
 
 {% else %}
 
-.content p:first-child:first-letter
+.content>p:first-child:first-letter
   float: left
   margin: 0.13em 0.05em 0 -0.05em
   font-size: 3.333em
