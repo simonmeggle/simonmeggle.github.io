@@ -22,7 +22,7 @@ $sans: "PT Sans", Arial, sans
   max-width: $width/$size*$main
 
 
-// Éléments de base
+// Main elements
 
 html
   -webkit-text-size-adjust: 100%
@@ -35,9 +35,6 @@ a
   text-decoration: none
   &:hover
     color: #0c4255
-
-
-// Main
 
 img
   margin: 3em auto
@@ -198,7 +195,7 @@ h1
   width: 100%
   $size: 26 !global
   +padding(4,2)
-  background: #252525 no-repeat center
+  background: #252525 no-repeat center url(/medias/headers/{{ page.date | date:'%Y-%m-%d' }}.jpg)
   background-size: cover
   color: #fff
   text-align: center

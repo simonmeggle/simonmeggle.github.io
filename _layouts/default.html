@@ -1,7 +1,7 @@
 ---
 layout: compress
 ---
-<!doctype html>{% capture styles %}{% include style.sass %}{% endcapture %}
+<!doctype html>
 <html lang="{{ page.lang }}">
 <head>
   <meta charset="utf-8">
@@ -16,14 +16,14 @@ layout: compress
     {% endif %}
   {% endfor %}
   <link rel="alternate" href="/rss.xml" type="application/rss+xml" />
-  <style>{{ styles | sassify }}</style>
+  <style>{% capture styles %}{% include style.sass %}{% endcapture %}{{ styles | sassify }}</style>
   <script>{% include script.js %}</script>
 </head>
 
 <body>
 
 <div class="header">
-  <h1 style="background-image: url(/medias/headers/{{ page.date | date:'%Y-%m-%d' }}.jpg)">{{ page.title }}</h1>
+  <h1>{{ page.title }}</h1>
 </div>
 
 {% include typo.html %}
