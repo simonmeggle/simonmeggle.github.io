@@ -1,9 +1,28 @@
-<ul class="list">{% assign posts=site.posts | where:"lang", page.lang | where:"type", posts %}{% for post in posts %}{% capture currentyear %}{{post.date | date: "%m/%Y"}}{% endcapture %}{% if currentyear != year %}{% unless forloop.first %}
-    </ul>
-  </li>{% endunless %}
-  <li><span>{% include month.html date=post.date %}</span>
-    <ul>{% capture year %}{{currentyear}}{% endcapture %}{% endif %}
-	  <li><a href="{{ post.url }}"><span>{% include day.html date=post.date %}</span> {{ post.title | replace: '<br/>', '' }}</a></li>{% endfor %}
+<ul class="list">
+  {% assign posts=site.posts | where:"lang", page.lang | where:"type", posts %}
+  {% for post in posts %}
+    {% capture currentyear %}{{post.date | date: "%m/%Y"}}{% endcapture %}
+    
+    {% if currentyear != year %}
+
+      {% unless forloop.first %}
+        </ul></li>
+      {% endunless %}
+
+      <li><span>{% include date.html date=post.date mode="month"%}</span>
+      <ul>{% capture year %}{{currentyear}}{% endcapture %}
+
+    {% endif %}
+
+      <li>
+        <a href="{{ post.url }}">
+          <span>{% include date.html date=post.date mode="day" %}</span>
+          {{ post.title | replace: '<br/>', '' }}
+        </a>
+      </li>
+
+  {% endfor %}
+
     </ul>
   </li>
 </ul>

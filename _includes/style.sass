@@ -1,5 +1,3 @@
----
----
 
 // Sizes
 $main: 18
@@ -24,22 +22,20 @@ $sans: "PT Sans", Arial, sans
   max-width: $width/$size*$main
 
 
-// Éléments de base
+// Main elements
 
 html
   -webkit-text-size-adjust: 100%
   
 body
   font: #{$main/16}em / $line "PT Serif", Georgia, serif
-  margin: 10*$line/$size*$main+em 1em 0
+  margin: 0
+  text-align: center // IE 5.5
 a
   color: #156f8f
   text-decoration: none
   &:hover
     color: #0c4255
-
-
-// Main
 
 img
   margin: 3em auto
@@ -50,6 +46,7 @@ p,ul,ol
   list-style-type: none
   +padding(1,0)
   +width
+  *width: $width/$size*$main // IE < 7
   text-align: justify
 
 ul, ol
@@ -61,9 +58,8 @@ p+ul li, p+ol li
   &:before
     content: "– "
 
-abbr
-  font-size: .8em
-  border-bottom: .1em solid #DDD
+.content
+  margin: 0 1em
 
 // Titles
 
@@ -104,13 +100,13 @@ hr
   text-align: center
   color: #ccc
 
-hr:before
-  content: "*\a*    *"
-  white-space: pre
+  &:before
+    content: "*\a*\00a0\00a0\00a0\00a0*"
+    white-space: pre
 
 // Footer
 
-footer
+.footer
   position: absolute
   left: 0
   width: 100%
@@ -122,9 +118,6 @@ footer
   color: #ddd
   background: #fcfcfc
 
-  .arianne
-    display: none
-
   time, span, a
     color: #ccc
 
@@ -132,6 +125,8 @@ footer
     color: #000
 
 // Articles list
+
+{% if page.title == "Articles" %}
 
 .list
   &>li
@@ -178,7 +173,9 @@ footer
 
 // Lettrine
 
-header+p:first-letter
+{% else %}
+
+.content>p:first-child:first-letter
   float: left
   margin: 0.13em 0.05em 0 -0.05em
   font-size: 3.333em
@@ -187,20 +184,19 @@ header+p:first-letter
 sup
   font-size: 0.8em
 
+abbr
+  font-size: .8em
+  border-bottom: .1em solid #DDD
+
+{% endif %}
 
 
-// Black title
-
-
+// Main title
 
 h1
-  position: absolute
-  top: 0
-  left: 0
-  width: 100%
   $size: 26 !global
   +padding(4,2)
-  background: #252525 no-repeat center
+  background: #252525 no-repeat center url(/medias/headers/{{ page.date | date:'%Y-%m-%d' }}.jpg)
   background-size: cover
   color: #fff
   text-align: center
@@ -212,22 +208,29 @@ h1
 
 // Navbar
 
-nav
+.nav
   position: fixed
   top: 0
   left: 0
   width: 100%
-  background: #222
-  background: rgba(30,30,30,.92)
+  background-color: #222 // IE 8
+  background-color: rgba(30,30,30,.92)
+  *background-color: #222 // IE < 8
+  z-index: 1
 
   ul
     max-width: $width * 1.25
-    padding: $line+em $line+em 0
+    padding: $line/2+em $line+em 0
+
+    li:first-child a
+      color: #ddd
+
+  li
+    float: left
 
   a
     display: block
     float: left
-    margin-top: -$line/2+em
     padding: 0 .5em $line/2+em
     color: #777
 
@@ -240,14 +243,12 @@ nav
       color: white
 
 
-  .logo a
-    color: #ddd
-
 // Code
 
+{% if page.content contains "highlight" %}
 
 code
-  line-height: 0
+  line-height: 1
   font-family: $sans
 
 pre
@@ -260,6 +261,7 @@ pre
   overflow-x: auto
   background: #f5f5f5
   border-radius: .5em
+  text-align: left
 
   code
     +width
@@ -292,11 +294,11 @@ pre
 .kd,.kr,.nc,.nd,.nf,.nt,.nv,.bp,.vc,.vg,.vi
   color: #268bd2
 
-
+{% endif %}
 
 // Footnotes
 
-
+{% if page.content contains "[^" %}
 
 .footnotes
   li
@@ -351,8 +353,11 @@ pre
     &:before
       display: none
 
+{% endif %}
+
 // Wide
 
+{% if page.content contains '="barre"' %}
 
 .barre
   $size: $main !global
@@ -398,6 +403,8 @@ pre
   border-radius: 0
   border-bottom-left-radius: .3em
   border-bottom-right-radius: .3em
+
+{% endif %}
 
 
 // Fonts

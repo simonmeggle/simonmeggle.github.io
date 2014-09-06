@@ -32,6 +32,9 @@ defaults:
 
 nav:
   en:
+    logo:
+      title: "sylvain durand"
+      url:   "/"
     journal:
       title: "journal"
       url:   "/index.html"
@@ -39,6 +42,9 @@ nav:
       title: "about"
       url:   "/about/"
   fr:
+    logo:
+      title: "sylvain durand"
+      url:   "/journal/"
     journal:
       title: "journal"
       url:   "/journal/"
@@ -48,9 +54,9 @@ nav:
 t:
   en:
     created: "Published on the"
-    of: "of"
     author: "by"
+    description: "Personal website, made with real pieces of code: articles about Jekyll, Raspberry Pi, R..."
   fr:
     created: "Publié le"
-    of: ""
     author: "par"
+    description: "Site personnel, avec des vrais bouts de code dedans : articles sur Jekyll, Raspberry Pi, R..."

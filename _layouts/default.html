@@ -1,44 +1,51 @@
+---
+layout: compress
+---
 <!doctype html>
 <html lang="{{ page.lang }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=450, maximum-scale=1.0, user-scalable=no">
-  <meta name="description" content="{{ page.excerpt | strip_html | strip_newlines }}">
+  <meta name="description" content="{% if page.title == 'Articles' %}{{ site.t[page.lang].description }}{% else %}{{ page.excerpt | strip_html }}{% endif %}">
   <title>{{page.title | strip_html}} – Sylvain Durand</title>
   <link rel="icon" href="/medias/design/favicon.ico" />
-  <link rel="canonical" href="{{site.url}}{{page.url}}" />
-{% assign posts=site.posts|where:"date",page.date %}{% for post in posts %}{% if post.lang != page.lang %}  <link rel="alternate" hreflang="{{post.lang}}" href="{{post.url}}" />
-  {% endif %}{% endfor %}<link rel="alternate" href="/rss.xml" type="application/rss+xml">
-  <link rel="stylesheet" type="text/css" href="/medias/style.css">
-  <script>{% include script.js %}</script>
+  {% assign posts=site.posts | where:"date", page.date %}
+  {% for post in posts %}
+    {% if post.lang != page.lang %}
+      <link rel="alternate" hreflang="{{post.lang}}" href="{{post.url}}" />
+    {% endif %}
+  {% endfor %}
+  <link rel="alternate" href="/rss.xml" type="application/rss+xml" />
+  <style>{% capture styles %}{% include style.sass %}{% endcapture %}{{ styles | sassify }}</style>
+  {% include script.js %}
 </head>
-<body itemscope itemtype="http://schema.org/Article">
-<article itemprop="articleBody">
-<header>
-  <h1 style="background-image: url(/medias/headers/{{ page.date | date:'%Y-%m-%d' }}.jpg)" itemprop="name">{{ page.title }}</h1>
-</header>{% include typo.html content=content %}<hr/>
-<footer>
-  <div class="arianne">
-    <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-      <a href="{{site.url}}/" itemprop="url">
-        <span itemprop="title">Journal</span>
-      </a>
-    </span> › 
-    <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-      <a href="{{site.url}}{{page.url}}" itemprop="url">
-        <span itemprop="title">{{ page.title }}</span>
-      </a>
-    </span>
-  </div>
-  <div>{{ site.t[page.lang].created }} <time datetime="{{ page.date | date:'%Y-%m-%d'}}" itemprop="dateCreated" class="date">{% include day.html date=page.date %} {{ site.t[page.lang].of }} {% include month.html date=page.date %}</time> {{ site.t[page.lang].author }} <a href="https://github.com/sylvaindurand/" itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Sylvain Durand</span></a>.</div>
-</footer>
-</article>
-<nav>
+
+<body>
+
+<div class="nav">
   <ul>
-    <li class="logo"><a href="{{site.nav[page.lang].journal.url}}">sylvain durand</a></li>
-  {% assign posts=site.posts|where:"date",page.date|sort: 'path'| reverse %}{% for post in posts %}  <li class="lang"><a href="{{ post.url }}" class="{{ post.lang }}">{{ post.lang }}</a></li>
-  {% endfor %}{% for menu in site.nav[page.lang] %}  <li><a href="{{menu[1].url}}">{{menu[1].title}}</a></li>
-  {% endfor %}</ul>
-</nav>
+    {% for menu in site.nav[page.lang] %}
+      <li><a href="{{ menu[1].url }}">{{ menu[1].title }}</a></li>
+    {% endfor %}
+    <li class="lang">
+      {% assign posts=site.posts | where:"date", page.date | sort: 'path' %}
+      {% for post in posts %}
+        <a href="{{ post.url }}" class="{{ post.lang }}">{{ post.lang }}</a>
+      {% endfor %}
+    </li>
+  </ul>
+</div>
+
+<h1>{{ page.title }}</h1>
+
+<div class="content">
+  {% include typo.html %}
+</div>
+
+<div class="footer">
+  {{ site.t[page.lang].created }} <time datetime="{{ page.date | date:'%Y-%m-%d' }}">{% include date.html date=page.date %}</time>
+  {{ site.t[page.lang].author }}  <a href="https://github.com/sylvaindurand/">Sylvain Durand</a>.
+</div>
+
 </body>
 </html>
