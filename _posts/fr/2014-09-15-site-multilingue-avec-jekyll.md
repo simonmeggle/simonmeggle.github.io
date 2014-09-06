@@ -4,14 +4,14 @@ title: Rendre <em>Jekyll</em> <br/> multilingue
 
 J<em>ekyll</em> laisse une grande liberté de choix en permettant de mettre simplement en place des fonctionnalités qui ne sont pas prévues par son moteur. C'est notamment le cas lorsque l'on souhaite proposer son site en plusieurs langues : alors que la plupart des CMS sont très rigides ou nécessitent des plugins, quelques filtres suffisent ici pour obtenir le résultat désiré. 
 
-Cet article a pour objectif de présenter une façon de créer un site multilingue avec _Jekyll_. Il suppose que celui-ci est bien installé[^installation] et que vous savez l'utiliser pour générer un site simple.
+Cet article a pour objectif de présenter une façon de créer un site multilingue avec *Jekyll*. Il suppose que celui-ci est bien installé[^installation] et que vous savez l'utiliser pour générer un site simple.
 
 ### Objectifs
 Notre site pourra être traduit en autant de langues que souhaité ; dans les exemples qui suivront, il comptera trois langues : anglais, français et chinois. Chaque page pourra elle-même être traduite ou non dans ces différentes langues[^traductions]. Quelle que soit la page affichée, l'intégralité du contenu --- article, date, menus, URL --- doit être dans la même langue.
 
 Un sélecteur de langue tel que celui présent en haut à droite de ce site permettra pour chaque page d'indiquer la langue en cours et ses traductions disponibles [^selecteur].
 
-Tout cela fonctionnera sans plugin, afin d'assurer une meilleure compatibilité avec les futures versions de _Jekyll_ et de pouvoir générer le site en mode `safe` et donc l'héberger sur [GitHub Pages](https://pages.github.com/).
+Tout cela fonctionnera sans plugin, afin d'assurer une meilleure compatibilité avec les futures versions de *Jekyll* et de pouvoir générer le site en mode `safe` et donc l'héberger sur [GitHub Pages](https://pages.github.com/).
 
 ## Principe
 
@@ -64,7 +64,7 @@ defaults:
 
 ### Choix des URL
 
-Par défaut, _Jekyll_ génère les URL à partir du nom des fichiers, de la forme `/2014/09/01/bonjour-monde.html`. Comme sur ce site, il est possible[^permalinks] de n'afficher que `/bonjour-monde/` en ajoutant dans `_config.yml` :
+Par défaut, *Jekyll* génère les URL à partir du nom des fichiers, de la forme `/2014/09/01/bonjour-monde.html`. Comme sur ce site, il est possible[^permalinks] de n'afficher que `/bonjour-monde/` en ajoutant dans `_config.yml` :
 
 {% highlight ruby %}
 permalink: /:title/
@@ -79,10 +79,10 @@ Nous pouvons également spécifier individuellement une adresse pour chaque fich
 
 Jusqu'ici, rien ne relie les différentes versions d'une même page. Pour ce faire, nous pourrions utiliser :
 
- - __la date__, mais plusieurs articles différents pourraient avoir la même ou, au contraire, plusieurs versions d'un même article peuvent avoir deux dates différentes ;
- - __le nom du fichier__, mais il est préférable d'avoir des noms de fichiers différents pour traduire les URL.
+ - **la date**, mais plusieurs articles différents pourraient avoir la même ou, au contraire, plusieurs versions d'un même article peuvent avoir deux dates différentes ;
+ - **le nom du fichier**, mais il est préférable d'avoir des noms de fichiers différents pour traduire les URL.
 
-C'est pourquoi le plus simple est d'attribuer à chaque article un __identifiant__ dont la valeur sera identique pour chaque version :
+C'est pourquoi le plus simple est d'attribuer à chaque article un **identifiant** dont la valeur sera identique pour chaque version :
 
 {% highlight python %}
 ---
@@ -112,7 +112,7 @@ Les pages affichant la liste des articles ne doivent afficher que ceux qui sont 
 {% endraw %}
 {% endhighlight %}
 
-Pour ne pas afficher certaines pages, comme par exemple celles qui listent les articles, il suffit de leur donner un "`type: pages`" dans leurs métadonnées et de rajouter dans `assign` la condition "`| where:"type", "posts"`".
+Pour ne pas afficher certaines pages, comme par exemple celles qui listent les articles, il suffit d'indiquer "`type: pages`" dans leurs métadonnées et de rajouter dans `assign` la condition "`| where:"type", "posts"`".
 
 
 ### Sélecteur de langue
@@ -137,7 +137,7 @@ Pour emphaser la langue de la version affichée, il suffit d'utiliser CSS[^css].
 {% highlight css %}
 .en:lang(en), .fr:lang(fr), .zh:lang(zh){
     font-weight: bold;
-)
+}
 {% endhighlight %}
 
 ## Peaufinage
@@ -198,7 +198,7 @@ Le menu peut alors être généré à l'aide d'une boucle :
 
 
 ### Traduction des dates
-À ce stade, tout peut être traduit sur le site à l'exception des dates,  générées automatiquement par _Jekyll_. Les formats courts, composés uniquement de chiffres, peuvent être adaptés sans difficulté. Selon la langue de la page, nous cherchons à obtenir :
+À ce stade, tout peut être traduit sur le site à l'exception des dates,  générées automatiquement par *Jekyll*. Les formats courts, composés uniquement de chiffres, peuvent être adaptés sans difficulté. Selon la langue de la page, nous cherchons à obtenir :
 
 - en anglais : "2014/09/01" ;
 - en français : "01/09/2014" ;
@@ -273,7 +273,7 @@ Les pages étant entièrement statiques, il est difficile de deviner la langue d
 
 Pour ce faire, deux solutions sont possibles : [intégrer une balise `<link>`](https://support.google.com/webmasters/answer/189077?hl=fr) dans notre page, ou [l'indiquer dans un fichier `sitemaps.xml`](https://support.google.com/webmasters/answer/2620865?hl=fr).
 
-### Avec la balise _link_
+### Avec la balise *link*
 
 Il suffit d'indiquer dans la partie `<head>` chaque page, l'ensemble des traductions de la page en cours[^link]. Nous pouvons pour cela d'utiliser le code suivant, semblable à ceux présentés précédemment :
 
@@ -288,14 +288,15 @@ Il suffit d'indiquer dans la partie `<head>` chaque page, l'ensemble des traduct
 {% endraw %}
 {% endhighlight %}
 
-### Avec un fichier _sitemaps_
+### Avec un fichier *sitemaps*
 
 Le fichier `sitemaps.xml`, qui permet aux moteurs de recherche de connaître les pages et la structure de votre site, [permet également d'indiquer aux moteurs de recherches quelles pages sont les différentes versions d'un même contenu](https://support.google.com/webmasters/answer/2620865?hl=fr).
 
 Pour cela, il suffit d'indiquer l'intégralité des pages du site (quelle que soit leur langue) dans des éléments `<url>` et pour chacun d'entre eux l'ensemble des versions qui existent, y compris celle que l'on est en train de décrire. 
 
-Ce fichier peut être généré automatiquement par Jekyll en créant un fichier `sitemaps.xml` à la racine du site contenant :
+Ce fichier peut être généré automatiquement par *Jekyll* en créant un fichier `sitemaps.xml` à la racine du site contenant :
 
+{% include barre.html %}
 {% highlight xml %}
 {% raw %}
 ---
@@ -328,15 +329,15 @@ permalink: /sitemaps.xml
 
 [^lang]: Il est également possible d'indiquer la langue dans les entêtes de chaque fichier.
 
-[^permalinks]: Les possibilités offertes sont présentées dans la [documentation](http://jekyllrb.com/docs/permalinks/) de _Jekyll_. 
+[^permalinks]: Les possibilités offertes sont présentées dans la [documentation](http://jekyllrb.com/docs/permalinks/) de *Jekyll*. 
 
 [^index]: C'est par exemple le cas pour la page d'accueil, que l'on place à la racine en indiquant `permalink: /` dans l'entête.
 
 [^selecteur]: Les différents liens de ce sélecteur doivent renvoyer vers la traduction de la page en cours, et non vers la page d'accueil traduite.
 
-[^css]: Pour cela, il faut bien déclarer l'attribut `lang` de la balise `html` en indiquant `<html lang="{{ page.lang }}">` dans le _layout_.
+[^css]: Pour cela, il faut bien déclarer l'attribut `lang` de la balise `html` en indiquant `<html lang="{{ page.lang }}">` dans le *layout*.
 
-[^data]: Depuis la deuxième version de Jekyll, il est également possible de placer ces informations dans le dossier [_data](http://jekyllrb.com/docs/datafiles/).
+[^data]: Depuis la deuxième version de *Jekyll*, il est également possible de placer ces informations dans le dossier [_data](http://jekyllrb.com/docs/datafiles/).
 
 [^referencement]: Ainsi, les utilisateurs trouvant notre contenu par un moteur de recherche devraient se voir proposer automatiquement la bonne traduction. 
 
