@@ -22,22 +22,19 @@ layout: compress
 
 <body>
 
-<article>
-  <header>
-    <h1 style="background-image: url(/medias/headers/{{ page.date | date:'%Y-%m-%d' }}.jpg)">{{ page.title }}</h1>
-  </header>
+<div class="header">
+  <h1 style="background-image: url(/medias/headers/{{ page.date | date:'%Y-%m-%d' }}.jpg)">{{ page.title }}</h1>
+</div>
 
-  {% include typo.html %}
-  <hr/>
+{% include typo.html %}
+<hr/>
 
-  <footer>
-    {{ site.t[page.lang].created }} <time datetime="{{ page.date | date:'%Y-%m-%d' }}">{% include date.html date=page.date %}</time>
-    {{ site.t[page.lang].author }}  <a href="https://github.com/sylvaindurand/">Sylvain Durand</a>.
-  </footer>
+<div class="footer">
+  {{ site.t[page.lang].created }} <time datetime="{{ page.date | date:'%Y-%m-%d' }}">{% include date.html date=page.date %}</time>
+  {{ site.t[page.lang].author }}  <a href="https://github.com/sylvaindurand/">Sylvain Durand</a>.
+</div>
 
-</article>
-
-<nav>
+<div class="nav">
   <ul>
     {% for menu in site.nav[page.lang] %}
       <li><a href="{{ menu[1].url }}">{{ menu[1].title }}</a></li>
@@ -49,7 +46,7 @@ layout: compress
       {% endfor %}
     </li>
   </ul>
-</nav>
+</div>
 
 </body>
 </html>
