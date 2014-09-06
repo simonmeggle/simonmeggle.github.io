@@ -29,7 +29,7 @@ html
   
 body
   font: #{$main/16}em / $line "PT Serif", Georgia, serif
-  margin: 10*$line/$size*$main+em 1em 0
+  margin: 0
 a
   color: #156f8f
   text-decoration: none
@@ -55,6 +55,9 @@ p+ul li, p+ol li
 
   &:before
     content: "– "
+
+.content
+  margin: 0 1em
 
 // Titles
 
@@ -170,7 +173,7 @@ hr
 
 {% else %}
 
-h1+p:first-letter
+.content p:first-child:first-letter
   float: left
   margin: 0.13em 0.05em 0 -0.05em
   font-size: 3.333em
@@ -189,10 +192,6 @@ abbr
 // Main title
 
 h1
-  position: absolute
-  top: 0
-  left: 0
-  width: 100%
   $size: 26 !global
   +padding(4,2)
   background: #252525 no-repeat center url(/medias/headers/{{ page.date | date:'%Y-%m-%d' }}.jpg)
