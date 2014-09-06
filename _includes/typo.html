@@ -1,5 +1,0 @@
-{% if page.lang == 'fr' %}
-	{{ content | replace: '“', '«&#160;' | replace: '”', '&#160;»' | replace: ' :', '&#160;:' | replace: ' ;', '&#160;;' | replace: '<h2>', '<h2><span>' | replace: '</h2>', '</span></h2>' | replace: '~', '&nbsp;' }}
-{% else %}
-  {{ content | replace: '<h2>', '<h2><span>' | replace: '</h2>', '</span></h2>' | replace: '~', '&nbsp;' }}
-{% endif %}
