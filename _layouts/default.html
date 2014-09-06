@@ -22,16 +22,6 @@ layout: compress
 
 <body>
 
-<h1>{{ page.title }}</h1>
-
-{% include typo.html %}
-<hr/>
-
-<div class="footer">
-  {{ site.t[page.lang].created }} <time datetime="{{ page.date | date:'%Y-%m-%d' }}">{% include date.html date=page.date %}</time>
-  {{ site.t[page.lang].author }}  <a href="https://github.com/sylvaindurand/">Sylvain Durand</a>.
-</div>
-
 <div class="nav">
   <ul>
     {% for menu in site.nav[page.lang] %}
@@ -44,6 +34,15 @@ layout: compress
       {% endfor %}
     </li>
   </ul>
+</div>
+
+<h1>{{ page.title }}</h1>
+
+{% include typo.html %}
+
+<div class="footer">
+  {{ site.t[page.lang].created }} <time datetime="{{ page.date | date:'%Y-%m-%d' }}">{% include date.html date=page.date %}</time>
+  {{ site.t[page.lang].author }}  <a href="https://github.com/sylvaindurand/">Sylvain Durand</a>.
 </div>
 
 </body>
