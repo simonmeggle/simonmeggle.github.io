@@ -1,187 +1,245 @@
 ---
-title: Multilingual website <br/> with <em>Jekyll</em>
+title: Make <em>Jekyll</em> <br/> multilingual
 ---
 
-J _ekyll_ static website generator has a very flexible design that allows a great freedom of choice, allowing the user to simply introduce features that are not integrated into its engine. This is particularly the case when one wants to create a multilingual website: while CMS remain very rigid and often require plugins, few filters are sufficient to achieve it with _Jekyll_.
+J<em>ekyll</em> has a very flexible design that allows a great freedom of choice, allowing the user to simply introduce features that are not integrated into its engine. This is particularly the case when one wants to create a multilingual website: while CMS remain very rigid and often require plugins, few filters are sufficient to achieve it with _Jekyll_.
 
-This article aims to present a way to create a multilingual site with _Jekyll_. _Jekyll_ have to be installed on your computer and you should be able to know how to generate a simple website.
+This article aims to present a way to create a multilingual site with _Jekyll_. _Jekyll_ have to be installed[^install] on your computer and you should be able to know how to generate a simple website.
 
 ### Goals
-Our site has two versions: English and French. On the same page, the entire contents (article, date, menus ...) must be in the same language, but an article (whether in English or French) is not necessarily translated. The rules of English and French typography will be respected.
+Our website can be translated in as many languages as wanted. In the following examples, it will have three languages: English, French, and Chinese. Each page may be translated or not in the various languages[^translations]. On each page, the entire contents --- article, date, menus, URL --- must be in the same language.
 
-All URL will be like `domain.tld/article-name/`. `domain.tld` root will display the list of English articles, and `domain.tld/articles/` the list of French articles. The language selector (on the top right) musn't lead to the translated homepage but to the translation of the _current_ page.
+A language selector, as the one on the top right of this website, will show the actual language and the different translations available[^selector].
 
-Everything will work without any plugin, in order to generate the site in `safe` mode and thus to be able to host it on [GitHub Pages](https://pages.github.com/).
+Everything will work without any plugin, in order to get a good compatibility with the future versions of *Jekyll* and to be able to generate the site in `safe` mode and thus to be able to host it on [GitHub Pages](https://pages.github.com/).
 
 
 ## Principle
 
 ### File tree 
 
-
-The organization of our files will be very simple. Home page `index.html`, listing articles in English, is stored at the root to be accessible from `domain.tld`. All other pages and articles (including the list of articles in French) will be stored in `_posts /`:
+Every article will be put in the `_posts` folder on the root of the website. In this folder, we will create one folder for each language, in order to stay organized and to declare the language of the articles[^tree]:
 
 {% highlight r %}
-.  
-├── index.html                        # English home page
-|
-└── _posts
-    ├── 2014-01-01-articles.html      # French home page
-    |
-    ├── 2014-03-05-hello-world.md     # English article
-    └── 2014-03-05-bonjour-monde.md   # French article
+_config.yml
+_layouts
+_posts
+       ├──  en
+        │         ├── 2014-09-01-hello-world.md
+        │         └── 0000-01-01-index.md
+        │
+       ├──  fr
+        │         ├── 2014-09-01-bonjour-monde.md
+        │         └── 0000-01-01-journal.md
+        │
+       └── zh
+                   ├── 2014-09-01-你好世界.md
+                   └── 0000-01-01-首页.md
 {% endhighlight %}
 
+In this folder, you can freely organise your files. The only rule is to name each post with the publication date, followed by its identifier. 
 
-### Prettier URL
+We will then declare the `lang` variable for each folder[^lang], in order to be able later to detect the lang and the translations. To do so, we write the following statement in `_config.yml`:
 
-Instead of having URL like `/2014/03/05/hello-world.html`, we only want the prettier `/hello-world/`. Simply indicate in `_config.yml`:
+{% highlight ruby %}
+defaults:
+  -
+    scope:
+      path: _posts/en
+    values:
+      layout: default
+      lang: en
+  -
+    scope:
+      path: _posts/fr
+    values:
+      layout: default
+      lang: fr
+  -
+    scope:
+      path: _posts/zh
+    values:
+      layout: default
+      lang: zh
+{% endhighlight %}
 
+### URL format
+
+By default, *Jekyll* generates URL from the filenames, with the following format: `/2014/09/01/hello-world.html`. As it is done on this website, it is possible[^permalinks] to show only `/hello-world/` by writing in `_config.yml`:
 
 {% highlight ruby %}
 permalink: /:title/
 {% endhighlight %}
 
+It is also possible to specify an URL for each file, by using the `permalink` variable in the frontmatter[^index].
 
-### Articles metadata
+### Giving an identifier to each article
 
-Each page or article will have a variable `lang`, which can be worth `en` or `fr` depending on the lang of the article. _If a translation exists_, `trans` will be the address (from the root) to it, as the URL format previously selected. The pages have no need to have an identifier or a common date. Account only the variable `trans` indicating that translation exists, and where it is located.
+Until now, nothing links the various version of a same page. To do so, we could use:
 
-For instance, a French article `_posts/2014-03-05-bonjour-monde.md` available at `domain.tld/bonjour-monde/`, if there is no translation, include the following metadata:
+ - **the date**, but several different articles may have the same or, on the contrary, several translations of the same article may have differents dates;
+ - **the filename**, but it is quite better to translate those in order to get translated URL.
 
-{% highlight ruby %}
+This is why the most simple way is to give an unique **identifier** to each article, shared between each translation:
+
+{% highlight python %}
 ---
-layout: post
-title:  "Bonjour monde !"
-lang:   fr
----
-{% endhighlight %}
-
-If a translation `_posts/2014-03-15-hello-world.md` exists, which will be accessible at `domain.tld/hello-world/`, then the metadata our French page become:
-
-{% highlight ruby %}
----
-layout: post
-title:  "Bonjour monde !"
-lang:   fr
-trans:  /hello-world/
+title: Hello World!
+name: hello
 ---
 {% endhighlight %}
-
-### Translation of website elements 
-Outside the content of the articles, it is also necessary to translate the various elements like menus, header, footer, some titles... 
-
-It is possible to save translation as variables in `_config.yml`. Then, `{% raw %}{{ site.t[page.lang].home }}{% endraw %}` will generate `Accueil` or `Home` depending `page.lang` value:
-
-{% highlight ruby %}
-t:
-  fr:
-    home:  "Accueil"
-    about: "À propos"
-  en:
-    home:  "Home"
-    about: "About"
-{% endhighlight %}
-
 
 
 ## Links between the two translations 
 
 ### List of articles
 
-The home page will display a list of articles depending of their language, which can be reached easily with the metadata `lang`. For example, for English items:
+The page listing the articles has to display only the one with the good translation. That is easy to do, thanks to the `lang` metadata. The following code provides every article with the same language than the actual page:
 
 {% highlight html %}
 {% raw %}
+{% assign posts=site.posts | where:"lang", page.lang %}
 <ul>
-  {% for post in site.posts %}
-    {% if post.lang == 'en' %}
-     <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-    {% endif %}
-  {% endfor %}
+{% for post in posts %}
+    <li class="lang">
+        <a href="{{ post.url }}" class="{{ post.lang }}">{{ post.lang }}</a>
+    </li>
+{% endfor %}
 </ul>
 {% endraw %}
 {% endhighlight %}
 
-In the case of French articles, we musn't display the french homepage. The previous code becomes:
+If you don't want to show some pages in the list, you just have to provide "`type: pages`" in their frontmatter, and to add in `assign` the condition "`| where:"type", "posts"`".
+
+### Language selector
+
+To create a language selector, like the one at the top right of this page, the process is very similar. We show the language of each translation available, including the actual page, sorting by path in order to always get the same order:
 
 {% highlight html %}
 {% raw %}
+{% assign posts=site.posts | where:"name", page.name | sort: 'path' %}
 <ul>
-  {% for post in site.posts %}
-    {% if post.lang == 'fr' and post.trans != '/' %}
-     <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-    {% endif %}
-  {% endfor %}
+{% for post in posts %}
+    <li class="lang">
+        <a href="{{ post.url }}" class="{{ post.lang }}">{{ post.lang }}</a>
+    </li>
+{% endfor %}
 </ul>
 {% endraw %}
 {% endhighlight %}
 
-### Display a link to the translation of the current page 
-To offer the visitor directly to a link to the translation of an article if it exists, just look if the variable `trans` exists and its value:
+Then, in order to emphase the actual version, just use CSS[^css]. For instance, if you want to bold it:
 
-{% highlight html %}
-{% raw %}
-{% if page.trans %}
-    <a href="{{page.trans}}">{{ site.t[page.lang].translation }}</a>
-{% endif %}
-{% endraw %}
+{% highlight css %}
+.en:lang(en), .fr:lang(fr), .zh:lang(zh){
+    font-weight: bold;
+}
 {% endhighlight %}
-
-As explain in the previous section, we define in `_config.yml`:
-
-{% highlight ruby %}
-t:
-  fr:
-    translation: "read in English"
-  en:
-    translation: "lire en français"
-{% endhighlight %}
-
-### Sélecteur de langue
-To create a language selector, like this at the top right of this page, the process is very similar to that presented in the previous paragraph. We use `!= 'fr'` instead of `== 'en'` in order to make this selector working on the homepage, where `page.lang` is not defined.
-
-{% highlight html %}
-{% raw %}
-{% if page.lang != 'fr'%}  <span class="active">en</span> | 
-    {% if page.trans %}    <a href="{{page.trans}}">fr</a>
-    {% else %}             <span class="inactive">fr</span>
-    {% endif %}
-{% else %}
-    {% if page.trans %}    <a href="{{page.trans}}">en</a>
-    {% else %}             <span class="inactive">en</span>
-    {% endif %}          | <span class="active">fr</span>
-{% endif %}
-{% endraw %}
-{% endhighlight %}
-
 
 ## Tweaking
 
-### Translation of dates 
-At this point, everything can be translated on the site except the dates automatically generated by _Jekyll_. Short formats, consisting only of numbers, can be adapted without difficulty:
+### Translation of website elements 
+Around the articles, it is also necessary to translate the various elements like menus, header, footer, some titles... 
+
+To do so, we can provide translations into `_config.yml`[^data]. Then, in the following example, `{% raw %}{{site.t[page.lang].home}}{% endraw %}` will generate `Home`, `Accueil` or `首页` depending of the page language:
+
+{% highlight python %}
+t:
+  en:
+    home:  "Home"
+  fr:
+    home:  "Accueil"
+  zh:
+    home:  "首页"
+{% endhighlight %}
+
+It is possible to do the same in order to generate the menu of each version. For example, if you want to provide a two elements menu, you just have to provide in `_config.yml` :
+
+{% highlight python %}
+t:
+  en:
+    home:
+      name: "Home"
+      url: "/"
+    about:
+      name: "About"
+      url: "/about/"
+  fr:
+    home:
+      name: "Accueil"
+      url: "/accueil/"
+    about:
+      name: "À propos"
+      url: "/a-propos/"
+  zh:
+    home:
+      name: "首页"
+      url: "/首页/"
+    about:
+      name: "关于"
+      url: "/关于/"
+{% endhighlight %}
+
+Then, you can generate the menu with a simple loop:
 
 {% highlight html %}
 {% raw %}
+<ul>
+  {% for menu in site.t[page.lang] %}
+    <li><a href="{{menu[1].url}}">{{menu[1].title}}</a></li>
+  {% endfor %}
+</ul>
+{% endraw %}
+{% endhighlight %}
+
+### Translation of dates 
+At this point, everything can be translated on the site except the dates automatically generated by *Jekyll*. Short formats, consisting only of numbers, can be adapted without difficulty. Depending of the language, we want to get:
+
+- in English : "2014/09/01" ;
+- in French : "01/09/2014" ;
+- in Chinese : "2014年9月1号".
+
+To do so, we just have to use the following code, which we may then put in the `_includes` folder in order to use it when needed:
+{% highlight python %}
+{% raw %}
+{% if page.lang == 'en' %}
+    {{ page.date | date: "%d/%m/%Y" }}
+{% endif %}
+
 {% if page.lang == 'fr' %}
-    {{ post.date | date: "%d/%m/%Y" }}
-{% else %}
-    {{ post.date | date: "%Y-%m-%d" }}
+    {{ page.date | date: "%Y-%m-%d" }}
+{% endif %}
+
+{% if page.lang == 'zh' %}
+    {{ page.date | date: "%Y年%-m月%-d号" }}
 {% endif %}
 {% endraw %}
 {% endhighlight %}
 
-For long dates, it is possible to use date filters and replacements for any format. For example, in order to translate the date in English and in French, you can use:
+For the long format dates, it is possible to use date filters and replacements for any format. For example, we want to get:
 
-{% highlight html %}
+- in English : "1<sup>st</sup> of September 2014" ;
+- in French : "1<sup>er</sup> septembre 2014".
+
+We just have to use the following code:
+
+{% highlight python %}
 {% raw %}
 {% assign d = page.date | date: "%-d" %}
 {% assign m = page.date | date: "%-m" %}
 
-{% if page.lang == 'fr' %}
+{% if page.lang == 'en' %}
+{{ d }}<sup>{% case d %}
+  {% when '1' or '21' or '31' %}st
+  {% when '2' or '22' %}nd
+  {% when '3' or '23' %}rd
+{% else %}th
+{% endcase %}</sup> 
+of {{ page.date | date: "%B %Y"}}
+{% endif %}
 
+{% if page.lang == 'fr' %}
 {{ d }}{% if d == "1" %}<sup>er</sup>{% endif %}
- 
 {% case m %}
   {% when '1' %}janvier
   {% when '2' %}février
@@ -197,103 +255,57 @@ For long dates, it is possible to use date filters and replacements for any form
   {% when '12' %}décembre
 {% endcase %} 
 {{ page.date | date: "%Y"}}
-
-{% else %}
-
-{{ d }}<sup>{% case d %}
-  {% when '1' or '21' or '31' %}st
-  {% when '2' or '22' %}nd
-  {% when '3' or '23' %}rd
-{% else %}th
-{% endcase %}</sup> 
-{{ page.date | date: "%B %Y"}}
-
 {% endif %}
 {% endraw %}
 {% endhighlight %}
 
-
-
-
-### Typographic rules
-
-Since Jekyll 2, Kramdown rendering engine is used by default and improves the rendering of apostrophes, quotes and long dashes. In order to use French quotes instead of double quotes, simply replace the string: 
-{% highlight html %}
-{% raw %}
-{% if lang == 'en' %}
-  {{ content }}
-{% else %}
-  {{ content | replace: '“', '«&#160;' | replace: '”', '&#160;»' }}
-{% endif %}
-{% endraw %}
-{% endhighlight %}
+Again, it is possible to put this code in a file named `date.html` stored in the `_includes` folder, in order to call it without having to duplicate it.
 
 ## Website access and search engine
 
-The website is completely static, so it is difficult to know the language of our visitors, either by detecting the headers sent by the browser or on the basis of their geographical location. Nevertheless, it is possible to indicating the search engines which pages are translations of the same content. Thus, search engine should be automatically suggest the correct translation to our visitors.
+The website is completely static, so it is difficult to know the language of our visitors, either by detecting the headers sent by the browser or on the basis of their geographical location. Nevertheless, it is possible to indicating the search engines which pages are translations of the same content[^search]. 
 
 To do so, two ways are possible: [use `<link>`](https://support.google.com/webmasters/answer/189077?hl=en) or [create a `sitemaps.xml` file](https://support.google.com/webmasters/answer/2620865?hl=en).
 
-### With a &lt;link&gt; tag
+### With a *link* tag
 
-You only have to provide, in each translated page, a link like `<link rel="alternate" hreflang="fr" href="/francais.html" `. [Be careful about the country codes](https://support.google.com/webmasters/answer/189077?hl=en). Use the following Liquid code:
+You only have to provide in the `<head>` part of the page, every translation available of the actual version[^link]. To do so, we can use the following code, similar to those used previously:
 
 {% highlight html %}
 {% raw %}
-{% if page.trans %}
-<link
-  rel="alternate" 
-  hreflang="{% if page.lang != 'fr' %}fr{% else %}en{% endif %}"
-  href="{{ page.trans }}" />
-{% endif %}
+{% assign posts=site.posts | where:"name", page.name %}
+{% for post in posts %}
+  {% if post.lang != page.lang %}
+    <link rel="alternate" hreflang="{{post.lang}}" href="{{post.url}}" />
+  {% endif %}
+{% endfor %}
 {% endraw %}
 {% endhighlight %}
 
-### With a sitemaps.xml file
+### With a *sitemaps* file
 
-The `sitemaps.xml` file,  which allows search engines to know the pages and the structure of your website, [also helps tell the search engines which pages are different translations of the same content](https://support.google.com/webmasters/answer/2620865?hl=en).
+The `sitemaps.xml` file,  which allows search engines to know the pages and the structure of your website, [also helps tell the search engines which pages are different translations of the same content](https://support.google.com/webmasters/answer/189077?hl=en).
 
-For this, just indicate all pages of the site (regardless of language) in `<url>` elements, and for each of them all the versions that exist, including the one _we are now describing_. For example, in the case of two pages `francais.html` and `english.html` that are translations of the same content, we should provide:
+For this, just indicate all pages of the site (regardless of language) in `<url>` elements, and for each of them all the versions that exist, including the one we are now describing. 
 
-{% highlight xml %}
-<url>
-  <loc>http://www.domain.tld/francais.html</loc>
-  <xhtml:link rel="alternate" hreflang="fr"
-    href="http://www.domain.tld/francais.html" />
-  <xhtml:link rel="alternate" hreflang="en "
-    href="http://www.domain.tld/english.html" />
-</url>
+This file can be generated automatically by *Jekyll* with the following code, which will create a `sitemaps.xml` file on the root of the website:
 
-<url>
-  <loc>http://www.domain.tld/english.html</loc>
-  <xhtml:link rel="alternate" hreflang="fr"
-    href="http://www.domain.tld/francais.html" />
-  <xhtml:link rel="alternate" hreflang="en "
-    href="http://www.domain.tld/english.html" />
-</url>
-{% endhighlight %}
-
-This file can (of course!) be automatically generated by Jekyll. Simply create a file `sitemaps.xml` to the root, containing:
-
+{% include barre.html %}
 {% highlight xml %}
 {% raw %}
 ---
+layout:
+permalink: /sitemaps.xml
 ---
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   {% for post in site.posts %}
   <url>
-    <loc>http://domain.tdl{{ post.url }}</loc>
-    {% if post.trans %}
-      <xhtml:link rel="alternate" 
-                  hreflang="{{ post.lang }}" 
-                  href="http://domain.tdl{{ post.url }}" />
-      <xhtml:link rel="alternate" 
-                  hreflang="{% if page.lang != 'fr' %}fr
-                            {% else %}en{% endif %}" 
-                  href="http://domain.tdl{{ post.trans }}" />
-    {% endif %}
+    <loc>http://sylvain.durand.tf{{ post.url }}</loc>
+    {% assign versions=site.posts|where:"name",post.name %}
+    {% for version in versions %}
+      <xhtml:link rel="alternate" hreflang="{{ version.lang }}" href="http://sylvain.durand.tf{{ version.url }}" />
+    {% endfor %}
     <lastmod>{{ post.date | date_to_xmlschema }}</lastmod>
     <changefreq>weekly</changefreq>
   </url>
@@ -303,4 +315,29 @@ This file can (of course!) be automatically generated by Jekyll. Simply create a
 {% endhighlight %}
 
 
-*[CMS]: Content management system
+[^install]: The article [Static website with *Jekyll*](/static-website-with-Jekyll) explains how to install and use *Jekyll* in order to get a simple website.
+
+[^tree]: It is quite possible to organized differently the articles, but you may have to provide manually the language in each frontmatter.
+
+[^translations]: Regardless of the version, they may be pages which are not translated in each language.
+
+[^lang]: It is also possible to provide manually the lang in the frontmatters.
+
+[^permalinks]: *Jekyll* [documentation](http://jekyllrb.com/docs/permalinks/) explains the various possibilities . 
+
+[^index]: For instance, you need to provide `permalink: /` on the homepage.
+
+[^selector]: The selector musn’t lead to the translated homepage, but to the translation of the current page. 
+
+[^css]: You need to declare the `lang` attribute on the `html`, with `<html lang="{{ page.lang }}">` in the *layout*.
+
+[^data]: Since *Jekyll* 2.0, it is also possible to put the translations in the [_data](http://jekyllrb.com/docs/datafiles/) folder.
+
+[^search]: Thus, users finding our website through a search engine should be offered the good translation. 
+
+[^link]: You need to be careful to use the good [country codes](https://support.google.com/webmasters/answer/189077?hl=fr).
+
+*[CMS]: Content Management System
+*[CSS]: Cascading Style Sheets
+*[URL]: Uniform Resource Locator
+
