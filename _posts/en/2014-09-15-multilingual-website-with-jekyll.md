@@ -290,7 +290,6 @@ For this, just indicate all pages of the site (regardless of language) in `<url>
 
 This file can be generated automatically by *Jekyll* with the following code, which will create a `sitemaps.xml` file on the root of the website:
 
-{% include barre.html %}
 {% highlight xml %}
 {% raw %}
 ---

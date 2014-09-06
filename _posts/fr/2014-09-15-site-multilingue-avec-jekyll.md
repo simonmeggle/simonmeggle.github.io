@@ -296,7 +296,6 @@ Pour cela, il suffit d'indiquer l'intégralité des pages du site (quelle que so
 
 Ce fichier peut être généré automatiquement par *Jekyll* en créant un fichier `sitemaps.xml` à la racine du site contenant :
 
-{% include barre.html %}
 {% highlight xml %}
 {% raw %}
 ---
