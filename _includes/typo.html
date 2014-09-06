@@ -1,0 +1,26 @@
+{% assign temp1 = content | split: '<pre' %}
+{% for temp2 in temp1 %}{% assign temp3 = temp2 | split: '</pre>' %}
+{% if temp3.size == 2 %}<pre{{ temp3.first }}</pre>{% endif %}
+{% assign compressed = temp3.last | split: ' ' | join: ' ' %}
+
+{% capture typo %}{{ compressed }}{% endcapture %}
+
+{% capture typo %}{{ typo | replace: '<h2>' , '<h2><span>'   }} {% endcapture %}
+{% capture typo %}{{ typo | replace: '</h2>', '</span></h2>' }} {% endcapture %}
+{% capture typo %}{{ typo | replace: '~'    , '&nbsp;'       }} {% endcapture %}
+
+{% if page.lang == 'fr' %}
+
+  {% capture typo %}{{ typo | replace: '“' , '«&#160;' }} {% endcapture %}
+  {% capture typo %}{{ typo | replace: '”' , '&#160;»' }} {% endcapture %}
+  {% capture typo %}{{ typo | replace: ' :', '&#160;:' }} {% endcapture %}
+  {% capture typo %}{{ typo | replace: ' %', '&#160;%' }} {% endcapture %}
+  {% capture typo %}{{ typo | replace: ' ;', '<span style="white-space:nowrap">&thinsp;</span>;' }} {% endcapture %}
+  {% capture typo %}{{ typo | replace: ' !', '<span style="white-space:nowrap">&thinsp;</span>!' }} {% endcapture %}
+  {% capture typo %}{{ typo | replace: ' ?', '<span style="white-space:nowrap">&thinsp;</span>?' }} {% endcapture %}
+
+{% endif %}
+
+{{ typo }}
+
+{% endfor %}
