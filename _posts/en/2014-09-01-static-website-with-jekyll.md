@@ -23,14 +23,14 @@ As a first step, we will see how to install *Jekyll* on your computer, in order 
 
 ### Installation of *Jekyll* 
 
-**On *Linux***, directly install the last stable version of [*Ruby*](https://packages.debian.org/stable/ruby)[[it is also possible to install [Ruby version manager](http://rvm.io/)]], with its [developpement tools](https://packages.debian.org/stable/ruby-dev) and [gem](https://packages.debian.org/stable/rubygems). On *Debian*, you just have to install the following packages:
+**On Linux**, directly install the last stable version of [*Ruby*](https://packages.debian.org/stable/ruby)[[it is also possible to install [Ruby version manager](http://rvm.io/)]], with its [developpement tools](https://packages.debian.org/stable/ruby-dev) and [gem](https://packages.debian.org/stable/rubygems). On *Debian*, you just have to install the following packages:
 
 ```bash
 sudo apt-get install ruby ruby-dev libgsl-ruby rubygems
 sudo gem install jekyll
 ```
 
-**On *Mac OS X***, first install [*Homebrew*](http://brew.sh/)[[if you don't already have them, a window will ask you to install the "Command Line Tools": you need to install them]] and [*Ruby version manager*](http://rvm.io/) with the last stable version of *Ruby*, then install *Jekyll*:
+**On Mac OS X**, first install [*Homebrew*](http://brew.sh/)[[if you don't already have them, a window will ask you to install the "Command Line Tools": you need to install them]] and [*Ruby version manager*](http://rvm.io/) with the last stable version of *Ruby*, then install *Jekyll*:
 
 ```bash
 ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
@@ -39,7 +39,7 @@ source ~/.rvm/scripts/rvm
 gem install jekyll
 ```
 
-**On *Windows***, it is less easy to install *Jekyll*. However, [Julian Thilo](http://jekyll-windows.juthilo.com/) wrote a [very detailed guide](http://jekyll-windows.juthilo.com/) about how to do it.
+**On Windows**, it is less easy to install *Jekyll*. However, [Julian Thilo](http://jekyll-windows.juthilo.com/) wrote a [very detailed guide](http://jekyll-windows.juthilo.com/) about how to do it.
 
 ### Creation of a new website
 

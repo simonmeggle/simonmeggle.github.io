@@ -23,14 +23,14 @@ Dans un premier temps, nous allons voir comment installer *Jekyll* sur votre mac
 
 ### Installation de *Jekyll* 
 
-**Sur *Linux***, installez directement la dernière version stable de [*Ruby*](https://packages.debian.org/stable/ruby)[[il est également possible d'installer [Ruby version manager](http://rvm.io/)]], accompagné de ses [outils de développement](https://packages.debian.org/stable/ruby-dev) et de [gem](https://packages.debian.org/stable/rubygems). Sous *Debian*, il suffit d'installer les paquets suivants :
+**Sur Linux**, installez directement la dernière version stable de [*Ruby*](https://packages.debian.org/stable/ruby)[[il est également possible d'installer [Ruby version manager](http://rvm.io/)]], accompagné de ses [outils de développement](https://packages.debian.org/stable/ruby-dev) et de [gem](https://packages.debian.org/stable/rubygems). Sous *Debian*, il suffit d'installer les paquets suivants :
 
 ```sh
 sudo apt-get install ruby ruby-dev libgsl-ruby rubygems
 sudo gem install jekyll
 ```
 
-**Sur *Mac OS X***, commencez par installer [*Homebrew*](http://brew.sh/)[[si vous ne les avez pas déjà, une fenêtre vous proposera d'installer les "outils en ligne de commande Xcode", ce qu'il faut accepter pour continuer]] puis [*Ruby version manager*](http://rvm.io/) avec la dernière version stable de *Ruby*, pour pouvoir ensuite installer *Jekyll* :
+**Sur Mac OS X**, commencez par installer [*Homebrew*](http://brew.sh/)[[si vous ne les avez pas déjà, une fenêtre vous proposera d'installer les "outils en ligne de commande Xcode", ce qu'il faut accepter pour continuer]] puis [*Ruby version manager*](http://rvm.io/) avec la dernière version stable de *Ruby*, pour pouvoir ensuite installer *Jekyll* :
 
 ```sh
 ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
@@ -39,7 +39,7 @@ source ~/.rvm/scripts/rvm
 gem install jekyll
 ```
 
-**Sur *Windows*** enfin, l'installation est moins aisée. Cependant, [Julian Thilo](http://jekyll-windows.juthilo.com/) a écrit un [guide très détaillé](http://jekyll-windows.juthilo.com/) sur les façons d'y installer *Jekyll*.
+**Sur Windows** enfin, l'installation est moins aisée. Cependant, [Julian Thilo](http://jekyll-windows.juthilo.com/) a écrit un [guide très détaillé](http://jekyll-windows.juthilo.com/) sur les façons d'y installer *Jekyll*.
 
 ### Création d'un nouveau site
 
