@@ -22,7 +22,7 @@ Each page header is illustrated with a part from the ["Turgot" map of Paris](htt
 The [source code](https://github.com/sylvaindurand/sylvaindurand.github.io) is freely available on [GitHub](https://github.com/sylvaindurand/sylvaindurand.github.io).
 
 # License
-Content, design and codes presented on this website are published under the [Creative Commons Attribution](http://creativecommons.org/licenses/by/4.0/) license. This means you can freely reuse them as long as the source is indicated.
+Unless stated otherwise, content, design and codes presented on this website are published under the [MIT license](http://opensource.org/licenses/MIT) and © 2014 Sylvain Durand.
 
 #Question? Comment?
 Please feel free to open an issue or to push a commit.
