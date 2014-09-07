@@ -1,11 +1,9 @@
+markdown: redcarpet
+redcarpet:
+  extensions: ['smart']
+
 permalink: /:title/
 url: 'http://sylvain.durand.tf'
-kramdown:
-  auto_ids: false
-
-prose:
-  siteurl: 'http://sylvain.durand.tf'
-  media: "medias"
 
 defaults:
   -

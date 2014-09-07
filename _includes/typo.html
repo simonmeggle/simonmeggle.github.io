@@ -8,13 +8,15 @@
 {% capture typo %}{{ typo | replace: '<h2>' , '<h2><span>'   }} {% endcapture %}
 {% capture typo %}{{ typo | replace: '</h2>', '</span></h2>' }} {% endcapture %}
 {% capture typo %}{{ typo | replace: '~'    , '&nbsp;'       }} {% endcapture %}
+{% capture typo %}{{ typo | replace: '[[' , '<span class="asterisk"></span><span class="bracket"> (</span><span class="marginalia">' }} {% endcapture %}
+{% capture typo %}{{ typo | replace: ']]' , '</span><span class="bracket">)</span>'   }} {% endcapture %}
 
 {% if page.lang == 'fr' %}
 
-  {% capture typo %}{{ typo | replace: '“' , '«&#160;' }} {% endcapture %}
-  {% capture typo %}{{ typo | replace: '”' , '&#160;»' }} {% endcapture %}
-  {% capture typo %}{{ typo | replace: ' :', '&#160;:' }} {% endcapture %}
-  {% capture typo %}{{ typo | replace: ' %', '&#160;%' }} {% endcapture %}
+  {% capture typo %}{{ typo | replace: '&ldquo;' , '«&#160;' }} {% endcapture %}
+  {% capture typo %}{{ typo | replace: '&rdquo;' , '&#160;»' }} {% endcapture %}
+  {% capture typo %}{{ typo | replace: ' :',       '&#160;:' }} {% endcapture %}
+  {% capture typo %}{{ typo | replace: ' %',       '&#160;%' }} {% endcapture %}
   {% capture typo %}{{ typo | replace: ' ;', '<span style="white-space:nowrap">&thinsp;</span>;' }} {% endcapture %}
   {% capture typo %}{{ typo | replace: ' !', '<span style="white-space:nowrap">&thinsp;</span>!' }} {% endcapture %}
   {% capture typo %}{{ typo | replace: ' ?', '<span style="white-space:nowrap">&thinsp;</span>?' }} {% endcapture %}
