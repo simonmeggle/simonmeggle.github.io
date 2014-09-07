@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/sylvaindurand/sylvaindurand.github.io.svg?branch=master)](https://travis-ci.org/sylvaindurand/sylvaindurand.github.io)
-[![Dependency Status](https://gemnasium.com/sylvaindurand/sylvaindurand.github.io.svg)](https://gemnasium.com/sylvaindurand/sylvaindurand.github.io)
+[![Build Status](http://img.shields.io/travis/sylvaindurand/sylvaindurand.github.io.svg?style=flat)](https://travis-ci.org/sylvaindurand/sylvaindurand.github.io)
+[![Dependency Status](http://img.shields.io/gemnasium/sylvaindurand/sylvaindurand.github.io.svg?style=flat)](https://gemnasium.com/sylvaindurand/sylvaindurand.github.io)
 
 This repository is the source code of the personnal website [sylvain.durand.tf](http://sylvain.durand.tf), built with *Jekyll*.
 
