@@ -1,4 +1,4 @@
-
+[![Build Status](https://travis-ci.org/sylvaindurand/sylvaindurand.github.io.svg?branch=master)](https://travis-ci.org/sylvaindurand/sylvaindurand.github.io)
 
 This repository is the source code of the personnal website [sylvain.durand.tf](http://sylvain.durand.tf), built with *Jekyll*.
 
