@@ -4,12 +4,12 @@ title: Rendre <em>Jekyll</em> <br/> multilingue
 
 J<em>ekyll</em> laisse une grande liberté de choix en permettant de mettre simplement en place des fonctionnalités qui ne sont pas prévues par son moteur. C'est notamment le cas lorsque l'on souhaite proposer son site en plusieurs langues : alors que la plupart des CMS sont très rigides ou nécessitent des plugins, quelques filtres suffisent ici pour obtenir le résultat désiré. 
 
-Cet article a pour objectif de présenter une façon de créer un site multilingue avec *Jekyll*. Il suppose que celui-ci est bien installé[^installation] et que vous savez l'utiliser pour générer un site simple.
+Cet article a pour objectif de présenter une façon de créer un site multilingue avec *Jekyll*. Il suppose que celui-ci est bien installé[[l'article [Site statique avec *Jekyll*](/site-statique-avec-Jekyll) décrit comment installer et utiliser *Jekyll* pour obtenir un site simple]] et que vous savez l'utiliser pour générer un site simple.
 
 ### Objectifs
-Notre site pourra être traduit en autant de langues que souhaité ; dans les exemples qui suivront, il comptera trois langues : anglais, français et chinois. Chaque page pourra elle-même être traduite ou non dans ces différentes langues[^traductions]. Quelle que soit la page affichée, l'intégralité du contenu --- article, date, menus, URL --- doit être dans la même langue.
+Notre site pourra être traduit en autant de langues que souhaité ; dans les exemples qui suivront, il comptera trois langues : anglais, français et chinois. Chaque page pourra elle-même être traduite ou non dans ces différentes langues[[quelle que soit la langue, il peut exister des pages qui ne sont pas forcément traduites dans toutes les autres]]. Quelle que soit la page affichée, l'intégralité du contenu --- article, date, menus, URL --- doit être dans la même langue.
 
-Un sélecteur de langue tel que celui présent en haut à droite de ce site permettra pour chaque page d'indiquer la langue en cours et ses traductions disponibles [^selecteur].
+Un sélecteur de langue tel que celui présent en haut à droite de ce site permettra pour chaque page d'indiquer la langue en cours et ses traductions disponibles[[les différents liens de ce sélecteur doivent renvoyer vers la traduction de la page en cours, et non vers la page d'accueil traduite]].
 
 Tout cela fonctionnera sans plugin, afin d'assurer une meilleure compatibilité avec les futures versions de *Jekyll* et de pouvoir générer le site en mode `safe` et donc l'héberger sur [GitHub Pages](https://pages.github.com/).
 
@@ -17,7 +17,7 @@ Tout cela fonctionnera sans plugin, afin d'assurer une meilleure compatibilité 
 
 ### Organisation des fichiers 
 
-L'intégralité des pages vont être rangées dans le dossier `_posts` à la racine de notre site. En son sein, créer un dossier par langue permet de rester organisé tout en définissant globalement la langue des articles[^rangement] :
+L'intégralité des pages vont être rangées dans le dossier `_posts` à la racine de notre site. En son sein, créer un dossier par langue permet de rester organisé tout en définissant globalement la langue des articles[[il est tout à fait possible de ranger différemment les articles, mais il sera alors nécessaire de spécifier manuellement la langue de chaque article par la suite dans chaque entête]] :
 
 ```r
 _config.yml
@@ -38,7 +38,7 @@ _posts
 
 Au sein de ceux-ci, l'organisation des fichiers en sous-dossiers est entièrement libre. La seule contrainte est que tous les fichiers doivent avoir un nom de fichier indiquant la date, suivi de l'identifiant qui apparaîtra dans l'URL.
 
-Affectons alors une variable `lang` à chacun de ces dossiers[^lang], ce qui nous permettra par la suite à détecter la langue et les traductions. Pour cela, nous indiquons dans `_config.yml` :
+Affectons alors une variable `lang` à chacun de ces dossiers[[il est également possible d'indiquer la langue dans les entêtes de chaque fichier]], ce qui nous permettra par la suite à détecter la langue et les traductions. Pour cela, nous indiquons dans `_config.yml` :
 
 ```ruby
 defaults:
@@ -64,13 +64,13 @@ defaults:
 
 ### Choix des URL
 
-Par défaut, *Jekyll* génère les URL à partir du nom des fichiers, de la forme `/2014/09/01/bonjour-monde.html`. Comme sur ce site, il est possible[^permalinks] de n'afficher que `/bonjour-monde/` en ajoutant dans `_config.yml` :
+Par défaut, *Jekyll* génère les URL à partir du nom des fichiers, de la forme `/2014/09/01/bonjour-monde.html`. Comme sur ce site, il est possible[[les possibilités offertes sont présentées dans la [documentation](http://jekyllrb.com/docs/permalinks/) de *Jekyll*]] de n'afficher que `/bonjour-monde/` en ajoutant dans `_config.yml` :
 
 ```ruby
 permalink: /:title/
 ```
 
-Nous pouvons également spécifier individuellement une adresse pour chaque fichier en indiquant la variable `permalink` dans son entête[^index].
+Nous pouvons également spécifier individuellement une adresse pour chaque fichier en indiquant la variable `permalink` dans son entête[[c'est par exemple le cas pour la page d'accueil, que l'on place à la racine en indiquant `permalink: /` dans l'entête]].
 
 
 
@@ -132,7 +132,7 @@ Pour créer un sélecteur de langue, comme celui présent en haut à droite de c
 {% endraw %}
 ```
 
-Pour emphaser la langue de la version affichée, il suffit d'utiliser CSS[^css]. Par exemple, pour la mettre en gras :
+Pour emphaser la langue de la version affichée, il suffit d'utiliser CSS[[pour cela, il faut bien déclarer l'attribut `lang` de la balise `html` en indiquant `<html lang="{{ page.lang }}">` dans le *layout*]]. Par exemple, pour la mettre en gras :
 
 ```css
 .en:lang(en), .fr:lang(fr), .zh:lang(zh){
@@ -145,7 +145,7 @@ Pour emphaser la langue de la version affichée, il suffit d'utiliser CSS[^css].
 ### Traduction des éléments du site
 En dehors du contenu des articles, il est également nécessaire de traduire les différents éléments qui composent le site : textes des menus, du haut et de bas de page, certains titres... 
 
-Pour cela, on peut indiquer des traductions dans `_config.yml`[^data]. Ainsi, dans l'exemple suivant, `{% raw %}{{site.t[page.lang].home}}{% endraw %}` génèrera `Home`, `Accueil` ou `首页` selon la langue de la page :
+Pour cela, on peut indiquer des traductions dans `_config.yml`[[depuis la deuxième version de *Jekyll*, il est également possible de placer ces informations dans le dossier [_data](http://jekyllrb.com/docs/datafiles/)]]. Ainsi, dans l'exemple suivant, `{% raw %}{{site.t[page.lang].home}}{% endraw %}` génèrera `Home`, `Accueil` ou `首页` selon la langue de la page :
 
 ```python
 t:
@@ -270,13 +270,13 @@ Il est à nouveau possible de placer ce code dans un fichier `date.html` placé 
 
 ## Accès au site et référencement
 
-Les pages étant entièrement statiques, il est difficile de deviner la langue de nos visiteurs pour envoyer la bonne version, que ce soit en détectant les entêtes envoyées par le navigateur ou en se basant sur sa localisation géographique. Néanmoins, il est possible d'améliorer le référencement en indiquant aux moteurs de recherche les pages qui constituent les traductions d'un seul et même contenu[^referencement]. 
+Les pages étant entièrement statiques, il est difficile de deviner la langue de nos visiteurs pour envoyer la bonne version, que ce soit en détectant les entêtes envoyées par le navigateur ou en se basant sur sa localisation géographique. Néanmoins, il est possible d'améliorer le référencement en indiquant aux moteurs de recherche les pages qui constituent les traductions d'un seul et même contenu[[ainsi, les utilisateurs trouvant notre contenu par un moteur de recherche devraient se voir proposer automatiquement la bonne traduction]]. 
 
 Pour ce faire, deux solutions sont possibles : [intégrer une balise `<link>`](https://support.google.com/webmasters/answer/189077?hl=fr) dans notre page, ou [l'indiquer dans un fichier `sitemaps.xml`](https://support.google.com/webmasters/answer/2620865?hl=fr).
 
 ### Avec la balise *link*
 
-Il suffit d'indiquer dans la partie `<head>` chaque page, l'ensemble des traductions de la page en cours[^link]. Nous pouvons pour cela d'utiliser le code suivant, semblable à ceux présentés précédemment :
+Il suffit d'indiquer dans la partie `<head>` chaque page, l'ensemble des traductions de la page en cours[[il convient cependant de faire attention d'utiliser les bons [identifiants de langue](https://support.google.com/webmasters/answer/189077?hl=fr) pour qu'ils soient reconnus]]. Nous pouvons pour cela d'utiliser le code suivant, semblable à ceux présentés précédemment :
 
 ```html
 {% raw %}
@@ -319,32 +319,4 @@ permalink: /sitemaps.xml
 </urlset>
 {% endraw %}
 ```
-
-
-[^installation]: L'article [Site statique avec *Jekyll*](/site-statique-avec-Jekyll) décrit comment installer et utiliser *Jekyll* pour obtenir un site simple.
-
-[^rangement]: Il est tout à fait possible de ranger différemment les articles, mais il sera alors nécessaire de spécifier manuellement la langue de chaque article par la suite dans chaque entête.
-
-[^traductions]: Quelle que soit la langue, il peut exister des pages qui ne sont pas forcément traduites dans toutes les autres.
-
-[^lang]: Il est également possible d'indiquer la langue dans les entêtes de chaque fichier.
-
-[^permalinks]: Les possibilités offertes sont présentées dans la [documentation](http://jekyllrb.com/docs/permalinks/) de *Jekyll*. 
-
-[^index]: C'est par exemple le cas pour la page d'accueil, que l'on place à la racine en indiquant `permalink: /` dans l'entête.
-
-[^selecteur]: Les différents liens de ce sélecteur doivent renvoyer vers la traduction de la page en cours, et non vers la page d'accueil traduite.
-
-[^css]: Pour cela, il faut bien déclarer l'attribut `lang` de la balise `html` en indiquant `<html lang="{{ page.lang }}">` dans le *layout*.
-
-[^data]: Depuis la deuxième version de *Jekyll*, il est également possible de placer ces informations dans le dossier [_data](http://jekyllrb.com/docs/datafiles/).
-
-[^referencement]: Ainsi, les utilisateurs trouvant notre contenu par un moteur de recherche devraient se voir proposer automatiquement la bonne traduction. 
-
-[^link]: Il convient cependant de faire attention d'utiliser les bons [ identifiants de langue](https://support.google.com/webmasters/answer/189077?hl=fr) pour qu'ils soient reconnus.
-
-*[CMS]: Content Management System
-*[CSS]: Cascading Style Sheets
-*[URL]: Uniform Resource Locator
-
 

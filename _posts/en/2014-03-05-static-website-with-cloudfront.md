@@ -294,15 +294,3 @@ To generate statistics of every six hours for example:
 ```r
 0 */6 * * * ~/awstats/stats.sh
 ```
-
-
-
-
-
-
-
-
-
-*[CDN]: Content Delivery Network
-*[CMS]: Content Management System
-*[AWS]: Amazon Web Services

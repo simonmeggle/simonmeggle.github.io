@@ -359,10 +359,3 @@ dev.off()
 ```
 
 [![Carte du monde projetée en Winkel Tripel](/medias/carto/urbain.jpg)](/medias/carto/urbain.pdf)
-
-*[IGN]:   Institut géographique national
-*[INSEE]: Institut national de la statistique et des études économiques
-*[IDH]:   Indice de développement humain
-*[PNUD]:  Programme des Nations Unies pour le développement
-
-

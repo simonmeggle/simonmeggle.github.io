@@ -275,4 +275,3 @@ Dans _Administration_, décochez les autorisations de partage qui ne sont pas ut
 
 ## C'est prêt !
 Vous pouvez commencer à créer des carnets d'adresse et des calendriers depuis l'interface web. Celle-ci fournit des liens `cardDav` et `calDav` qui peuvent ensuite être renseignés, accompagnés de votre nom d'utilisateur et de votre mot de passe OwnCloud, sur vos différents ordinateurs et périphériques.
-

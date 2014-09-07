@@ -4,12 +4,12 @@ title: Making <em>Jekyll</em> <br/> multilingual
 
 J<em>ekyll</em> has a very flexible design that allows a great freedom of choice, allowing the user to simply introduce features that are not integrated into its engine. This is particularly the case when one wants to create a multilingual website: while CMS remain very rigid and often require plugins, few filters are sufficient to achieve it with _Jekyll_.
 
-This article aims to present a way to create a multilingual site with _Jekyll_. _Jekyll_ have to be installed[^install] on your computer and you should be able to know how to generate a simple website.
+This article aims to present a way to create a multilingual site with _Jekyll_. _Jekyll_ have to be installed[[the article [Static website with *Jekyll*](/static-website-with-Jekyll) explains how to install and use *Jekyll* in order to get a simple website]] on your computer and you should be able to know how to generate a simple website.
 
 ### Goals
-Our website can be translated in as many languages as wanted. In the following examples, it will have three languages: English, French, and Chinese. Each page may be translated or not in the various languages[^translations]. On each page, the entire contents --- article, date, menus, URL --- must be in the same language.
+Our website can be translated in as many languages as wanted. In the following examples, it will have three languages: English, French, and Chinese. Each page may be translated or not in the various languages[[regardless of the version, they may be pages which are not translated in each language]]. On each page, the entire contents --- article, date, menus, URL --- must be in the same language.
 
-A language selector, as the one on the top right of this website, will show the actual language and the different translations available[^selector].
+A language selector, as the one on the top right of this website, will show the actual language and the different translations available[[the selector musn't lead to the translated homepage, but to the translation of the current page]].
 
 Everything will work without any plugin, in order to get a good compatibility with the future versions of *Jekyll* and to be able to generate the site in `safe` mode and thus to be able to host it on [GitHub Pages](https://pages.github.com/).
 
@@ -18,7 +18,7 @@ Everything will work without any plugin, in order to get a good compatibility wi
 
 ### File tree 
 
-Every article will be put in the `_posts` folder on the root of the website. In this folder, we will create one folder for each language, in order to stay organized and to declare the language of the articles[^tree]:
+Every article will be put in the `_posts` folder on the root of the website. In this folder, we will create one folder for each language, in order to stay organized and to declare the language of the articles[[it is quite possible to organized differently the articles, but you may have to provide manually the language in each frontmatter]]:
 
 ```
 _config.yml
@@ -39,7 +39,7 @@ _posts
 
 In this folder, you can freely organise your files. The only rule is to name each post with the publication date, followed by its identifier. 
 
-We will then declare the `lang` variable for each folder[^lang], in order to be able later to detect the lang and the translations. To do so, we write the following statement in `_config.yml`:
+We will then declare the `lang` variable for each folder[[it is also possible to provide manually the lang in the frontmatters]], in order to be able later to detect the lang and the translations. To do so, we write the following statement in `_config.yml`:
 
 ```ruby
 defaults:
@@ -65,13 +65,13 @@ defaults:
 
 ### URL format
 
-By default, *Jekyll* generates URL from the filenames, with the following format: `/2014/09/01/hello-world.html`. As it is done on this website, it is possible[^permalinks] to show only `/hello-world/` by writing in `_config.yml`:
+By default, *Jekyll* generates URL from the filenames, with the following format: `/2014/09/01/hello-world.html`. As it is done on this website, it is possible[[*Jekyll* [documentation](http://jekyllrb.com/docs/permalinks/) explains the various possibilities]] to show only `/hello-world/` by writing in `_config.yml`:
 
 ```ruby
 permalink: /:title/
 ```
 
-It is also possible to specify an URL for each file, by using the `permalink` variable in the frontmatter[^index].
+It is also possible to specify an URL for each file, by using the `permalink` variable in the frontmatter[[for instance, you need to provide `permalink: /` on the homepage]].
 
 ### Giving an identifier to each article
 
@@ -128,7 +128,7 @@ To create a language selector, like the one at the top right of this page, the p
 {% endraw %}
 ```
 
-Then, in order to emphase the actual version, just use CSS[^css]. For instance, if you want to bold it:
+Then, in order to emphase the actual version, just use CSS[[you need to declare the `lang` attribute on the `html`, with `<html lang="{{ page.lang }}">` in the *layout*]]. For instance, if you want to bold it:
 
 ```css
 .en:lang(en), .fr:lang(fr), .zh:lang(zh){
@@ -141,7 +141,7 @@ Then, in order to emphase the actual version, just use CSS[^css]. For instance, 
 ### Translation of website elements 
 Around the articles, it is also necessary to translate the various elements like menus, header, footer, some titles... 
 
-To do so, we can provide translations into `_config.yml`[^data]. Then, in the following example, `{% raw %}{{site.t[page.lang].home}}{% endraw %}` will generate `Home`, `Accueil` or `首页` depending of the page language:
+To do so, we can provide translations into `_config.yml`[[since *Jekyll* 2.0, it is also possible to put the translations in the [_data](http://jekyllrb.com/docs/datafiles/) folder]]. Then, in the following example, `{% raw %}{{site.t[page.lang].home}}{% endraw %}` will generate `Home`, `Accueil` or `首页` depending of the page language:
 
 ```python
 t:
@@ -264,13 +264,13 @@ Again, it is possible to put this code in a file named `date.html` stored in the
 
 ## Website access and search engine
 
-The website is completely static, so it is difficult to know the language of our visitors, either by detecting the headers sent by the browser or on the basis of their geographical location. Nevertheless, it is possible to indicating the search engines which pages are translations of the same content[^search]. 
+The website is completely static, so it is difficult to know the language of our visitors, either by detecting the headers sent by the browser or on the basis of their geographical location. Nevertheless, it is possible to indicating the search engines which pages are translations of the same content[[thus, users finding our website through a search engine should be offered the good translation]]. 
 
 To do so, two ways are possible: [use `<link>`](https://support.google.com/webmasters/answer/189077?hl=en) or [create a `sitemaps.xml` file](https://support.google.com/webmasters/answer/2620865?hl=en).
 
 ### With a *link* tag
 
-You only have to provide in the `<head>` part of the page, every translation available of the actual version[^link]. To do so, we can use the following code, similar to those used previously:
+You only have to provide in the `<head>` part of the page, every translation available of the actual version[[you need to be careful to use the good [country codes](https://support.google.com/webmasters/answer/189077?hl=en)]]. To do so, we can use the following code, similar to those used previously:
 
 ```html
 {% raw %}
@@ -313,31 +313,3 @@ permalink: /sitemaps.xml
 </urlset>
 {% endraw %}
 ```
-
-
-[^install]: The article [Static website with *Jekyll*](/static-website-with-Jekyll) explains how to install and use *Jekyll* in order to get a simple website.
-
-[^tree]: It is quite possible to organized differently the articles, but you may have to provide manually the language in each frontmatter.
-
-[^translations]: Regardless of the version, they may be pages which are not translated in each language.
-
-[^lang]: It is also possible to provide manually the lang in the frontmatters.
-
-[^permalinks]: *Jekyll* [documentation](http://jekyllrb.com/docs/permalinks/) explains the various possibilities . 
-
-[^index]: For instance, you need to provide `permalink: /` on the homepage.
-
-[^selector]: The selector musn’t lead to the translated homepage, but to the translation of the current page. 
-
-[^css]: You need to declare the `lang` attribute on the `html`, with `<html lang="{{ page.lang }}">` in the *layout*.
-
-[^data]: Since *Jekyll* 2.0, it is also possible to put the translations in the [_data](http://jekyllrb.com/docs/datafiles/) folder.
-
-[^search]: Thus, users finding our website through a search engine should be offered the good translation. 
-
-[^link]: You need to be careful to use the good [country codes](https://support.google.com/webmasters/answer/189077?hl=fr).
-
-*[CMS]: Content Management System
-*[CSS]: Cascading Style Sheets
-*[URL]: Uniform Resource Locator
-

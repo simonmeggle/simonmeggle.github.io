@@ -360,12 +360,3 @@ dev.off()
 ```
 
 [![World map (Winkel Tripel projection)](/medias/carto/urbain.jpg)](/medias/carto/urbain.pdf)
-
-
-*[IGN]:   National Geographic Institute
-*[communes]: The smallest administrative level in France.
-*[commune]: The smallest administrative level in France.
-*[INSEE]: National Institute for Statistics and Economic Studies
-
-*[HDI]:   Human Development Index
-*[UNDP]:  United Nations Development Programme
