@@ -6,6 +6,10 @@ rvm:
 script:
 - bundle exec jekyll build && bundle exec htmlproof ./_site
 
+branches:
+  only:
+  - master
+
 env:
   global:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
