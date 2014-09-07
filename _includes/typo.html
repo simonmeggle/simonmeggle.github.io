@@ -11,10 +11,10 @@
 
 {% if page.lang == 'fr' %}
 
-  {% capture typo %}{{ typo | replace: '“' , '«&#160;' }} {% endcapture %}
-  {% capture typo %}{{ typo | replace: '”' , '&#160;»' }} {% endcapture %}
-  {% capture typo %}{{ typo | replace: ' :', '&#160;:' }} {% endcapture %}
-  {% capture typo %}{{ typo | replace: ' %', '&#160;%' }} {% endcapture %}
+  {% capture typo %}{{ typo | replace: '&ldquo;' , '«&#160;' }} {% endcapture %}
+  {% capture typo %}{{ typo | replace: '&rdquo;' , '&#160;»' }} {% endcapture %}
+  {% capture typo %}{{ typo | replace: ' :',       '&#160;:' }} {% endcapture %}
+  {% capture typo %}{{ typo | replace: ' %',       '&#160;%' }} {% endcapture %}
   {% capture typo %}{{ typo | replace: ' ;', '<span style="white-space:nowrap">&thinsp;</span>;' }} {% endcapture %}
   {% capture typo %}{{ typo | replace: ' !', '<span style="white-space:nowrap">&thinsp;</span>!' }} {% endcapture %}
   {% capture typo %}{{ typo | replace: ' ?', '<span style="white-space:nowrap">&thinsp;</span>?' }} {% endcapture %}
