@@ -7,6 +7,7 @@
 
 {% capture typo %}{{ typo | replace: '<h2>' , '<h2><span>'   }} {% endcapture %}
 {% capture typo %}{{ typo | replace: '</h2>', '</span></h2>' }} {% endcapture %}
+{% capture typo %}{{ typo | replace: '&#39;', '’'       }} {% endcapture %}
 {% capture typo %}{{ typo | replace: '~'    , '&nbsp;'       }} {% endcapture %}
 {% capture typo %}{{ typo | replace: '[[' , '<span class="asterisk"></span><span class="bracket"> (</span><span class="marginalia">' }} {% endcapture %}
 {% capture typo %}{{ typo | replace: ']]' , '</span><span class="bracket">)</span>'   }} {% endcapture %}
