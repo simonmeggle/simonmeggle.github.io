@@ -1,4 +1,5 @@
 [![Build Status](http://img.shields.io/travis/sylvaindurand/sylvaindurand.github.io.svg?style=flat)](https://travis-ci.org/sylvaindurand/sylvaindurand.github.io)
+[![W3C Status](http://img.shields.io/badge/w3c-valid-brightgreen.svg?style=flat)](http://validator.w3.org/check?uri=sylvain.durand.tf)
 [![Dependency Status](http://img.shields.io/gemnasium/sylvaindurand/sylvaindurand.github.io.svg?style=flat)](https://gemnasium.com/sylvaindurand/sylvaindurand.github.io)
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat)](/LICENSE)
 
