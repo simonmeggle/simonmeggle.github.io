@@ -11,9 +11,9 @@ This repository is the source code of the personnal website [sylvain.durand.tf](
 5. Look at [localhost:4000](http://localhost:4000): surprise!
 
 # Colophon
-This website is entirely [static](https://en.wikipedia.org/wiki/Static_web_page): it does not require any dynamic language or javascript library. The pages are designed to have a minimal weight. Particular attention is paid to [typography](http://webtypography.net/) and to [vertical motion](http://webtypography.net/2.2.2).
+This website is entirely [static](https://en.wikipedia.org/wiki/Static_web_page): it does not require any dynamic language or any javascript code, but only HTML and CSS. It respects web standards: it even works on Internet Explorer 5.5! Particular attention is paid to [typography](http://webtypography.net/) and to [vertical motion](http://webtypography.net/2.2.2).
 
-To this end, the articles are written with [Kramdown](http://kramdown.gettalong.org/) and the pages are produced with the static website generator [Jekyll](http://jekyllrb.com/). The website is then hosted and served thanks to [GitHub Pages](https://pages.github.com/). 
+The pages are produced with the static website generator [Jekyll](http://jekyllrb.com/). The website is then hosted and served thanks to [GitHub Pages](https://pages.github.com/). 
 
 Each page header is illustrated with a part from the ["Turgot" map of Paris](https://en.wikipedia.org/wiki/Turgot_map_of_Paris), created in the 18<sup>th</sup> century by Louis Bretez.
 
