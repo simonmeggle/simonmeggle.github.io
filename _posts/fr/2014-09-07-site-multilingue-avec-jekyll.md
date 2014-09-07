@@ -19,7 +19,7 @@ Tout cela fonctionnera sans plugin, afin d'assurer une meilleure compatibilité 
 
 L'intégralité des pages vont être rangées dans le dossier `_posts` à la racine de notre site. En son sein, créer un dossier par langue permet de rester organisé tout en définissant globalement la langue des articles[^rangement] :
 
-{% highlight r %}
+```r
 _config.yml
 _layouts
 _posts
@@ -34,13 +34,13 @@ _posts
        └── zh
                    ├── 2014-09-01-你好世界.md
                    └── 0000-01-01-首页.md
-{% endhighlight %}
+```
 
 Au sein de ceux-ci, l'organisation des fichiers en sous-dossiers est entièrement libre. La seule contrainte est que tous les fichiers doivent avoir un nom de fichier indiquant la date, suivi de l'identifiant qui apparaîtra dans l'URL.
 
 Affectons alors une variable `lang` à chacun de ces dossiers[^lang], ce qui nous permettra par la suite à détecter la langue et les traductions. Pour cela, nous indiquons dans `_config.yml` :
 
-{% highlight ruby %}
+```ruby
 defaults:
   -
     scope:
@@ -60,15 +60,15 @@ defaults:
     values:
       layout: default
       lang: zh
-{% endhighlight %}
+```
 
 ### Choix des URL
 
 Par défaut, *Jekyll* génère les URL à partir du nom des fichiers, de la forme `/2014/09/01/bonjour-monde.html`. Comme sur ce site, il est possible[^permalinks] de n'afficher que `/bonjour-monde/` en ajoutant dans `_config.yml` :
 
-{% highlight ruby %}
+```ruby
 permalink: /:title/
-{% endhighlight %}
+```
 
 Nous pouvons également spécifier individuellement une adresse pour chaque fichier en indiquant la variable `permalink` dans son entête[^index].
 
@@ -84,12 +84,12 @@ Jusqu'ici, rien ne relie les différentes versions d'une même page. Pour ce fai
 
 C'est pourquoi le plus simple est d'attribuer à chaque article un **identifiant** dont la valeur sera identique pour chaque version :
 
-{% highlight python %}
+```python
 ---
 title: Bonjour monde !
 name: hello
 ---
-{% endhighlight %}
+```
 
 
 
@@ -99,7 +99,7 @@ name: hello
 
 Les pages affichant la liste des articles ne doivent afficher que ceux qui sont dans la bonne langue, ce qui peut être atteint facilement grâce à la métadonnée `lang`. Le code suivant permet d'afficher l'ensemble des articles de la bonne langue :
 
-{% highlight html %}
+```html
 {% raw %}
 {% assign posts=site.posts | where:"lang", page.lang %}
 <ul>
@@ -110,7 +110,7 @@ Les pages affichant la liste des articles ne doivent afficher que ceux qui sont 
 {% endfor %}
 </ul>
 {% endraw %}
-{% endhighlight %}
+```
 
 Pour ne pas afficher certaines pages, comme par exemple celles qui listent les articles, il suffit d'indiquer "`type: pages`" dans leurs métadonnées et de rajouter dans `assign` la condition "`| where:"type", "posts"`".
 
@@ -119,7 +119,7 @@ Pour ne pas afficher certaines pages, comme par exemple celles qui listent les a
 
 Pour créer un sélecteur de langue, comme celui présent en haut à droite de cette page, la démarche est très similaire à celle présentée au paragraphe précédent. On affiche la langue de toutes les versions existantes, y compris l'article en cours, en triant par dossier pour toujours avoir le même ordre :
 
-{% highlight html %}
+```html
 {% raw %}
 {% assign posts=site.posts | where:"name", page.name | sort: 'path' %}
 <ul>
@@ -130,15 +130,15 @@ Pour créer un sélecteur de langue, comme celui présent en haut à droite de c
 {% endfor %}
 </ul>
 {% endraw %}
-{% endhighlight %}
+```
 
 Pour emphaser la langue de la version affichée, il suffit d'utiliser CSS[^css]. Par exemple, pour la mettre en gras :
 
-{% highlight css %}
+```css
 .en:lang(en), .fr:lang(fr), .zh:lang(zh){
     font-weight: bold;
 }
-{% endhighlight %}
+```
 
 ## Peaufinage
 
@@ -147,7 +147,7 @@ En dehors du contenu des articles, il est également nécessaire de traduire les
 
 Pour cela, on peut indiquer des traductions dans `_config.yml`[^data]. Ainsi, dans l'exemple suivant, `{% raw %}{{site.t[page.lang].home}}{% endraw %}` génèrera `Home`, `Accueil` ou `首页` selon la langue de la page :
 
-{% highlight python %}
+```python
 t:
   en:
     home:  "Home"
@@ -155,11 +155,11 @@ t:
     home:  "Accueil"
   zh:
     home:  "首页"
-{% endhighlight %}
+```
 
 Il est possible d'utiliser cette technique pour générer les menus des différentes versions du site. Ainsi, dans le cas d'un menu à deux éléments comme sur ce site, on indique dans `_config.yml` :
 
-{% highlight python %}
+```python
 t:
   en:
     home:
@@ -182,11 +182,11 @@ t:
     about:
       name: "关于"
       url: "/关于/"
-{% endhighlight %}
+```
 
 Le menu peut alors être généré à l'aide d'une boucle :
 
-{% highlight html %}
+```html
 {% raw %}
 <ul>
   {% for menu in site.t[page.lang] %}
@@ -194,7 +194,7 @@ Le menu peut alors être généré à l'aide d'une boucle :
   {% endfor %}
 </ul>
 {% endraw %}
-{% endhighlight %}
+```
 
 
 ### Traduction des dates
@@ -205,7 +205,8 @@ Le menu peut alors être généré à l'aide d'une boucle :
 - en chinois : "2014年9月1号".
 
 Pour cela, il suffit d'utiliser le code suivant, qu'il est possible ensuite de placer dans le dossier `_includes` afin de l'utiliser à plusieurs reprises :
-{% highlight python %}
+
+```python
 {% raw %}
 {% if page.lang == 'en' %}
     {{ page.date | date: "%d/%m/%Y" }}
@@ -219,7 +220,7 @@ Pour cela, il suffit d'utiliser le code suivant, qu'il est possible ensuite de p
     {{ page.date | date: "%Y年%-m月%-d号" }}
 {% endif %}
 {% endraw %}
-{% endhighlight %}
+```
 
 
 Pour les dates longues, il est possible d'utiliser astucieusement les filtres de date et les remplacements pour obtenir n'importe quel format. Par exemple, si nous cherchons à obtenir :
@@ -229,7 +230,7 @@ Pour les dates longues, il est possible d'utiliser astucieusement les filtres de
 
 Nous utilisons alors le code suivant :
 
-{% highlight python %}
+```python
 {% raw %}
 {% assign d = page.date | date: "%-d" %}
 {% assign m = page.date | date: "%-m" %}
@@ -263,7 +264,7 @@ of {{ page.date | date: "%B %Y"}}
 {{ page.date | date: "%Y"}}
 {% endif %}
 {% endraw %}
-{% endhighlight %}
+```
 
 Il est à nouveau possible de placer ce code dans un fichier `date.html` placé dans le dossier `_includes` pour pouvoir l'appeler simplement.
 
@@ -277,7 +278,7 @@ Pour ce faire, deux solutions sont possibles : [intégrer une balise `<link>`](h
 
 Il suffit d'indiquer dans la partie `<head>` chaque page, l'ensemble des traductions de la page en cours[^link]. Nous pouvons pour cela d'utiliser le code suivant, semblable à ceux présentés précédemment :
 
-{% highlight html %}
+```html
 {% raw %}
 {% assign posts=site.posts | where:"name", page.name %}
 {% for post in posts %}
@@ -286,7 +287,7 @@ Il suffit d'indiquer dans la partie `<head>` chaque page, l'ensemble des traduct
   {% endif %}
 {% endfor %}
 {% endraw %}
-{% endhighlight %}
+```
 
 ### Avec un fichier *sitemaps*
 
@@ -296,7 +297,7 @@ Pour cela, il suffit d'indiquer l'intégralité des pages du site (quelle que so
 
 Ce fichier peut être généré automatiquement par *Jekyll* en créant un fichier `sitemaps.xml` à la racine du site contenant :
 
-{% highlight xml %}
+```xml
 {% raw %}
 ---
 layout:
@@ -317,7 +318,7 @@ permalink: /sitemaps.xml
   {% endfor %}
 </urlset>
 {% endraw %}
-{% endhighlight %}
+```
 
 
 [^installation]: L'article [Site statique avec *Jekyll*](/site-statique-avec-Jekyll) décrit comment installer et utiliser *Jekyll* pour obtenir un site simple.

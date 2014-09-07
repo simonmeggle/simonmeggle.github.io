@@ -24,18 +24,20 @@ As a first step, we will see how to install *Jekyll* on your computer, in order 
 ### Installation of *Jekyll* 
 
 **On *Linux***, directly install the last stable version of [*Ruby*](https://packages.debian.org/stable/ruby)[^rvm], with its [developpement tools](https://packages.debian.org/stable/ruby-dev) and [gem](https://packages.debian.org/stable/rubygems). On *Debian*, you just have to install the following packages:
-{% highlight sh %}
+
+```bash
 sudo apt-get install ruby ruby-dev libgsl-ruby rubygems
 sudo gem install jekyll
-{% endhighlight %}
+```
 
 **On *Mac OS X***, first install [*Homebrew*](http://brew.sh/)[^xcode] and [*Ruby version manager*](http://rvm.io/) with the last stable version of *Ruby*, then install *Jekyll*:
-{% highlight sh %}
+
+```bash
 ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 \curl -L https://get.rvm.io | bash -s stable --ruby
 source ~/.rvm/scripts/rvm
 gem install jekyll
-{% endhighlight %}
+```
 
 **On *Windows***, it is less easy to install *Jekyll*. However, [Julian Thilo](http://jekyll-windows.juthilo.com/) wrote a [very detailed guide](http://jekyll-windows.juthilo.com/) about how to do it.
 
@@ -56,7 +58,7 @@ With a single command, it is possible to generate the website and create a local
 
 The tree structure may then looks like:
 
-{% highlight r %}
+```r
 mysite/
        ├──  _includes/
        ├──  _layouts/
@@ -72,7 +74,7 @@ mysite/
        ├──  index.html
        ├──  rss.xml
        └──  _config.yml
-{% endhighlight %} 
+```
 
 You can add any folder or file in your website folder. If they don't start with an underscore, *Jekyll* will generate them on the same location. 
 
@@ -86,25 +88,25 @@ In order to create an article, juste create in `_posts` folder a file with a nam
 
 The frontmatter allows us to declare metadata, which will be called or tested in the website[^meta]. It is set into the top of the file, under the following format:
 
-{% highlight r %}
+```r
 ---
 layout: default
 title: My title
 ---
-{% endhighlight %} 
+```
 
 Only the `layout` variable is required: it defines which file in `_layouts/` *Jekyll* should use to build the page. It is also usual to define a `title` variable in order to provide a title to our article[^variable].
 
 It is also possible to define default variables, declared once for all or parts of the articles. For instance, instead of declare `layout: default` in each article stored in `_posts/`, you may declare it once in `_config.yml`:
 
-{% highlight ruby %}
+```ruby
 defaults:
   -
     scope:
       path: "_posts"
     values:
       layout: "default"
-{% endhighlight %} 
+```
 
 ### Writing articles with *Markdown*
 
@@ -118,24 +120,25 @@ From its second version, *Jekyll* uses [*Kramdown*](http://kramdown.gettalong.or
 Any metadata "`variable`", declared in the frontmatter or as a default, can be called anywhere in the website, with the tag `{%raw%}{{page.variable}}{%endraw%}`, which returns its value. 
 
 It is also possible to do some tests: 
-{% highlight r %}{% raw %}
+
+```r{% raw %}
 {% if page.variable == 'value' %}
     banana
 {% else %}
     coconut
 {% endif %}
 {%endraw%}
-{% endhighlight %} 
+```
 
 We can also, for example, make loops on each article satisfying some conditions:
 
-{% highlight r %}{% raw %}
+```r{% raw %}
 {% assign posts=site.posts | where: "variable", "value" %}
 {% for post in posts %}
     {{ post.lang }}
 {% endfor %} 
 {% endraw %}
-{% endhighlight %} 
+```
 
 Although the [syntax](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers) may not be very elegant to use, the large number of [available variables](http://jekyllrb.com/docs/variables/), plus the custom metadata, combined with the [filters et commands](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers), may become highly effective.
 

@@ -24,18 +24,20 @@ Dans un premier temps, nous allons voir comment installer *Jekyll* sur votre mac
 ### Installation de *Jekyll* 
 
 **Sur *Linux***, installez directement la dernière version stable de [*Ruby*](https://packages.debian.org/stable/ruby)[^rvm], accompagné de ses [outils de développement](https://packages.debian.org/stable/ruby-dev) et de [gem](https://packages.debian.org/stable/rubygems). Sous *Debian*, il suffit d'installer les paquets suivants :
-{% highlight sh %}
+
+```sh
 sudo apt-get install ruby ruby-dev libgsl-ruby rubygems
 sudo gem install jekyll
-{% endhighlight %}
+```
 
 **Sur *Mac OS X***, commencez par installer [*Homebrew*](http://brew.sh/)[^xcode] puis [*Ruby version manager*](http://rvm.io/) avec la dernière version stable de *Ruby*, pour pouvoir ensuite installer *Jekyll* :
-{% highlight sh %}
+
+```sh
 ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 \curl -L https://get.rvm.io | bash -s stable --ruby
 source ~/.rvm/scripts/rvm
 gem install jekyll
-{% endhighlight %}
+```
 
 **Sur *Windows*** enfin, l'installation est moins aisée. Cependant, [Julian Thilo](http://jekyll-windows.juthilo.com/) a écrit un [guide très détaillé](http://jekyll-windows.juthilo.com/) sur les façons d'y installer *Jekyll*.
 
@@ -56,7 +58,7 @@ Le code source d'un site *Jekyll* s'organise selon plusieurs dossiers :
 
 Le répertoire de votre site pourra alors ressembler à :
 
-{% highlight r %}
+```r
 monsite/
        ├──  _includes/
        ├──  _layouts/
@@ -72,7 +74,7 @@ monsite/
        ├──  index.html
        ├──  rss.xml
        └──  _config.yml
-{% endhighlight %} 
+```
 
 Vous pouvez ajouter n'importe quel autre dossier, ou fichier, dans le répertoire de votre site. Tant qu'ils ne commencent pas par un tiret bas, ceux-ci seront directement générés au même emplacement par *Jekyll*. 
 
@@ -86,25 +88,25 @@ Pour créer un article, il suffit de créer dans le dossier `_posts` un fichier 
 
 L'en-tête permet de déclarer les métadonnées de l'article ; celles-ci pourront par la suite être appelées ou testées dans le reste du site[^meta]. Elle est présente en début de fichier, sous la forme suivante :
 
-{% highlight r %}
+```r
 ---
 layout: default
 title: Mon titre
 ---
-{% endhighlight %} 
+```
 
 Seule la variable `layout` est obligatoire : elle définit le fichier que *Jekyll* doit utiliser dans le dossier `_layouts/` pour construire la page autour de l'article. Il est également usuel de définir `title` qui permet de définir le titre de l'article[^variable].
 
 Il est également possible de définir des variables "par défaut" qui concerneront tous les articles d'un dossier. Par exemple, pour ne pas avoir à indiquer `layout: default` au sein de tous les articles placés dans `_posts/`, il est possible de la définir par défaut dans `_config.yml` :
 
-{% highlight ruby %}
+```ruby
 defaults:
   -
     scope:
       path: "_posts"
     values:
       layout: "default"
-{% endhighlight %} 
+```
 
 ### Écriture des articles avec *Markdown*
 
@@ -118,24 +120,25 @@ Depuis sa deuxième version, *Jekyll* utilise [*Kramdown*](http://kramdown.getta
 Toute métadonnée "`variable`" déclarée dans l'entête peut être appelée, dans n'importe quel fichier, à l'aide d'une balise `{%raw%}{{page.variable}}{%endraw%}` qui retournera alors sa valeur. 
 
 Il est également possible d'effectuer des tests :
-{% highlight r %}{% raw %}
+
+```r{% raw %}
 {% if page.variable == 'value' %}
     banane
 {% else %}
     noix de coco
 {% endif %}
 {%endraw%}
-{% endhighlight %} 
+```
 
 Nous pouvons aussi, par exemple, effectuer des boucles sur l'ensemble des articles répondant à certaines conditions :
 
-{% highlight r %}{% raw %}
+```r{% raw %}
 {% assign posts=site.posts | where: "variable", "value" %}
 {% for post in posts %}
     {{ post.lang }}
 {% endfor %} 
 {% endraw %}
-{% endhighlight %} 
+```
 
 Bien que la [syntaxe](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers) ne soit pas toujours très élégante à utiliser, le grande nombre de [variables disponibles](http://jekyllrb.com/docs/variables/), auxquelles s'ajoutent les métadonnées personnalisées que vous créerez ainsi que les nombreux [filtres et commandes](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers), peuvent être extrêmement efficaces.
 

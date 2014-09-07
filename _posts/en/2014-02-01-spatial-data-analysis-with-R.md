@@ -10,11 +10,11 @@ If _R_ language has already become a reference in statistical analysis and data 
 
 Once _R_ is installed on your computer, few libraries will be used: `rgdal` allows us to import and project shapefiles, `plotrix` creates color scales, and `classInt` assigns colors to map data. Once the libraries installed with `install.packages`, load them at the beginning of the session:
 
-{% highlight r %}
+```r
 library('rgdal')      # Reading and projecting shapefiles
 library('plotrix')    # Creating color scales
 library('classInt')   # Assigning colors to data
-{% endhighlight %}
+```
 
 Graphics will be plot using _R_ base functions. `ggplot2` is an alternative, but it seems less relevant here: longer and less legible code, unability to plot holes inside polygones, `fortify` and ploting can last much longer.
 
@@ -26,22 +26,22 @@ Graphics will be plot using _R_ base functions. `ggplot2` is an alternative, but
 
 The `rgdal` library provides `readOGR()` in order to read shapefiles. `dsn` must contain the path where shapefiles are located, and `layer` the shapefile name, without extension. `readOGR` reads `.shp`, `.shx`, `.dbf` and `.prj` files. Departements of France are given by [Geofla](http://professionnels.ign.fr/geofla):
 
-{% highlight r %}
+```r
 # Reading departements
 departements <- readOGR(dsn="shp/geofla",  layer="DEPARTEMENT")
 
 # Reading departements boundaries in order to plot France boundaries
 bounderies <- readOGR(dsn="shp/geofla",  layer="LIMITE_DEPARTEMENT")
 bounderies <- bounderies[bounderies$NATURE %in% c('Fronti\xe8re internationale','Limite c\xf4ti\xe8re'),]
-{% endhighlight %}
+```
 
 In order to show neighbouring countries, we will use data provided by [Natural Earth](http://www.naturalearthdata.com/downloads/110m-cultural-vectors/110m-admin-0-countries/). We will select Europe countries only:
 
-{% highlight r %}
+```r
 # Reading country and selecting Europe
 europe <- readOGR(dsn="shp/ne/cultural", layer="ne_10m_admin_0_countries") 
  <- europe[europe$REGION_UN=="Europe",]
-{% endhighlight %}
+```
 
 
 ### Projection and plot
@@ -50,7 +50,7 @@ The map will use the [French official projection](http://www.legifrance.gouv.fr/
 
 Then, we will first plot French boundaries, in order to center the map on France. Borders colors are defined in `border`, their tickness in `lwd` and the filling color in `col`. 
 
-{% highlight r %}
+```r
 
 # Projection
 europe <- spTransform(europe, CRS("+init=epsg:2154"))
@@ -67,7 +67,7 @@ plot(departements,col="#FFFFFF", border="#CCCCCC",lwd=.7, add=TRUE)
 plot(bounderies,  col="#666666", lwd=1, add=TRUE)
 
 dev.off() 
-{% endhighlight %}
+```
 
 [![France blank map](/medias/carto/france.jpg)](/medias/carto/france.pdf)
 
@@ -78,13 +78,13 @@ dev.off()
 The very large number of _communes_ (the smallest administrative level in France) gives us excellent spatial data. Geofla provides us their bounderies, population and area. So we will plot population density:
 
 
-{% highlight r %}
+```r
 # Reading shapefile
 communes     <- readOGR(dsn="shp/geofla", layer="COMMUNE")
 
 # Calculate density
 communes$DENSITY <- communes$POPULATION/communes$SUPERFICIE*100000
-{% endhighlight %}
+```
 
 
 ### Color scale 
@@ -92,7 +92,7 @@ In order to create a color scale, we will assign shades of blue to each percenti
 
  
 
-{% highlight r %}
+```r
 # Color scale
 col <- findColours(classIntervals(
             communes$DENSITY, 100, style="quantile"),
@@ -103,12 +103,12 @@ leg <- findColours(classIntervals(
             smoothColors("#0C3269",3,"white"),
             under="less than", over="more than", between="–", 
             cutlabels=FALSE)
-{% endhighlight %}
+```
 
 ### Plot
 We can now plot the map. In order to use an embedded font in the PDF, we will use `cairo_pdf()` instead of `pdf`:
 
-{% highlight r %}
+```r
 # Exporting in PDF
 cairo_pdf('densite.pdf',width=6,height=4.7)
 par(mar=c(0,0,0,0),family="Myriad Pro",ps=8) 
@@ -126,7 +126,7 @@ legend(-10000,6387500,fill=attr(leg, "palette"),
         title = "Density (p/km²):") 
 
 dev.off() 
-{% endhighlight %}
+```
 
 [![Population density in France](/medias/carto/density.jpg)](/medias/carto/density.pdf)
 
@@ -140,7 +140,7 @@ Unfortunately, data is missing for more than 5 000 communes, due to tax secrecy.
 
 
 
-{% highlight r %}
+```r
 # Loading communes data
 incomes <- read.csv('csv/revenus.csv')
 communes <- merge(communes, incomes, by.x="INSEE_COM", by.y="COMMUNE")
@@ -153,12 +153,12 @@ communes <- merge(communes, cantons, by="CANTON", all.x=TRUE)
 
 # Assigning canton median income to communes with missing data
 communes$REVENUS[is.na(communes$REVENUS)] <- communes$REVENUC[is.na(communes$REVENUS)]
-{% endhighlight %}
+```
 
 ### Color scale
 We generate color scale and legend:
 
-{% highlight r %}
+```r
 col <- findColours(classIntervals(
             communes$REVENUS, 100, style="quantile"),
             smoothColors("#FFFFD7",98,"#F3674C"))
@@ -168,12 +168,12 @@ leg <- findColours(classIntervals(
             smoothColors("#FFFFD7",2,"#F3674C"),
             under="moins de", over="plus de", between="–", 
             cutlabels=FALSE)
-{% endhighlight %}
+```
 
 ### Plot
 And we plot:
 
-{% highlight r %}
+```r
 cairo_pdf('incomes.pdf',width=6,height=4.7)
 par(mar=c(0,0,0,0),family="Myriad Pro",ps=8) 
 
@@ -188,7 +188,7 @@ legend(-10000,6337500,fill=attr(leg, "palette"),
     title = "Median income:")
 
 dev.off() 
-{% endhighlight %}
+```
 
 [![Median taxable income per consumption unit in France in 2010](/medias/carto/incomes.jpg)](/medias/carto/incomes.pdf)
 
@@ -197,7 +197,7 @@ dev.off()
 
 We can also add map data: cities, urban areas, rivers, forests... We will here plot the French road network, thanks to [Route 500](http://professionnels.ign.fr/route500):
 
-{% highlight r %}
+```r
 roads <- readOGR(dsn="shp/geofla",  layer="TRONCON_ROUTE")
 local     <- roads[roads$VOCATION=="Liaison locale",] 
 principal <- roads[roads$VOCATION=="Liaison principale",] 
@@ -218,7 +218,7 @@ plot(highway,     col="#AAAAAA", lwd=.7, add=TRUE)
 plot(boundaries,  col="#666666", lwd=1, add=TRUE)
 
 dev.off() 
-{% endhighlight %}
+```
 
 [![French roads network](/medias/carto/routes.jpg)](/medias/carto/routes.pdf)
 
@@ -230,18 +230,18 @@ dev.off()
 
 We will load the following [Natural Earth](http://www.naturalearthdata.com/downloads) shapefiles: 
 
-{% highlight r %}
+```r
 # Loading Shapefiles
 countries   <- readOGR(dsn="shp/ne/cultural",layer="ne_110m_admin_0_countries")
 graticules  <- readOGR(dsn="shp/ne/physical",layer="ne_110m_graticules_10") 
 bbox        <- readOGR(dsn="shp/ne/physical",layer="ne_110m_wgs84_bounding_box")
-{% endhighlight %}
+```
 
 ### Projection and plot
 
 We will use the _[Winkel Tripel](http://fr.wikipedia.org/wiki/Projection_de_Winkel-Tripel)_ projection:
 
-{% highlight r %}
+```r
 # Winkel Tripel projection
 countries   <- spTransform(countries,CRS("+proj=wintri"))
 bbox        <- spTransform(bbox,  CRS("+proj=wintri"))
@@ -256,7 +256,7 @@ plot(countries, col="#E6E6E6", border="#AAAAAA",lwd=1, add=TRUE)
 plot(graticules, col="#CCCCCC33", lwd=1, add=TRUE)
 
 dev.off()                          # Saving file
-{% endhighlight %}
+```
 
 [![Carte du monde projetée en Winkel Tripel](/medias/carto/monde.jpg)](/medias/carto/monde.pdf)
 
@@ -266,7 +266,7 @@ dev.off()                          # Saving file
 
 Most frequent usage consists of visualizing data with a color scale. Let's plot the HDI, provided by the [UNDP](https://data.undp.org/dataset/Human-Development-Index-HDI-value/8ruz-shxu) in a [CSV file](/medias/carto/hdi.csv). The procedure is as described above:
 
-{% highlight r %}
+```r
 # Loading data and merging dataframes
 hdi  <- read.csv('csv/hdi.csv')
 countries <- merge(countries, hdi, by.x="iso_a3", by.y="Abbreviation")
@@ -297,7 +297,7 @@ legend(-15000000,-3000000,fill=attr(leg, "palette"),
     legend= names(attr(leg,"table")),
     title = "HDI in 2012 :")
 dev.off() 
-{% endhighlight %}
+```
 
 [![Human Development Index (HDI) in 2012](/medias/carto/hdi.jpg)](/medias/carto/hdi.pdf)
 
@@ -307,27 +307,27 @@ dev.off()
 An other kind of visualization is given by circles. Population of most populated cities is provided by [Natural Earth](http://www.naturalearthdata.com/downloads/110m-cultural-vectors/110m-populated-places/):
 
 
-{% highlight r %}
+```r
 # Loading shapefile
 cities <- readOGR(dsn="shp/ne/cultural",layer="ne_110m_populated_places") 
 cities <- spTransform(cities,  CRS("+proj=wintri")) 
-{% endhighlight %}
+```
 
 ### Circle size
    
 The data shall be proportionate to the circles areas, not the radius; so the radius is the square root of the population:
 
-{% highlight r %}
+```r
 # Calculating circles radius
 cities$radius <- sqrt(cities$POP2015)
 cities$radius <- cities$radius/max(cities$radius)*3
-{% endhighlight %}
+```
 
 ### Plot
 
 We plot the map:
 
-{% highlight r %}
+```r
 pdf('cities.pdf',width=10,height=6)
 par(mar=c(0,0,0,0))
 
@@ -337,7 +337,7 @@ points(cities,col="#8D111766",bg="#8D111766",lwd=1, pch=21,cex=cities$radius)
 plot(graticules,col="#CCCCCC33",lwd=1, add=TRUE)
 
 dev.off() 
-{% endhighlight %}
+```
 
 [![Most populated cities in the world](/medias/carto/villes.jpg)](/medias/carto/villes.pdf)
 
@@ -346,7 +346,7 @@ dev.off()
 
 [Natural Earth](http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-urban-area/) provides urban areas shapefiles, derived from satellite data. Let'us map them with night lights colors[^urban]:
 
-{% highlight r %}
+```r
 areas  <- readOGR(dsn="shp/ne/cultural",layer="ne_10m_urban_areas")
 areas <- spTransform(areas, CRS("+proj=wintri"))
 
@@ -357,7 +357,7 @@ plot(countries,  col="#000000",  border="#000000",lwd=1, add=TRUE)
 plot(areas,  col="#FFFFFF",  border="#FFFFFF66",lwd=1.5, add=TRUE)
 
 dev.off() 
-{% endhighlight %}
+```
 
 [![World map (Winkel Tripel projection)](/medias/carto/urbain.jpg)](/medias/carto/urbain.pdf)
 

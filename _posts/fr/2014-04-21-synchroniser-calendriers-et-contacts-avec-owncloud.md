@@ -16,17 +16,17 @@ L'objectif ici n'est pas de concurrencer les très nombreux tutoriels qui aident
 
 Commençons par [récupérer Raspbian](http://www.raspberrypi.org/downloads/), et insérons la carte SD sur votre ordinateur. Sous Mac OS ou Linux, lancez dans le terminal la commande suivante :
 
-{% highlight bash %}
+```bash
 diskutil list
-{% endhighlight %}
+```
 
 Après avoir repéré l'identifiant de votre carte SD (`/dev/disk2` dans l'exemple qui suit), on écrit Raspbian dessus. Attention, l'intégralité de son contenu sera effacé :
 
-{% highlight bash %}
+```bash
 diskutil unmountDisk /dev/disk2
 sudo dd if=raspbian.img of=/dev/disk2 bs=1m
 sudo diskutil eject /dev/rdisk2
-{% endhighlight %}
+```
 
 Vous pouvez éjecter la carte, l'insérer dans votre Raspberry Pi branché sur le réseau, et allumer ce dernier.
 
@@ -39,11 +39,15 @@ Après avoir accepté la mise en garde de sécurité sur le certificat SSH, vous
 
 À la suite de plusieurs partenariats passés par la fondation Raspberry Pi, l'image de Raspbian contient aujourd'hui trois paquets `oracle-java7-jdk`, `wolfram-engine` et `scratch` qui représentent à eux seuls 635 Mo. S'ils ne sont d'aucune utilité, nous pouvons les supprimer :
 
-    sudo apt-get purge wolfram-engine oracle-java7-jdk scratch
+```bash
+sudo apt-get purge wolfram-engine oracle-java7-jdk scratch
+```
 
 Nous mettons ensuite l'intégralité du système à jour :
 
-    sudo apt-get update && sudo apt-get dist-upgrade
+```bash
+sudo apt-get update && sudo apt-get dist-upgrade
+```
 
 Enfin, nous finalisons l'installation à l'aide de l'utilitaire `raspi-config`. Plusieurs options nous intéressent.
 
@@ -64,7 +68,7 @@ Cette partie est inutile si vous utilisez un serveur et que vous y avez déjà i
 
 Commençons par installer les dépendances nécessaires, notamment le serveur léger `nginx` et PHP5 :
 
-{% highlight sh %}
+```sh
 sudo apt-get update && sudo apt-get dist-upgrade
 sudo apt-get install nginx openssl ssl-cert php5-cli \
              php5-sqlite php5-gd php5-curl php5-common \
@@ -72,37 +76,37 @@ sudo apt-get install nginx openssl ssl-cert php5-cli \
              libapr1 libtool curl libcurl4-openssl-dev \
              php-xml-parser php5 php5-dev php5-gd \
              php5-fpm memcached php5-memcache ntp varnish
-{% endhighlight %}
+```
 
 Nous créons ensuite un utilisateur pour le serveur `nginx` :
 
-{% highlight bat %}
+```bat
 sudo groupadd www-data
 sudo usermod -a -G www-data www-data
-{% endhighlight %}
+```
 
 Nous créons également des clefs SSL pour sécuriser les connexions avec nos calendriers et nos carnets d'adresse :
 
-{% highlight bat %}
+```bat
 sudo openssl req $@ -new -x509 -days 365 -nodes -out /etc/nginx/cert.pem -keyout /etc/nginx/cert.key
 sudo chmod 600 /etc/nginx/cert.pem
 sudo chmod 600 /etc/nginx/cert.key
-{% endhighlight %}
+```
 
 
 ## Configuration de `nginx`
 
 Supprimons le fichier de configuration par défaut, et créons-en un nouveau :
 
-{% highlight bat %}
+```bat
 sudo rm /etc/nginx/sites-available/default
 sudo unlink /etc/nginx/sites-enabled/default
 sudo nano /etc/nginx/sites-available/owncloud
-{% endhighlight %}
+```
 
 Nous y installons la configuration suivante, qui permettra de faire fonctionner _OwnCloud_ en optimisant la vitesse d'exécution de PHP (remplacez `votre-ip`) par l'adresse IP _externe_, que vous pouvez connaître à l'aide de `dig +short myip.opendns.com @resolver1.opendns.com`) :
 
-{% highlight nginx %}
+```nginx
 upstream php-handler {
         server 127.0.0.1:9000;
 }
@@ -161,25 +165,25 @@ server {
         access_log off;
     }
 }
-{% endhighlight %}
+```
 
 On active alors cette configuration :
 
-{% highlight bat %}
+```bat
 cd /etc/nginx/sites-enabled
 sudo ln -s ../sites-available/owncloud
-{% endhighlight %}
+```
 
 ### Configuration de PHP
 Pour optimiser OwnCloud, nous modifions la configuration de PHP :
 
-{% highlight bat %}
+```bat
 sudo nano /etc/php5/fpm/php.ini
-{% endhighlight %}
+```
 
 Dans ce fichier, modifiez ou ajouter les paramètres suivants :
 
-{% highlight apache %}
+```apache
 upload_max_filesize = 1000M
 post_max_size = 1000M
 upload_tmp_dir = /srv/http/owncloud/data
@@ -187,36 +191,36 @@ extension = apc.so
 apc.enabled = 1
 apc.include_once_override = 0
 apc.shm_size = 256
-{% endhighlight %}
+```
 
 Nous modifions également le paramètre d'écoute et créons le dossier avec les droits :
 
-{% highlight bat %}
+```bat
 sudo sed /etc/php5/fpm/pool.d/www.conf -i -e "s|listen = /var/run/php5-fpm.sock|listen = 127.0.0.1:9000|g"
 sudo mkdir -p /srv/http/owncloud/data
 sudo chown www-data:www-data /srv/http/owncloud/data
-{% endhighlight %}
+```
 
 Nous modifions enfin `100` en `512` dans le fichier suivant :
 
-{% highlight bat %}
+```bat
 sudo nano /etc/dphys-swapfile
-{% endhighlight %}
+```
 
 Nous validons la modification :
 
-{% highlight bat %}
+```bat
 sudo dphys-swapfile setup
 sudo dphys-swapfile swapon
-{% endhighlight %}
+```
  
 
 On redémarre alors le serveur web et PHP :
 
-{% highlight bat %}
+```bat
 sudo /etc/init.d/php5-fpm restart
 sudo /etc/init.d/nginx restart
-{% endhighlight %}
+```
 
 
 ### Routage des ports
@@ -237,26 +241,26 @@ Enfin, dans `/etc/nginx/sites-available/owncloud`, remplacez les deux paramètre
 
 Il ne nous reste qu'à installer OwnCloud :
 
-{% highlight bat %}
+```bat
 sudo mkdir -p /var/www/owncloud
 sudo wget http://download.owncloud.org/community/owncloud-6.0.2.tar.bz2
 sudo tar xvf owncloud-6.0.2.tar.bz2
 sudo mv owncloud/ /var/www/
 sudo chown -R www-data:www-data /var/www
 sudo rm -rf owncloud owncloud-6.0.2.tar.bz2
-{% endhighlight %}
+```
 
 Nous ajoutons ensuite une tâche `cron` qui va automatiser la mise à jour en exécutant :
 
-{% highlight bat %}
+```bat
 sudo crontab -e
-{% endhighlight %}
+```
 
 Dans le fichier ouvert, entrez :
 
-{% highlight r %}
+```r
 */15  *  *  *  * php -f /var/www/owncloud/cron.php
-{% endhighlight %}
+```
 
 
 ### Configuration

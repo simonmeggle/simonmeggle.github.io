@@ -94,20 +94,20 @@ Nous allons utiliser `s3cmd` pour mettre à jour notre site directement sur S3. 
 
 Sous Mac OS, avec Homebrew, on installe `s3cmd` avec l'option `devel`, ainsi que `gnupg` pour des transferts sécurisés :
 
-{% highlight bat %}
+```bat
 brew install --devel s3cmd
 brew install gpg
-{% endhighlight %}
+```
 
 Nous devons maintenant donner l'autorisation à `s3cmd` d'intéragir avec notre compte. Depuis la rubrique [Security Credentials](https://console.aws.amazon.com/iam/home?#security_credential) de la console, allez dans `Access Key` et générez une clef d'accès et une clef secrète. Conservez-les précieusement. On lance alors l'assistant de configuration avec `s3cmd --configure`.
 
 
 Par ailleurs, afin d'optimiser les images, nous allons installer `jpegoptim` et `optipng` :
 
-{% highlight bat %}
+```bat
 brew install jpegoptim
 brew install optipng
-{% endhighlight %}
+```
 
 
 ### Déploiement du site
@@ -116,23 +116,23 @@ brew install optipng
 
 On commence par générer jekyll dans le dossier `_site` :
 
-{% highlight bat %}
+```bat
 jekyll build
-{% endhighlight %}
+```
 
 L'utilisation du plugin `jekyll-press` permet d'optimiser les fichiers HTML, JS et CSS. Si `jpegoptim` et `optipng` sont installés sur le système, nous pouvons optimiser les pages et les images :
 
-{% highlight bat %}
+```bat
 find _site -name '*.jpg' -exec jpegoptim --strip-all -m80 {} \;
 find _site -name '*.png' -exec optipng -o5 {} \;
-{% endhighlight %}
+```
 
 Afin d'accélérer encore un peu plus le chargement du site, nous compressons l'ensemble des fichiers HTML, CSS et JS, c'est-à-dire les fichiers qui sont hors de `static/` :
 
-{% highlight bat %}
+```bat
 find _site -path _site/static -prune -o -type f \
 -exec gzip -n "{}" \; -exec mv "{}.gz" "{}" \;
-{% endhighlight %}
+```
 
 ### Déploiement des fichiers vers Amazon S3
 
@@ -146,36 +146,36 @@ Nous pouvons alors utiliser `s3cmd` pour déployer notre site en ligne. Seuls le
 
 Nous commençons ainsi par envoyer tous les fichiers multimédias stockés dans `static/`, en leur affectant une durée de cache de dix semaines :
 
-{% highlight bat %}
+```bat
 s3cmd --acl-public --cf-invalidate -M \
       --add-header="Cache-Control: max-age=6048000" \
       --cf-invalidate \
       sync _site/static s3://www.domain.tld/ 
-{% endhighlight %}
+```
 
 Nous envoyons tous les autres fichiers (HTML, CSS, JS), auxquels nous affectons une durée de cache de 48 heures, et nous indiquons que le contenu est compressé :
 
-{% highlight bat %}
+```bat
 s3cmd --acl-public --cf-invalidate -M \
       --add-header 'Content-Encoding:gzip' \
       --add-header="Cache-Control: max-age=604800" \
       --cf-invalidate \
       --exclude="/static/*" \
       sync _site/ s3://www.domain.tld/ 
-{% endhighlight %}
+```
 
 Enfin, nous faisons le ménage en supprimant en ligne tout ce qui n'existe plus dans notre dossier local, et on actualise la page d'accueil `index.html` sur Cloudfront (ce que ne fait pas `cf-invalidate`) : 
 
-{% highlight bat %}
+```bat
 s3cmd --delete-removed --cf-invalidate-default-index \
       sync _site/ s3://www.domain.tld/ 
-{% endhighlight %}
+```
 
 ### En une seule commande
 
 Stockons l'intégralité des opérations précédentes en un seul fichier `_deploy.sh`, que nous plaçons à la racine de _Jekyll_ :
 
-{% highlight sh %}
+```sh
 #!/bin/sh
 # Compilation de Jekyll
 jekyll build
@@ -203,7 +203,7 @@ s3cmd --acl-public --cf-invalidate -M \
 # Suppression des fichiers retirés en local
 s3cmd --delete-removed --cf-invalidate-default-index \
       sync _site/ s3://www.domain.tld/ 
-{% endhighlight %}{:.wide}
+```
 
 Il suffit alors d'exécuter la commande `sh _deploy.sh` pour mettre à jour notre site en une seule commande. Quelques minutes peuvent s'écouler avant que la mise à jour ne soit effective sur _Cloudfront_.
 
@@ -218,27 +218,27 @@ Commençons par activer la création de logs par notre distribution Cloudfront. 
 
 Nous créons en local un dossier qui va récupérer ces logs, puis nous pouvons alors récupérer les logs puis les supprimer du _bucket_ à l'aide de `s3cmd` :
 
-{% highlight bat %}
+```bat
 mkdir ~/awstats
 mkdir ~/awstats/logs
 s3cmd get --recursive s3://statistiques/ ~/awstats/logs/
 s3cmd del --recursive --force s3://statistiques/ 
-{% endhighlight %}
+```
 
 ### Installation et configuration d'Awstats
 
 Commençons par installer et copier Awstats (où `www.domain.tld` est votre nom de domaine) :
 
-{% highlight bat %}
+```bat
 sudo apt-get install awstats
 sudo cp /etc/awstats/awstats.conf \
         /etc/awstats/awstats.www.domain.tld.conf
 sudo nano /etc/awstats/awstats.www.domain.tld.conf
-{% endhighlight %}
+```
 
 Dans ce fichier de configuration, modifiez les paramètres suivants pour indiquer à Awstats comment traiter les logs de Cloudfront (où `user` est votre nom d'utilisateur) :
 
-{% highlight r %}
+```r
 # Traitement des multiples fichiers logs au format gzip
 LogFile="/usr/share/awstats/tools/logresolvemerge.pl /home/user/awstats/logs/* |"
 # Format des logs générés par CloudFront
@@ -247,22 +247,22 @@ LogSeparator="\t"
 # Nom de domaine de notre site et serveurs Cloudfront
 SiteDomain="www.domain.tld"
 HostAliases="REGEX[.cloudfront\.net]"
-{% endhighlight %}
+```
 
 Enfin, nous copions les images qui seront affichées dans les rapports :
 
-{% highlight bat %}
+```bat
 sudo cp -r /usr/share/awstats/icon/ ~/awstats/awstats-icon/
-{% endhighlight %}
+```
 
 ### Génération des statistiques
 
 Une fois cette configuration faite, il est possible de générer les statistiques sous forme d'un fichier HTML statique l'aide de : 
 
-{% highlight bat %}
+```bat
 /usr/share/awstats/tools/awstats_buildstaticpages.pl \
     -dir=~/awstats/ -update -config=www.domain.tld \
-{% endhighlight %}
+```
 
 Les statistiques sont désormais lisibles depuis le fichier `awstats.www.domain.tld.html`. Il est ensuite possible de le publier, de l'envoyer sur un serveur ou par mail par exemple.
 
@@ -271,7 +271,7 @@ Les statistiques sont désormais lisibles depuis le fichier `awstats.www.domain.
 
 Pour automatiser la génération de statistiques à intervalles réguliers, créons un fichier `stats.sh` avec `nano ~/awstats/stats.sh` qui récupère les logs et génère les statistiques :
 
-{% highlight sh %}
+```sh
 #!/bin/sh
 # Récupération des logs
 s3cmd get --recursive s3://statistiques/ ~/awstats/logs/
@@ -279,21 +279,21 @@ s3cmd del --recursive --force s3://statistiques/
 # Génération des logs
 /usr/share/awstats/tools/awstats_buildstaticpages.pl \
     -dir=~/awstats/ -update -config=www.domain.tld \
-{% endhighlight %}{:.wide}
+```
 
 Nous donnons à ce fichier les droits pour qu'il puisse être exécuté, puis créons une tâche `cron` :
 
 
-{% highlight bat  %}
+```bat
 sudo chmod 711 ~/awstats/stats.sh
 sudo crontab -e
-{% endhighlight %}
+```
 
 Pour générer des statistiques toutes les six heures par exemple, on y ajoute la ligne :
 
-{% highlight r %}
+```r
 0 */6 * * * ~/awstats/stats.sh
-{% endhighlight %}
+```
 
 
 
