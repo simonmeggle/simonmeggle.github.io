@@ -1,0 +1,16 @@
+---
+layout: compress
+permalink: /sitemaps.img.xml
+---
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  {% for img in site.static_files %}
+    {% if img.extname == ".jpg" or img.extname == ".png" or img.extname == ".ico" or img.extname == ".pdf"  %}
+    <url>
+      <loc>{{ site.url }}</loc>
+      <image:image>
+        <image:loc>{{ site.url }}{{ img.path }}</image:loc>
+      </image:image>
+   </url> 
+    {% endif %}
+  {% endfor %}
+</urlset>
