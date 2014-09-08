@@ -22,13 +22,11 @@ permalink: /sitemaps.xml
       <changefreq>weekly</changefreq>
     </url>
   {% endfor %}
-  {% for pdf in site.static_files %}
-    {% if pdf.path contains ".pdf" %}
-    <url>
-      <loc>{{ site.url }}{{ pdf.path }}</loc>
-      <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
-      <changefreq>weekly</changefreq>
-    </url>
-    {% endif %}
+  {% for media in site.static_files %}
+  <url>
+    <loc>{{ site.url }}{{ media.path }}</loc>
+    <lastmod>{{ media.modified_time | date_to_xmlschema }}</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
   {% endfor %}
 </urlset>
