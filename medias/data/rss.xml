@@ -6,6 +6,7 @@ permalink: /rss.xml
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Sylvain Durand</title>
+    <description>{{ site.t[page.lang].description }}</description>
     <link>{{ site.url }}</link>
     <atom:link href="{{ site.url }}/rss.xml" rel="self" type="application/rss+xml" />
     {% assign posts=site.posts | where:"lang", "en" | where:"type", posts %}
