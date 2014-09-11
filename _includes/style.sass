@@ -130,10 +130,11 @@ hr
 {% if page.title == "Articles" %}
 
 .list
+  $size: 18 !global
+  +font
+  +padding(1,0)
   &>li
-    $size: 18 !global
-    +font
-    +padding(0,.5,.5)
+    +padding(0,.5)
     text-align: center
     color: #ccc
     border-top: 1px solid #f5f5f5
