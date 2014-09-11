@@ -6,7 +6,7 @@ layout: compress
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=450, maximum-scale=1.0, user-scalable=no">
-  <meta name="description" content="{% if page.title == 'Articles' %}{{ site.t[page.lang].description }}{% else %}{{ page.excerpt | strip_html }}{% endif %}">
+  <meta name="description" content="{% if page.type == 'pages' %}{{ site.t[page.lang].description }}{% else %}{{ page.excerpt | strip_html }}{% endif %}">
   <title>{{page.title | strip_html}} – Sylvain Durand</title>
   <link rel="icon" href="/medias/design/favicon.ico" />
   {% assign posts=site.posts | where:"date", page.date %}
@@ -36,6 +36,12 @@ layout: compress
 </div>
 
 <h1>{{ page.title }}</h1>
+
+<div class="date">
+  {% if page.type != 'pages' %}
+    {% include date.html date=page.date %}
+  {% endif %}
+</div>
 
 <div class="content">
   {% include typo.html %}
