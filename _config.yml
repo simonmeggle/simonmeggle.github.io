@@ -1,6 +1,6 @@
 markdown: redcarpet
 redcarpet:
-  extensions: ['smart']
+  extensions: ['smart', 'superscript']
 
 permalink: /:title/
 url: 'http://sylvain.durand.tf'
