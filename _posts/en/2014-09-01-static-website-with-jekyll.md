@@ -151,7 +151,7 @@ This article doesn't claim to be more than a very short introduction to *Jekyll*
 
 You may also read three other articles written on this website about *Jekyll*:
 
-- [create a multilingual website]({{ site.url }}/make-jekyll-multilingual/) as it has been done here;
+- [create a multilingual website]({{ site.url }}/making-jekyll-multilingual/) as it has been done here;
 - **host _Jekyll_ on GitHub** (article coming soon) in order to edit your website online and generate it on the fly.
 
 Lastly, browsing [website using *Jekyll* source codes](https://github.com/jekyll/jekyll/wiki/Sites)[[feel free to browse the [source code of this website](https://github.com/sylvaindurand/sylvaindurand.github.io) to find out how it works]], in order to find inspiration, can only be a good idea. 
