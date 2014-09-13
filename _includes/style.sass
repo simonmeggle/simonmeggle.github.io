@@ -31,6 +31,19 @@ body
   font: #{$main/16}em / $line "PT Serif", Georgia, serif
   margin: 0
   text-align: center // IE 5.5
+
+@font-face
+  font-family: 'PT Serif'
+  font-style: normal
+  font-weight: 400
+  src: local('PT Serif'), local('PTSerif-Regular'), url(/medias/fonts/ptserif.woff) format('woff')
+
+@font-face
+  font-family: 'PT Serif'
+  font-style: italic
+  font-weight: 400
+  src: local('PT Serif Italic'), local('PTSerif-Italic'), url(/medias/fonts/ptserif-it.woff) format('woff')
+
 a
   color: #156f8f
   text-decoration: none
@@ -260,6 +273,12 @@ code
   line-height: 1
   font-family: $sans
 
+@font-face
+  font-family: 'PT Sans'
+  font-style: normal
+  font-weight: 400
+  src: local('PT Sans'), local('PTSans-Regular'), url(/medias/fonts/ptsans.woff) format('woff')
+
 pre
   $size: $main !global
   +font
@@ -345,24 +364,3 @@ pre
         color: #aaa
 
 {% endif %}
-
-
-// Fonts
-
-@font-face
-  font-family: 'PT Serif'
-  font-style: normal
-  font-weight: 400
-  src: local('PT Serif'), local('PTSerif-Regular'), url(/medias/fonts/ptserif.woff) format('woff')
-
-@font-face
-  font-family: 'PT Serif'
-  font-style: italic
-  font-weight: 400
-  src: local('PT Serif Italic'), local('PTSerif-Italic'), url(/medias/fonts/ptserif-it.woff) format('woff')
-
-@font-face
-  font-family: 'PT Sans'
-  font-style: normal
-  font-weight: 400
-  src: local('PT Sans'), local('PTSans-Regular'), url(/medias/fonts/ptsans.woff) format('woff')
