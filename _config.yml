@@ -7,9 +7,6 @@ url: 'http://sylvain.durand.tf'
 gems:
   - jekyll-redirect-from
 
-gems:
-  - jekyll-redirect-from
-
 defaults:
   -
     scope:
