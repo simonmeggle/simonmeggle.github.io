@@ -1,5 +1,6 @@
 ---
 title: Website delivery <br/> with <em>Cloudfront</em>
+redirect_from: /static-website-with-cloudfront/
 ---
 
 Long neglected in favor of dynamic languages​, static websites became popular again in recent years with the advent of generators like [_Jekyll_](http://jekyllrb.com), [_Pelican_](http://docs.getpelican.com/) or [_Hyde_](http://hyde.github.io). As they can be stored in the cloud or on very simple servers, they have multiple benefits in terms of lightness, safety and reliability.
