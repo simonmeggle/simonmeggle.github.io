@@ -11,7 +11,7 @@ It was then that appeared **dynamic sites**: the different programming languages
 - they badly handle significant increases in workload, so they are very sensitive to DDoS attacks or huge influx of visitors[[it is not uncommon that a website become unavailable because of an important event or a link from a news website]];
 - they tend to be a labyrinthine system, largely overkill for their use and needing databases.
 
-For a couple of years, **static websites** has come back into favor with the emergence of the *static website generators*. With simple text files, a program generates a website made entirely from static pages you just have to host. Security problems are thus virtually non-existent, it is possible to host your website on a very modest server or rather the opposite, to get excellent performances and handle huge increases in workload using a [CDN](https://en.wikipedia.org/wiki/Content_delivery_network) like [*Cloudflare*](https://www.cloudflare.com/) or [*Cloudfront*](http://aws.amazon.com/cloudfront/)[[ways to host a static website on [*Amazon S3*](http://aws.amazon.com/s3/) and [*Cloudfront*](http://aws.amazon.com/cloudfront/) are explained in "[Static website with *Cloudfront*]({{ site.url }}/static-website-with-cloudfront/)"]]. 
+For a couple of years, **static websites** has come back into favor with the emergence of the *static website generators*. With simple text files, a program generates a website made entirely from static pages you just have to host. Security problems are thus virtually non-existent, it is possible to host your website on a very modest server or rather the opposite, to get excellent performances and handle huge increases in workload using a [CDN](https://en.wikipedia.org/wiki/Content_delivery_network) like [*Cloudflare*](https://www.cloudflare.com/) or [*Cloudfront*](http://aws.amazon.com/cloudfront/). 
 
 In addition, it is possible to follow the changes and to work collaboratively thanks to `git`, to write the articles online and to generate the website on the fly with services like [*GitHub*](https://pages.github.com/) and [*Prose*](http://prose.io), or to have a commenting system with [*Disqus*](https://disqus.com/). 
 
@@ -152,7 +152,6 @@ This article doesn't claim to be more than a very short introduction to *Jekyll*
 You may also read three other articles written on this website about *Jekyll*:
 
 - [create a multilingual website]({{ site.url }}/multilingual-website-with-jekyll/) as it has been done here;
-- [serve a static website with *CloudFront*]({{ site.url }}/site-statique-avec-cloudfront/) in order to get excellent performances and handle huge increases in workload;
 - **host _Jekyll_ on GitHub** (article coming soon) in order to edit your website online and generate it on the fly.
 
 Lastly, browsing [website using *Jekyll* source codes](https://github.com/jekyll/jekyll/wiki/Sites)[[feel free to browse the [source code of this website](https://github.com/sylvaindurand/sylvaindurand.github.io) to find out how it works]], in order to find inspiration, can only be a good idea. 
