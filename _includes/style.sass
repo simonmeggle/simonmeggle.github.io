@@ -140,7 +140,7 @@ hr
 
 // Articles list
 
-{% if page.title == "Articles" %}
+{% if page.title == "Articles" or page.url contains "404" %}
 
 .list
   $size: 18 !global
