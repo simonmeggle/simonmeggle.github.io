@@ -3,89 +3,89 @@ title: Website delivery <br/> with <em>Cloudfront</em>
 redirect_from: /static-website-with-cloudfront/
 ---
 
-Long neglected in favor of dynamic languages​, static websites became popular again in recent years with the advent of generators like [_Jekyll_](http://jekyllrb.com), [_Pelican_](http://docs.getpelican.com/) or [_Hyde_](http://hyde.github.io). As they can be stored in the cloud or on very simple servers, they have multiple benefits in terms of lightness, safety and reliability.
+Long neglected in favor of dynamic languages​, static websites became popular again in recent years with the advent of generators. As they can be stored in the cloud or on very simple servers, they have multiple benefits in terms of lightness, safety and reliability.
 
-This article sets out to show how to host a _Jekyll_ powered website on [Amazon Web Services](http://aws.amazon.com). The website will be fast from anywhere, reliable, secure, highly scalable and inexpensive. Only one command line will be needed to update it.
+This article sets out to show how to host a static website[[wether built from a generator like [*Jekyll*](http://jekyllrb.com), [*Pelican*](http://docs.getpelican.com/) or [*Hyde*](http://hyde.github.io), or "by hand"]] on [*Amazon Web Services*](http://aws.amazon.com), especially [*Amazon S3*](http://aws.amazon.com/s3/) in order to store the website files, and [*CloudFront*](http://aws.amazon.com/cloudfront/) in order to deliver them. The main purpose is to be able to get a website fast from anywhere, reliable, secure, highly scalable and inexpensive[[with a low traffic, the hosting will cost you about one dollar a month]].
 
-We will use:
+To this purpose, we will use:
 
-* [S3](http://aws.amazon.com/s3/) in order to store the website;
-* [CloudFront](http://aws.amazon.com/cloudfront/) in order to deliver our data;
-* [Route 53](http://aws.amazon.com/route53/) in order to use our domain name.
-* [Awstats](http://awstats.sourceforge.net/) in order to analyse the logs.
+* [*S3*](http://aws.amazon.com/s3/) in order to store the website;
+* [*CloudFront*](http://aws.amazon.com/cloudfront/) in order to deliver our data;
+* [*Route 53*](http://aws.amazon.com/route53/) in order to use our domain name.
+* [*Awstats*](http://awstats.sourceforge.net/) in order to analyse the logs.
 
 
 
-## Hosting on S3
-After having created an [AWS](http://aws.amazon.com/) account, go to the [management console](https://console.aws.amazon.com/), then to [S3](https://console.aws.amazon.com/s3/): this service will store the website files.
+## Hosting on *S3*
+After having created an [*AWS*](http://aws.amazon.com/) account, go to the [management console](https://console.aws.amazon.com/), then to [*S3*](https://console.aws.amazon.com/s3/): this service will store the website files.
 
 ### Creating buckets
-We will take this website as an example: the website will be located on `www.domain.tld`. `domain.tld` will redirect to this location. Create two buckets (with `Create bucket`) named from the expected URL: `domain.tld` and `www.domain.tld`.
+We will take this website as an example: the website will be located on `www.domain.tld`. The domain name root, `domain.tld`, will redirect to this location. Create two buckets (with `Create bucket`) named from the expected URL: `domain.tld` and `www.domain.tld`.
 
 ### Bucket hosting the website
-In `www.domain.tld` properties, activate website hosting (`Static Website Hosting` then `Enable website hosting`): you can choose a home page (`index.html`) or an error page (`error.html`). The website will be available from the  `Endpoint` URL: _keep it_, we will need it in the following section.
+In `www.domain.tld` properties, activate website hosting (`Static Website Hosting` then `Enable website hosting`): you can choose a home page (`index.html`) or an error page (`error.html`). The website will be available from the  `Endpoint` URL: *keep it*, we will need it in the following section.
 
 ### Buckets redirecting
 In `domain.tld` properties, choose `Static Website Hosting` in order to select `Redirect all requests`: we provide `domain.tld`. This bucket will stay empty.
 
-From `Endpoint` location, we can now see the files hosted in `www.domain.tld` bucket. We can upload those files from the AWS console, but we will explain on the last part how to upload it with one bash command line.
+From `Endpoint` location, we can now see the files hosted in `www.domain.tld` bucket. We can upload those files from the *AWS* console, but we will explain on the last part how to upload it with one bash command line.
 
 
 
-## Serving data with Cloudfront
+## Serving data with *Cloudfront*
 
-S3 hosts our data in one unique location. Data stored in Dublin will be provided quite fast to a visitor located in Paris (about 200 ms in order to load the home page of this website) but less in New-York (500 ms) or Shanghai (1,300 ms).
+*S3* hosts our data in one unique location. Data stored in Dublin will be provided quite fast to a visitor located in Paris (about 200 ms in order to load the home page of this website) but less in New-York (500 ms) or Shanghai (1,300 ms).
 
-Amazon CloudFront is a [CDN](http://fr.wikipedia.org/wiki/Content_delivery_network), serving content to end-users with high availability and high performance. The access time falls below 100 ms in Paris, New-York and Shanghai.
+*Amazon CloudFront* is a [CDN](http://fr.wikipedia.org/wiki/Content_delivery_network), serving content to end-users with high availability and high performance. The access time falls below 100 ms in Paris, New-York and Shanghai.
 
-In return, a propagation delay exists between an upload and its update on Cloudfront. We will see in the last part how to notify any modification.
+In return, a propagation delay exists between an upload and its update on *Cloudfront*. We will see in the last part how to notify any modification.
 
 
 
 ### Creating the distribution
 
-In the AWS management console, choose _CloudFront_, `Create Distribution`, then `Web`.
+In the *AWS* management console, choose *CloudFront*, `Create Distribution`, then `Web`.
 
-In `Origin Domain Name`, we provide the address previously copied, similar to `www.domain.tld.s3-website-eu-west-1.amazonaws.com`. The field will automatically propose an other value (like `www.domain.tld.s3.amazonaws.com`); _don't_ click on it: URL ending with `/` wouldn't lead to `/index.html`. Choose an ID in `Origin ID`.
+In `Origin Domain Name`, we provide the address previously copied, similar to `www.domain.tld.s3-website-eu-west-1.amazonaws.com`. The field will automatically propose an other value (like `www.domain.tld.s3.amazonaws.com`); *don't* click on it: URL ending with `/` wouldn't lead to `/index.html`. Choose an ID in `Origin ID`.
 
 Leave the other field as default, except `Alternate Domain Names` where we provide our domain name: `www.domain.tld`. Indicate the homepage in `Default Root Object`: `index.html`.
 
-Our distribution is now created: we can now activate it with `Enable`. `InProgress`  status means Cloudfront is currently propagating our data; when it's over, the status will become `Deployed`. 
+Our distribution is now created: we can now activate it with `Enable`. `InProgress`  status means *Cloudfront* is currently propagating our data; when it's over, the status will become `Deployed`. 
 
 
-## Domain name with Route 53
+## Domain name with *Route 53*
 
 ### Creating zone
-_Route 53_ service will allow us to use our own domain name. In AWS console management, select `Route 53` then `Create Hosted Zone`. In `Domain Name`, put your domain name without any sub-domain: `domain.tld`.
+*Route 53* service will allow us to use our own domain name. In *AWS* console management, select *Route 53* then `Create Hosted Zone`. In `Domain Name`, put your domain name without any sub-domain: `domain.tld`.
 
 ### Redirecting DNS
 Select the newly created zone, then the `NS` type. Its `Value` field gives 4 addresses. Tell your registrar to make the DNS pointing to them.
 
-### Domain with Cloudfront
-Back to `Route 53`, in `domain.tld`, create 3 records set with `Create Record Set`:
+### Domain with *Cloudfront*
+Back to *Route 53*, in `domain.tld`, create 3 records set with `Create Record Set`:
 
-* `domain.tld` (put  `www` in `name`), `A` type: in `Alias`, select our Cloudfront distribution;
+* `domain.tld` (put  `www` in `name`), `A` type: in `Alias`, select our *Cloudfront* distribution;
 * `domain.tld`, `A` type: select the same name bucket.
 
 Of course, it is possible to redirect sub-domains to other services (with NS, A and CNAME records) and to use mails (MX records). 
 
 
-Now, an user going to `domain.tld` or `www.domain.tld` will target the same name buckets (thanks to Route 53) which redirect to `www.domain.tld` (thanks to S3). This address directly leads (thanks to Route 53) to the Cloudfront distribution, which provides our files stored in the  bucket `www.domain.tld`. Now, we just have to send our website to Amazon S3.
+Now, an user going to `domain.tld` or `www.domain.tld` will target the same name buckets (thanks to *Route 53*) which redirect to `www.domain.tld` (thanks to *S3*). This address directly leads (thanks to *Route 53*) to the *Cloudfront* distribution, which provides our files stored in the  bucket `www.domain.tld`. Now, we just have to send our website to *Amazon S3*.
 
 
 
 
 
 
-## Deploying _Jekyll_ to the cloud
+## Deploying *Jekyll* to the cloud
 
 Locally, a simple `jekyll serve -w` build the website, visible from `http://localhost:4000`. 
 
-We will now create a `sh` file which will build the website, compress and send to Amazon S3 files which has been updated since the previous version, and indicate it to Cloudfront.
+We will now create a `sh` file which will build the website, compress and send to *Amazon S3* files which has been updated since the previous version, and indicate it to *Cloudfront*.
 
 ### Prerequisite
 
-We will use `s3cmd` in order to sync our bucket with our local files. Install the last development version (1.5.0) which allows us to invalidate files on Cloudfront.
+We will use `s3cmd` in order to sync our bucket with our local files. Install the last development version (1.5.0) which allows us to invalidate files on *Cloudfront*.
 
 On Mac OS, with Homebrew, install `s3cmd` with `--devel` option, and `gnupg` for secured transfers:
 
@@ -94,7 +94,7 @@ brew install --devel s3cmd
 brew install gpg
 ```
 
-Now we have to gives `s3cmd` the ability to deal with our AWS account. In [Security Credentials](https://console.aws.amazon.com/iam/home?#security_credential), go to `Access Key` and generate one access key and its secret Key. Then configure `s3cmd` with  `s3cmd --configure`.
+Now we have to gives `s3cmd` the ability to deal with our *AWS* account. In [Security Credentials](https://console.aws.amazon.com/iam/home?#security_credential), go to `Access Key` and generate one access key and its secret Key. Then configure `s3cmd` with  `s3cmd --configure`.
 
 In order to optimize images, we will install `jpegoptim` and `optipng`:
 
@@ -110,7 +110,7 @@ sudo brew install optipng
 
 ### Building Jekyll and compressing files
 
-We first build _Jekyll_ into the `_site` folder:
+We first build *Jekyll* into the `_site` folder:
 
 ```bat
 jekyll build
@@ -133,12 +133,12 @@ find _site -path _site/static -prune -o -type f \
 
 
 
-### Uploading files to Amazon S3
+### Uploading files to *Amazon S3*
 
 We use `s3cmd` to upload the website; only the updated files will be sent. We use the following options:
 
 * `acl-public` make our files public;
-* `cf-invalidate` warn Cloudfront files have to be updated; 
+* `cf-invalidate` warn *Cloudfront* files have to be updated; 
 * `add-header` defines headers (compression, cache duration...);
 * `delete-sync` delete files removed locally;
 * `M` defines files MIME type.
@@ -163,7 +163,7 @@ s3cmd --acl-public --cf-invalidate -M \
       sync _site/ s3://www.domain.tld/ 
 ```
 
-Finally we clean the bucket by deleting files which have been deleted in the local folder, and we invalidate the home page on Cloudfront (`cf-invalidate` doesn't do it): 
+Finally we clean the bucket by deleting files which have been deleted in the local folder, and we invalidate the home page on *Cloudfront* (`cf-invalidate` doesn't do it): 
 
 ```bat
 s3cmd --delete-removed --cf-invalidate-default-index \
@@ -175,7 +175,7 @@ s3cmd --delete-removed --cf-invalidate-default-index \
 
 ### Deploy in one single command
 
-We put those command in one single file, named `_deploy.sh`, located in _Jekyll_ folder:
+We put those command in one single file, named `_deploy.sh`, located in *Jekyll* folder:
 
 ```sh
 #!/bin/sh
@@ -207,18 +207,18 @@ s3cmd --delete-removed --cf-invalidate-default-index \
       sync _site/ s3://www.domain.tld/ 
 ```
 
-You only have to execute `sh _deploy.sh` to update the website. A few minutes may be required in order to update _CloudFront_ data.
+You only have to execute `sh _deploy.sh` to update the website. A few minutes may be required in order to update *CloudFront* data.
 
 
 ## Stats
 
-Although our site is static and served by a CDN, it is quite possible to analyze the logs if you do not want to use a system based on a javascript code, such as [Piwik](http://piwik.org/) or [Google Analytics](https://www.google.fr/intl/en/analytics/). Here, we will automate the task (recovery logs, processing and displaying statistics) from a server (in our example, a Raspberry Pi in Raspbian) and we will use [Awstats](http://awstats.sourceforge.net/).
+Although our site is static and served by a CDN, it is quite possible to analyze the logs if you do not want to use a system based on a javascript code, such as [Piwik](http://piwik.org/) or [Google Analytics](https://www.google.fr/intl/en/analytics/). Here, we will automate the task (recovery logs, processing and displaying statistics) from a server (in our example, a Raspberry Pi in Raspbian) and we will use [*Awstats*](http://awstats.sourceforge.net/).
 
 ### Retrieving logs
 
-Let's start by activating logs creation on our Cloudfront distribution. In the AWS Management Console, select the _Amazon S3_ service and create a "statistics" bucket which will store logs waiting to be retrieved. Then, in _Cloudfront_, select the distribution that provides our website, then `Distribution `settings`, `Edit`, and select the `statistics` bucket in the field `Bucket for Logs`.
+Let's start by activating logs creation on our *Cloudfront* distribution. In the AWS Management Console, select the *Amazon S3* service and create a "statistics" bucket which will store logs waiting to be retrieved. Then, in *Cloudfront*, select the distribution that provides our website, then `Distribution `settings`, `Edit`, and select the `statistics` bucket in the field `Bucket for Logs`.
 
-We create locally a folder that will retrieve these logs, then we can then retrieve the logs and then delete the _bucket_ using `s3cmd`:
+We create locally a folder that will retrieve these logs, then we can then retrieve the logs and then delete the bucket using `s3cmd`:
 
 ```bat
 mkdir ~/awstats
@@ -227,9 +227,9 @@ s3cmd get --recursive s3://statistics/ ~/awstats/logs/
 s3cmd del --recursive --force s3://statistics/ 
 ```
 
-### Installing and configuring Awstats
+### Installing and configuring *Awstats*
 
-We begin by installing and copy Awstats (where `www.domain.tld` is your domain name):
+We begin by installing and copy *Awstats* (where `www.domain.tld` is your domain name):
 
 ```bat
 sudo apt-get install awstats
@@ -238,7 +238,7 @@ sudo cp /etc/awstats/awstats.conf \
 sudo nano /etc/awstats/awstats.www.domain.tld.conf
 ```
 
-In this configuration file, change the following settings to specify how to treat Awstats logs Cloudfront (where `user` is your username):
+In this configuration file, change the following settings to specify how to treat *Awstats* logs *Cloudfront* (where `user` is your username):
 
 ```bat
 # Processing multiple gzip logs files
