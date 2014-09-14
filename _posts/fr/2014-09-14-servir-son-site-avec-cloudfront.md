@@ -3,7 +3,7 @@ title: Servir son site <br/> avec <em>Cloudfront</em>
 redirect_from: /site-statique-avec-cloudfront/
 ---
 
-Longtemps délaissés au profit des langages dynamiques, les sites statiques ont pourtant retrouvé une grande popularité ces dernières années avec l'apparition de générateurs. Puisqu'ils peuvent être stockés dans le nuage ou sur des serveurs très simples, les avantages sont multiples en termes de légèreté, de sécurité et de fiabilité.
+Les sites statiques ont pour principal intérêt de pouvoir être stockés dans le *nuage*, c'est-à-dire sur des serveurs de contenu permettant de les délivrer très rapidement, à moindre coût, avec une fiabilité et une sécurité extraordinaire.
 
 Ce billet montrera comment un site statique[[qu'il soit produit par un générateur comme [*Jekyll*](http://jekyllrb.com), [*Pelican*](http://docs.getpelican.com/) ou encore [*Hyde*](http://hyde.github.io), ou réalisé à la main]] peut être hébergé sur les [services web d'*Amazon*](http://aws.amazon.com/fr/) (*AWS*), et notamment hébergé sur [*S3*](http://aws.amazon.com/fr/s3/) et servi à l'aide de [*Cloudfront*](http://aws.amazon.com/fr/cloudfront/). De cette façon, le site sera disponible très rapidement depuis n'importe où, supportera n'importe quelle montée en charge, sans préoccupation de maintenance ou de sécurité, et cela à un coût presque nul[[avec un faible trafic, il ne vous en coûtera qu'environ un dollar]]. 
 
@@ -83,17 +83,14 @@ Cette adresse `www.domain.tld` pointe directement (grâce à *Route 53*) vers la
 
 ## Déployer *Jekyll* dans les nuages
 
-
-Lorsque l'on travaille en local, un simple `jekyll serve -w` permet de générer un site consultable depuis `http://localhost:4000`. 
-
 Nous allons maintenant créer un fichier `sh` qui va nous permettre, en une commande, de générer notre site et de mettre à jour sur *Amazon S3* tous les fichiers qui ont été modifiés depuis la version précédente, et d'indiquer à *Cloudfront* qu'il va falloir les mettre à jour.
 
 
 ### Prérequis : s3cmd
 
-Nous allons utiliser `s3cmd` pour mettre à jour notre site directement sur *S3*. Installez la dernière version alpha (1.5.0) et non la version stable afin de pouvoir invalider les fichiers sur *Cloudfront* (c'est-à-dire notifier à *Cloudfront* qu'un fichier a été modifié et qu'il va devoir mettre à jour ses copies).
+Nous allons utiliser `s3cmd` pour mettre à jour notre site directement sur *S3*. Installez la dernière version de développement[[il est nécessaire d'installer au moins la version 1.5]] et non la version stable afin de pouvoir invalider les fichiers sur *Cloudfront* (c'est-à-dire notifier à *Cloudfront* qu'un fichier a été modifié et qu'il va devoir mettre à jour ses copies).
 
-Sous Mac OS, avec Homebrew, on installe `s3cmd` avec l'option `devel`, ainsi que `gnupg` pour des transferts sécurisés :
+Sous Mac OS, avec *Homebrew*, on installe `s3cmd` avec l'option `devel`, ainsi que `gnupg` pour des transferts sécurisés :
 
 ```bat
 brew install --devel s3cmd
@@ -110,8 +107,6 @@ brew install jpegoptim
 brew install optipng
 ```
 
-
-### Déploiement du site
 
 ### Génération de Jekyll et compression des fichiers
 

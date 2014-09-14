@@ -3,7 +3,7 @@ title: Website delivery <br/> with <em>Cloudfront</em>
 redirect_from: /static-website-with-cloudfront/
 ---
 
-Long neglected in favor of dynamic languages​, static websites became popular again in recent years with the advent of generators. As they can be stored in the cloud or on very simple servers, they have multiple benefits in terms of lightness, safety and reliability.
+The main interest of static website is to be able to be stored in the *cloud*, that is to say on a content delivery network able to serve our data with amazing performances, a very low cost, and multiple benefits in terms of lightness, safety and reliability.
 
 This article sets out to show how to host a static website[[wether built from a generator like [*Jekyll*](http://jekyllrb.com), [*Pelican*](http://docs.getpelican.com/) or [*Hyde*](http://hyde.github.io), or "by hand"]] on [*Amazon Web Services*](http://aws.amazon.com), especially [*Amazon S3*](http://aws.amazon.com/s3/) in order to store the website files, and [*CloudFront*](http://aws.amazon.com/cloudfront/) in order to deliver them. The main purpose is to be able to get a website fast from anywhere, reliable, secure, highly scalable and inexpensive[[with a low traffic, the hosting will cost you about one dollar a month]].
 
@@ -20,7 +20,7 @@ To this purpose, we will use:
 After having created an [*AWS*](http://aws.amazon.com/) account, go to the [management console](https://console.aws.amazon.com/), then to [*S3*](https://console.aws.amazon.com/s3/): this service will store the website files.
 
 ### Creating buckets
-We will take this website as an example: the website will be located on `www.domain.tld`. The domain name root, `domain.tld`, will redirect to this location. Create two buckets (with `Create bucket`) named from the expected URL: `domain.tld` and `www.domain.tld`.
+The website will be located on `www.domain.tld`. The domain name root, `domain.tld`, will redirect to this location. Create two buckets (with `Create bucket`) named from the expected URL: `domain.tld` and `www.domain.tld`.
 
 ### Bucket hosting the website
 In `www.domain.tld` properties, activate website hosting (`Static Website Hosting` then `Enable website hosting`): you can choose a home page (`index.html`) or an error page (`error.html`). The website will be available from the  `Endpoint` URL: *keep it*, we will need it in the following section.
@@ -79,15 +79,13 @@ Now, an user going to `domain.tld` or `www.domain.tld` will target the same name
 
 ## Deploying *Jekyll* to the cloud
 
-Locally, a simple `jekyll serve -w` build the website, visible from `http://localhost:4000`. 
-
 We will now create a `sh` file which will build the website, compress and send to *Amazon S3* files which has been updated since the previous version, and indicate it to *Cloudfront*.
 
 ### Prerequisite
 
-We will use `s3cmd` in order to sync our bucket with our local files. Install the last development version (1.5.0) which allows us to invalidate files on *Cloudfront*.
+We will use `s3cmd` in order to sync our bucket with our local files. Install the last development version[[you need to install at least the 1.5 version]] which allows us to invalidate files on *Cloudfront*.
 
-On Mac OS, with Homebrew, install `s3cmd` with `--devel` option, and `gnupg` for secured transfers:
+On Mac OS, with *Homebrew*, install `s3cmd` with `--devel` option, and `gnupg` for secured transfers:
 
 ```bat
 brew install --devel s3cmd
@@ -104,9 +102,6 @@ sudo brew install optipng
 ```
 
 
-
-
-### Deploying the website
 
 ### Building Jekyll and compressing files
 
