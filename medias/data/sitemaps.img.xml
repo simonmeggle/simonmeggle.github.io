@@ -6,9 +6,9 @@ permalink: /sitemaps.img.xml
   {% for img in site.static_files %}
     {% if img.extname == ".jpg" or img.extname == ".png" or img.extname == ".ico" or img.extname == ".pdf"  %}
     <url>
-      <loc>{{ site.url }}</loc>
+      <loc>http://sylvain.durand.tf</loc>
       <image:image>
-        <image:loc>{{ site.url }}{{ img.path }}</image:loc>
+        <image:loc>http://sylvain.durand.tf{{ img.path }}</image:loc>
       </image:image>
    </url> 
     {% endif %}

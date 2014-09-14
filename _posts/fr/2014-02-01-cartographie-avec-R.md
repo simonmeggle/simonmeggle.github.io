@@ -70,7 +70,7 @@ plot(frontieres,  col="#666666", lwd=1, add=TRUE)
 dev.off() 
 ```
 
-[![Carte de France]({{ site.url }}/medias/carto/france.jpg)]({{ site.url }}/medias/carto/france.pdf)
+[![Carte de France](http://sylvain.durand.tf/medias/carto/france.jpg)](http://sylvain.durand.tf/medias/carto/france.pdf)
 
 ## Coloration d'une donnée : densité de population
 
@@ -127,13 +127,13 @@ legend(-10000,6387500,fill=attr(leg, "palette"),
 dev.off() 
 ```
 
-[![Densité de population en 2013]({{ site.url }}/medias/carto/densite.jpg)]({{ site.url }}/medias/carto/densite.pdf)
+[![Densité de population en 2013](http://sylvain.durand.tf/medias/carto/densite.jpg)](http://sylvain.durand.tf/medias/carto/densite.pdf)
 
 ## Coloration d'une donnée externe : le revenu médian 
-En réalité, nous serons plutôt amenés à tracer des données issues d'autres fichiers. Nous allons ici représenter le revenu fiscal médian par unité de consommation ([mis à disposition par l'INSEE](http://www.insee.fr/fr/themes/detail.asp?reg_id=99&ref_id=base-cc-rev-fisc-loc-menage)). À l'aide d'un tableur, [nous remettons ce fichier en forme au format CSV]({{ site.url }}/medias/carto/revenus.csv).
+En réalité, nous serons plutôt amenés à tracer des données issues d'autres fichiers. Nous allons ici représenter le revenu fiscal médian par unité de consommation ([mis à disposition par l'INSEE](http://www.insee.fr/fr/themes/detail.asp?reg_id=99&ref_id=base-cc-rev-fisc-loc-menage)). À l'aide d'un tableur, [nous remettons ce fichier en forme au format CSV](http://sylvain.durand.tf/medias/carto/revenus.csv).
 
 ### Lecture et correction des données
-On lit ce fichier, puis on fait correspondre les données grâce à l'identifiant des communes. Malheureusement, les données sont manquantes pour plus de 5<span style="white-space:nowrap">&thinsp;</span>000 communes, en raison du [secret fiscal](http://bofip.impots.gouv.fr/bofip/7248-PGP.html). "Trichons" pour améliorer le rendu général en affectant à ces communes le revenu médian du canton, fournit dans le même fichier et [remis en forme au format CSV]({{ site.url }}/medias/carto/cantons.csv) :
+On lit ce fichier, puis on fait correspondre les données grâce à l'identifiant des communes. Malheureusement, les données sont manquantes pour plus de 5<span style="white-space:nowrap">&thinsp;</span>000 communes, en raison du [secret fiscal](http://bofip.impots.gouv.fr/bofip/7248-PGP.html). "Trichons" pour améliorer le rendu général en affectant à ces communes le revenu médian du canton, fournit dans le même fichier et [remis en forme au format CSV](http://sylvain.durand.tf/medias/carto/cantons.csv) :
 
 
 
@@ -188,7 +188,7 @@ legend(-10000,6337500,fill=attr(leg, "palette"),
 dev.off() 
 ```
 
-[![Revenu fiscal médian par unité de consommation par commune en 2010]({{ site.url }}/medias/carto/revenus.jpg)]({{ site.url }}/medias/carto/revenus.pdf)
+[![Revenu fiscal médian par unité de consommation par commune en 2010](http://sylvain.durand.tf/medias/carto/revenus.jpg)](http://sylvain.durand.tf/medias/carto/revenus.pdf)
 
 
 
@@ -220,7 +220,7 @@ plot(frontieres,  col="#666666", lwd=1, add=TRUE)
 dev.off() 
 ```
 
-[![Réseau routier français en 2013]({{ site.url }}/medias/carto/routes.jpg)]({{ site.url }}/medias/carto/routes.pdf)
+[![Réseau routier français en 2013](http://sylvain.durand.tf/medias/carto/routes.jpg)](http://sylvain.durand.tf/medias/carto/routes.pdf)
 
 
 
@@ -259,12 +259,12 @@ plot(grille,col="#CCCCCC33",lwd=1, add=TRUE)
 dev.off()                          # Enregistrement du fichier
 ```
 
-[![Carte du monde projetée en Winkel Tripel]({{ site.url }}/medias/carto/monde.jpg)]({{ site.url }}/medias/carto/monde.pdf)
+[![Carte du monde projetée en Winkel Tripel](http://sylvain.durand.tf/medias/carto/monde.jpg)](http://sylvain.durand.tf/medias/carto/monde.pdf)
 
 
 ## Coloration d'une donnée : l'indice de développement humain
 
-L'utilisation la plus fréquente de ce type de carte consiste à colorer chaque pays selon une donnée. Traçons par exemple l'IDH, que le [PNUD](https://data.undp.org/dataset/Human-Development-Index-HDI-value/8ruz-shxu) propose au [format CSV]({{ site.url }}/medias/carto/hdi.csv). La démarche est identique à celle utilisée pour tracer le revenu en France :
+L'utilisation la plus fréquente de ce type de carte consiste à colorer chaque pays selon une donnée. Traçons par exemple l'IDH, que le [PNUD](https://data.undp.org/dataset/Human-Development-Index-HDI-value/8ruz-shxu) propose au [format CSV](http://sylvain.durand.tf/medias/carto/hdi.csv). La démarche est identique à celle utilisée pour tracer le revenu en France :
 
 ```r
 # Lecture des données et jointure avec les pays
@@ -300,7 +300,7 @@ dev.off()
 ```
 
 
-[![L'indice de développement humain (IDH) dans le monde]({{ site.url }}/medias/carto/idh.jpg)]({{ site.url }}/medias/carto/idh.pdf)
+[![L'indice de développement humain (IDH) dans le monde](http://sylvain.durand.tf/medias/carto/idh.jpg)](http://sylvain.durand.tf/medias/carto/idh.pdf)
 
 ## Représentation en cercles : les villes les plus peuplées
 
@@ -338,7 +338,7 @@ plot(grille,col="#CCCCCC33",lwd=1, add=TRUE)
 dev.off() 
 ```
 
-[![Carte du monde présentant la population des principales villes]({{ site.url }}/medias/carto/villes.jpg)]({{ site.url }}/medias/carto/villes.pdf)
+[![Carte du monde présentant la population des principales villes](http://sylvain.durand.tf/medias/carto/villes.jpg)](http://sylvain.durand.tf/medias/carto/villes.pdf)
 
 
 ## Représentation de données cartographiques : aires urbaines
@@ -358,4 +358,4 @@ plot(urbain,  col="#FFFFFF",  border="#FFFFFF66",lwd=1.5, add=TRUE)
 dev.off() 
 ```
 
-[![Carte du monde projetée en Winkel Tripel]({{ site.url }}/medias/carto/urbain.jpg)]({{ site.url }}/medias/carto/urbain.pdf)
+[![Carte du monde projetée en Winkel Tripel](http://sylvain.durand.tf/medias/carto/urbain.jpg)](http://sylvain.durand.tf/medias/carto/urbain.pdf)
