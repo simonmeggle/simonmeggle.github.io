@@ -302,10 +302,10 @@ permalink: /sitemaps.xml
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   {% for post in site.posts %}
   <url>
-    <loc>http://sylvain.durand.tf{{ post.url }}</loc>
+    <loc>http://domain.tld{{ post.url }}</loc>
     {% assign versions=site.posts|where:"name",post.name %}
     {% for version in versions %}
-      <xhtml:link rel="alternate" hreflang="{{ version.lang }}" href="http://sylvain.durand.tf{{ version.url }}" />
+      <xhtml:link rel="alternate" hreflang="{{ version.lang }}" href="http://domain.tld{{ version.url }}" />
     {% endfor %}
     <lastmod>{{ post.date | date_to_xmlschema }}</lastmod>
     <changefreq>weekly</changefreq>
