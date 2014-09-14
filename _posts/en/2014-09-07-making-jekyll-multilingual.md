@@ -5,7 +5,7 @@ redirect_from: /multilingual-website-with-jekyll/
 
 J<em>ekyll</em> has a very flexible design that allows a great freedom of choice, allowing the user to simply introduce features that are not integrated into its engine. This is particularly the case when one wants to create a multilingual website: while CMS remain very rigid and often require plugins, few filters are sufficient to achieve it with _Jekyll_.
 
-This article aims to present a way to create a multilingual site with _Jekyll_. _Jekyll_ have to be installed[[the article [Static website with *Jekyll*]({{ site.url }}/static-website-with-jekyll/) explains how to install and use *Jekyll* in order to get a simple website]] on your computer and you should be able to know how to generate a simple website.
+This article aims to present a way to create a multilingual site with _Jekyll_. _Jekyll_ have to be installed[[the article [Static website with *Jekyll*](http://sylvain.durand.tf/static-website-with-jekyll/) explains how to install and use *Jekyll* in order to get a simple website]] on your computer and you should be able to know how to generate a simple website.
 
 ### Goals
 Our website can be translated in as many languages as wanted. In the following examples, it will have three languages: English, French, and Chinese. Each page may be translated or not in the various languages[[regardless of the version, they may be pages which are not translated in each language]]. On each page, the entire contents --- article, date, menus, URL --- must be in the same language.
@@ -302,10 +302,10 @@ permalink: /sitemaps.xml
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   {% for post in site.posts %}
   <url>
-    <loc>http://sylvain.durand.tf{{ post.url }}</loc>
+    <loc>http://domain.tld{{ post.url }}</loc>
     {% assign versions=site.posts|where:"name",post.name %}
     {% for version in versions %}
-      <xhtml:link rel="alternate" hreflang="{{ version.lang }}" href="http://sylvain.durand.tf{{ version.url }}" />
+      <xhtml:link rel="alternate" hreflang="{{ version.lang }}" href="http://domain.tld{{ version.url }}" />
     {% endfor %}
     <lastmod>{{ post.date | date_to_xmlschema }}</lastmod>
     <changefreq>weekly</changefreq>

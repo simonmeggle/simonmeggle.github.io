@@ -3,7 +3,6 @@ redcarpet:
   extensions: ['smart', 'superscript']
 
 permalink: /:title/
-url: 'http://sylvain.durand.tf'
 gems:
   - jekyll-redirect-from
 
