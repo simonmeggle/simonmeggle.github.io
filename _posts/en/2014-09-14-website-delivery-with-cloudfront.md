@@ -211,7 +211,7 @@ Although our site is static and served by a CDN, it is quite possible to analyze
 
 ### Retrieving logs
 
-Let's start by activating logs creation on our *Cloudfront* distribution. In the AWS Management Console, select the *Amazon S3* service and create a "statistics" bucket which will store logs waiting to be retrieved. Then, in *Cloudfront*, select the distribution that provides our website, then `Distribution `settings`, `Edit`, and select the `statistics` bucket in the field `Bucket for Logs`.
+Let's start by activating logs creation on our *Cloudfront* distribution. In the AWS Management Console, select the *Amazon S3* service and create a "statistics" bucket which will store logs waiting to be retrieved. Then, in *Cloudfront*, select the distribution that provides our website, then `Distribution` settings, `Edit`, and select the `statistics` bucket in the field `Bucket for Logs`.
 
 We create locally a folder that will retrieve these logs, then we can then retrieve the logs and then delete the bucket using `s3cmd`:
 
