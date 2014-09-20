@@ -2,7 +2,6 @@
 // Variables
 $main: 18
 $line: 30
-$width: 32em
 
 $serif: PT Serif, Cambria, Georgia, serif
 $sans: Calibri, Arial, sans
@@ -48,7 +47,7 @@ p
   +padding($main,1,1,1)
   text-align: justify
   margin: 0 auto
-  max-width: $width
+  max-width: 32em
 
 // Titles
 
@@ -209,8 +208,8 @@ h1
   z-index: 1
 
   ul
-    max-width: $width
-    padding: $line/$main/2+em 0 0
+    padding: 0
+    max-width: 32em
 
     li:first-child a
       color: #ddd
@@ -219,18 +218,16 @@ h1
     float: left
 
   a
+    +padding($main,.5,.5,.5)
     display: block
     float: left
-    padding: 0 .5em $line/$main/2+em
     color: #777
 
-    &:hover, &:active
+    &:hover, .en:lang(en), .fr:lang(fr)
       color: white
 
   .lang
     float: right
-    .en:lang(en), .fr:lang(fr)
-      color: white
 
 
 // Code
@@ -241,9 +238,6 @@ code
   line-height: 1
   font-family: $sans
   color: #666
-  background: #fcfcfc
-  outline: 4px #fcfcfc solid
-  margin: 0 3px
 
 pre
   +font($main)
@@ -254,11 +248,6 @@ pre
   background: #f5f5f5
   border-radius: .5em
   text-align: left
-
-  code
-    color: #111
-    background: #f5f5f5
-    outline: none
 
 .ge,.gs
   color: #93a1a1
@@ -307,24 +296,18 @@ pre
     left: 58%
     right: 1em
     padding: 0
-    margin-left: $width/2+1em
-    max-width: $width/2
+    margin-left: 17em
+    max-width: 16em
     text-align: left
     color: #e0e0e0
 
     &:before
       content: "* "
 
-    em 
-      font-style: normal
-
-    code
+    code, a
       color: #ddd
-      font-style: normal
 
-    a
-      color: #dadada
-      &:hover
-        color: #aaa
+    a:hover
+      color: #aaa
 
 {% endif %}
