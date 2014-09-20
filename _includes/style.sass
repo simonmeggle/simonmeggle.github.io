@@ -1,26 +1,18 @@
 
-// Sizes
+// Variables
 $main: 18
-$size: $main
-$line: 30/$main
+$line: 30
 $width: 32em
 $sans: Calibri, Arial, sans
 
-// Mixins
+// Vertical rhythm
 
-=font
+=font($size)
   font-size: #{$size/$main}em
-  line-height: #{$line/$size*$main}
+  line-height: #{$line/$size}
 
-=padding($top, $bottom, $hor:0)
-  padding: $top*$line/$size*$main+em $hor+em $bottom*$line/$size*$main+em
-
-=margin($top, $bottom, $size:$size)
-  margin: $top*$line/$size*$main+em auto $bottom*$line/$size*$main+em
-
-=width($width:$width, $size:$size)
-  max-width: $width/$size*$main
-
+=padding($size,$top, $bottom, $lateral:0)
+  padding: $top*$line/$size+em $lateral+em $bottom*$line/$size+em
 
 // Main elements
 
@@ -28,9 +20,9 @@ html
   -webkit-text-size-adjust: 100%
   
 body
-  font: #{$main/16}em / $line PT Serif, Cambria, Georgia, serif
-  margin: 0
+  font: #{$main/16}em / #{$line/$main} PT Serif, Cambria, Georgia, serif
   text-align: center // IE 5.5
+  margin: 0
 
 a
   color: #156f8f
@@ -42,25 +34,19 @@ img
   margin: 3em auto
   width: 100%
 
-p,ul,ol
+ul,ol
   margin: 0 auto
   list-style-type: none
-  +padding(1,0)
-  +width
-  *width: $width/$size*$main // IE < 7
-  text-align: justify
 
-ul, ol
-  +padding(0,0)
-
-p+ul li, p+ol li
-  padding: 0 0 0 1.5*$line+em 
-
-  &:before
-    content: "– "
+p
+  margin: 0
+  +padding(18,1,0)
 
 .content
-  margin: 0 1em
+  text-align: justify
+  margin: 0 auto
+  +padding(18,1,1,1)
+  max-width: $width
 
 // Titles
 
@@ -70,13 +56,13 @@ h1, h2, h3
 
 h2
   $size: 25 !global
-  +font
+  text-align: center
+  +font(25)
   font-style: italic
-  +padding(2.5,0)
-  +width($width - 4em)
+  +padding(25,2.5,0)
   color: #666
   border-bottom: 1px solid #ddd
-  margin: -1px auto 1.5*$line/$size*$main+em
+  margin: -1px auto 1.5*$line/25+em
 
   span
     position: relative
@@ -85,19 +71,16 @@ h2
     padding: 0 .4em
 
 h3
-  $size: 21 !global
-  +font
-  +padding(2,0)
+  +font(21)
+  +padding(21,2,0)
   color: #888
-  +width
   text-align: left
 
 hr
-  $size: 24 !global
   border: 0
   margin: 0
-  +font
-  +padding(2,2)
+  +font(24)
+  +padding(24,2,2)
   text-align: center
   color: #ccc
 
@@ -111,10 +94,8 @@ hr
   position: absolute
   left: 0
   width: 100%
-  $size: 16 !global
-  +font
-  +margin(2,0)
-  +padding(1,1)
+  +font(16)
+  +padding(16,1,1)
   text-align: center
   color: #ddd
   background: #fcfcfc
@@ -132,14 +113,15 @@ hr
 
 .list
   $size: 18 !global
-  +font
-  +padding(1,0)
+  +font(18)
+  +padding(18,1,0)
+
   &>li
-    +padding(0,.5)
+    +padding(18,0,.5)
     text-align: center
     color: #ccc
     border-top: 1px solid #f5f5f5
-    margin: -2px auto 1.5*$line/$size*$main+em
+    margin: -2px auto 1.5*$line/$size+em
 
     &>span
       font-style: italic
@@ -148,16 +130,14 @@ hr
       background: #fff
       padding: 0 .4em 0
   ul
-    $size: 19 !global
-    +font
-    +padding(0,0)
-    +width
+    +font(19)
+    +padding(19,0,0)
     text-align: left
 
     a
       display: block
-      +font
-      +width($width - 12em)
+      +font(19)
+      max-width: 18em
       margin: 0 auto
       padding-left: 2em
 
@@ -165,8 +145,7 @@ hr
         background: #fdfdfd
 
       span
-        $size: 13 !global
-        +font
+        +font(13)
         font-family: $sans
         margin-left: -3em
         display: block
@@ -193,11 +172,13 @@ abbr
   border-bottom: .1em solid #DDD
 
 .date
-  $size: 18 !global
-  +font
-  +padding(0,1)
+  +font(18)
+  +padding(18,0,1)
   font-style: italic
   color: #ddd
+
+.content li:before
+  content: "– "
 
 {% endif %}
 
@@ -206,14 +187,14 @@ abbr
 
 h1
   $size: 26 !global
-  +padding(4,2)
+  +padding(26,4,2)
   background: #252525 no-repeat center url(/medias/headers/{{ page.date | date:'%Y-%m-%d' }})
   background-size: cover
   color: #fff
-  text-shadow: 0 0 0 #000,  0 0 .3em #000
-  min-height: 2*$line/$size*$main+em
-  margin-bottom: 2*$line/$size*$main+em
-  +font
+  text-shadow: 0 0 0 #000, 0 0 .3em #000
+  min-height: 2*$line/$size+em
+  margin-bottom: 2*$line/$size+em
+  +font(26)
 
 
 // Navbar
@@ -229,8 +210,8 @@ h1
   z-index: 1
 
   ul
-    max-width: $width * 1.25
-    padding: $line/2+em $line+em 0
+    max-width: $width
+    padding: $line/$main/2+em 0 0
 
     li:first-child a
       color: #ddd
@@ -241,7 +222,7 @@ h1
   a
     display: block
     float: left
-    padding: 0 .5em $line/2+em
+    padding: 0 .5em $line/$main/2+em
     color: #777
 
     &:hover, &:active
@@ -267,18 +248,16 @@ code
 
 pre
   $size: $main !global
-  +font
+  +font(18)
   font-family: monospace, monospace
-  +padding(1,1,$line/$size*$main)
-  +width($width - 3em)
-  margin: $line/$size*$main+em auto
+  +padding(18,1,1,$line/$size)
+  margin: $line/$size+em auto
   overflow-x: auto
   background: #f5f5f5
   border-radius: .5em
   text-align: left
 
   code
-    +width
     color: #111
     background: #f5f5f5
     outline: none
@@ -324,8 +303,7 @@ pre
     display: none
 
   .marginalia
-    $size: 14 !global
-    +font
+    +font(14)
     font-style: italic
     position: absolute
     left: 58%
