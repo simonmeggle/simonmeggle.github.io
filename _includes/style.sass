@@ -250,18 +250,18 @@ pre
 
 {% endif %}
 
-// Footnotes
+// Marginalias
 
 {% if page.content contains "[[" %}
 
 @media screen and (min-width: 1000px)
-  .asterisk:after
+  .as:after
     content: "*"
     color: #DDD
-  .bracket
+  .br
     display: none
 
-  .marginalia
+  .mar
     +font(14)
     font-style: italic
     position: absolute
