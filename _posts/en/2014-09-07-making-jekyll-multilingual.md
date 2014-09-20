@@ -78,10 +78,10 @@ It is also possible to specify an URL for each file, by using the `permalink` va
 
 Until now, nothing links the various version of a same page. To do so, we could use:
 
- - **the date**, but several different articles may have the same or, on the contrary, several translations of the same article may have differents dates;
- - **the filename**, but it is quite better to translate those in order to get translated URL.
+ - *the date*, but several different articles may have the same or, on the contrary, several translations of the same article may have differents dates;
+ - *the filename*, but it is quite better to translate those in order to get translated URL.
 
-This is why the most simple way is to give an unique **identifier** to each article, shared between each translation:
+This is why the most simple way is to give an unique *identifier* to each article, shared between each translation:
 
 ```python
 ---

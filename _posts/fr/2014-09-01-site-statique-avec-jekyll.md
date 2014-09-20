@@ -2,16 +2,16 @@
 title: Site statique <br/> avec <em>Jekyll</em>
 ---
 
-Au commencement d'Internet étaient les **sites statiques** : chaque page web était rédigée "à la main" à l'aide d'un éditeur de texte, puis mise en ligne. Les inconvénients étaient nombreux, en particulier la nécessité de dupliquer une même modification sur chaque page concernée[[il en découlait une  réelle difficulté à faire évoluer un site sur le long terme]], de connaître le HTML pour le rédacteur et d'avoir son ordinateur à disposition pour éditer les pages. L'apparition du CSS, permettant de séparer la forme du fond et de mutualiser celle-ci pour l'ensemble d'un même site n'a guère changé cet état de fait[[de surcroît, la très faible interopérabilité entre navigateurs et le très mauvais support de CSS par Microsoft Internet Explorer, alors très dominant, ont fortement retardé son utilisation]].
+Au commencement d'Internet étaient les *sites statiques* : chaque page web était rédigée "à la main" à l'aide d'un éditeur de texte, puis mise en ligne. Les inconvénients étaient nombreux, en particulier la nécessité de dupliquer une même modification sur chaque page concernée[[il en découlait une  réelle difficulté à faire évoluer un site sur le long terme]], de connaître le HTML pour le rédacteur et d'avoir son ordinateur à disposition pour éditer les pages. L'apparition du CSS, permettant de séparer la forme du fond et de mutualiser celle-ci pour l'ensemble d'un même site n'a guère changé cet état de fait[[de surcroît, la très faible interopérabilité entre navigateurs et le très mauvais support de CSS par Microsoft Internet Explorer, alors très dominant, ont fortement retardé son utilisation]].
 
-C'est alors que sont apparus les **sites dynamiques** : les langages de programmation exécutés côté serveur, tels que PHP, ont permis de voir apparaître les [CMS](https://fr.wikipedia.org/wiki/Syst%C3%A8me_de_gestion_de_contenu), qui rendaient possible la création de sites et la modification de leur contenu directement depuis un navigateur, permettant ainsi l'émergence de sites, blogs, forums accessibles au plus grand nombre. C'est par exemple le cas de [*Spip*](http://www.spip.net/), [*Dotclear*](http://fr.dotclear.org/) ou [*WordPress*](https://fr.wordpress.com/). Pourtant, ces systèmes ne sont pas dénués d'inconvénients :
+C'est alors que sont apparus les *sites dynamiques* : les langages de programmation exécutés côté serveur, tels que PHP, ont permis de voir apparaître les [CMS](https://fr.wikipedia.org/wiki/Syst%C3%A8me_de_gestion_de_contenu), qui rendaient possible la création de sites et la modification de leur contenu directement depuis un navigateur, permettant ainsi l'émergence de sites, blogs, forums accessibles au plus grand nombre. C'est par exemple le cas de [*Spip*](http://www.spip.net/), [*Dotclear*](http://fr.dotclear.org/) ou [*WordPress*](https://fr.wordpress.com/). Pourtant, ces systèmes ne sont pas dénués d'inconvénients :
 
 - ils sont très sensibles aux failles de sécurité, ce qui implique de surveiller attentivement les mises à jour et les logs ;
 - ils sont consommateurs de ressources serveur, nécessitant des hébergements spécifiques pour les gros volumes de visiteurs ;
 - ils supportent mal les montées en charge, et sont ainsi très sensibles aux attaques DDoS ou aux affluences de visiteurs[[il n'est pas rare qu'un site devienne indisponible, par exemple lors d'un événement important ou en raison d'un lien publié sur un site d'actualités]] ;
 - ils constituent souvent de vraies usines à gaz, surdimensionnées vis-à-vis des besoins et nécessitant des bases de données.
 
-Depuis quelques années, les **sites statiques** font leur retour en grâce avec l'apparition des *générateurs de sites statiques*. Sur la base de simples fichiers textes, un programme génère un site composé uniquement de pages statiques qu'il suffit ensuite d'héberger. Ainsi, les problèmes de sécurité sont presque inexistants, il est possible de s'héberger sur un serveur très modeste ou au contraire d'obtenir d'excellentes performances et de supporter de très fortes montées en charge en utilisant un [CDN](https://fr.wikipedia.org/wiki/Content_delivery_network) comme [*Cloudflare*](https://www.cloudflare.com/) ou [*Cloudfront*](http://aws.amazon.com/fr/cloudfront/)[[les façons d'héberger un site statique sur [*Amazon S3*](http://aws.amazon.com/fr/s3/) et [*Cloudfront*](http://aws.amazon.com/fr/cloudfront/) sont détaillés dans "[Site statique avec *Cloudfront*](http://sylvain.durand.tf/site-statique-avec-cloudfront/)"]]. 
+Depuis quelques années, les *sites statiques* font leur retour en grâce avec l'apparition des *générateurs de sites statiques*. Sur la base de simples fichiers textes, un programme génère un site composé uniquement de pages statiques qu'il suffit ensuite d'héberger. Ainsi, les problèmes de sécurité sont presque inexistants, il est possible de s'héberger sur un serveur très modeste ou au contraire d'obtenir d'excellentes performances et de supporter de très fortes montées en charge en utilisant un [CDN](https://fr.wikipedia.org/wiki/Content_delivery_network) comme [*Cloudflare*](https://www.cloudflare.com/) ou [*Cloudfront*](http://aws.amazon.com/fr/cloudfront/)[[les façons d'héberger un site statique sur [*Amazon S3*](http://aws.amazon.com/fr/s3/) et [*Cloudfront*](http://aws.amazon.com/fr/cloudfront/) sont détaillés dans "[Site statique avec *Cloudfront*](http://sylvain.durand.tf/site-statique-avec-cloudfront/)"]]. 
 
 Il est de plus possible de suivre toutes les modifications et de travailler collaborativement grâce à `git`, de rédiger ses articles en ligne et de générer son site à la volée à l'aide de services comme [*GitHub*](https://pages.github.com/) et [*Prose*](http://prose.io), ou d'avoir un système de commentaires avec [*Disqus*](https://disqus.com/). 
 
@@ -23,14 +23,14 @@ Dans un premier temps, nous allons voir comment installer *Jekyll* sur votre mac
 
 ### Installation de *Jekyll* 
 
-**Sur Linux**, installez directement la dernière version stable de [*Ruby*](https://packages.debian.org/stable/ruby)[[il est également possible d'installer [Ruby version manager](http://rvm.io/)]], accompagné de ses [outils de développement](https://packages.debian.org/stable/ruby-dev) et de [gem](https://packages.debian.org/stable/rubygems). Sous *Debian*, il suffit d'installer les paquets suivants :
+*Sur Linux*, installez directement la dernière version stable de [*Ruby*](https://packages.debian.org/stable/ruby)[[il est également possible d'installer [Ruby version manager](http://rvm.io/)]], accompagné de ses [outils de développement](https://packages.debian.org/stable/ruby-dev) et de [gem](https://packages.debian.org/stable/rubygems). Sous *Debian*, il suffit d'installer les paquets suivants :
 
 ```sh
 sudo apt-get install ruby ruby-dev libgsl-ruby rubygems
 sudo gem install jekyll
 ```
 
-**Sur Mac OS X**, commencez par installer [*Homebrew*](http://brew.sh/)[[si vous ne les avez pas déjà, une fenêtre vous proposera d'installer les "outils en ligne de commande Xcode", ce qu'il faut accepter pour continuer]] puis [*Ruby version manager*](http://rvm.io/) avec la dernière version stable de *Ruby*, pour pouvoir ensuite installer *Jekyll* :
+*Sur Mac OS X*, commencez par installer [*Homebrew*](http://brew.sh/)[[si vous ne les avez pas déjà, une fenêtre vous proposera d'installer les "outils en ligne de commande Xcode", ce qu'il faut accepter pour continuer]] puis [*Ruby version manager*](http://rvm.io/) avec la dernière version stable de *Ruby*, pour pouvoir ensuite installer *Jekyll* :
 
 ```sh
 ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
@@ -39,7 +39,7 @@ source ~/.rvm/scripts/rvm
 gem install jekyll
 ```
 
-**Sur Windows** enfin, l'installation est moins aisée. Cependant, [Julian Thilo](http://jekyll-windows.juthilo.com/) a écrit un [guide très détaillé](http://jekyll-windows.juthilo.com/) sur les façons d'y installer *Jekyll*.
+*Sur Windows* enfin, l'installation est moins aisée. Cependant, [Julian Thilo](http://jekyll-windows.juthilo.com/) a écrit un [guide très détaillé](http://jekyll-windows.juthilo.com/) sur les façons d'y installer *Jekyll*.
 
 ### Création d'un nouveau site
 
@@ -52,9 +52,9 @@ En une seule commande, il est possible de générer le site et de créer un serv
 
 Le code source d'un site *Jekyll* s'organise selon plusieurs dossiers :
 
-- **`_posts/`** dans lequel seront placés[[l'arborence interne du dossier `_post` est laissée entièrement libre]] tous les articles de votre site, au format `aaaa-mm-jj-nom-du-post.md` ;
-- **`_layouts/`** qui va contenir la maquette du site, c'est-à-dire tout ce qui entourera nos articles ;
--  **`_includes/`**, qui contiendra des codes que vous pouvez inclure[[en plaçant un fichier dans `_includes`, il vous sera possible de l'importer n'importe où avec `{%raw%}{{include nom-du-fichier}}{%endraw%}` ; il est même possible de lui passer des [paramètres](http://jekyllrb.com/docs/templates/#includes)]] dans différentes pages si vous en avez besoin régulièrement.
+- *`_posts/`* dans lequel seront placés[[l'arborence interne du dossier `_post` est laissée entièrement libre]] tous les articles de votre site, au format `aaaa-mm-jj-nom-du-post.md` ;
+- *`_layouts/`* qui va contenir la maquette du site, c'est-à-dire tout ce qui entourera nos articles ;
+-  *`_includes/`*, qui contiendra des codes que vous pouvez inclure[[en plaçant un fichier dans `_includes`, il vous sera possible de l'importer n'importe où avec `{%raw%}{{include nom-du-fichier}}{%endraw%}` ; il est même possible de lui passer des [paramètres](http://jekyllrb.com/docs/templates/#includes)]] dans différentes pages si vous en avez besoin régulièrement.
 
 Le répertoire de votre site pourra alors ressembler à :
 
@@ -82,7 +82,7 @@ Vous pouvez ajouter n'importe quel autre dossier, ou fichier, dans le répertoir
 
 Maintenant ce premier site créé, nous allons voir comment le faire évoluer en rédigeant des articles et en utilisant leurs métadonnées. 
 
-Pour créer un article, il suffit de créer dans le dossier `_posts` un fichier dont le nom est au format `aaaa-mm-jj-nom-du-post.md`[[il est également possible de créer des articles dans le dossier `_drafts` sans date dans le nom de fichier : cela permet de créer des brouillons d'article, qui n'apparaîtront pas dans la liste des articles disponibles mais restent accessibles depuis leur adresse directe]]. Ce fichier se compose de deux parties : l'**en-tête** où sont situées les métadonnées de l'article, et le **contenu** de l'article à proprement parler.
+Pour créer un article, il suffit de créer dans le dossier `_posts` un fichier dont le nom est au format `aaaa-mm-jj-nom-du-post.md`[[il est également possible de créer des articles dans le dossier `_drafts` sans date dans le nom de fichier : cela permet de créer des brouillons d'article, qui n'apparaîtront pas dans la liste des articles disponibles mais restent accessibles depuis leur adresse directe]]. Ce fichier se compose de deux parties : l'*en-tête* où sont situées les métadonnées de l'article, et le *contenu* de l'article à proprement parler.
 
 ### Déclarer les métadonnées des fichiers
 
@@ -110,7 +110,7 @@ defaults:
 
 ### Écriture des articles avec *Markdown*
 
-Par défaut, les articles s'écrivent en [*Markdown*](http://daringfireball.net/projects/markdown/basics). L'objectif de ce langage est de proposer une syntaxe très simple permettant de rédiger les articles en évitant les balises HTML les plus courantes. Ainsi, "*italique*" s'obtient avec `*italique*`, et "**gras**" avec `**gras**`. Il reste cependant toujours possible d'utiliser HTML au sein des articles.
+Par défaut, les articles s'écrivent en [*Markdown*](http://daringfireball.net/projects/markdown/basics). L'objectif de ce langage est de proposer une syntaxe très simple permettant de rédiger les articles en évitant les balises HTML les plus courantes. Ainsi, "*italique*" s'obtient avec `*italique*`, et "*gras*" avec `*gras*`. Il reste cependant toujours possible d'utiliser HTML au sein des articles.
 
 Depuis sa deuxième version, *Jekyll* utilise [*Kramdown*](http://kramdown.gettalong.org/) qui ajoute de nombreuses fonctionnalités telles que la possibilité d'attribuer des classes aux éléments, les notes de bas de page, les listes de définition, les tableaux[[la [documentation de *Kramdown*](http://kramdown.gettalong.org/quickref.html) présente efficacement l'ensemble des possibilités offertes par le moteur et la syntaxe permettant d'y parvenir]]... 
 
@@ -153,6 +153,6 @@ Vous pouvez également consulter sur ce site trois autres articles à propos de 
 
 - [créer un site multilingue avec *Jekyll*](http://sylvain.durand.tf/rendre-jekyll-multilingue/) comme cela a été réalisé ici ;
 - [servir son site à l'aide de *CloudFront*](http://sylvain.durand.tf/servir-son-site-avec-cloudfront/) pour obtenir des performances maximales en termes de disponibilité et de vitesse ;
-- **héberger _Jekyll_ sur GitHub** (article à venir) pour pouvoir suivre et modifier votre site en ligne, en le générant à la volée.
+- *héberger _Jekyll_ sur GitHub* (article à venir) pour pouvoir suivre et modifier votre site en ligne, en le générant à la volée.
 
 Enfin, parcourir les [codes sources de sites utilisant *Jekyll*](https://github.com/jekyll/jekyll/wiki/Sites)[[vous êtes notamment libres de consulter le [code source du présent site](https://github.com/sylvaindurand/sylvaindurand.github.io) pour voir comment celui-ci est conçu]], pour vous inspirer, ne peut être qu'une excellente idée. 

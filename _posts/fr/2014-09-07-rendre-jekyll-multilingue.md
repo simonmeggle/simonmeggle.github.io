@@ -80,10 +80,10 @@ Nous pouvons également spécifier individuellement une adresse pour chaque fich
 
 Jusqu'ici, rien ne relie les différentes versions d'une même page. Pour ce faire, nous pourrions utiliser :
 
- - **la date**, mais plusieurs articles différents pourraient avoir la même ou, au contraire, plusieurs versions d'un même article peuvent avoir deux dates différentes ;
- - **le nom du fichier**, mais il est préférable d'avoir des noms de fichiers différents pour traduire les URL.
+ - *la date*, mais plusieurs articles différents pourraient avoir la même ou, au contraire, plusieurs versions d'un même article peuvent avoir deux dates différentes ;
+ - *le nom du fichier*, mais il est préférable d'avoir des noms de fichiers différents pour traduire les URL.
 
-C'est pourquoi le plus simple est d'attribuer à chaque article un **identifiant** dont la valeur sera identique pour chaque version :
+C'est pourquoi le plus simple est d'attribuer à chaque article un *identifiant* dont la valeur sera identique pour chaque version :
 
 ```python
 ---
