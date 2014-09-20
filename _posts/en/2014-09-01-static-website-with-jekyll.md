@@ -54,7 +54,7 @@ With a single command, it is possible to generate the website and create a local
 
 - **`_posts/`** in which the articles are stored[[you can freely organize your files in `_post`]], with names such as `yyyy-mm-dd-post-name.md`;
 - **`_layouts/`** which contains the layout of the website, that is to say everythin that will surround the articles;
--  **`_includes/`**, which contains small page fragments that you wish to include in multiple places on your site[[when you put a fil in `_includes`, it is possible to include it anywhere with the tag `{%raw%}{{include filename}}{%endraw%}`. Il is also possible to provide it [parameters](http://jekyllrb.com/docs/templates/#includes)]].
+-  **`_includes/`**, which contains small page fragments that you wish to include in multiple places on your site[[when you put a file in `_includes`, it is possible to include it anywhere with the tag `{%raw%}{{include filename}}{%endraw%}`. Il is also possible to provide it [parameters](http://jekyllrb.com/docs/templates/#includes)]].
 
 The tree structure may then looks like:
 
