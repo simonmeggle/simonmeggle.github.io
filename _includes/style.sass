@@ -113,7 +113,6 @@ hr
 {% if page.title == "Articles" or page.url contains "404" %}
 
 .list
-  $size: 18 !global
   +font(18)
   +padding(18,1,0)
 
@@ -122,7 +121,7 @@ hr
     text-align: center
     color: #ccc
     border-top: 1px solid #f5f5f5
-    margin: -2px auto 1.5*$line/$size+em
+    margin: -2px auto 1.5*$line/18+em
 
     &>span
       font-style: italic
@@ -189,13 +188,12 @@ abbr
 h1
   +font(26)
   +padding(26,4,2)
-  $size: 26 !global
+  min-height: 2*$line/26+em
+  margin-bottom: 2*$line/26+em
   background: #252525 no-repeat center url(/medias/headers/{{ page.date | date:'%Y-%m-%d' }})
   background-size: cover
   color: #fff
   text-shadow: 0 0 0 #000, 0 0 .3em #000
-  min-height: 2*$line/$size+em
-  margin-bottom: 2*$line/$size+em
 
 
 // Navbar
@@ -249,7 +247,7 @@ code
 
 pre
   +font(18)
-  +padding(18,1,1,$line/$size)
+  +padding(18,1,1,$line/18)
   font-family: monospace, monospace
   margin: $line/18+em auto
   overflow-x: auto
