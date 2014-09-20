@@ -22,7 +22,7 @@ html
   
 body
   font: #{$main/16}em / #{$line/$main} $serif
-  text-align: center // IE 5.5
+  text-align: left
   margin: 0
 
 a
@@ -45,20 +45,19 @@ p
 
 .content
   +padding($main,1,1,1)
-  text-align: justify
   margin: 0 auto
   max-width: 32em
 
 // Titles
 
 h1, h2, h3
+  text-align: center
   margin: 0 auto
   font-weight: normal
 
 h2
   +font(25)
   +padding(25,2.5,0)
-  text-align: center
   font-style: italic
   color: #666
   border-bottom: 1px solid #ddd
@@ -173,6 +172,7 @@ abbr
 .date
   +font($main)
   +padding($main,0,1)
+  text-align: center
   font-style: italic
   color: #ddd
 
@@ -194,7 +194,6 @@ h1
   color: #fff
   text-shadow: 0 0 0 #000, 0 0 .3em #000
 
-
 // Navbar
 
 .nav
@@ -202,9 +201,7 @@ h1
   top: 0
   left: 0
   width: 100%
-  background-color: #222 // IE 8
-  background-color: rgba(30,30,30,.92)
-  *background-color: #222 // IE < 8
+  background-color: #191919
   z-index: 1
 
   ul
