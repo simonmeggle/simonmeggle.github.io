@@ -47,10 +47,13 @@ layout: compress
   {% include typo.html %}
 </div>
 
-<div class="footer">
-  {{ site.t[page.lang].created }} <time datetime="{{ page.date | date:'%Y-%m-%d' }}">{% include date.html date=page.date %}</time>
+<div class="footer">{% capture date %}headers/{{ page.date | date:'%Y-%m-%d' }}{% endcapture %}
+  {{ site.t[page.lang].created }} <time datetime="{{date}}">{% include date.html date=page.date %}</time>
   {{ site.t[page.lang].author }}  <a href="https://github.com/sylvaindurand/">Sylvain Durand</a>.
 </div>
 
+<style>
+  h1{ background-image:url('data:image/jpg;base64,{%include {{date}} %}');}
+</style>
 </body>
 </html>
