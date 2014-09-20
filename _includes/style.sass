@@ -17,13 +17,15 @@ $sans:  PT Sans,  Calibri, Arial,   sans
 
 // Main elements
 
-html
-  -webkit-text-size-adjust: 100% // Mobile
-  
+*
+  padding: 0
+  margin: 0 auto
+  font-weight: normal
+  -webkit-text-size-adjust: 100%
+
 body
   font: #{$main/16}em / #{$line/$main} $serif
-  text-align: left
-  margin: 0
+  text-align: justify
 
 a
   color: #156f8f
@@ -32,86 +34,22 @@ a
     color: #0c4255
 
 img
-  margin: 3em auto
   width: 100%
 
 ul,ol
-  margin: 0 auto
   list-style-type: none
 
 p
   +padding($main,1,0)
-  margin: 0
 
-.content
-  +padding($main,1,1,1)
-  margin: 0 auto
+.article
   max-width: 32em
-
-// Titles
-
-h1, h2, h3
-  text-align: center
-  margin: 0 auto
-  font-weight: normal
-
-h2
-  +font(25)
-  +padding(25,2.5,0)
-  font-style: italic
-  color: #666
-  border-bottom: 1px solid #ddd
-  margin: -1px auto 1.5*$line/25+em
-
-  span
-    position: relative
-    top: .5em
-    background: #fff
-    padding: 0 .4em
-
-h3
-  +font(21)
-  +padding(21,2,0)
-  color: #888
-  text-align: left
-
-hr
-  +font(24)
-  +padding(24,2,2)
-  border: 0
-  margin: 0
-  text-align: center
-  color: #ccc
-
-  &:before
-    content: "*\a*\00a0\00a0\00a0\00a0*"
-    white-space: pre
-
-// Footer
-
-.footer
-  +font(16)
-  +padding(16,1,1)
-  position: absolute
-  left: 0
-  width: 100%
-  text-align: center
-  color: #ddd
-  background: #fcfcfc
-
-  time, span, a
-    color: #d0d0d0
-    font-style: italic
-
-  a:hover
-    color: #000
 
 // Articles list
 
 {% if page.title == "Articles" or page.url contains "404" %}
 
 .list
-  +font($main)
   +padding($main,1,0)
 
   &>li
@@ -119,7 +57,7 @@ hr
     text-align: center
     color: #ccc
     border-top: 1px solid #f5f5f5
-    margin: -2px auto 1.5*$line/18+em
+    margin: -2px auto 1.5*$line/$main+em
 
     &>span
       font-style: italic
@@ -129,13 +67,12 @@ hr
       padding: 0 .4em 0
   ul
     +font(19)
-    +padding(19,0,0)
     text-align: left
 
     a
       +font(19)
       display: block
-      max-width: 18em
+      max-width: $main+em
       margin: 0 auto
       padding-left: 2em
 
@@ -152,7 +89,7 @@ hr
         position: absolute
         color: #ddd
 
-// Lettrine
+// Other pages
 
 {% else %}
 
@@ -170,23 +107,42 @@ abbr
   border-bottom: .1em solid #DDD
 
 .date
-  +font($main)
   +padding($main,0,1)
   text-align: center
   font-style: italic
   color: #ddd
 
-.content li:before
+.article li:before
   content: "– "
+
+h2
+  +font(25)
+  +padding(25,2.5,0)
+  font-style: italic
+  text-align: center
+  color: #666
+  border-bottom: 1px solid #ddd
+  margin: -1px auto 1.5*$line/25+em
+
+  span
+    position: relative
+    top: .5em
+    background: #fff
+    padding: 0 .4em
+
+h3
+  +font(21)
+  +padding(21,2,0)
+  color: #888
 
 {% endif %}
 
-
-// Main title
+// Head and foot
 
 h1
   +font(26)
   +padding(26,4,2)
+  text-align: center
   min-height: 2*$line/26+em
   margin-bottom: 2*$line/26+em
   background: #252525 no-repeat center
@@ -194,26 +150,24 @@ h1
   color: #fff
   text-shadow: 0 0 0 #000, 0 0 .3em #000
 
-// Navbar
+.nav, .foot
+  text-align: center
+  left: 0
+  width: 100%
+  z-index: 1
 
 .nav
   position: fixed
   top: 0
-  left: 0
-  width: 100%
   background-color: #191919
-  z-index: 1
 
   ul
-    padding: 0
-    max-width: 32em
-
-    li:first-child a
-      color: #ddd
+    max-width: 32em 
 
   li
     float: left
-
+    &:first-child a
+      color: #ddd
   a
     +padding($main,.5,.5,.5)
     display: block
@@ -226,6 +180,30 @@ h1
   .lang
     float: right
 
+.foot
+  +font(16)
+  +padding(16,1,1)
+  position: absolute
+  color: #ddd
+  background: #fcfcfc
+
+  span, a
+    color: #d0d0d0
+
+  a:hover
+    color: #999
+
+hr
+  +font(24)
+  +padding(24,2,3)
+  border: 0
+  margin: 0
+  text-align: center
+  color: #ccc
+
+  &:before
+    content: "*\a*\00a0\00a0\00a0\00a0*"
+    white-space: pre
 
 // Code
 
@@ -234,17 +212,14 @@ h1
 code
   line-height: 1
   font-family: $sans
-  color: #666
 
 pre
-  +font($main)
-  +padding($main,1,1,$line/18)
+  +padding($main,1,1,$line/$main)
   font-family: monospace, monospace
-  margin: $line/18+em auto
+  margin: $line/$main+em auto
   overflow-x: auto
   background: #f5f5f5
   border-radius: .5em
-  text-align: left
 
 .ge,.gs
   color: #93a1a1
@@ -292,7 +267,6 @@ pre
     position: absolute
     left: 58%
     right: 1em
-    padding: 0
     margin-left: 17em
     max-width: 16em
     text-align: left

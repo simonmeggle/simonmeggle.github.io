@@ -38,21 +38,23 @@ layout: compress
 <h1>{{ page.title }}</h1>
 
 {% if page.type != 'pages' %}
-<div class="date">
+<p class="date">
     {% include date.html date=page.date %}
-</div>
+</p>
 {% endif %}
 
-<div class="content">
+<div class="article">
   {% include typo.html %}
+  <hr/>
 </div>
 
-<div class="footer">{% capture date %}headers/{{ page.date | date:'%Y-%m-%d' }}{% endcapture %}
-  {{ site.t[page.lang].created }} <time datetime="{{date}}">{% include date.html date=page.date %}</time>
+<div class="foot">
+  {{ site.t[page.lang].created }} <span>{% include date.html date=page.date %}</span>
   {{ site.t[page.lang].author }}  <a href="https://github.com/sylvaindurand/">Sylvain Durand</a>.
 </div>
 
 <style>
+  {% capture date %}headers/{{ page.date | date:'%Y-%m-%d' }}{% endcapture %}
   h1{ background-image:url('data:image/jpg;base64,{%include {{date}} %}');}
 </style>
 </body>
