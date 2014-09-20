@@ -189,7 +189,7 @@ h1
   +padding(26,4,2)
   min-height: 2*$line/26+em
   margin-bottom: 2*$line/26+em
-  background: #252525 no-repeat center url(/medias/headers/{{ page.date | date:'%Y-%m-%d' }})
+  background: #252525 no-repeat center url('data:image/jpg;base64,{% capture date %}headers/{{ page.date | date:'%Y-%m-%d' }}{% endcapture %}{%include {{date}} %}')
   background-size: cover
   color: #fff
   text-shadow: 0 0 0 #000, 0 0 .3em #000
