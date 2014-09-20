@@ -22,11 +22,4 @@ permalink: /sitemaps.xml
       <changefreq>weekly</changefreq>
     </url>
   {% endfor %}
-  {% for media in site.static_files %}
-  <url>
-    <loc>http://sylvain.durand.tf{{ media.path }}</loc>
-    <lastmod>{{ media.modified_time | date_to_xmlschema }}</lastmod>
-    <changefreq>weekly</changefreq>
-  </url>
-  {% endfor %}
 </urlset>
