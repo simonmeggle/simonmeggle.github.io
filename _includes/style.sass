@@ -1,10 +1,6 @@
-
 // Variables
 $main: 18
 $line: 30
-
-$serif: PT Serif, Cambria, Georgia, serif
-$sans:  PT Sans,  Calibri, Arial,   sans
 
 // Vertical rhythm
 
@@ -24,7 +20,7 @@ $sans:  PT Sans,  Calibri, Arial,   sans
   -webkit-text-size-adjust: 100%
 
 body
-  font: #{$main/16}em / #{$line/$main} $serif
+  font: #{$main/16}em / #{$line/$main} PT Serif, Cambria, Georgia, serif
   text-align: justify
 
 a
@@ -80,7 +76,6 @@ h3
 
     div
       +font(13)
-      font-family: $sans
       margin-left: -3em
       text-align: right
       width: 2em
@@ -99,10 +94,6 @@ h3
 
 sup
   font-size: 0.8em
-
-abbr
-  font-size: .8em
-  border-bottom: .1em solid #DDD
 
 .date
   +padding($main,3,1)
@@ -191,10 +182,10 @@ hr
 
 code
   line-height: 1
-  font-family: $sans
+  font-family: PT Sans, Calibri, Arial, sans
 
 pre
-  +padding($main,1,1,$line/$main)
+  +padding($main,1,1,1.5)
   font-family: monospace, monospace
   margin: $line/$main+em auto
   overflow-x: auto
