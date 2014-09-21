@@ -43,7 +43,6 @@ p
   +padding($main,1,0)
 
 .article
-  +padding($main,3,2)
   max-width: 32em
 
 // Articles list
@@ -51,7 +50,7 @@ p
 {% if page.title == "Articles" or page.url contains "404" %}
 
 .list
-  +padding($main,1,0)
+  +padding($main,4,0)
 
   &>li
     +padding($main,0,.5)
@@ -108,7 +107,7 @@ abbr
   border-bottom: .1em solid #DDD
 
 .date
-  +padding($main,0,1)
+  +padding($main,3,1)
   text-align: center
   font-style: italic
   color: #ddd
@@ -142,13 +141,16 @@ h3
 
 h1
   +font(26)
-  +padding(26,4,2)
   text-align: center
-  min-height: 2*$line/26+em
   background: #252525 no-repeat center
   background-size: cover
   color: #fff
   text-shadow: 0 0 0 #000, 0 0 .3em #000
+  {% if page.type == "pages" %}
+  +padding(26,4.5,2.5)
+  {% else %}
+  +padding(26,4,2)
+  {% endif %}
 
 .nav, .foot
   text-align: center
