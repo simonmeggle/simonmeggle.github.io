@@ -50,44 +50,31 @@ p
 {% if page.title == "Articles" or page.url contains "404" %}
 
 .list
-  +padding($main,4,0)
-
-  &>li
-    +padding($main,0,.5)
-    text-align: center
+  h2
     color: #ccc
-    border-top: 1px solid #f5f5f5
-    margin: -2px auto 1.5*$line/$main+em
-
-    &>span
-      font-style: italic
-      position: relative
-      bottom: 1em
-      background: #fff
-      padding: 0 .4em 0
-  ul
     +font(19)
-    text-align: left
+    +padding(19,2,1)
+    text-align: center
+    font-style: italic
+    background: #fff
 
-    a
-      +font(19)
-      display: block
-      max-width: $main+em
-      margin: 0 auto
-      padding-left: 2em
+    &:before,&:after
+      color: #f5f5f5
+      content: "⎯⎯⎯⎯⎯⎯⎯"
+  a
+    +font(19)
+    display: block
+    max-width: 18em
+    padding-left: 2em
 
-      &:hover
-        background: #fdfdfd
-
-      span
-        +font(13)
-        font-family: $sans
-        margin-left: -3em
-        display: block
-        text-align: right
-        width: 2em
-        position: absolute
-        color: #ddd
+    div
+      +font(13)
+      font-family: $sans
+      margin-left: -3em
+      text-align: right
+      width: 2em
+      position: absolute
+      color: #ddd
 
 // Other pages
 

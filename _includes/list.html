@@ -6,12 +6,12 @@
       {% unless forloop.first %}
         </ul></li>
       {% endunless %}
-      <li><span>{% include date.html date=post.date mode="month"%}</span>
+      <li><h2>{% include date.html date=post.date mode="month"%}</h2>
       <ul>{% capture month %}{{currentmonth}}{% endcapture %}
     {% endif %}
       <li>
         <a href="{{ post.url }}">
-          <span>{{ post.date | date: '%-d' }}</span>
+          <div>{{ post.date | date: '%-d' }}</div>
           {{ post.title | replace: '<br/>', '' }}
         </a>
       </li>
