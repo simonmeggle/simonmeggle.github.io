@@ -3,8 +3,6 @@
 {% if temp3.size == 2 %}<pre{{ temp3.first }}</pre>{% endif %}
 {% assign compressed = temp3.last | split: ' ' | join: ' ' %}
 {% capture typo %}{{ compressed }}{% endcapture %}
-{% capture typo %}{{ typo | replace: '<h2>' , '<h2><span>'   }} {% endcapture %}
-{% capture typo %}{{ typo | replace: '</h2>', '</span></h2>' }} {% endcapture %}
 {% capture typo %}{{ typo | replace: '&#39;', '’'       }} {% endcapture %}
 {% capture typo %}{{ typo | replace: '~'    , '&nbsp;'       }} {% endcapture %}
 {% capture typo %}{{ typo | replace: '[[' , '<span class="as"></span><span class="br"> (</span><span class="mar">' }} {% endcapture %}
