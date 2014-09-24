@@ -43,10 +43,8 @@ layout: compress
 </p>
 {% endif %}
 
-<div class="article">
-  {% include typo.html %}
-  <hr/>
-</div>
+{% include typo.html %}
+<hr/>
 
 <div class="foot">
   {{ site.t[page.lang].created }} <span>{% include date.html date=page.date %}</span>
