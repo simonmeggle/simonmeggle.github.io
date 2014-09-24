@@ -23,6 +23,18 @@ body
   font: #{$main/16}em / #{$line/$main} PT Serif, Cambria, Georgia, serif
   text-align: justify
 
+@font-face
+  font-family: 'PT Serif'
+  font-style: normal
+  font-weight: 400
+  src: local('PT Serif'), local('PTSerif-Regular'), url(/medias/fonts/ptserif.woff) format('woff')
+
+@font-face
+  font-family: 'PT Serif'
+  font-style: italic
+  font-weight: 400
+  src: local('PT Serif Italic'), local('PTSerif-Italic'), url(/medias/fonts/ptserif-it.woff) format('woff')
+
 a
   color: #156f8f
   text-decoration: none
@@ -189,6 +201,12 @@ hr
 code
   line-height: 1
   font-family: PT Sans, Calibri, Arial, sans
+
+@font-face
+  font-family: 'PT Sans'
+  font-style: normal
+  font-weight: 400
+  src: local('PT Sans'), local('PTSans-Regular'), url(/medias/fonts/ptsans.woff) format('woff')
 
 pre
   +padding($main,1,1,1.5)
