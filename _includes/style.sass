@@ -199,14 +199,7 @@ hr
 {% if page.content contains "```" %}
 
 code
-  line-height: 1
-  font-family: PT Sans, Calibri, Arial, sans
-
-@font-face
-  font-family: 'PT Sans'
-  font-style: normal
-  font-weight: 400
-  src: local('PT Sans'), local('PTSans-Regular'), url(/medias/fonts/ptsans.woff) format('woff')
+  font-family: PT Serif, Cambria, Georgia, serif
 
 pre
   +padding($main,1,1,1.5)
@@ -214,6 +207,10 @@ pre
   margin: $line/$main+em auto
   overflow-x: auto
   background: #f5f5f5
+
+  code
+    line-height: 1
+    font-family: PT Sans, Calibri, Arial, sans
 
 .ge,.gs
   color: #93a1a1
