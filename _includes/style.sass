@@ -16,6 +16,7 @@ $line: 30
 *
   padding: 0
   margin: 0 auto
+  list-style-type: none
   font-weight: normal
   text-align: justify
   -webkit-text-size-adjust: 100%
@@ -32,18 +33,15 @@ a
 img
   width: 100%
 
-ul,ol,p
-  list-style-type: none
-  max-width: 32em
-
-pre, h2
-  max-width: 29em
+.article, .nav ul
+  max-width: 30em
+  +padding($main,0,0,1)
 
 h1, h2, hr, .date, .nav, .foot
   text-align: center
 
 p
-  +padding($main,1,0,1)
+  +padding($main,1,0)
 
 // Titles
 
@@ -54,13 +52,11 @@ h2
   color: #666
   background: linear-gradient(#fff 52%, #e8e8e8 52%, #fff 53%)
   text-shadow: -.2em 0 #fff, .2em 0 #fff, -.1em 0 #fff, .1em 0px #fff
-  max-width: 32/25*18+em
 
 h3
   +font(21)
   +padding(21,1,0)
   color: #888
-  max-width: 32/21*18+em
 
 // Articles list
 
@@ -75,8 +71,7 @@ h3
   a
     +font(20)
     display: block
-    max-width: 18em
-    padding-left: 2em
+    padding-left: 6em
 
     div
       +font(13)
