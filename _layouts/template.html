@@ -53,8 +53,7 @@ layout: compress
 </div>
 
 <style>
-  {% capture date %}headers/{{ page.date | date:'%Y-%m-%d' }}{% endcapture %}
-  h1{ background-image:url('data:image/jpg;base64,{%include {{date}} %}');}
+  h1{ background-image:url('data:image/jpg;base64,{%include headers/{{ page.date | date:'%Y-%m-%d' }} %}');}
 </style>
 </body>
 </html>
