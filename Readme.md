@@ -8,9 +8,9 @@ This repository is the source code of the personnal website [sylvain.durand.tf](
 # Try this at home
 
 1. Clone the repo: `git clone https://github.com/sylvaindurand/sylvaindurand.github.io.git`
-2. Open the folder: `cd sylvaindurand.github.io.git`
+2. Open the folder: `cd sylvaindurand.github.io`
 3. Install the dependencies: `bundle install`
-4. Build the website: `bundle exec jekyll serve -w`
+4. Build the website: `bundle exec jekyll serve`
 5. Look at [localhost:4000](http://localhost:4000): surprise!
 
 # Colophon
