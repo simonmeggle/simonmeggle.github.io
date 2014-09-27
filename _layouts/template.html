@@ -37,6 +37,7 @@ layout: compress
 
 <h1>{{ page.title }}</h1>
 
+<div class="article">
 {% if page.type != 'pages' %}
 <p class="date">
     {% include date.html date=page.date %}
@@ -44,7 +45,7 @@ layout: compress
 {% endif %}
 
 {{ content }}
-
+</div>
 <hr/>
 
 <div class="foot">
