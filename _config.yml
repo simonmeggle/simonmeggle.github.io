@@ -3,6 +3,7 @@ redcarpet:
   extensions: ['smart', 'superscript']
 
 permalink: /:title/
+future: false
 gems:
   - jekyll-redirect-from
 
