@@ -15,11 +15,4 @@ permalink: /sitemaps.xml
       <changefreq>weekly</changefreq>
     </url>
   {% endfor %}
-  {% for page in site.pages %}
-    <url>
-      <loc>http://sylvain.durand.tf{{ page.url }}</loc>
-      <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
-      <changefreq>weekly</changefreq>
-    </url>
-  {% endfor %}
 </urlset>
