@@ -151,8 +151,8 @@ This article doesn't claim to be more than a very short introduction to *Jekyll*
 
 You may also read three other articles written on this website about *Jekyll*:
 
-- [create a multilingual website](http://sylvain.durand.tf/making-jekyll-multilingual/) as it has been done here;
+- [creating a multilingual website](http://sylvain.durand.tf/making-jekyll-multilingual/) as it has been done here;
 - [website delivery with *CloudFront*](http://sylvain.durand.tf/website-delivery-with-cloudfront/) in order to get excellent performances and handle huge increases in workload;
-- *host _Jekyll_ on GitHub* (article coming soon) in order to edit your website online and generate it on the fly.
+- [hosting *Jekyll* on GitHub](http://sylvain.durand.tf/using-github-to-serve-jekyll/) in order to edit your website online and generate it on the fly.
 
 Lastly, browsing [website using *Jekyll* source codes](https://github.com/jekyll/jekyll/wiki/Sites)[[feel free to browse the [source code of this website](https://github.com/sylvaindurand/sylvaindurand.github.io) to find out how it works]], in order to find inspiration, can only be a good idea. 
