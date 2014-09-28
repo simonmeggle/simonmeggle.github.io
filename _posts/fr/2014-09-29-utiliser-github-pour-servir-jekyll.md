@@ -2,7 +2,7 @@
 title: Utiliser Github <br/> pour servir <em>Jekyll</em>
 ---
 
-G*itHub* a créé un fantastique écosystème autour du générateur de sites statiques *Jekyll*. Son service *[GitHub Pages](https://pages.github.com/)* permet en effet de générer puis de servir automatiquement les sites *Jekyll*. Ce service, gratuit et très performant, permet de réunir les meilleurs aspects des sites statiques – rapidité, fiabilité, sécurité, possibilité d'utiliser `git` – tout en permettant leur édition en ligne.
+G*itHub* a créé un fantastique écosystème autour du générateur de sites statiques *Jekyll*. *[GitHub Pages](https://pages.github.com/)* permet en effet de générer puis de servir automatiquement les sites *Jekyll*. Ce service, gratuit et très performant, permet de réunir les meilleurs aspects des sites statiques – rapidité, fiabilité, sécurité, possibilité d'utiliser `git` – tout en permettant leur édition en ligne.
 
 Nous avons vu dans des articles précédents comment [créer un site statique avec *Jekyll*](http://sylvain.durand.tf/site-statique-avec-jekyll/), puis comment [le servir avec *Cloudfront*](http://sylvain.durand.tf/servir-son-site-avec-cloudfront/). À la place, nous allons montrer dans cet article comment :
 
@@ -22,7 +22,7 @@ Sur votre page de profil, cliquez sur *Repositories* puis *New* afin de créer u
 
 Choisissez l'option *Initialize this repository with a README* pour pouvoir utiliser directement `git clone`.
 
-Si vous possédez un compte GitHub payant, il vous est par ailleurs possible de créer un répertoire privé, afin de ne pas rendre les codes publics[[néanmoins, dans le cas d'un simple site en *Jekyll*, cette option n'est sans doute pas très importante]].
+Si vous possédez un compte *GitHub* payant, il vous est par ailleurs possible de créer un répertoire privé, afin de ne pas rendre les codes publics[[néanmoins, dans le cas d'un simple site *Jekyll*, cette option n'est sans doute pas très importante]].
 
 ### Synchronisation du répertoire en local
 Sur votre ordinateur local, créez le dossier qui accueillera votre site, ouvrez un terminal dans ce dossier, et clonez le répertoire fraîchement créé :
@@ -69,13 +69,13 @@ Notre site n'étant composé que de simples fichiers texte, vous pouvez utiliser
 
 ## Servir son site sur *GitHub Pages*
 
-Nous allons désormais voir comment faire en sorte que GitHub génère le site, puis l'héberge sur ses serveurs. Il suffira par la suite d'utiliser `git push` pour que *GitHub* compile et serve la dernière version de votre site.
+Nous allons désormais voir comment faire en sorte que *GitHub* génère le site, puis l'héberge sur ses serveurs. Il suffira par la suite d'utiliser `git push` pour que *GitHub* compile et serve la dernière version de votre site.
 
 
 ### Avoir le même environnement en local
 À chaque fois que vous utiliserez `git push`, votre site sera automatiquement mis à jour. 
 
-Avant cela, il est donc important de s'assurer que tout fonctionne correctement en local, et donc avoir exactement le même environnement, c'est-à-dire la même version de *Jekyll* et les mêmes dépendances que celles utilisées par *GitHub*. La meilleure façon pour ce faire est d'utiliser `bundler`[[si vous ne le possédez pas, installer-le avec `gem install bundler`]].
+C'est pourquoi, pour éviter de casser notre site en ligne, il est important de s'assurer que tout fonctionne correctement en local, et donc avoir exactement le même environnement, c'est-à-dire la même version de *Jekyll* et les mêmes dépendances que celles utilisées par *GitHub*. La meilleure façon pour ce faire est d'utiliser `bundler`[[si vous ne le possédez pas, installer-le avec `gem install bundler`]].
 
 Commencez par créer, à la racine, un fichier `Gemfile` qui fait référence à la gemme `github-pages`, qui indique automatiquement les versions et dépendances utilisées par *GitHub* :
 
@@ -94,13 +94,11 @@ De retour sur *GitHub*, allez dans votre répertoire `username.github.io` puis d
 Au bout de quelques instants (la première fois, cela pourra prendre une dizaine de minutes, mais ensuite le site sera mis à jour en quelques secondes), votre site sera disponible à l'adresse `http://username.github.io`[[le site est également disponible en HTTPS à l'adresse `https://username.github.io`]].
 
 ### Utiliser un nom de domaine personnalisé
-Si vous possédez votre nom de domaine personnalisé "`domain.tld`" il est bien sûr possible de l'utiliser à la place de l'adresse proposée par *GitHub*. Celle-ci redirigera alors vers votre nouveau nom de domaine. Il ne vous sera cependant pas possible d'utiliser HTTPS[[si vous essayez d'accéder à l'adresse ``https://domain.tld`, il apparaît une page blanche indiquant `unknown domain: domain.tld`]].
+Si vous possédez votre nom de domaine personnalisé "`domain.tld`", il est bien sûr possible de l'utiliser à la place de l'adresse proposée par *GitHub*. Celle-ci redirigera alors vers votre nouveau nom de domaine. Il ne vous sera cependant pas possible d'utiliser HTTPS[[si vous essayez d'accéder à l'adresse ``https://domain.tld`, il apparaît une page blanche indiquant `unknown domain: domain.tld`]].
 
 Si vous souhaitez utiliser uniquement un sous-domaine `subdomain.domain.tld`, créez chez votre fournisseur de nom de domaine un enregistrement `CNAME` avec pour nom `subdomain` et pour valeur `username.github.io`. Créez alors un fichier nommé `CNAME` contenant exactement `subdomain.domain.tld` à la racine.
 
-Si vous souhaitez utiliser la racine du nom de domaine, créez chez votre fournisseur de nom de domaine deux enregistrements `CNAME` ayant tous les deux pour valeur `username.github.io`, l'un concernant la racine, et l'autre nommé `www`. Votre site sera alors accessible à la fois avec et sans `www` dans l'URL. Créez alors à la racine un fichier nommé `CNAME` contenant soit `domain.tld`, soit `www.domain.tld`, selon l'adresse que vous souhaitez voir apparaître.
-
-Pour plus de précisions, [consultez la page correspondante](https://help.github.com/articles/about-custom-domains-for-github-pages-sites) sur la documentation de *GitHub*.
+Si vous voulez utiliser la racine de votre nom de domaine, suivez la [documentation de *GitHub*](https://help.github.com/articles/about-custom-domains-for-github-pages-sites).
 
 ### Page d'erreur 404
 *GitHub* permet d'obtenir une page d'erreur 404 personnalisée[[lorsque vous testez votre site en local avec `bundle exec jekyll serve`, cette page d'erreur est également fonctionnelle : vous pouvez la tester en entrant une URL incorrecte]] : il suffit pour cela de demander à *Jekyll* de générer une page `404.html` à la racine :
@@ -130,7 +128,7 @@ Une fois les modifications acceptées, il vous est possible d'effectuer un `comm
 
 Le service *[Travis](https://travis-ci.org/)* permet de compiler lui-même votre site à chaque *push*, afin de vous assurer qu'il n'y a pas d'erreur. Il est également possible d'ajouter d'autres tests, notamment `htmlproofer` pour vérifier la conformité de votre code HTML et s'il existe des liens morts. En cas de problème, vous serez prévenus par email.
 
-Pour cela, créez un compte sur *[Travis](https://travis-ci.org/)* puis activez la surveillance de votre répertoire `username.github.io`. Ajoutez ensuite `htmlproofer` dans votre fichier Gemfile, qui devient alors :
+Pour cela, entrez vos identifiants *GitHub* sur *[Travis](https://travis-ci.org/)* puis activez la surveillance de votre répertoire `username.github.io`. Ajoutez ensuite `htmlproofer` dans votre fichier `Gemfile`, qui devient alors :
 
 ```
 source 'https://rubygems.org'
@@ -148,6 +146,6 @@ script:
 - bundle exec jekyll build && bundle exec htmlproof ./_site
 ```
 
-Désormais, à chaque *push*, *Travis* vous avertira par email si *Jekyll* ne parvient pas à compiler votre site, si le code HTML produit n'est pas compatible ou s'il existe un lien mort.
+Désormais, à chaque *push*, *Travis* vous avertira par email si *Jekyll* ne parvient pas à compiler votre site, si le code HTML produit n'est pas valide ou s'il existe un lien mort.
 
 
