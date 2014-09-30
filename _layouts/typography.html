@@ -1,9 +1,17 @@
 ---
 layout: template
 ---
-{% assign temp1 = content | split: '<pre' %}
+{% assign temp1 = content | split: '<pre>' %}
 {% for temp2 in temp1 %}{% assign temp3 = temp2 | split: '</pre>' %}
-{% if temp3.size == 2 %}<pre{{ temp3.first }}</pre>{% endif %}
+
+{% if temp3.size == 2 %}
+
+  {% assign pre = temp3.first %}
+  {% assign pre = pre | newline_to_br  | replace: "<br />", "</code><code>" %}
+  {% assign pre = pre | strip_newlines | replace: "<code></code>", "" %}
+  <pre>{{ pre }}</pre>
+
+{% endif %}
 
 {% assign typo = temp3.last | split: ' ' | join: ' ' %}
 
