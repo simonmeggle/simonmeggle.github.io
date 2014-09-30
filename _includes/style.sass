@@ -181,15 +181,25 @@ code
   line-height: 1
 
 pre
-  +padding($main,1,1,1.5)
+  +padding($main,.5,.5,.75)
   font-family: monospace, monospace
-  margin: $line/$main+em -2em
+  margin: $line/$main/2+em -1em
   overflow-x: auto
   background: #f5f5f5
-  border-left: 8px solid #EEE
+  counter-reset: line
+  border-left: 6px solid #eee
   code
     display: block
+    counter-increment: line
     +font(18)
+    &:before
+      +font(10)
+      display: block
+      float: left
+      color: #ddd
+      width: 2em
+      font-weight: bold
+      content: counter(line)
 
 .ge,.gs
   color: #93a1a1
