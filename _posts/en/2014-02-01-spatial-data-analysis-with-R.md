@@ -264,7 +264,7 @@ dev.off()                          # Saving file
 
 ## Visualizing data: Human Development Index
 
-Most frequent usage consists of visualizing data with a color scale. Let's plot the HDI, provided by the [UNDP](https://data.undp.org/dataset/Human-Development-Index-HDI-value/8ruz-shxu) in a [CSV file](http://sylvain.durand.tf/medias/carto/hdi.csv). The procedure is as described above:
+Most frequent usage consists of visualizing data with a color scale. Let's plot the HDI, provided by the United Nations Develment Programme in a [CSV file](http://sylvain.durand.tf/medias/carto/hdi.csv). The procedure is as described above:
 
 ```r
 # Loading data and merging dataframes

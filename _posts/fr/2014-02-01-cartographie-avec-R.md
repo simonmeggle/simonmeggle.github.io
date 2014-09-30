@@ -264,7 +264,7 @@ dev.off()                          # Enregistrement du fichier
 
 ## Coloration d'une donnée : l'indice de développement humain
 
-L'utilisation la plus fréquente de ce type de carte consiste à colorer chaque pays selon une donnée. Traçons par exemple l'IDH, que le [PNUD](https://data.undp.org/dataset/Human-Development-Index-HDI-value/8ruz-shxu) propose au [format CSV](http://sylvain.durand.tf/medias/carto/hdi.csv). La démarche est identique à celle utilisée pour tracer le revenu en France :
+L'utilisation la plus fréquente de ce type de carte consiste à colorer chaque pays selon une donnée. Traçons par exemple l'IDH, que le Programme de développement des nations unies propose au [format CSV](http://sylvain.durand.tf/medias/carto/hdi.csv). La démarche est identique à celle utilisée pour tracer le revenu en France :
 
 ```r
 # Lecture des données et jointure avec les pays
