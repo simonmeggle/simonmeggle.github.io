@@ -1,6 +1,4 @@
----
-layout: compress
----
+{% capture compress %}
 <!doctype html>
 <html lang="{{ page.lang }}">
 <head>
@@ -60,3 +58,4 @@ layout: compress
 </style>
 </body>
 </html>
+{% endcapture %}{{ compress | split: ' ' | join: ' '}}
