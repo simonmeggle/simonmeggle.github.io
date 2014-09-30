@@ -13,7 +13,7 @@ layout: template
 
 {% endif %}
 
-{% assign typo = temp3.last | split: ' ' | join: ' ' %}
+{% assign typo = temp3.last %}
 
 {% assign typo = typo | replace: '&#39;', '’' | replace: '~', '&nbsp;' %}
 {% assign typo = typo | replace: '[[', '<span class="as"></span><span class="br"> (</span><span class="mar">' %}
