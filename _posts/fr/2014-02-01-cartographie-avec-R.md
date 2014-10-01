@@ -133,7 +133,7 @@ dev.off()
 En réalité, nous serons plutôt amenés à tracer des données issues d'autres fichiers. Nous allons ici représenter le revenu fiscal médian par unité de consommation ([mis à disposition par l'INSEE](http://www.insee.fr/fr/themes/detail.asp?reg_id=99&ref_id=base-cc-rev-fisc-loc-menage)). À l'aide d'un tableur, [nous remettons ce fichier en forme au format CSV](http://sylvain.durand.tf/medias/carto/revenus.csv).
 
 ### Lecture et correction des données
-On lit ce fichier, puis on fait correspondre les données grâce à l'identifiant des communes. Malheureusement, les données sont manquantes pour plus de 5<span style="white-space:nowrap">&thinsp;</span>000 communes, en raison du [secret fiscal](http://bofip.impots.gouv.fr/bofip/7248-PGP.html). "Trichons" pour améliorer le rendu général en affectant à ces communes le revenu médian du canton, fournit dans le même fichier et [remis en forme au format CSV](http://sylvain.durand.tf/medias/carto/cantons.csv) :
+On lit ce fichier, puis on fait correspondre les données grâce à l'identifiant des communes. Malheureusement, les données sont manquantes pour plus de 5<span style="white-space:nowrap">&thinsp;</span>000 communes, en raison du secret fiscal. "Trichons" pour améliorer le rendu général en affectant à ces communes le revenu médian du canton, fournit dans le même fichier et [remis en forme au format CSV](http://sylvain.durand.tf/medias/carto/cantons.csv) :
 
 
 
