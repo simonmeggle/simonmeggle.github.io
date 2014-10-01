@@ -5,9 +5,9 @@
 
 {% if temp3.size == 2 %}
 
-  {% assign pre = temp3.first %}
-  {% assign pre = pre | newline_to_br  | replace: "<br />", "</code><code>" | replace: "<code></code>", "" %}
-  <pre>{{ pre }}</pre>
+{% assign pre = temp3.first %}
+{% assign pre = pre | newline_to_br  | replace: "<br />", "</code><code>" | replace: "<code></code>", "" %}
+<pre>{{ pre }}</pre>
 
 {% endif %}
 
@@ -18,11 +18,11 @@
 {% assign typo = typo | replace: ']]', '</span><span class="br">)</span>' %}
 
 {% if page.lang == 'fr' %}
-  {% assign typo = typo | replace: '&ldquo;' , '«&#160;' | replace: '&rdquo;' , '&#160;»' %}
-  {% assign typo = typo | replace: ' :',       '&#160;:' | replace: ' %',       '&#160;%' %}
-  {% assign typo = typo | replace: ' ;', '<span style="white-space:nowrap">&thinsp;</span>;' %}
-  {% assign typo = typo | replace: ' !', '<span style="white-space:nowrap">&thinsp;</span>!' %}
-  {% assign typo = typo | replace: ' ?', '<span style="white-space:nowrap">&thinsp;</span>?' %}
+{% assign typo = typo | replace: '&ldquo;' , '«&#160;' | replace: '&rdquo;' , '&#160;»' %}
+{% assign typo = typo | replace: ' :',       '&#160;:' | replace: ' %',       '&#160;%' %}
+{% assign typo = typo | replace: ' ;', '<span style="white-space:nowrap">&thinsp;</span>;' %}
+{% assign typo = typo | replace: ' !', '<span style="white-space:nowrap">&thinsp;</span>!' %}
+{% assign typo = typo | replace: ' ?', '<span style="white-space:nowrap">&thinsp;</span>?' %}
 {% endif %}
 
 {{ typo | split: ' ' | join: ' '}}
