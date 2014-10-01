@@ -6,7 +6,7 @@
 {% if temp3.size == 2 %}
 
 {% assign pre = temp3.first %}
-{% assign pre = pre | newline_to_br  | replace: "<br />", "</code><code>" | replace: "<code></code>", "" %}
+{% assign pre = pre | newline_to_br  | replace: "<br />", "</code><code>" %}
 <pre>{{ pre }}</pre>
 
 {% endif %}
@@ -28,4 +28,4 @@
 {{ typo | split: ' ' | join: ' '}}
 
 {% endfor %}
-{% endcapture %}{{ compress | strip_newlines }}
+{% endcapture %}{{ compress | strip_newlines | replace: "<code></code>", "" }}
