@@ -21,21 +21,19 @@ Everything will work without any plugin, in order to get a good compatibility wi
 
 Every article will be put in the `_posts` folder on the root of the website. In this folder, we will create one folder for each language, in order to stay organized and to declare the language of the articles[[it is quite possible to organized differently the articles, but you may have to provide manually the language in each frontmatter]]:
 
-```
+```r
 _config.yml
 _layouts
 _posts
-       ├──  en
-        │         ├── 2014-09-01-hello-world.md
-        │         └── 0000-01-01-index.md
-        │
-       ├──  fr
-        │         ├── 2014-09-01-bonjour-monde.md
-        │         └── 0000-01-01-journal.md
-        │
-       └── zh
-                   ├── 2014-09-01-你好世界.md
-                   └── 0000-01-01-首页.md
+        en
+                2014-09-01-hello-world.md
+                0000-01-01-index.md
+        fr
+                2014-09-01-bonjour-monde.md
+                0000-01-01-journal.md
+        zh
+                2014-09-01-你好世界.md
+                0000-01-01-首页.md
 ```
 
 In this folder, you can freely organise your files. The only rule is to name each post with the publication date, followed by its identifier. 

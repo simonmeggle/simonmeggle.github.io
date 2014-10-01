@@ -24,17 +24,15 @@ L'intégralité des pages vont être rangées dans le dossier `_posts` à la rac
 _config.yml
 _layouts
 _posts
-       ├──  en
-        │         ├── 2014-09-01-hello-world.md
-        │         └── 0000-01-01-index.md
-        │
-       ├──  fr
-        │         ├── 2014-09-01-bonjour-monde.md
-        │         └── 0000-01-01-journal.md
-        │
-       └── zh
-                   ├── 2014-09-01-你好世界.md
-                   └── 0000-01-01-首页.md
+        en
+                2014-09-01-hello-world.md
+                0000-01-01-index.md
+        fr
+                2014-09-01-bonjour-monde.md
+                0000-01-01-journal.md
+        zh
+                2014-09-01-你好世界.md
+                0000-01-01-首页.md
 ```
 
 Au sein de ceux-ci, l'organisation des fichiers en sous-dossiers est entièrement libre. La seule contrainte est que tous les fichiers doivent avoir un nom de fichier indiquant la date, suivi de l'identifiant qui apparaîtra dans l'URL.
