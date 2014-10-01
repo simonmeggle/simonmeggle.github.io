@@ -1,14 +1,12 @@
----
-layout: default
----
+{% capture compress %}
 {% assign temp1 = content | split: '<pre>' %}
-{% for temp2 in temp1 %}{% assign temp3 = temp2 | split: '</pre>' %}
+{% for temp2 in temp1 %}
+{% assign temp3 = temp2 | split: '</pre>' %}
 
 {% if temp3.size == 2 %}
 
   {% assign pre = temp3.first %}
-  {% assign pre = pre | newline_to_br  | replace: "<br />", "</code><code>" %}
-  {% assign pre = pre | strip_newlines | replace: "<code></code>", "" %}
+  {% assign pre = pre | newline_to_br  | replace: "<br />", "</code><code>" | replace: "<code></code>", "" %}
   <pre>{{ pre }}</pre>
 
 {% endif %}
@@ -27,6 +25,7 @@ layout: default
   {% assign typo = typo | replace: ' ?', '<span style="white-space:nowrap">&thinsp;</span>?' %}
 {% endif %}
 
-{{ typo }}
+{{ typo | split: ' ' | join: ' '}}
 
 {% endfor %}
+{% endcapture %}{{ compress | strip_newlines }}

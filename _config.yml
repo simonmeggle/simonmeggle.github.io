@@ -12,7 +12,7 @@ defaults:
       path: ""
     values:
       lang: en
-      layout: typo
+      layout: default
   -
     scope:
       path: _posts/fr
