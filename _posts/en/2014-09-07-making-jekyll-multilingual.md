@@ -23,15 +23,15 @@ Every article will be put in the `_posts` folder on the root of the website. In 
 
 ```r
 _config.yml
-_layouts
-_posts
-        en
+_layouts/
+_posts/
+        en/
                 2014-09-01-hello-world.md
                 0000-01-01-index.md
-        fr
+        fr/
                 2014-09-01-bonjour-monde.md
                 0000-01-01-journal.md
-        zh
+        zh/
                 2014-09-01-你好世界.md
                 0000-01-01-首页.md
 ```
