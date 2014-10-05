@@ -11,21 +11,21 @@
 
 {% endif %}
 
-{% assign typo = temp3.last %}
+{% assign t = temp3.last %}
 
-{% assign typo = typo | replace: '&#39;', '’' | replace: '~', '&nbsp;' %}
-{% assign typo = typo | replace: '[[', '<span class="as"></span><span class="br"> (</span><span class="mar">' %}
-{% assign typo = typo | replace: ']]', '</span><span class="br">)</span>' %}
+{% assign t = t | replace: '&#39;', '’' | replace: '~', '&nbsp;' %}
+{% assign t = t | replace: '[[', '<span class="as"></span><span class="br"> (</span><span class="mar">' %}
+{% assign t = t | replace: ']]', '</span><span class="br">)</span>' %}
 
 {% if page.lang == 'fr' %}
-{% assign typo = typo | replace: '&ldquo;' , '«&#160;' | replace: '&rdquo;' , '&#160;»' %}
-{% assign typo = typo | replace: ' :',       '&#160;:' | replace: ' %',       '&#160;%' %}
-{% assign typo = typo | replace: ' ;', '<span style="white-space:nowrap">&thinsp;</span>;' %}
-{% assign typo = typo | replace: ' !', '<span style="white-space:nowrap">&thinsp;</span>!' %}
-{% assign typo = typo | replace: ' ?', '<span style="white-space:nowrap">&thinsp;</span>?' %}
+{% assign t = t | replace: '&ldquo;' , '«&#160;' | replace: '&rdquo;' , '&#160;»' %}
+{% assign t = t | replace: ' :',       '&#160;:' | replace: ' %',       '&#160;%' %}
+{% assign t = t | replace: ' ;', '<span style="white-space:nowrap">&thinsp;</span>;' %}
+{% assign t = t | replace: ' !', '<span style="white-space:nowrap">&thinsp;</span>!' %}
+{% assign t = t | replace: ' ?', '<span style="white-space:nowrap">&thinsp;</span>?' %}
 {% endif %}
 
-{{ typo | split: ' ' | join: ' '}}
+{{ t | split: ' ' | join: ' '}}
 
 {% endfor %}
 {% endcapture %}{{ compress | strip_newlines | replace: "<code></code>", "" }}
