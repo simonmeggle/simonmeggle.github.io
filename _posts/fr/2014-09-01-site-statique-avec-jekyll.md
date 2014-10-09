@@ -60,20 +60,20 @@ Le répertoire de votre site pourra alors ressembler à :
 
 ```r
 monsite/
-       ├──  _includes/
-       ├──  _layouts/
-        │           ├── default.html
-        │           ├── page.html
-        │           └── post.html
-       ├──  _posts/
-        │           └── 2014-08-24-site-statique-avec-jekyll.md
-       ├──  medias/
-        │           ├── style.sass
-        │           ├── script.js
-        │           └── favicon.ico
-       ├──  index.html
-       ├──  rss.xml
-       └──  _config.yml
+        _includes/
+        _layouts/
+                default.html
+                page.html
+                post.html
+        _posts/
+                2014-08-24-site-statique-avec-jekyll.md
+        medias/
+                style.sass
+                script.js
+                favicon.ico
+        index.html
+        rss.xml
+        _config.yml
 ```
 
 Vous pouvez ajouter n'importe quel autre dossier, ou fichier, dans le répertoire de votre site. Tant qu'ils ne commencent pas par un tiret bas, ceux-ci seront directement générés au même emplacement par *Jekyll*. 

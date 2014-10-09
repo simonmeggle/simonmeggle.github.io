@@ -60,20 +60,20 @@ The tree structure may then looks like:
 
 ```r
 mysite/
-       ├──  _includes/
-       ├──  _layouts/
-        │           ├── default.html
-        │           ├── page.html
-        │           └── post.html
-       ├──  _posts/
-        │           └── 2014-08-24-static-website-with-jekyll.md
-       ├──  medias/
-        │           ├── style.sass
-        │           ├── script.js
-        │           └── favicon.ico
-       ├──  index.html
-       ├──  rss.xml
-       └──  _config.yml
+        _includes/
+        _layouts/
+                default.html
+                page.html
+                post.html
+        _posts/
+                2014-08-24-static-website-with-jekyll.md
+        medias/
+                style.sass
+                script.js
+                favicon.ico
+        index.html
+        rss.xml
+        _config.yml
 ```
 
 You can add any folder or file in your website folder. If they don't start with an underscore, *Jekyll* will generate them on the same location. 
