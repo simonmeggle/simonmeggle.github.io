@@ -33,7 +33,7 @@ sudo gem install jekyll
 *On Mac OS X*, first install [*Homebrew*](http://brew.sh/)[[if you don't already have them, a window will ask you to install the "Command Line Tools": you need to install them]] and [*Ruby version manager*](http://rvm.io/) with the last stable version of *Ruby*, then install *Jekyll*:
 
 ```bash
-ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 \curl -L https://get.rvm.io | bash -s stable --ruby
 source ~/.rvm/scripts/rvm
 gem install jekyll
