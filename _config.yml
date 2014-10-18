@@ -1,5 +1,4 @@
 permalink: /:title/
-future: false
 markdown: redcarpet
 redcarpet:
   extensions: ['smart', 'superscript']
