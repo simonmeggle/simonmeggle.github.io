@@ -80,27 +80,20 @@ Il va ainsi nous être possible, à l'aide d'une boucle, d'appliquer certains fi
 {% for temp2 in temp1 %}
 {% assign temp3 = temp2 | split: '</pre>' %}
 {% if temp3.size == 2 %}
-{% assign code_blocks = temp3.first %}
-<pre>{{ code_blocks }}</pre>
+<pre>{{ temp3.first }}</pre>
 {% endif %}
-{% assign everything_else = temp3.last %}
-{{ everything_else }}
+{{ temp3.last }}
 {% endfor %}
 {% endraw %}
 ```
 
-Nous pouvons alors, sur cette base, appliquer des filtres soit uniquement aux blocs de code[[en ajoutant un filtre à `{%raw%}{{code_blocks}}{%endraw%}`]], comme par exemple rajouter des balises `<code>` à chaque ligne, ou au contraire le reste du code source du site[[en modifiant cette fois-ci `{%raw%}{{everything_else}}{%endraw%}`]], pour par exemple améliorer la typographie.
+Nous pouvons alors, sur cette base, appliquer des filtres soit uniquement aux blocs de code[[en ajoutant un filtre à `{%raw%}{{temp3.first}}{%endraw%}`]], comme par exemple [rajouter des balises `<code>` à chaque ligne pour les numéroter](http://sylvain.durand.tf/numeroter-les-lignes-de-code-avec-css/), ou au contraire le reste du code source du site[[en modifiant cette fois-ci `{%raw%}{{temp3.last}}{%endraw%}`]], pour par exemple améliorer la typographie.
 
 ## Compression du code HTML
 
-Il ne nous reste désormais qu'à compresser le code HTML. Nous ne voulons pas toucher au contenu des blocs de code, en revanche nous allons supprimer tous les espaces multiples et les sauts de ligne pour le reste du code. Pour cela, on utilise `split` pour chaque espace, puis `join` :
+Il ne nous reste désormais qu'à compresser le code HTML. Dans les blocs de code, nous préservons les sauts de ligne en les transformant en `<br/>` avec le filtre `newline_to_br`. En dehors, supprimons tous les espaces multiples et les sauts de ligne pour le reste du code avec `split` sur chaque espace, puis `join`.
 
-```r
-{% raw %}
-{{ everything_else | split: ' ' | join: ' '}}
-```
-
-On obtient donc le code suivant :
+En reprenant le code précédent, on obtient alors :
 
 ```r
 {% raw %}
@@ -108,19 +101,28 @@ On obtient donc le code suivant :
 {% for temp2 in temp1 %}
 {% assign temp3 = temp2 | split: '</pre>' %}
 {% if temp3.size == 2 %}
-{% assign code_blocks = temp3.first %}
-<pre>{{ code_blocks }}</pre>
+<pre>{{ temp3.first | newline_to_br }}</pre>
 {% endif %}
-{% assign everything_else = temp3.last %}
-{{ everything_else | split: ' ' | join: ' '}}
+{{ temp3.last | split: ' ' | join: ' ' }}
 {% endfor %}
 {% endraw %}
 ```
 
-Enfin, nous enlevons tous les sauts de lignes de ce fichier pour éviter que Jekyll n'en ajoute au moment de le traiter :
+Enfin, nous enlevons tous les sauts de lignes en capturant l'ensemble, puis en y appliquant le filtre `strip_newlines` :
 
 ```r
-{% raw %}{% assign temp1 = content | split: '<pre>' %}{% for temp2 in temp1 %}{% assign temp3 = temp2 | split: '</pre>' %}{% if temp3.size == 2 %}{% assign code_blocks = temp3.first %}<pre>{{ code_blocks }}</pre>{% endif %}{% assign everything_else = temp3.last %}{{ everything_else | split: ' ' | join: ' '}}{% endfor %}{% endraw %}
+{% raw %}
+{% capture compress %}
+{% assign temp1 = content | split: '<pre>' %}
+{% for temp2 in temp1 %}
+{% assign temp3 = temp2 | split: '</pre>' %}
+{% if temp3.size == 2 %}
+<pre>{{ temp3.first | newline_to_br }}</pre>
+{% endif %}
+{{ temp3.last | split: ' ' | join: ' ' }}
+{% endfor %}
+{% endcapture %}{{ compress | strip_newlines }}
+{% endraw %}
 ```
 
 C'est tout ! Vous pouvez observer que le code source ne tiendra désormais qu'en une seule ligne de code, en dehors des blocs de code `<pre>` où rien n'aura été modifié.

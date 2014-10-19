@@ -72,7 +72,7 @@ The `split` filter can cut a string around a specific substring. For example, th
 {% endraw %}
 ```
 
-It will thus be possible for us, using a loop, apply some filters only for blocks of code, and others in the rest of the page only. Thus, we can apply filters to the entire code of a page without having any influence on the code blocks[[to do this, we first get all the content around `<pre>` and then we split these into two parts, in order to separate content around the `</ pre>` closing tag]] by putting in `compress.html`:
+It will thus be possible for us, using a loop, apply some filters only for blocks of code, and others in the rest of the page only. Thus, we can apply filters to the entire code of a page without having any influence on the code blocks[[to do this, we first get all the content around `<pre>` and then we split these into two parts, in order to separate content around the `</pre>` closing tag]] by putting in `compress.html`:
 
 ```r
 {% raw %}
@@ -80,27 +80,20 @@ It will thus be possible for us, using a loop, apply some filters only for block
 {% for temp2 in temp1 %}
 {% assign temp3 = temp2 | split: '</pre>' %}
 {% if temp3.size == 2 %}
-{% assign code_blocks = temp3.first %}
-<pre>{{ code_blocks }}</pre>
+<pre>{{ temp3.first }}</pre>
 {% endif %}
-{% assign everything_else = temp3.last %}
-{{ everything_else }}
+{{ temp3.last }}
 {% endfor %}
 {% endraw %}
 ```
 
-We can then, based on this, either only apply filters to code blocks[[by adding a filter to `{%raw%}{{code_blocks}}{%endraw%}`]], like for example adding `<code>` tags on each line, or otherwise the rest of the source code of the site[[by modifying `{%raw%}{{everything_else}}{%endraw%}`]], for instance in order to improve typography.
+We can then, based on this, either only apply filters to code blocks[[by adding a filter to `{%raw%}{{temp3.first}}{%endraw%}`]], for example [adding `<code>` tags on each line in order to numerate them](http://sylvain.durand.tf/using-css-to-add-line-numbering/), or otherwise the rest of the source code of the site[[by modifying `{%raw%}{{temp3.last}}{%endraw%}`]], for instance in order to improve typography.
 
 ## Compressing HTML code
 
-Now, we just have to compress the HTML code. We do not want to modify the contents of code blocks, however we will remove all multiple spaces and line breaks for the rest of the code. For this, we will use `split` on each spaces, then `join`:
+Now, we just have to compress the HTML code. In the code blocks, we will transform new lines in `<br/>` in order to preserve line breaks with the `newline_to_br` filter. We will remove all multiple spaces and line breaks for the rest of the code. For this, we will use `split` on each spaces, then `join`. 
 
-```r
-{% raw %}
-{{ everything_else | split: ' ' | join: ' '}}
-```
-
-We get the following code:
+With the previous code, we get:
 
 ```r
 {% raw %}
@@ -108,19 +101,28 @@ We get the following code:
 {% for temp2 in temp1 %}
 {% assign temp3 = temp2 | split: '</pre>' %}
 {% if temp3.size == 2 %}
-{% assign code_blocks = temp3.first %}
-<pre>{{ code_blocks }}</pre>
+<pre>{{ temp3.first | newline_to_br }}</pre>
 {% endif %}
-{% assign everything_else = temp3.last %}
-{{ everything_else | split: ' ' | join: ' '}}
+{{ temp3.last | split: ' ' | join: ' ' }}
 {% endfor %}
 {% endraw %}
 ```
 
-Finally, we remove all the line breaks in order to prevent Jekyll adds them when processing this file:
+Finally, we remove all the line breaks by using a `capture` then the `strip_newline` filter:
 
 ```r
-{% raw %}{% assign temp1 = content | split: '<pre>' %}{% for temp2 in temp1 %}{% assign temp3 = temp2 | split: '</pre>' %}{% if temp3.size == 2 %}{% assign code_blocks = temp3.first %}<pre>{{ code_blocks }}</pre>{% endif %}{% assign everything_else = temp3.last %}{{ everything_else | split: ' ' | join: ' '}}{% endfor %}{% endraw %}
+{% raw %}
+{% capture compress %}
+{% assign temp1 = content | split: '<pre>' %}
+{% for temp2 in temp1 %}
+{% assign temp3 = temp2 | split: '</pre>' %}
+{% if temp3.size == 2 %}
+    <pre>{{ temp3.first | newline_to_br }}</pre>
+{% endif %}
+{{ temp3.last | split: ' ' | join: ' ' }}
+{% endfor %}
+{% endcapture %}{{ compress | strip_newlines }}
+{% endraw %}
 ```
 
 That's it! You can see that it remains only one line of code, outside the `<pre>` code blocks where nothing has been changed.
