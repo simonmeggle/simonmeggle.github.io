@@ -4,7 +4,7 @@
 {% assign temp3 = temp2 | split: '</pre>' %}
 
 {% if temp3.size == 2 %}
-<pre>{{ temp3.first | newline_to_br | replace: "<br />", "</code><code>" }}</pre>
+<pre>{{ temp3.first | newline_to_br | replace: "<br />", "</code><br /><code>" | strip_newlines | replace: "<code></code>", ""}}</pre>
 {% endif %}
 
 {% assign t = temp3.last %}
@@ -21,4 +21,4 @@
 {{ t | split: ' ' | join: ' ' }}
 
 {% endfor %}
-{% endcapture %}{{ compress | strip_newlines | replace: "<code></code>", "" }}
+{% endcapture %}{{ compress | strip_newlines }}
