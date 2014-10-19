@@ -74,5 +74,39 @@ Il ne vous reste qu'à améliorer leur style à votre gré. C'est tout !
 
 Par défaut, le moteur *Markdown* de *Jekyll* ne place qu'un seul élément `<code>` dans les balises `<pre>`, alors qu'il nous en faudrait un pour chaque ligne. 
 
-Nous verrons dans un futur article comment compresser le code HTML avec *Jekyll*, tout en générant des balises `<code>` à chaque ligne, nous permettant donc de les numéroter.
+Nous avons vu, dans l'article "[compresser le HTML produit par *Jekyll*](http://sylvain.durand.tf/compresser-le-code-html-de-jekyll/)", qu'il était possible de compresser notre code HTML en créant un fichier `compress.html` dans `_layout/`[[en ajoutant ensuite `layout: compress` dans l'entête des fichiers présents dans `_layout` concernés]] qui contenait :
+
+```r
+{% raw %}
+{% capture compress %}
+{% assign temp1 = content | split: '<pre>' %}
+{% for temp2 in temp1 %}
+{% assign temp3 = temp2 | split: '</pre>' %}
+{% if temp3.size == 2 %}
+<pre>{{ temp3.first | newline_to_br }}</pre>
+{% endif %}
+{{ temp3.last | split: ' ' | join: ' ' }}
+{% endfor %}
+{% endcapture %}{{ compress | strip_newlines }}
+{% endraw %}
+```
+
+Pour ajouter une balise `<code>` pour chaque ligne, il suffit d'appliquer à `temp3.first` le filtre `replace` pour remplacer les `<br/>`par `</code><br /><code>`. On supprime ensuite les sauts de ligne avec `strip_newlines`, et enfin on supprime la dernière ligne vide qui subsiste. On obtient alors le code suivant :
+
+```r
+{% raw %}
+{% capture compress %}
+{% assign temp1 = content | split: '<pre>' %}
+{% for temp2 in temp1 %}
+{% assign temp3 = temp2 | split: '</pre>' %}
+{% if temp3.size == 2 %}
+<pre>{{ temp3.first | newline_to_br | replace: "<br />", "</code><br /><code>" | strip_newlines | replace: "<code></code>", ""}}</pre>
+{% endif %}
+{{ temp3.last | split: ' ' | join: ' ' }}
+{% endfor %}
+{% endcapture %}{{ compress | strip_newlines }}
+{% endraw %}
+```
+
+
 

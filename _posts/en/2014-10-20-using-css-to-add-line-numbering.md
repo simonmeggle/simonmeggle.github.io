@@ -74,4 +74,38 @@ It only remains to improve their style as desired. That's it!
 
 By default, *Markdown* engine wraps code in only one `<code>` tag, instead of one tag for each line. 
 
-We will see in a future article how to compress the HTML code with *Jekyll*, while generating tags `<code>` to each line, thus allowing us to number them.
+
+In the article "[compressing *Jekyll* generated HTML](http://sylvain.durand.tf/compressing-jekyll-generated-html/)", we saw it is possible to compress the HTML code by creating a `compress.html` file inside `_layout/`[[then you need to add `layout: compress` into the frontmatters of the different files in `_layout`]] with the following code:
+
+```r
+{% raw %}
+{% capture compress %}
+{% assign temp1 = content | split: '<pre>' %}
+{% for temp2 in temp1 %}
+{% assign temp3 = temp2 | split: '</pre>' %}
+{% if temp3.size == 2 %}
+<pre>{{ temp3.first | newline_to_br }}</pre>
+{% endif %}
+{{ temp3.last | split: ' ' | join: ' ' }}
+{% endfor %}
+{% endcapture %}{{ compress | strip_newlines }}
+{% endraw %}
+```
+
+In order to add a `<code>` tag on each line, we just have to apply to `temp3.first` the `replace` filter in order to replace `<br/>` with `</code><br /><code>`. Then, we delete breaks with `strip_newlines`, and the last empty line. It gives us the following code:
+
+```r
+{% raw %}
+{% capture compress %}
+{% assign temp1 = content | split: '<pre>' %}
+{% for temp2 in temp1 %}
+{% assign temp3 = temp2 | split: '</pre>' %}
+{% if temp3.size == 2 %}
+<pre>{{ temp3.first | newline_to_br | replace: "<br />", "</code><br /><code>" | strip_newlines | replace: "<code></code>", ""}}</pre>
+{% endif %}
+{{ temp3.last | split: ' ' | join: ' ' }}
+{% endfor %}
+{% endcapture %}{{ compress | strip_newlines }}
+{% endraw %}
+```
+
