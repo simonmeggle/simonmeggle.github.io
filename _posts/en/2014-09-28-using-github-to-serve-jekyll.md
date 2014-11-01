@@ -57,7 +57,7 @@ It is then easy to maintain and edit the website with `git` :
 * `git commit` valids thoses changes;
 * `git push` sends them on *GitHub*.
 
-For instance, in order to send our new website, we add every files, then we use  `git commit` then `git push` :
+For instance, in order to send our new website, we add every file, then we use  `git commit` then `git push` :
 
 ```bash
 git add --all
@@ -75,7 +75,7 @@ We will now see how to use *GitHub* to generate, then host and serve the website
 ### Being able to reproduce *GitHub* settings
 Each time you will use `git push`, your website will be automatically generated on *GitHub*.
 
-This is why it is highly important to make sure everything is going to work perfectly, if we don't want to broke our website online. In order to ensure your computer most closely matches the GitHub Pages settings, the best way to do is to use `bundler`:
+This is why it is highly important to make sure everything is going to work perfectly, if we don't want to break our website online. In order to ensure your computer most closely matches the GitHub Pages settings, the best way to do is to use `bundler`:
 
 ```
 gem install bundler
@@ -88,24 +88,24 @@ source 'https://rubygems.org'
 gem 'github-pages'
 ```
 
-You can then use `bundle install` in order to install them. The `bundle update` command will ensure you always have an up to date system.
+You can then use `bundle install` in order to install the gem(s). The `bundle update` command will ensure you always have an up to date system.
 
-The `bundle exec jekyll serve` command will now generates the website exactly as *Github* would do, so you can check on `http://localhost:4000` that everything is right before pushing anything.
+The `bundle exec jekyll serve` command will now generate the website exactly as *Github* would do, so you can check on `http://localhost:4000` that everything is right before pushing anything.
 
 ### Activating *GitHub Pages*
 Back on *GitHub*, go in the `username.github.io` repository, choose `Settings`, then the `GitHub Pages` section in order to activate the website generation. 
 
-Within a few moments (the first time, it can takes a dozen of minutes, but then the website will be generated in a couple of seconds each time you push a commit), your website will be available on `http://username.github.io`[[it is also available in HTTPS on `https://username.github.io`]].
+Within a few moments (the first time, it can take a dozen of minutes, but then the website will be generated in a couple of seconds each time you push a commit), your website will be available on `http://username.github.io`[[it is also available in HTTPS on `https://username.github.io`]].
 
 ### Using a custom domain name
 If you have a custom domain name "`domain.tld`", it is of course possible to use it instead of the default URL given by *GitHub*, which will then redirect to the new domain name. However, it won't be possible to use HTTPS[[if you try to go to ``https://domain.tld`, you will get a blank page showing `unknown domain: domain.tld`]].
 
-If you want to use a subdomain `subdomain.domain.tld`, tells your registar to create a `CNAME` record, with the `subdomain` name and the `username.github.io` value. Then, create a file named `CNAME` on the root of the repository, containing exactly `subdomain.domain.tld`.
+If you want to use a subdomain `subdomain.domain.tld`, tell your registar to create a `CNAME` record, with the `subdomain` name and the `username.github.io` value. Then, create a file named `CNAME` on the root of the repository, containing exactly `subdomain.domain.tld`.
 
 If you want to use an Apex domain, follow the [GitHub guide](https://help.github.com/articles/about-custom-domains-for-github-pages-sites).
 
 ### Custom 404 error page
-*GitHub* allows you to get a custom 404 error page[[when you test your website locally with `bundle exec jekyll serve`, this error page also works: you can try by providing an incorrect URL]] : just ask *Jekyll* to create a `404.html` on the root:
+*GitHub* allows you to have a custom 404 error page. When you test your website locally with `bundle exec jekyll serve`, this error page also works: you can try by providing an incorrect URL. Just tell *Jekyll* to create a `404.html` on the root:
 
 ```html
 ---
@@ -119,15 +119,15 @@ This page must have been removed or had its name changed.
 ## To go further
 
 ### Writing and editing your articles online with *Prose* 
-One of the main disadvantages of static websites is the impossibility to edite them online, without your computer.
+One of the main disadvantages of static websites is the impossibility to edit them online without your computer.
 
-Because your website is hosted on *GitHub*, it is possible to modify directly online, *Pages* generating the website each time you modify it. You can also use the *[Prose.io](http://prose.io/)* website, which provides a nice interface, a great syntax highlight and a preview system in order to write your articles.
+Because your website is hosted on *GitHub*, it is possible to modify files directly online. Jekyll generates *Pages* each time you modify a page. You can also use the *[Prose.io](http://prose.io/)* website, which provides a nice interface, a great syntax highlighting and a preview system in order to write your articles.
 
-On the *[Prose.io](http://prose.io/)* website, use your *GitHub* login informations and allow *Prose* to see and change your repositories. You can then create and edite your articles, or any other file of the website.
+On the *[Prose.io](http://prose.io/)* website, use your *GitHub* login information and allow *Prose* to see and change your repositories. You can then create and edit your articles, or any other file of the website.
 
 ### Using *Travis* to check your website
 
-*[Travis](https://travis-ci.org/)* allows your to generate the website each time you *push* something, in order to check nothing is wrong. It is also possible to add some other tests, as `htmlproofer` which check if the HTML code is valid and their is no links rot. You will get an email to warn you if anything is wrong.
+*[Travis](https://travis-ci.org/)* allows your to generate the website each time you *push* something, in order to check nothing is wrong. It is also possible to add some other tests like `htmlproofer` which checks if the HTML code is valid and there are no rotten links. You will get a warning email if something is wrong.
 
 To do so, use your *GitHub* login informations on *[Travis](https://travis-ci.org/)*, then enable the `username.github.io` repository. Then, add `htmlproofer` in your `Gemfile` file, which now looks like:
 
