@@ -110,7 +110,7 @@ defaults:
 
 ### Écriture des articles avec *Markdown*
 
-Par défaut, les articles s'écrivent en [*Markdown*](http://daringfireball.net/projects/markdown/basics). L'objectif de ce langage est de proposer une syntaxe très simple permettant de rédiger les articles en évitant les balises HTML les plus courantes. Ainsi, "*italique*" s'obtient avec `*italique*`, et "*gras*" avec `*gras*`. Il reste cependant toujours possible d'utiliser HTML au sein des articles.
+Par défaut, les articles s'écrivent en [*Markdown*](http://daringfireball.net/projects/markdown/basics). L'objectif de ce langage est de proposer une syntaxe très simple permettant de rédiger les articles en évitant les balises HTML les plus courantes. Ainsi, "*italique*" s'obtient avec `*italique*`, et "**gras**" avec `**gras**`. Il reste cependant toujours possible d'utiliser HTML au sein des articles.
 
 Depuis sa deuxième version, *Jekyll* utilise *Kramdown* qui ajoute de nombreuses fonctionnalités telles que la possibilité d'attribuer des classes aux éléments, les notes de bas de page, les listes de définition, les tableaux... 
 
