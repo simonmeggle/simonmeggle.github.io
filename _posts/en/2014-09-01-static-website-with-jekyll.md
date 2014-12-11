@@ -110,7 +110,7 @@ defaults:
 
 ### Writing articles with *Markdown*
 
-By default, *Jekyll* use [*Markdown*](http://daringfireball.net/projects/markdown/basics). The purpose of this language is to provide a very simple syntax to replace the most commons HTML tags. For example, `*italic` gives "*italic*" and `*bold*` gives "*bold*". It is however still quite possible to use HTML in posts.
+By default, *Jekyll* use [*Markdown*](http://daringfireball.net/projects/markdown/basics). The purpose of this language is to provide a very simple syntax to replace the most commons HTML tags. For example, `*italic*` gives "*italic*" and `**bold**` gives "**bold**". It is however still quite possible to use HTML in posts.
 
 From its second version, *Jekyll* uses *Kramdown* which add many features like the possibility of giving CSS classes to elements, footnotes, definition lists, tables... 
 
