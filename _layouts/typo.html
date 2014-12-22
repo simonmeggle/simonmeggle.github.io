@@ -1,10 +1,9 @@
 {% capture compress %}
-{% assign temp0 = content | split: '</body>' %}
+{% assign temp0 = content | split: '</head>' %}
 {{ temp0.first }}
 {% assign temp1 = temp0.last | split: '<pre>' %}
 {% for temp2 in temp1 %}
 {% assign temp3 = temp2 | split: '</pre>' %}
-
 {% if temp3.size == 2 %}
 <pre>{{ temp3.first | newline_to_br | replace: "<br />", "</code><br /><code>" | strip_newlines | replace: "<code></code>", ""}}</pre>
 {% endif %}
