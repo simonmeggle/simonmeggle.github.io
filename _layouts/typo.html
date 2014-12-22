@@ -1,5 +1,7 @@
 {% capture compress %}
-{% assign temp1 = content | split: '<pre>' %}
+{% assign temp0 = content | split: '</body>' %}
+{{ temp0.first }}
+{% assign temp1 = temp0.last | split: '<pre>' %}
 {% for temp2 in temp1 %}
 {% assign temp3 = temp2 | split: '</pre>' %}
 
