@@ -12,7 +12,7 @@ Many initiatives exist for improving the support of the English typography, incl
 
 ### Kramdown and Typogruby
 
-Since version 2.0, *Jekyll* use by default [[no special configuration is required to enable it]] *Kramdown* engine and Typogruby extension, which:
+Since version 2.0, *Jekyll* use by default[[no special configuration is required to enable it]] *Kramdown* engine and Typogruby extension, which:
 
 * transforms the ellipsis `...` in its symbol... ;
 * convert quotation marks `""` in English quotation marks “” ;

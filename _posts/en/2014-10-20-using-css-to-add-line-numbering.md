@@ -4,23 +4,7 @@ title: Using <em>CSS</em> to add<br/> line numbering
 
 When you want to display a code listing with *HTML*, you use a `<pre>` tag in order to indicate that the text is preformatted[[and therefore the spaces and line breaks must be respected]], then inside one or multiple `<code>` tags to specify this text is a code.
 
-On this website, the line numbers appears on the left of code listings, like most word processors. For example: 
-
-```ruby
-class Greeter
-  def initialize(name)
-    @name = name.capitalize
-  end
-  def salute
-    puts "Hello #{@name}!"
-  end
-end
-
-g = Greeter.new("world")
-g.salute
-```
-
-On the Internet, the methods to achieve this vary widely: many use *jQuery* or *Javascript*, unorthodox HTML codes, or even tables... 
+On this website, the line numbers appears on the left of code listings, like most word processors. The methods to achieve this vary widely: many use *jQuery* or *Javascript*, ugly HTML codes, or even tables... 
 
 Yet it is possible to achieve this in a simple way, using only CSS and HTML. The line numbers won't be selected when the user wants to copy the code.
 
@@ -60,7 +44,7 @@ code:before{
 }
 ```
 
-With *Webkit* browsers, select the code to copy it gives the impression that the numbers are selected[[although fortunately they are not copied]]. To avoid this, simply use the property `user-select`:
+With *Webkit* browsers, selecting the code to copy it gives the impression that the numbers are selected[[although fortunately they are not copied]]. To avoid this, simply use the property `user-select`:
 
 ```css
 code:before{

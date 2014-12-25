@@ -4,25 +4,9 @@ title: Numéroter les lignes <br/> de code avec <em>CSS</em>
 
 Lorsque l'on souhaite afficher un bloc de lignes de code en HTML, on utilise une balise `<pre>`, pour indiquer que le texte est préformaté[[et donc en particulier que les espaces et sauts de ligne doivent être respectés]] dans laquelle on place une balise ou plusieurs balises `<code>`, pour indiquer qu'il s'agit bien de code. 
 
-Sur ce site, la numérotation des lignes apparaît à gauche de chacune d'entres elles, comme le permettent la plupart des traitements de texte. Par exemple :
+Sur ce site, la numérotation des lignes apparaît à gauche de chacune d'entres elles, comme le permettent la plupart des traitements de texte. Les techniques pour obtenir ce résultat sont très variables : beaucoup utilisent *jQuery* ou *Javascript*, des codes HTML douteux, voire même des tableaux...
 
-```ruby
-class Greeter
-  def initialize(name)
-    @name = name.capitalize
-  end
-  def salute
-    puts "Hello #{@name}!"
-  end
-end
-
-g = Greeter.new("world")
-g.salute
-```
-
-Sur Internet, les techniques pour obtenir ce résultat sont très variables : beaucoup utilisent *jQuery* ou *Javascript*, des codes HTML peu catholiques, voire même des tableaux...
-
-Pourtant, il est possible d'obtenir ce résultat de façon très simple, uniquement à l'aide de CSS et HTML, sans gêner l'utilisateur et en permettant de copier le code sans que ne se copie les nombres.
+Pourtant, il est possible d'obtenir ce résultat de façon très simple, uniquement à l'aide de CSS et HTML, sans gêner l'utilisateur et en permettant de copier le code sans que ne se copient les nombres.
 
 ## HTML
 La seule condition qui va peser sur notre HTML est d'utiliser une balise `<code>` pour chaque ligne de code. Cela produit un code HTML parfaitement valide, et nous permettra de numéroter chaque ligne directement à avec CSS :
