@@ -2,9 +2,9 @@
 title: Improving typography <br/> with <em>Jekyll</em>
 ---
 
-Observe the Internet typographical rules is not always easy. Although Unicode reserves many areas of characters for typographic symbols, punctuation marks and spaces of different lengths, difficult entry on the keyboard makes virtually unused.
+Observing typographical rules on the Internet is not always easy. Although Unicode reserves many areas of characters for typographic symbols, many punctuation marks and spaces are most of the time unused.
 
-With *Jekyll*, the articles are written very simply Markdown before being generated in HTML by the engine: it is at this point that we can add automatic rules to improve typography on our site without express concern ourselves when writing articles.
+With *Jekyll*, the articles are written very simply with Markdown before being generated in HTML by the engine: we can add automatic rules to improve typography on our site without carrying about it when writing articles.
 
 
 ## English typography
