@@ -56,7 +56,7 @@ layout: typo
 </div>
 
 <style>
-  h1{ background-image:url('data:image/jpg;base64,{% for h in site.data.headers %}{% if h.date == page.date %}{{ h.image }}{% endif %}{% endfor %}');}
+  h1{ background-image:url('data:image/jpg;base64,{% assign d = page.date|date:'%Y-%m-%d' %}{{ site.data.headers[d].img }}');}
 </style>
 </body>
 </html>
