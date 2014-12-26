@@ -17,33 +17,3 @@ defaults:
       path: _posts/fr
     values:
       lang: fr
-nav:
-  en:
-    logo:
-      title: "sylvain durand"
-      url:   "/"
-    journal:
-      title: "journal"
-      url:   "/index.html"
-    about:
-      title: "about"
-      url:   "/about/"
-  fr:
-    logo:
-      title: "sylvain durand"
-      url:   "/journal/"
-    journal:
-      title: "journal"
-      url:   "/journal/"
-    about:
-      title: "à propos"
-      url:   "/a-propos/"
-t:
-  en:
-    created: "Published on the"
-    author: "by"
-    description: "Personal website, made with real pieces of code: articles about Jekyll, Raspberry Pi, R..."
-  fr:
-    created: "Publié le"
-    author: "par"
-    description: "Site personnel, avec des vrais bouts de code dedans : articles sur Jekyll, Raspberry Pi, R..."

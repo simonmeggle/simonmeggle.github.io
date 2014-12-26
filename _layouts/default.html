@@ -24,7 +24,7 @@ layout: typo
 
 <div class="nav">
   <ul>
-    {% for menu in site.nav[page.lang] %}
+    {% for menu in site.data.navigation[page.lang] %}
       <li><a href="{{ menu[1].url }}">{{ menu[1].title }}</a></li>
     {% endfor %}
     <li class="lang">
@@ -51,8 +51,8 @@ layout: typo
 </div>
 
 <div class="foot">
-  {{ site.t[page.lang].created }} <span>{% include date.html date=page.date %}</span>
-  {{ site.t[page.lang].author }}  <a href="https://github.com/sylvaindurand/">Sylvain Durand</a>.
+  {{ site.data.translations[page.lang].created }} <span>{% include date.html date=page.date %}</span>
+  {{ site.data.translations[page.lang].author }}  <a href="https://github.com/sylvaindurand/">Sylvain Durand</a>.
 </div>
 
 <style>
