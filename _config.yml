@@ -1,7 +1,9 @@
 permalink: /:title/
+
 markdown: redcarpet
 redcarpet:
   extensions: ['smart', 'superscript']
+
 gems:
   - jekyll-redirect-from
 
