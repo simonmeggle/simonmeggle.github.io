@@ -73,7 +73,7 @@ Une fois l'adresse du Raspberry Pi connue (nous prendrons `192.168.1.1` pour exe
 ssh root@192.168.1.1
 ```
 
-Validez alors le certificat de sécurité qui est présenté, puis entrez le mot de passe par défaut `raspberry`. Nous voilà connecté à notre Raspberry Pi !
+Validez alors le certificat de sécurité qui est présenté, puis entrez le mot de passe par défaut `root`. Nous voilà connecté à notre Raspberry Pi !
 
 
 ### Depuis n'importe où

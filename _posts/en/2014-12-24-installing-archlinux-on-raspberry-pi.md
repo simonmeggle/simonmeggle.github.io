@@ -72,7 +72,7 @@ Once the address of the Raspberry Pi known (we will use `192.168.1.1` in the fol
 ssh root@192.168.1.1
 ```
 
-Then validate the security certificate, and enter the default password `raspberry`. Here we are connected to our Raspberry Pi!
+Then validate the security certificate, and enter the default password `root`. Here we are connected to our Raspberry Pi!
 
 
 ### From anywhere
