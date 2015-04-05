@@ -53,7 +53,7 @@ Nous allons montrer ici comment faire en sorte que *Jekyll* génère automatique
 
 Il faut prendre garde de n'appliquer les modifications que dans les paragraphes de texte, et non au sein des blocs de code qui pourraient devenir inutilisables pour les utilisateurs qui les copieront[[les codes qui ne compileront à cause d'espaces particulières seront difficiles à débugger]].
 
-Nous avons vu, dans l'article "[compresser le HTML produit par *Jekyll*](http://sylvain.durand.tf/compresser-le-code-html-de-jekyll/)", qu'il était possible de compresser le code HTML en créant un fichier `compress.html` dans `_layout/`[[en ajoutant ensuite `layout: compress` dans l'entête des fichiers présents dans `_layout` concernés]] qui contenait :
+Nous avons vu, dans l'article "[compresser le HTML produit par *Jekyll*]({{site.base}}/compresser-le-code-html-de-jekyll/)", qu'il était possible de compresser le code HTML en créant un fichier `compress.html` dans `_layout/`[[en ajoutant ensuite `layout: compress` dans l'entête des fichiers présents dans `_layout` concernés]] qui contenait :
 
 ```r 
 {% raw %}
@@ -140,7 +140,7 @@ Finalement, le code suivant permet d'obtenir toutes les améliorations typograph
 {% endraw %}
 ```
 
-Si votre site est multilingue[[par exemple sur la base de l'article [Rendre *Jekyll* multilingue](http://sylvain.durand.tf/rendre-jekyll-multilingue/)]], vous pouvez n'appliquer ces modifications que sur les pages françaises en plaçant, autour des parties concernées :
+Si votre site est multilingue[[par exemple sur la base de l'article [Rendre *Jekyll* multilingue]({{site.base}}/rendre-jekyll-multilingue/)]], vous pouvez n'appliquer ces modifications que sur les pages françaises en plaçant, autour des parties concernées :
 
 ```r
 {% raw %}

@@ -51,7 +51,7 @@ We will show here how to make *Jekyll* automatically generates quotes French and
 
 Care must be taken to apply the changes only in paragraphs, not in code blocks that could become unusable for users that will copy them.
 
-We have seen, in the article "[compressing *Jekyll* generated HTML](http://sylvain.durand.tf/compressing-jekyll-generated-html/)", it is possible to compress HTML by creating a `compress.html` file in `_layout/`[[then, you need to add `layout: compress` in the layout files headers]] which contains:
+We have seen, in the article "[compressing *Jekyll* generated HTML]({{site.base}}/compressing-jekyll-generated-html/)", it is possible to compress HTML by creating a `compress.html` file in `_layout/`[[then, you need to add `layout: compress` in the layout files headers]] which contains:
 
 ```r 
 {% raw %}
@@ -138,7 +138,7 @@ Finally, the following code provides all the typographical improvements presente
 {% endraw %}
 ```
 
-If your website is multilingual[[as explained, for example, in the article [Making *Jekyll* multilingual](http://sylvain.durand.tf/making-jekyll-multilingual/)]], you can restrict the previous modifications to the French articles, by adding around:
+If your website is multilingual[[as explained, for example, in the article [Making *Jekyll* multilingual]({{site.base}}/making-jekyll-multilingual/)]], you can restrict the previous modifications to the French articles, by adding around:
 
 ```r
 {% raw %}

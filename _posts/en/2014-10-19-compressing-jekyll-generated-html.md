@@ -35,7 +35,7 @@ To avoid this, the easiest way is to compress the generated source code, by remo
 For this we have two constraints:
 
 * we musn't compress codes inside `<pre>` tags, in which spaces and lines breaks are important;
-* we don't want to use plugins in order to be able to [host our website on *GitHub Pages*](http://sylvain.durand.tf/using-github-to-serve-jekyll/).
+* we don't want to use plugins in order to be able to [host our website on *GitHub Pages*]({{site.base}}/using-github-to-serve-jekyll/).
 
 The method explained in this article is freely inspired by [`jekyll-compress-html`](https://github.com/penibelst/jekyll-compress-html), created by [Anatol Broder](https://github.com/penibelst).
 
@@ -87,7 +87,7 @@ It will thus be possible for us, using a loop, apply some filters only for block
 {% endraw %}
 ```
 
-We can then, based on this, either only apply filters to code blocks[[by adding a filter to `{%raw%}{{temp3.first}}{%endraw%}`]], for example [adding `<code>` tags on each line in order to numerate them](http://sylvain.durand.tf/using-css-to-add-line-numbering/), or otherwise the rest of the source code of the site[[by modifying `{%raw%}{{temp3.last}}{%endraw%}`]], for instance in order to improve typography.
+We can then, based on this, either only apply filters to code blocks[[by adding a filter to `{%raw%}{{temp3.first}}{%endraw%}`]], for example [adding `<code>` tags on each line in order to numerate them]({{site.base}}/using-css-to-add-line-numbering/), or otherwise the rest of the source code of the site[[by modifying `{%raw%}{{temp3.last}}{%endraw%}`]], for instance in order to improve typography.
 
 ## Compressing HTML code
 

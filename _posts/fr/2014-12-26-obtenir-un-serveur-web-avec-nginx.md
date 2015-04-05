@@ -7,7 +7,7 @@ A<em>pache</em> était il y a peu la solution incontournable pour créer un serv
 
 Depuis quelques années, *Nginx* s'est affirmé comme une alternative de grande qualité : bien que très complet du point de vue des fonctionnalités, le logiciel se caractérise par une très grande légereté, qui le permet de tourner sur des configurations très modestes, comme (à tout hasard) un Raspberry Pi.
 
-Dans la ligne de [l'article précédent](http://sylvain.durand.tf/installer-archlinux-sur-raspberry-pi/), nous allons voir comment installer un *Nginx* capable d'utiliser PHP sur un Raspberry Pi sur lequel est installé *Archlinux*. Néanmoins, la procédure restera très similaire sur une autre machine ou une autre configuration[[ce sont essentiellement les commandes `pacman` et `systemctl` qui devront être adaptées]].
+Dans la ligne de [l'article précédent]({{site.base}}/installer-archlinux-sur-raspberry-pi/), nous allons voir comment installer un *Nginx* capable d'utiliser PHP sur un Raspberry Pi sur lequel est installé *Archlinux*. Néanmoins, la procédure restera très similaire sur une autre machine ou une autre configuration[[ce sont essentiellement les commandes `pacman` et `systemctl` qui devront être adaptées]].
 
 ## Installer *Nginx*
 
@@ -64,7 +64,7 @@ systemctl restart nginx
 
 ## Site dynamique
 
-Les sites statiques, [c'est bien](http://sylvain.durand.tf/site-statique-avec-jekyll/), mais pouvoir créer des sites dynamiques est souvent bien utile. Cela permet par exemple, depuis un *Raspberry Pi*, de pouvoir héberger chez soi des applications web comme un lecteur de flux RSS ou un *cloud*. Des exemples sont présentés ci-dessous.
+Les sites statiques, [c'est bien]({{site.base}}/site-statique-avec-jekyll/), mais pouvoir créer des sites dynamiques est souvent bien utile. Cela permet par exemple, depuis un *Raspberry Pi*, de pouvoir héberger chez soi des applications web comme un lecteur de flux RSS ou un *cloud*. Des exemples sont présentés ci-dessous.
 
 ### Installation de PHP
 

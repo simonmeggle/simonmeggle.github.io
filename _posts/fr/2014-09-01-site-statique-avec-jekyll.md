@@ -11,7 +11,7 @@ C'est alors que sont apparus les *sites dynamiques* : les langages de programmat
 - ils supportent mal les montées en charge, et sont ainsi très sensibles aux attaques DDoS ou aux affluences de visiteurs[[il n'est pas rare qu'un site devienne indisponible, par exemple lors d'un événement important ou en raison d'un lien publié sur un site d'actualités]] ;
 - ils constituent souvent de vraies usines à gaz, surdimensionnées vis-à-vis des besoins et nécessitant des bases de données.
 
-Depuis quelques années, les *sites statiques* font leur retour en grâce avec l'apparition des *générateurs de sites statiques*. Sur la base de simples fichiers textes, un programme génère un site composé uniquement de pages statiques qu'il suffit ensuite d'héberger. Ainsi, les problèmes de sécurité sont presque inexistants, il est possible de s'héberger sur un serveur très modeste ou au contraire d'obtenir d'excellentes performances et de supporter de très fortes montées en charge en utilisant un [CDN](https://fr.wikipedia.org/wiki/Content_delivery_network) comme [*Cloudflare*](https://www.cloudflare.com/) ou [*Cloudfront*](http://aws.amazon.com/fr/cloudfront/)[[les façons d'héberger un site statique sur [*Amazon S3*](http://aws.amazon.com/fr/s3/) et [*Cloudfront*](http://aws.amazon.com/fr/cloudfront/) sont détaillés dans "[Site statique avec *Cloudfront*](http://sylvain.durand.tf/site-statique-avec-cloudfront/)"]]. 
+Depuis quelques années, les *sites statiques* font leur retour en grâce avec l'apparition des *générateurs de sites statiques*. Sur la base de simples fichiers textes, un programme génère un site composé uniquement de pages statiques qu'il suffit ensuite d'héberger. Ainsi, les problèmes de sécurité sont presque inexistants, il est possible de s'héberger sur un serveur très modeste ou au contraire d'obtenir d'excellentes performances et de supporter de très fortes montées en charge en utilisant un [CDN](https://fr.wikipedia.org/wiki/Content_delivery_network) comme [*Cloudflare*](https://www.cloudflare.com/) ou [*Cloudfront*](http://aws.amazon.com/fr/cloudfront/)[[les façons d'héberger un site statique sur [*Amazon S3*](http://aws.amazon.com/fr/s3/) et [*Cloudfront*](http://aws.amazon.com/fr/cloudfront/) sont détaillés dans "[Site statique avec *Cloudfront*]({{site.base}}/site-statique-avec-cloudfront/)"]]. 
 
 Il est de plus possible de suivre toutes les modifications et de travailler collaborativement grâce à `git`, de rédiger ses articles en ligne et de générer son site à la volée à l'aide de services comme [*GitHub*](https://pages.github.com/) et [*Prose*](http://prose.io), ou d'avoir un système de commentaires avec [*Disqus*](https://disqus.com/). 
 
@@ -151,8 +151,8 @@ Cet article n'a pas prétention à constituer davantage qu'une très brève intr
 
 Vous pouvez également consulter sur ce site trois autres articles à propos de *Jekyll* :
 
-- [créer un site multilingue avec *Jekyll*](http://sylvain.durand.tf/rendre-jekyll-multilingue/) comme cela a été réalisé ici ;
-- [servir son site à l'aide de *CloudFront*](http://sylvain.durand.tf/servir-son-site-avec-cloudfront/) pour obtenir des performances maximales en termes de disponibilité et de vitesse ;
-- [héberger _Jekyll_ sur GitHub](http://sylvain.durand.tf/utiliser-github-pour-servir-jekyll/) pour pouvoir suivre et modifier votre site en ligne, en le générant à la volée.
+- [créer un site multilingue avec *Jekyll*]({{site.base}}/rendre-jekyll-multilingue/) comme cela a été réalisé ici ;
+- [servir son site à l'aide de *CloudFront*]({{site.base}}/servir-son-site-avec-cloudfront/) pour obtenir des performances maximales en termes de disponibilité et de vitesse ;
+- [héberger _Jekyll_ sur GitHub]({{site.base}}/utiliser-github-pour-servir-jekyll/) pour pouvoir suivre et modifier votre site en ligne, en le générant à la volée.
 
 Enfin, parcourir les [codes sources de sites utilisant *Jekyll*](https://github.com/jekyll/jekyll/wiki/Sites)[[vous êtes notamment libres de consulter le [code source du présent site](https://github.com/sylvaindurand/sylvaindurand.github.io) pour voir comment celui-ci est conçu]], pour vous inspirer, ne peut être qu'une excellente idée. 

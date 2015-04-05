@@ -58,7 +58,7 @@ Il ne vous reste qu'à améliorer leur style à votre gré. C'est tout !
 
 Par défaut, le moteur *Markdown* de *Jekyll* ne place qu'un seul élément `<code>` dans les balises `<pre>`, alors qu'il nous en faudrait un pour chaque ligne. 
 
-Nous avons vu, dans l'article "[compresser le HTML produit par *Jekyll*](http://sylvain.durand.tf/compresser-le-code-html-de-jekyll/)", qu'il était possible de compresser notre code HTML en créant un fichier `compress.html` dans `_layout/`[[en ajoutant ensuite `layout: compress` dans l'entête des fichiers présents dans `_layout` concernés]] qui contenait :
+Nous avons vu, dans l'article "[compresser le HTML produit par *Jekyll*]({{site.base}}/compresser-le-code-html-de-jekyll/)", qu'il était possible de compresser notre code HTML en créant un fichier `compress.html` dans `_layout/`[[en ajoutant ensuite `layout: compress` dans l'entête des fichiers présents dans `_layout` concernés]] qui contenait :
 
 ```r
 {% raw %}

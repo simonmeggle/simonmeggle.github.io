@@ -1,4 +1,5 @@
 permalink: /:title/
+base: sylvain.durand.tf
 
 markdown: redcarpet
 redcarpet:

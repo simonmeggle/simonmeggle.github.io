@@ -4,7 +4,7 @@ title: Using Github <br/> to serve <em>Jekyll</em>
 
 G*itHub* has created a wonderful ecosystem built around the static websites generator *Jekyll*. *[GitHub Pages](https://pages.github.com/)* allows to generate, then to serve automatically *Jekyll* websites. This service, free and quite effective, brings together the best aspects of static websites – speed, reliability, security, ability to use `git` – while allowing their modification online.
 
-In the previous articles, we saw how to [create a static website with *Jekyll*](http://sylvain.durand.tf/static-website-with-jekyll/), then how to [deliver it with *Cloudfront*](http://sylvain.durand.tf/website-delivery-with-cloudfront/). This article aims to show how to:
+In the previous articles, we saw how to [create a static website with *Jekyll*]({{site.base}}/static-website-with-jekyll/), then how to [deliver it with *Cloudfront*]({{site.base}}/website-delivery-with-cloudfront/). This article aims to show how to:
 
 * synchronize your website with `git` on [*GitHub*](https://github.com/) ;
 * generate and serve it on the fly with [*GitHub Pages*](https://pages.github.com/) ;
@@ -49,7 +49,7 @@ git push
 ```
 
 ### Synchronizing the website
-Now, you only have to put your *Jekyll* website in this folder. It may be an existing website, or a newly created one thanks to `jekyll new`[[the article [Creating a static website with *Jekyll*](http://sylvain.durand.tf/static-website-with-jekyll/) explains how to create a simple website with *Jekyll*]].
+Now, you only have to put your *Jekyll* website in this folder. It may be an existing website, or a newly created one thanks to `jekyll new`[[the article [Creating a static website with *Jekyll*]({{site.base}}/static-website-with-jekyll/) explains how to create a simple website with *Jekyll*]].
 
 It is then easy to maintain and edit the website with `git` :
 

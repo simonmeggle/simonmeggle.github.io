@@ -69,7 +69,7 @@ plot(bounderies,  col="#666666", lwd=1, add=TRUE)
 dev.off() 
 ```
 
-[![France blank map](http://sylvain.durand.tf/medias/carto/france.jpg)](http://sylvain.durand.tf/medias/carto/france.pdf)
+[![France blank map]({{site.base}}/medias/carto/france.jpg)]({{site.base}}/medias/carto/france.pdf)
 
 ## Visualizing a data: population density
 
@@ -128,15 +128,15 @@ legend(-10000,6387500,fill=attr(leg, "palette"),
 dev.off() 
 ```
 
-[![Population density in France](http://sylvain.durand.tf/medias/carto/density.jpg)](http://sylvain.durand.tf/medias/carto/density.pdf)
+[![Population density in France]({{site.base}}/medias/carto/density.jpg)]({{site.base}}/medias/carto/density.pdf)
 
 ## Visualizing an external data : incomes 
-The main value is to plot data provided by external files. We will plot the median taxable income per consumption unit ([provided by INSEE](http://www.insee.fr/fr/themes/detail.asp?reg_id=99&ref_id=base-cc-rev-fisc-loc-menage)). [We convert it in CSV](http://sylvain.durand.tf/medias/carto/revenus.csv).
+The main value is to plot data provided by external files. We will plot the median taxable income per consumption unit ([provided by INSEE](http://www.insee.fr/fr/themes/detail.asp?reg_id=99&ref_id=base-cc-rev-fisc-loc-menage)). [We convert it in CSV]({{site.base}}/medias/carto/revenus.csv).
 
 ### Reading and supplementing data
 
 
-Unfortunately, data is missing for more than 5 000 communes, due to tax secrecy. We can "cheat" in order to improve the global render by assigning to those communes the canton (a larger administrative level) median income, given in the [same file](http://www.insee.fr/fr/themes/detail.asp?reg_id=99&ref_id=base-cc-rev-fisc-loc-menage), [converted in CSV](http://sylvain.durand.tf/medias/carto/cantons.csv).
+Unfortunately, data is missing for more than 5 000 communes, due to tax secrecy. We can "cheat" in order to improve the global render by assigning to those communes the canton (a larger administrative level) median income, given in the [same file](http://www.insee.fr/fr/themes/detail.asp?reg_id=99&ref_id=base-cc-rev-fisc-loc-menage), [converted in CSV]({{site.base}}/medias/carto/cantons.csv).
 
 
 
@@ -190,7 +190,7 @@ legend(-10000,6337500,fill=attr(leg, "palette"),
 dev.off() 
 ```
 
-[![Median taxable income per consumption unit in France in 2010](http://sylvain.durand.tf/medias/carto/incomes.jpg)](http://sylvain.durand.tf/medias/carto/incomes.pdf)
+[![Median taxable income per consumption unit in France in 2010]({{site.base}}/medias/carto/incomes.jpg)]({{site.base}}/medias/carto/incomes.pdf)
 
 
 ## Visualizing map data: the road network
@@ -220,7 +220,7 @@ plot(boundaries,  col="#666666", lwd=1, add=TRUE)
 dev.off() 
 ```
 
-[![French roads network](http://sylvain.durand.tf/medias/carto/routes.jpg)](http://sylvain.durand.tf/medias/carto/routes.pdf)
+[![French roads network]({{site.base}}/medias/carto/routes.jpg)]({{site.base}}/medias/carto/routes.pdf)
 
 
 
@@ -258,13 +258,13 @@ plot(graticules, col="#CCCCCC33", lwd=1, add=TRUE)
 dev.off()                          # Saving file
 ```
 
-[![Carte du monde projetée en Winkel Tripel](http://sylvain.durand.tf/medias/carto/monde.jpg)](http://sylvain.durand.tf/medias/carto/monde.pdf)
+[![Carte du monde projetée en Winkel Tripel]({{site.base}}/medias/carto/monde.jpg)]({{site.base}}/medias/carto/monde.pdf)
 
 
 
 ## Visualizing data: Human Development Index
 
-Most frequent usage consists of visualizing data with a color scale. Let's plot the HDI, provided by the United Nations Develment Programme in a [CSV file](http://sylvain.durand.tf/medias/carto/hdi.csv). The procedure is as described above:
+Most frequent usage consists of visualizing data with a color scale. Let's plot the HDI, provided by the United Nations Develment Programme in a [CSV file]({{site.base}}/medias/carto/hdi.csv). The procedure is as described above:
 
 ```r
 # Loading data and merging dataframes
@@ -299,7 +299,7 @@ legend(-15000000,-3000000,fill=attr(leg, "palette"),
 dev.off() 
 ```
 
-[![Human Development Index (HDI) in 2012](http://sylvain.durand.tf/medias/carto/hdi.jpg)](http://sylvain.durand.tf/medias/carto/hdi.pdf)
+[![Human Development Index (HDI) in 2012]({{site.base}}/medias/carto/hdi.jpg)]({{site.base}}/medias/carto/hdi.pdf)
 
 ## Circles visualization: most populated cities
 
@@ -339,7 +339,7 @@ plot(graticules,col="#CCCCCC33",lwd=1, add=TRUE)
 dev.off() 
 ```
 
-[![Most populated cities in the world](http://sylvain.durand.tf/medias/carto/villes.jpg)](http://sylvain.durand.tf/medias/carto/villes.pdf)
+[![Most populated cities in the world]({{site.base}}/medias/carto/villes.jpg)]({{site.base}}/medias/carto/villes.pdf)
 
 
 ## Visualizing map data: urban areas
@@ -359,4 +359,4 @@ plot(areas,  col="#FFFFFF",  border="#FFFFFF66",lwd=1.5, add=TRUE)
 dev.off() 
 ```
 
-[![World map (Winkel Tripel projection)](http://sylvain.durand.tf/medias/carto/urbain.jpg)](http://sylvain.durand.tf/medias/carto/urbain.pdf)
+[![World map (Winkel Tripel projection)]({{site.base}}/medias/carto/urbain.jpg)]({{site.base}}/medias/carto/urbain.pdf)

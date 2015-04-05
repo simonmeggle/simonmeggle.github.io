@@ -7,7 +7,7 @@ A<em>pache</em> was once the ideal solution for creating a web server. Its great
 
 In recent years, *Nginx* has established itself as a high quality alternative: although comprehensive features, the software is characterized by great lightness, which allows to run on very modest configurations such as a Raspberry Pi.
 
- In line with the [previous article](http://sylvain.durand.tf/installing-archlinux-on-raspberry-pi/), we'll see how to install a *Nginx* able to use PHP, on a Raspberry Pi which is running *Archlinux*. However, the procedure will remain very similar to another machine or other configuration[[it is essentially the commands `systemctl` and `pacman` which need to be adapted]].
+ In line with the [previous article]({{site.base}}/installing-archlinux-on-raspberry-pi/), we'll see how to install a *Nginx* able to use PHP, on a Raspberry Pi which is running *Archlinux*. However, the procedure will remain very similar to another machine or other configuration[[it is essentially the commands `systemctl` and `pacman` which need to be adapted]].
 
 ## Installing *Nginx*
 
@@ -64,7 +64,7 @@ systemctl restart nginx
 
 ## Dynamic website
 
-Static websites, [that's goof](http://sylvain.durand.tf/static-website-with-jekyll/), but being able to create dynamic sites is often helpful. This allows, for example, with a Raspberry Pi, to host web applications at home as an RSS reader or cloud. Examples are presented below.
+Static websites, [that's goof]({{site.base}}/static-website-with-jekyll/), but being able to create dynamic sites is often helpful. This allows, for example, with a Raspberry Pi, to host web applications at home as an RSS reader or cloud. Examples are presented below.
 
 ### Installing PHP
 

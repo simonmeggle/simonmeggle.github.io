@@ -4,7 +4,7 @@ title: Utiliser Github <br/> pour servir <em>Jekyll</em>
 
 G*itHub* a créé un fantastique écosystème autour du générateur de sites statiques *Jekyll*. *[GitHub Pages](https://pages.github.com/)* permet en effet de générer puis de servir automatiquement les sites *Jekyll*. Ce service, gratuit et très performant, permet de réunir les meilleurs aspects des sites statiques – rapidité, fiabilité, sécurité, possibilité d'utiliser `git` – tout en permettant leur édition en ligne.
 
-Nous avons vu dans des articles précédents comment [créer un site statique avec *Jekyll*](http://sylvain.durand.tf/site-statique-avec-jekyll/), puis comment [le servir avec *Cloudfront*](http://sylvain.durand.tf/servir-son-site-avec-cloudfront/). À la place, nous allons montrer dans cet article comment :
+Nous avons vu dans des articles précédents comment [créer un site statique avec *Jekyll*]({{site.base}}/site-statique-avec-jekyll/), puis comment [le servir avec *Cloudfront*]({{site.base}}/servir-son-site-avec-cloudfront/). À la place, nous allons montrer dans cet article comment :
 
 * synchroniser votre site avec `git` sur [*GitHub*](https://github.com/) ;
 * générer le site à la volée et le servir avec [*GitHub Pages*](https://pages.github.com/) ;
@@ -49,7 +49,7 @@ git push
 ```
 
 ### Synchronisation du site
-Il ne vous reste désormais qu'à placer les fichiers de votre site *Jekyll* dans ce répertoire. Il peut soit s'agir d'un site que vous avez précédemment créé, soit d'un nouveau site créé avec `jekyll new`[[l'article [Site statique avec *Jekyll*](http://sylvain.durand.tf/site-statique-avec-jekyll/) explique comment créer un site simple sous *Jekyll*]].
+Il ne vous reste désormais qu'à placer les fichiers de votre site *Jekyll* dans ce répertoire. Il peut soit s'agir d'un site que vous avez précédemment créé, soit d'un nouveau site créé avec `jekyll new`[[l'article [Site statique avec *Jekyll*]({{site.base}}/site-statique-avec-jekyll/) explique comment créer un site simple sous *Jekyll*]].
 
 Il est alors facile d'apporter une modification au site avec `git` :
 

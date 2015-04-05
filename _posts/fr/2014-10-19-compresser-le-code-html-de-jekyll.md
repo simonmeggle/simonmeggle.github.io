@@ -35,7 +35,7 @@ Pour l'éviter, le plus simple est encore de compresser le code source produit, 
 Nous avons pour cela deux contraintes :
 
 * ne pas compresser le contenu des balises `<pre>`, pour respecter les codes qui y sont présentés ;
-* ne pas utiliser de *plugins* pour pouvoir [héberger notre site sur *GitHub Pages*](http://sylvain.durand.tf/utiliser-github-pour-servir-jekyll/).
+* ne pas utiliser de *plugins* pour pouvoir [héberger notre site sur *GitHub Pages*]({{site.base}}/utiliser-github-pour-servir-jekyll/).
 
 La méthode expliquée dans cet article est librement inspirée de [`jekyll-compress-html`](https://github.com/penibelst/jekyll-compress-html), créé par [Anatol Broder](https://github.com/penibelst).
 
@@ -87,7 +87,7 @@ Il va ainsi nous être possible, à l'aide d'une boucle, d'appliquer certains fi
 {% endraw %}
 ```
 
-Nous pouvons alors, sur cette base, appliquer des filtres soit uniquement aux blocs de code[[en ajoutant un filtre à `{%raw%}{{temp3.first}}{%endraw%}`]], comme par exemple [rajouter des balises `<code>` à chaque ligne pour les numéroter](http://sylvain.durand.tf/numeroter-les-lignes-de-code-avec-css/), ou au contraire le reste du code source du site[[en modifiant cette fois-ci `{%raw%}{{temp3.last}}{%endraw%}`]], pour par exemple améliorer la typographie.
+Nous pouvons alors, sur cette base, appliquer des filtres soit uniquement aux blocs de code[[en ajoutant un filtre à `{%raw%}{{temp3.first}}{%endraw%}`]], comme par exemple [rajouter des balises `<code>` à chaque ligne pour les numéroter]({{site.base}}/numeroter-les-lignes-de-code-avec-css/), ou au contraire le reste du code source du site[[en modifiant cette fois-ci `{%raw%}{{temp3.last}}{%endraw%}`]], pour par exemple améliorer la typographie.
 
 ## Compression du code HTML
 

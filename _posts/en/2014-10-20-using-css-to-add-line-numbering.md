@@ -59,7 +59,7 @@ It only remains to improve their style as desired. That's it!
 By default, *Markdown* engine wraps code in only one `<code>` tag, instead of one tag for each line. 
 
 
-In the article "[compressing *Jekyll* generated HTML](http://sylvain.durand.tf/compressing-jekyll-generated-html/)", we saw it is possible to compress the HTML code by creating a `compress.html` file inside `_layout/`[[then you need to add `layout: compress` into the frontmatters of the different files in `_layout`]] with the following code:
+In the article "[compressing *Jekyll* generated HTML]({{site.base}}/compressing-jekyll-generated-html/)", we saw it is possible to compress the HTML code by creating a `compress.html` file inside `_layout/`[[then you need to add `layout: compress` into the frontmatters of the different files in `_layout`]] with the following code:
 
 ```r
 {% raw %}
