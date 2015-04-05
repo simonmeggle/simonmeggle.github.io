@@ -1,9 +1,9 @@
 [![Build Status](http://img.shields.io/travis/sylvaindurand/sylvaindurand.github.io.svg?style=flat)](https://travis-ci.org/sylvaindurand/sylvaindurand.github.io)
-[![W3C Status](http://img.shields.io/badge/w3c-valid-brightgreen.svg?style=flat)](http://html5.validator.nu/?doc=http%3A%2F%2Fsylvain.durand.tf)
+[![W3C Status](http://img.shields.io/badge/w3c-valid-brightgreen.svg?style=flat)](http://html5.validator.nu/?doc=http%3A%2F%2Fsylvaindurand.org)
 [![Dependency Status](http://img.shields.io/gemnasium/sylvaindurand/sylvaindurand.github.io.svg?style=flat)](https://gemnasium.com/sylvaindurand/sylvaindurand.github.io)
 [![License](http://img.shields.io/:license-mit-brightgreen.svg?style=flat)](http://opensource.org/licenses/MIT)
 
-This repository is the source code of the personnal website [sylvain.durand.tf](http://sylvain.durand.tf), built with *Jekyll*.
+This repository is the source code of the personnal website [sylvaindurand.org](http://sylvaindurand.org), built with *Jekyll*.
 
 # Try this at home
 
