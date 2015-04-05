@@ -1,14 +1,14 @@
-[![Build Status](http://img.shields.io/travis/sylvaindurand/sylvaindurand.github.io.svg?style=flat)](https://travis-ci.org/sylvaindurand/sylvaindurand.github.io)
+[![Build Status](http://img.shields.io/travis/sylvaindurand/sylvaindurand.org.svg?style=flat)](https://travis-ci.org/sylvaindurand/sylvaindurand.org)
 [![W3C Status](http://img.shields.io/badge/w3c-valid-brightgreen.svg?style=flat)](http://html5.validator.nu/?doc=http%3A%2F%2Fsylvaindurand.org)
-[![Dependency Status](http://img.shields.io/gemnasium/sylvaindurand/sylvaindurand.github.io.svg?style=flat)](https://gemnasium.com/sylvaindurand/sylvaindurand.github.io)
+[![Dependency Status](http://img.shields.io/gemnasium/sylvaindurand/sylvaindurand.org.svg?style=flat)](https://gemnasium.com/sylvaindurand/sylvaindurand.org)
 [![License](http://img.shields.io/:license-mit-brightgreen.svg?style=flat)](http://opensource.org/licenses/MIT)
 
 This repository is the source code of the personnal website [sylvaindurand.org](http://sylvaindurand.org), built with *Jekyll*.
 
 # Try this at home
 
-1. Clone the repo: `git clone https://github.com/sylvaindurand/sylvaindurand.github.io.git`
-2. Open the folder: `cd sylvaindurand.github.io`
+1. Clone the repo: `git clone https://github.com/sylvaindurand/sylvaindurand.org.git`
+2. Open the folder: `cd sylvaindurand.org`
 3. Install the dependencies: `bundle install`
 4. Build the website: `bundle exec jekyll serve`
 5. Look at [localhost:4000](http://localhost:4000): surprise!
@@ -20,8 +20,8 @@ The pages are produced with the static website generator [Jekyll](http://jekyllr
 
 Each page header is illustrated with a part from the ["Turgot" map of Paris](https://en.wikipedia.org/wiki/Turgot_map_of_Paris), created in the 18th century by Louis Bretez.
 
-The [source code](https://github.com/sylvaindurand/sylvaindurand.github.io) is freely available on [GitHub](https://github.com/sylvaindurand/sylvaindurand.github.io). Unless stated otherwise, content and codes presented on this website published under the [MIT license](http://opensource.org/licenses/MIT).
+The [source code](https://github.com/sylvaindurand/sylvaindurand.org) is freely available on [GitHub](https://github.com/sylvaindurand/sylvaindurand.org). Unless stated otherwise, content and codes presented on this website published under the [MIT license](http://opensource.org/licenses/MIT).
 
 ## Question?
-Please feel free to [open an issue](https://github.com/sylvaindurand/sylvaindurand.github.io/issues) or to [push a commit](https://github.com/sylvaindurand/sylvaindurand.github.io/pulls).
+Please feel free to [open an issue](https://github.com/sylvaindurand/sylvaindurand.org/issues) or to [push a commit](https://github.com/sylvaindurand/sylvaindurand.org/pulls).
 

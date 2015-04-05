@@ -155,4 +155,4 @@ Vous pouvez également consulter sur ce site trois autres articles à propos de 
 - [servir son site à l'aide de *CloudFront*]({{site.base}}/servir-son-site-avec-cloudfront/) pour obtenir des performances maximales en termes de disponibilité et de vitesse ;
 - [héberger _Jekyll_ sur GitHub]({{site.base}}/utiliser-github-pour-servir-jekyll/) pour pouvoir suivre et modifier votre site en ligne, en le générant à la volée.
 
-Enfin, parcourir les [codes sources de sites utilisant *Jekyll*](https://github.com/jekyll/jekyll/wiki/Sites)[[vous êtes notamment libres de consulter le [code source du présent site](https://github.com/sylvaindurand/sylvaindurand.github.io) pour voir comment celui-ci est conçu]], pour vous inspirer, ne peut être qu'une excellente idée. 
+Enfin, parcourir les [codes sources de sites utilisant *Jekyll*](https://github.com/jekyll/jekyll/wiki/Sites)[[vous êtes notamment libres de consulter le [code source du présent site](https://github.com/sylvaindurand/sylvaindurand.org) pour voir comment celui-ci est conçu]], pour vous inspirer, ne peut être qu'une excellente idée. 
