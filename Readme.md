@@ -8,6 +8,13 @@ This repository is the source code of the personnal website [sylvaindurand.org](
 4. Build the website: `bundle exec jekyll serve`
 5. Look at [localhost:4000](http://localhost:4000): surprise!
 
+__Advised prerequisite on OS X:__
+
+1. Homebrew : `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+2. Ruby : `\curl -sSL https://get.rvm.io | bash -s stable`
+3. `rvm install 2.1.5`
+4. `rvm use 2.1.5 --default`
+
 ## Colophon
 This website is entirely [static](https://en.wikipedia.org/wiki/Static_web_page): it works only with HTML and CSS, and does not use any dynamic language or any javascript code. Each page requires only one request! Particular attention is paid to [typography](http://webtypography.net/) and to [vertical rhythm](http://webtypography.net/2.2.2).
 
