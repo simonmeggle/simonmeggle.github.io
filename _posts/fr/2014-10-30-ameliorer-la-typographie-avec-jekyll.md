@@ -23,7 +23,7 @@ Depuis sa version 2.0, *Jekyll* utilise par défaut[[aucune configuration partic
 
 
 ### Redcarpet et Smartypants
-Avant la version 2.0, *Jekyll* utilisait par défaut le moteur *Markdown*. Si vous souhaitez l'utiliser avec une version postérieure, il vous suffit d'indiquer dans `_config.yml` à la racine de votre site :
+Avant la version 2.0, *Jekyll* utilisait par défaut le moteur *Redcarpet*. Si vous souhaitez l'utiliser avec une version postérieure, il vous suffit d'indiquer dans `_config.yml` à la racine de votre site :
 
 ```ruby
 markdown: redcarpet
