@@ -22,7 +22,7 @@ Since version 2.0, *Jekyll* use by default[[no special configuration is required
 
 
 ### Redcarpet and Smartypants
-Before version 2.0, *Jekyll* used *Markdown* as a default engine. If you want to use it with a later version, simply indicate in `_config.yml` to the root of your site:
+Before version 2.0, *Jekyll* used *Redcarpet* as a default engine. If you want to use it with a later version, simply indicate in `_config.yml` to the root of your site:
 
 ```ruby
 markdown: redcarpet
