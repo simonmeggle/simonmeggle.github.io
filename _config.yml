@@ -20,3 +20,13 @@ defaults:
       path: _posts/fr
     values:
       lang: fr
+  -
+    scope:
+      path: _posts/fr/pages
+    values:
+      type: pages
+  -
+    scope:
+      path: _posts/en/pages
+    values:
+      type: pages
