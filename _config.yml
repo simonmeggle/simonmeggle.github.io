@@ -30,3 +30,14 @@ defaults:
       path: _posts/en/pages
     values:
       type: pages
+
+  -
+    scope:
+      path: _posts/fr/projects
+    values:
+      type: projects
+  -
+    scope:
+      path: _posts/en/projects
+    values:
+      type: projects
