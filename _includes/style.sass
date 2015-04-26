@@ -40,7 +40,7 @@ img
   max-width: 30em
   +padding($main,0,0,1)
 
-h1, h2, hr, .date, .nav, .foot
+h1, h2, hr, .date, .nav, .foot, .bg
   text-align: center
 
 p
@@ -113,23 +113,26 @@ p+ul li
 
 // Head and foot
 
-h1
+h1, .bg
   +font(26)
   background: #252525 center
   background-size: cover
   color: #fff
+  top: 0
   text-shadow: 0 0 0 #000, 0 0 .3em #000
   border-top: 2*$line/26+em #191919 solid
   +padding(26,{% if page.type == "pages" %}2.5,2.5{% else %}2,2{% endif %})
 
-.nav, .foot
+.bg, .nav, .foot
+  position: absolute
   left: 0
   width: 100%
+
+.nav, .foot
   z-index: 1
 
 .nav
   position: fixed
-  top: 0
   background-color: #191919
 
   li

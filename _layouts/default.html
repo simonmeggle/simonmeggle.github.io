@@ -54,8 +54,8 @@ layout: typo
   {{ site.data.translations[page.lang].author }}  <a href="https://github.com/sylvaindurand/">Sylvain Durand</a>.
 </div>
 
-<style>
-  h1{ background-image:url('data:image/jpg;base64,{% assign d = page.date|date:'%Y-%m-%d' %}{{ site.data.headers[d].img }}');}
-</style>
+<div class="bg" style="background-image: url('data:image/jpg;base64,{% assign d = page.date|date:'%Y-%m-%d' %}{{ site.data.headers[d].img }}')
+">{{ page.title }}</div>
+
 </body>
 </html>
