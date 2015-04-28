@@ -8,7 +8,7 @@ $line: 30
   font-size: #{$size/$main}em
   line-height: #{$line/$size}
 
-=padding($size,$top, $bottom, $lateral:0)
+=padding($size,$top:0, $bottom:0, $lateral:0)
   padding: $top*$line/$size+em $lateral+em $bottom*$line/$size+em
 
 // Main elements
@@ -84,6 +84,55 @@ h3
       width: 2em
       position: absolute
       color: #ddd
+
+// Projects list
+
+{% elsif page.title == "Projets" or page.title == "Projects" %}
+
+.list
+  +padding(18,0,3,3)
+
+  li
+    +padding(18,2,0)
+
+  h3
+    +padding(21)
+    color: #156f8f
+    text-align: left
+
+  .sub
+    +font(16)
+    +padding(16)
+    color: #999
+    text-align: left
+
+  .img
+    img
+      margin-left: 1em
+      float: right
+      border: #eee 1px solid
+      height: 7.3em
+      width: 10em
+
+  .desc
+    +font(17)
+    +padding(17,.5,.5)
+    color: #444
+
+  a
+    text-decoration: none 
+
+    &:hover
+      h3
+        color: #0c4255
+        text-decoration: underline
+
+      .sub 
+        color: #666
+
+      .desc
+        color: #000
+
 
 // Other pages
 
