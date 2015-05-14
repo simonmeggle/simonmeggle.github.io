@@ -19,7 +19,7 @@ layout: typo
   <style>{% capture styles %}{% include style.sass %}{% endcapture %}{{ styles | sassify }}</style>
 </head>
 
-<body>
+<body{% if page.type == 'pages' %} class="page"{% endif %}>
 
 <div class="nav">
   <ul>

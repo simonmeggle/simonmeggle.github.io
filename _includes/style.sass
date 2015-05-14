@@ -64,8 +64,6 @@ h3
 
 // Articles list
 
-{% if page.title == "Articles" or page.url contains "404" %}
-
 .list
   +padding(18,1,1)
   h2
@@ -87,9 +85,7 @@ h3
 
 // Projects list
 
-{% elsif page.title == "Projets" or page.title == "Projects" %}
-
-.list
+.project
   +padding(18,0,3,3)
 
   li
@@ -141,8 +137,6 @@ h3
 
 // Other pages
 
-{% else %}
-
 .date+p:first-letter
   float: left
   margin: 0.13em 0.05em 0 -0.05em
@@ -163,8 +157,6 @@ p+ul li
   &:before
     content: "– "
 
-{% endif %}
-
 // Head and foot
 
 h1, .bg
@@ -175,7 +167,11 @@ h1, .bg
   top: 0
   text-shadow: 0 0 0 #000, 0 0 .3em #000
   border-top: 2*$line/26+em #191919 solid
-  +padding(26,{% if page.type == "pages" %}2.5,2.5{% else %}2,2{% endif %})
+  +padding(26,2,2)
+
+.page h1, .page .bg
+  +padding(26,2.5,2.5)
+
 
 .bg, .nav, .foot
   position: absolute
@@ -231,8 +227,6 @@ hr
 
 // Code
 
-{% if page.content contains "```" %}
-
 code
   font-family: PT Sans, Calibri, Arial, sans
   color: #4D4E53
@@ -287,11 +281,7 @@ pre
 .kd,.kr,.nc,.nd,.nf,.nt,.nv,.bp,.vc,.vg,.vi
   color: #268bd2
 
-{% endif %}
-
 // Marginalias
-
-{% if page.content contains "[[" %}
 
 @media screen and (min-width: 1000px)
   .as:after
@@ -324,11 +314,7 @@ pre
     a:hover
       color: #aaa
 
-{% endif %}
-
 // LaTeX logo
-
-{% if page.content contains "latex" or page.type == "pages" %}
 
 .latex 
   letter-spacing: .8px
@@ -346,5 +332,3 @@ pre
   margin-left: -0.1667em
   margin-right: -0.125em
   font-size: 1em
-
-{% endif %}
