@@ -101,7 +101,7 @@ The page listing the articles has to display only the one with the good translat
 <ul>
 {% for post in posts %}
     <li class="lang">
-        <a href="{{ post.url }}" class="{{ post.lang }}">{{ post.lang }}</a>
+        <a href="{{ post.url }}" class="{{ post.lang }}">{{ post.title }}</a>
     </li>
 {% endfor %}
 </ul>

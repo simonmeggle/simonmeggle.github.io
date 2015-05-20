@@ -104,7 +104,7 @@ Les pages affichant la liste des articles ne doivent afficher que ceux qui sont 
 <ul>
 {% for post in posts %}
     <li class="lang">
-        <a href="{{ post.url }}" class="{{ post.lang }}">{{ post.lang }}</a>
+        <a href="{{ post.url }}" class="{{ post.lang }}">{{ post.title }}</a>
     </li>
 {% endfor %}
 </ul>
