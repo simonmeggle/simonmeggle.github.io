@@ -3,7 +3,7 @@
   {% for post in posts %}
   <a href="{{ post.url }}">
    <li>
-      <div class="img"><img src="/medias/projects/{{ post.date|date:'%Y-%m-%d'}}.png" alt="{{ post.title | replace: '<br/>', '' }}"></div>
+      <div class="img"><img src="/medias/projects/{{ post.date|date:'%Y-%m-%d'}}.png" alt="{{ post.title | strip_html }}"></div>
       <h3 class="title">{{ post.title | replace: '<br/>', '' }}</h3>
       <div class="sub">{{ post.date | date: '%Y' }} • {{ post.language }}</div>
       <div class="desc">{{ post.desc }}</div>
