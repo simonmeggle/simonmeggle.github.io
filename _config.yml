@@ -25,11 +25,13 @@ defaults:
       path: _posts/fr/pages
     values:
       type: pages
+      desc: "Site personnel traitant essentiellement de programmation en Python, Ruby, TeX, R..."
   -
     scope:
       path: _posts/en/pages
     values:
       type: pages
+      desc: "Personnal website mostly about programming in Python, Ruby, TeX, R..."
 
   -
     scope:
