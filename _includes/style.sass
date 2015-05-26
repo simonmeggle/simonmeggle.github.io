@@ -328,17 +328,19 @@ pre
 
 .latex 
   letter-spacing: .8px
+  sup, sub
+    position: relative
+    vertical-align: 0
+    text-transform: uppercase
 
 .latex sup
-  text-transform: uppercase
-  font-size: 0.85em
-  vertical-align: 0.15em
+  bottom: .15em
   margin-left: -0.36em
   margin-right: -0.15em
+  font-size: 0.85em
 
 .latex sub
-  text-transform: uppercase
-  vertical-align: -0.5ex
+  top: .25em
   margin-left: -0.1667em
   margin-right: -0.125em
   font-size: 1em
