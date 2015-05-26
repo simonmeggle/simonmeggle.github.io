@@ -43,10 +43,8 @@ layout: typo
     {% include date.html date=page.date %}
 </p>
 {% endif %}
-
 {{ content }}
 <hr/>
-
 </div>
 
 <div class="foot">
@@ -54,8 +52,7 @@ layout: typo
   {{ site.data.translations[page.lang].author }}  <a href="https://github.com/sylvaindurand/">Sylvain Durand</a>.
 </div>
 
-<div class="bg" style="background-image: url('data:image/jpg;base64,{% assign d = page.date|date:'%Y-%m-%d' %}{{ site.data.headers[d].img }}')
-">{{ page.title }}</div>
+<div class="bg" style="background-image: url('data:image/jpg;base64,{% assign d = page.date|date:'%Y-%m-%d' %}{{ site.data.headers[d].img }}')">{{ page.title }}</div>
 <script data-no-instant>{% include instant.js %} </script>
 </body>
 </html>
