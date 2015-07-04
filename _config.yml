@@ -1,5 +1,5 @@
 permalink: /:title/
-base: http://sylvaindurand.org
+base: http://www.sylvaindurand.org
 
 markdown: redcarpet
 redcarpet:
