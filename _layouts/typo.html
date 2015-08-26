@@ -10,6 +10,7 @@
 
 {% assign t = temp3.last %}
 {% assign t = t | replace: '&#39;', '’' | replace: '~', '&nbsp;' %}
+{% assign t = t | replace: 'LaTeX', '<span class="latex">L<sup>a</sup>T<sub>e</sub>X</span>' %}
 {% assign t = t | replace: '[[', '<span class="as"></span><span class="br"> (</span><span class="mar">' %}
 {% assign t = t | replace: ']]', '</span><span class="br">)</span>' %}
 {% if page.lang == 'fr' %}
