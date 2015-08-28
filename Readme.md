@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/sylvaindurand/sylvaindurand.org.svg?branch=gh-pages)](https://travis-ci.org/sylvaindurand/sylvaindurand.org)
+
+
 This repository is the source code of the personnal website [sylvaindurand.org](http://sylvaindurand.org), built with *Jekyll*.
 
 # Try this at home
@@ -18,7 +21,7 @@ __Advised prerequisite on OS X:__
 ## Colophon
 This website is entirely [static](https://en.wikipedia.org/wiki/Static_web_page): it works only with HTML and CSS, and does not use any dynamic language. Each page requires only one request! Particular attention is paid to [typography](http://webtypography.net/) and to [vertical rhythm](http://webtypography.net/2.2.2).
 
-The pages are produced with the static website generator [Jekyll](http://jekyllrb.com/). The website is then hosted and served thanks to [GitHub Pages](https://pages.github.com/). 
+The pages are produced with the static website generator [Jekyll](http://jekyllrb.com/). The website is then hosted and served thanks to [GitHub Pages](https://pages.github.com/).
 
 Each page header is illustrated with a part from the ["Turgot" map of Paris](https://en.wikipedia.org/wiki/Turgot_map_of_Paris), created in the 18th century by Louis Bretez.
 
