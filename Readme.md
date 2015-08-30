@@ -1,9 +1,9 @@
-[![Build Status](https://travis-ci.org/sylvaindurand/sylvaindurand.org.svg?branch=gh-pages)](https://travis-ci.org/sylvaindurand/sylvaindurand.org)
+#sylvaindurand.org [![Build Status](https://travis-ci.org/sylvaindurand/sylvaindurand.org.svg?branch=gh-pages)](https://travis-ci.org/sylvaindurand/sylvaindurand.org)
 
 
 This repository is the source code of the personnal website [sylvaindurand.org](http://sylvaindurand.org), built with *Jekyll*.
 
-# Try this at home
+## Try this at home
 
 1. Clone the repo: `git clone https://github.com/sylvaindurand/sylvaindurand.org.git`
 2. Open the folder: `cd sylvaindurand.org`
