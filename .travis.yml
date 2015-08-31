@@ -1,11 +1,11 @@
 language: ruby
 rvm:
   - 2.1.1
-before_script:
-  - sudo pip install html5validator
 script:
+  - sudo pip install html5validator
   - bundle exec jekyll build
   - bundle exec htmlproof ./_site
+  - html5validator --root ./_site
 branches:
   only:
     - gh-pages
