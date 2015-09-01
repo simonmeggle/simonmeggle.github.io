@@ -8,7 +8,7 @@ layout: typo
   <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=0.85">
   <meta name="description" content="{% if page.desc %}{{ page.desc | strip_html }}{% else %}{{ page.excerpt | strip_html | replace: "[[", " ("  | replace: "]]", ")" }}{% endif %}">
   <title>{{page.title | strip_html}} – Sylvain Durand</title>
-  <link rel="icon" href="/medias/design/favicon.ico" />
+  <link rel="icon" href="/medias/elements/favicon.ico" />
   {% assign posts=site.posts | where:"date", page.date %}
   {% for post in posts %}
     {% if post.lang != page.lang %}
