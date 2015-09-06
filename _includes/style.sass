@@ -23,8 +23,10 @@ $line: 30
 
 body
   font: #{$main/16}em / #{$line/$main} PT Serif, Cambria, Georgia, serif
-  @media screen and (max-width: 400px)
+  @media screen and (max-width: 470px)
     font-size: .875em
+  @media screen and (min-width: 1200px)
+    font-size: 1.1875em
 
 a
   color: #156f8f
@@ -37,7 +39,7 @@ img
   width: 100%
 
 .article, .nav ul
-  max-width: 30em
+  max-width: 31em
   +padding($main,0,0,1)
 
 h1, h2, hr, .date, .nav, .foot, .bg
@@ -120,14 +122,14 @@ h3
     color: #444
 
   a
-    text-decoration: none 
+    text-decoration: none
 
     &:hover
       h3
         color: #0c4255
         text-decoration: underline
 
-      .sub 
+      .sub
         color: #666
 
       .desc
@@ -327,7 +329,7 @@ pre
 
 // LaTeX logo
 
-.latex 
+.latex
   letter-spacing: .8px
   sup, sub
     position: relative
