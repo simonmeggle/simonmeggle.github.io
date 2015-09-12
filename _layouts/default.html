@@ -9,14 +9,14 @@ layout: typo
   <meta name="description" content="{% if page.desc %}{{ page.desc | strip_html }}{% else %}{{ page.excerpt | strip_html | replace: "[[", " ("  | replace: "]]", ")" }}{% endif %}">
   <title>{{page.title | strip_html}} – Sylvain Durand</title>
   <link rel="icon" href="/medias/elements/favicon.ico" />
+  <link rel="alternate" href="/rss.xml" type="application/rss+xml" />
+  <link rel="stylesheet" href="/style.css">
   {% assign posts=site.posts | where:"date", page.date %}
   {% for post in posts %}
     {% if post.lang != page.lang %}
       <link rel="alternate" hreflang="{{post.lang}}" href="{{post.url}}" />
     {% endif %}
   {% endfor %}
-  <link rel="alternate" href="/rss.xml" type="application/rss+xml" />
-  <style>{% capture styles %}{% include style.sass %}{% endcapture %}{{ styles | sassify }}</style>
 </head>
 
 <body class="{{ page.lang }}{% if page.type == 'pages' %} page{% endif %}">
