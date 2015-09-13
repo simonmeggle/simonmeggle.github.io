@@ -2,11 +2,11 @@
 title:  Installer <em>Archlinux</em> <br/> sur Raspberry Pi
 ---
 
-Est-il encore nécessaire de le présenter ? Le Raspberry Pi est un nano-ordinateur, dont la toute petite taille, la très faible consommation électrique et le très faible coût[[environ 35 € dans sa version la plus puissante, auxquels doivent s'ajouter une carte SD, un câble d'alimentation µUSB et un câble ethernet, soit moins de 50 € au total]] en font un serveur personnel ou un support de bidouillage indispensable. 
+Est-il encore nécessaire de le présenter ? Le Raspberry Pi est un nano-ordinateur, dont la toute petite taille, la très faible consommation électrique et le très faible coût[[environ 35 € dans sa version la plus puissante, auxquels doivent s'ajouter une carte SD, un câble d'alimentation µUSB et un câble ethernet, soit moins de 50 € au total]] en font un serveur personnel ou un support de bidouillage indispensable.
 
 Malgré sa puissance de calcul limitée, il est parfaitement possible d'en faire un serveur web, un cloud personnel pour synchroniser fichiers, calendriers et vos contacts, un NAS, une borne *Airplay*, une console de jeux rétro... ou tout cela à la fois. Quel que soit votre objectif, il est nécessaire d'y installer une distribution Linux.
 
-Nous allons ici voir comment installer et configurer *Archlinux* sur notre Raspberry Pi, directement en ligne de commande par le réseau, ce qui signifie que nous n'aurons besoin ni de clavier, ni d'écran. 
+Nous allons ici voir comment installer et configurer *Archlinux* sur notre Raspberry Pi, directement en ligne de commande par le réseau, ce qui signifie que nous n'aurons besoin ni de clavier, ni d'écran.
 
 Ainsi, pour suivre ce tutoriel, vous n'aurez besoin que de  :
 
@@ -115,7 +115,7 @@ pacman -S sudo
 
 ### Mise à jour du système
 
-Pour mettre à jour l'intégralité[[cette commande mettra à jour aussi bien vos logiciels que les pilotes nécessaires au Raspberry Pi]] du système, on utilise simplement la commande suivante : 
+Pour mettre à jour l'intégralité[[cette commande mettra à jour aussi bien vos logiciels que les pilotes nécessaires au Raspberry Pi]] du système, on utilise simplement la commande suivante :
 
 ```bash
 pacman -Suy
@@ -136,7 +136,7 @@ Pour le français, il suffit de décommenter la ligne `fr_FR.UTF-8`. On regénè
 locale-gen
 ```
 
-Sélectionnons alors cette locale par défaut en éditant le fichier suivant : 
+Sélectionnons alors cette locale par défaut en éditant le fichier suivant :
 
 ```bash
 nano /etc/locale.conf
@@ -187,10 +187,10 @@ Par ailleurs, le paquet `fail2ban` permet d'empêcher les attaques par dictionna
 pacman -S fail2ban
 ```
 
-Vous pouvez surveiller régulièrement les logs pour identifier les tentatives frauduleuses de connexion avec la commande `grep 'sshd' /var/log/auth.log`. 
+Vous pouvez surveiller régulièrement les logs pour identifier les tentatives frauduleuses de connexion avec la commande `grep 'sshd' /var/log/auth.log`.
 
-## Conclusion 
-Vous disposez maintenant d'une machine pleinement fonctionnelle, accessible depuis votre réseau ou depuis internet. Si sa puissance de calcul reste limitée, il est cependant possible de l'utiliser de multiples façons : 
+## Conclusion
+Vous disposez maintenant d'une machine pleinement fonctionnelle, accessible depuis votre réseau ou depuis internet. Si sa puissance de calcul reste limitée, il est cependant possible de l'utiliser de multiples façons :
 
 - serveur web ;
 - cloud personnel ;

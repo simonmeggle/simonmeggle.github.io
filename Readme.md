@@ -12,7 +12,7 @@ This repository is the source code of the personnal website [sylvaindurand.org](
 5. Look at [localhost:4000](http://localhost:4000): surprise!
 
 ## Colophon
-This website is entirely [static](https://en.wikipedia.org/wiki/Static_web_page): it works only with HTML and CSS, and does not use any dynamic language. Each page requires only one request! Particular attention is paid to [typography](http://webtypography.net/) and to [vertical rhythm](http://webtypography.net/2.2.2).
+This website is entirely [static](https://en.wikipedia.org/wiki/Static_web_page): it works only with HTML and CSS, and does not use any dynamic language.Particular attention is paid to [typography](http://webtypography.net/) and to [vertical rhythm](http://webtypography.net/2.2.2).
 
 The pages are produced with the static website generator [Jekyll](http://jekyllrb.com/). The website is then hosted and served thanks to [GitHub Pages](https://pages.github.com/).
 

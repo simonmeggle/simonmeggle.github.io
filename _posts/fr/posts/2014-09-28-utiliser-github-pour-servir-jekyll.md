@@ -14,7 +14,7 @@ Nous avons vu dans des articles précédents comment [créer un site statique av
 
 ## Stocker son site sur *GitHub*
 
-### Création du compte 
+### Création du compte
 Si vous n'en avez pas déjà un, créez un compte sur [*GitHub*](https://github.com/) en renseignant un nom d'utilisateur[[attention, le choix du nom d'utilisateur est important, puisqu'il détermine l'URL par défaut à laquelle votre site sera accessible, et le nom du répertoire]], une adresse email et un mot de passe ; dans le cas contraire, connectez-vous avec vos identifiants.
 
 ### Création du répertoire sur *GitHub*
@@ -65,7 +65,7 @@ git commit -m "Première version du site"
 git push
 ```
 
-Notre site n'étant composé que de simples fichiers texte, vous pouvez utiliser *git* comme avec n'importe quels projets. De nombreuses références existent si `git` ne vous est pas familier[[vous pouvez par exemple consulter [Git, le petit guide](http://rogerdudler.github.io/git-guide/index.fr.html) pour une introduction rapide, ou le livre [Pro Git](http://git-scm.com/book/fr) pour une introduction plus complète]]. 
+Notre site n'étant composé que de simples fichiers texte, vous pouvez utiliser *git* comme avec n'importe quels projets. De nombreuses références existent si `git` ne vous est pas familier[[vous pouvez par exemple consulter [Git, le petit guide](http://rogerdudler.github.io/git-guide/index.fr.html) pour une introduction rapide, ou le livre [Pro Git](http://git-scm.com/book/fr) pour une introduction plus complète]].
 
 ## Servir son site sur *GitHub Pages*
 
@@ -73,7 +73,7 @@ Nous allons désormais voir comment faire en sorte que *GitHub* génère le site
 
 
 ### Avoir le même environnement en local
-À chaque fois que vous utiliserez `git push`, votre site sera automatiquement mis à jour. 
+À chaque fois que vous utiliserez `git push`, votre site sera automatiquement mis à jour.
 
 C'est pourquoi, pour éviter de casser notre site en ligne, il est important de s'assurer que tout fonctionne correctement en local, et donc avoir exactement le même environnement, c'est-à-dire la même version de *Jekyll* et les mêmes dépendances que celles utilisées par *GitHub*. La meilleure façon pour ce faire est d'utiliser `bundler`[[si vous ne le possédez pas, installer-le avec `gem install bundler`]].
 
@@ -89,7 +89,7 @@ Utilisez alors `bundle install` pour installer automatiquement toutes les dépen
 La commande `bundle exec jekyll serve` générera alors votre site exactement comme le fera *Github*. Vous pouvez alors l'observer à l'adresse `http://localhost:4000`.
 
 ### Activer *GitHub Pages*
-De retour sur *GitHub*, allez dans votre répertoire `username.github.io` puis dans `Settings`, et dans la rubrique `GitHub Pages` pour activer la génération de votre site. 
+De retour sur *GitHub*, allez dans votre répertoire `username.github.io` puis dans `Settings`, et dans la rubrique `GitHub Pages` pour activer la génération de votre site.
 
 Au bout de quelques instants (la première fois, cela pourra prendre une dizaine de minutes, mais ensuite le site sera mis à jour en quelques secondes), votre site sera disponible à l'adresse `http://username.github.io`[[le site est également disponible en HTTPS à l'adresse `https://username.github.io`]].
 
@@ -114,8 +114,8 @@ La page recherchée a probablement été supprimée ou déplacée.
 
 ## Pour aller plus loin
 
-### Rédiger et modifier ses articles en ligne avec *Prose* 
-L'un des principaux désavantages des sites statiques vis-à-vis des CMS est de ne pas pouvoir être facilement modifiables en ligne. 
+### Rédiger et modifier ses articles en ligne avec *Prose*
+L'un des principaux désavantages des sites statiques vis-à-vis des CMS est de ne pas pouvoir être facilement modifiables en ligne.
 
 Notre site étant hébergé sur *GitHub*, il est possible d'y modifier directement les fichiers, *Pages* se chargeant de regénérer le site à chaque modification. Il est également possible d'utiliser le site *[Prose.io](http://prose.io/)*, qui offre une belle interface avec coloration syntaxique et prévisualisation pour rédiger ses articles.
 

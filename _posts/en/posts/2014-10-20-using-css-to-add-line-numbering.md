@@ -4,7 +4,7 @@ title: Using <em>CSS</em> to add<br/> line numbering
 
 When you want to display a code listing with *HTML*, you use a `<pre>` tag in order to indicate that the text is preformatted[[and therefore the spaces and line breaks must be respected]], then inside one or multiple `<code>` tags to specify this text is a code.
 
-On this website, the line numbers appears on the left of code listings, like most word processors. The methods to achieve this vary widely: many use *jQuery* or *Javascript*, ugly HTML codes, or even tables... 
+On this website, the line numbers appears on the left of code listings, like most word processors. The methods to achieve this vary widely: many use *jQuery* or *Javascript*, ugly HTML codes, or even tables...
 
 Yet it is possible to achieve this in a simple way, using only CSS and HTML. The line numbers won't be selected when the user wants to copy the code.
 
@@ -56,7 +56,7 @@ It only remains to improve their style as desired. That's it!
 
 ## What about *Jekyll* ?
 
-By default, *Markdown* engine wraps code in only one `<code>` tag, instead of one tag for each line. 
+By default, *Markdown* engine wraps code in only one `<code>` tag, instead of one tag for each line.
 
 
 In the article "[compressing *Jekyll* generated HTML]({{site.base}}/compressing-jekyll-generated-html/)", we saw it is possible to compress the HTML code by creating a `compress.html` file inside `_layout/`[[then you need to add `layout: compress` into the frontmatters of the different files in `_layout`]] with the following code:

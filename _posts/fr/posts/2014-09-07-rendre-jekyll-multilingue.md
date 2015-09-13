@@ -1,9 +1,9 @@
 ---
-title: Rendre <em>Jekyll</em> <br/> multilingue 
+title: Rendre <em>Jekyll</em> <br/> multilingue
 redirect_from: /site-multilingue-avec-jekyll/
 ---
 
-J<em>ekyll</em> laisse une grande liberté de choix en permettant de mettre simplement en place des fonctionnalités qui ne sont pas prévues par son moteur. C'est notamment le cas lorsque l'on souhaite proposer son site en plusieurs langues : alors que la plupart des CMS sont très rigides ou nécessitent des plugins, quelques filtres suffisent ici pour obtenir le résultat désiré. 
+J<em>ekyll</em> laisse une grande liberté de choix en permettant de mettre simplement en place des fonctionnalités qui ne sont pas prévues par son moteur. C'est notamment le cas lorsque l'on souhaite proposer son site en plusieurs langues : alors que la plupart des CMS sont très rigides ou nécessitent des plugins, quelques filtres suffisent ici pour obtenir le résultat désiré.
 
 Cet article a pour objectif de présenter une façon de créer un site multilingue avec *Jekyll*. Il suppose que celui-ci est bien installé[[l'article [Site statique avec *Jekyll*]({{site.base}}/site-statique-avec-jekyll/) décrit comment installer et utiliser *Jekyll* pour obtenir un site simple]] et que vous savez l'utiliser pour générer un site simple.
 
@@ -16,7 +16,7 @@ Tout cela fonctionnera sans plugin, afin d'assurer une meilleure compatibilité 
 
 ## Principe
 
-### Organisation des fichiers 
+### Organisation des fichiers
 
 L'intégralité des pages vont être rangées dans le dossier `_posts` à la racine de notre site. En son sein, créer un dossier par langue permet de rester organisé tout en définissant globalement la langue des articles[[il est tout à fait possible de ranger différemment les articles, mais il sera alors nécessaire de spécifier manuellement la langue de chaque article par la suite dans chaque entête]] :
 
@@ -142,7 +142,7 @@ Pour emphaser la langue de la version affichée, il suffit d'utiliser CSS[[pour 
 ## Peaufinage
 
 ### Traduction des éléments du site
-En dehors du contenu des articles, il est également nécessaire de traduire les différents éléments qui composent le site : textes des menus, du haut et de bas de page, certains titres... 
+En dehors du contenu des articles, il est également nécessaire de traduire les différents éléments qui composent le site : textes des menus, du haut et de bas de page, certains titres...
 
 Pour cela, on peut indiquer des traductions dans `_config.yml`[[depuis la deuxième version de *Jekyll*, il est également possible de placer ces informations dans le dossier [_data](http://jekyllrb.com/docs/datafiles/)]]. Ainsi, dans l'exemple suivant, `{% raw %}{{site.t[page.lang].home}}{% endraw %}` génèrera `Home`, `Accueil` ou `首页` selon la langue de la page :
 
@@ -240,7 +240,7 @@ Nous utilisons alors le code suivant :
   {% when '2' or '22' %}nd
   {% when '3' or '23' %}rd
 {% else %}th
-{% endcase %}</sup> 
+{% endcase %}</sup>
 of {{ page.date | date: "%B %Y"}}
 {% endif %}
 
@@ -259,7 +259,7 @@ of {{ page.date | date: "%B %Y"}}
   {% when '10' %}octobre
   {% when '11' %}novembre
   {% when '12' %}décembre
-{% endcase %} 
+{% endcase %}
 {{ page.date | date: "%Y"}}
 {% endif %}
 {% endraw %}
@@ -269,7 +269,7 @@ Il est à nouveau possible de placer ce code dans un fichier `date.html` placé 
 
 ## Accès au site et référencement
 
-Les pages étant entièrement statiques, il est difficile de deviner la langue de nos visiteurs pour envoyer la bonne version, que ce soit en détectant les entêtes envoyées par le navigateur ou en se basant sur sa localisation géographique. Néanmoins, il est possible d'améliorer le référencement en indiquant aux moteurs de recherche les pages qui constituent les traductions d'un seul et même contenu[[ainsi, les utilisateurs trouvant notre contenu par un moteur de recherche devraient se voir proposer automatiquement la bonne traduction]]. 
+Les pages étant entièrement statiques, il est difficile de deviner la langue de nos visiteurs pour envoyer la bonne version, que ce soit en détectant les entêtes envoyées par le navigateur ou en se basant sur sa localisation géographique. Néanmoins, il est possible d'améliorer le référencement en indiquant aux moteurs de recherche les pages qui constituent les traductions d'un seul et même contenu[[ainsi, les utilisateurs trouvant notre contenu par un moteur de recherche devraient se voir proposer automatiquement la bonne traduction]].
 
 Pour ce faire, deux solutions sont possibles : [intégrer une balise `<link>`](https://support.google.com/webmasters/answer/189077?hl=fr) dans notre page, ou [l'indiquer dans un fichier `sitemaps.xml`](https://support.google.com/webmasters/answer/2620865?hl=fr).
 
@@ -292,7 +292,7 @@ Il suffit d'indiquer dans la partie `<head>` chaque page, l'ensemble des traduct
 
 Le fichier `sitemaps.xml`, qui permet aux moteurs de recherche de connaître les pages et la structure de votre site, [permet également d'indiquer aux moteurs de recherches quelles pages sont les différentes versions d'un même contenu](https://support.google.com/webmasters/answer/2620865?hl=fr).
 
-Pour cela, il suffit d'indiquer l'intégralité des pages du site (quelle que soit leur langue) dans des éléments `<url>` et pour chacun d'entre eux l'ensemble des versions qui existent, y compris celle que l'on est en train de décrire. 
+Pour cela, il suffit d'indiquer l'intégralité des pages du site (quelle que soit leur langue) dans des éléments `<url>` et pour chacun d'entre eux l'ensemble des versions qui existent, y compris celle que l'on est en train de décrire.
 
 Ce fichier peut être généré automatiquement par *Jekyll* en créant un fichier `sitemaps.xml` à la racine du site contenant :
 

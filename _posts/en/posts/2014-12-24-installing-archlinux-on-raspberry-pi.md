@@ -2,7 +2,7 @@
 title:  Installing <em>Archlinux</em> <br/> on Raspberry Pi
 ---
 
-Is it still necessary to present it? The Raspberry Pi is a nano-computer which, due to its small size, low power consumption and very low cost[[about 35 € in its most powerful version, to which must be added an SD card, μUSB  and ethernet cables, less than € 50 in total]], makes an essential personal server or hack tool. 
+Is it still necessary to present it? The Raspberry Pi is a nano-computer which, due to its small size, low power consumption and very low cost[[about 35 € in its most powerful version, to which must be added an SD card, μUSB  and ethernet cables, less than € 50 in total]], makes an essential personal server or hack tool.
 
 Despite its limited computing power, it is perfectly possible to make a web server, a personal cloud, a NAS, an *Airplay* terminal, a retro games console... or all at once. Whatever your goal, it is necessary to install a Linux distribution.
 
@@ -186,9 +186,9 @@ Moreover, the `fail2ban` package helps prevent dictionary attacks or bruteforce 
 pacman -S fail2ban
 ```
 
-You can regularly monitor the logs to identify fraudulent attempts connection with the command `grep 'sshd' /var/log/auth.log`. 
+You can regularly monitor the logs to identify fraudulent attempts connection with the command `grep 'sshd' /var/log/auth.log`.
 
-## Conclusion 
+## Conclusion
 You now have a fully functional machine accessible from your network or from the Internet. If its computing power is limited, however, it is possible to use it in many ways:
 
 - web server;

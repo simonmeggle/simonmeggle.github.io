@@ -53,7 +53,7 @@ Care must be taken to apply the changes only in paragraphs, not in code blocks t
 
 We have seen, in the article "[compressing *Jekyll* generated HTML]({{site.base}}/compressing-jekyll-generated-html/)", it is possible to compress HTML by creating a `compress.html` file in `_layout/`[[then, you need to add `layout: compress` in the layout files headers]] which contains:
 
-```r 
+```r
 {% raw %}
 {% capture compress %}
 {% assign temp1 = content | split: '<pre>' %}

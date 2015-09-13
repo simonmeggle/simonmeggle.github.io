@@ -65,7 +65,7 @@ git commit -m "First version"
 git push
 ```
 
-Because the website only use simple text files, you can use *git* as you would do with any other project. Many references exists if you are not familiar with `git`[[for example, you can read [Git, a simple guide](http://rogerdudler.github.io/git-guide/) for a short introduction, or the more complete [Pro Git](http://git-scm.com/book) book]]. 
+Because the website only use simple text files, you can use *git* as you would do with any other project. Many references exists if you are not familiar with `git`[[for example, you can read [Git, a simple guide](http://rogerdudler.github.io/git-guide/) for a short introduction, or the more complete [Pro Git](http://git-scm.com/book) book]].
 
 ## Serving *Jekyll* on *GitHub Pages*
 
@@ -93,7 +93,7 @@ You can then use `bundle install` in order to install the gem(s). The `bundle up
 The `bundle exec jekyll serve` command will now generate the website exactly as *Github* would do, so you can check on `http://localhost:4000` that everything is right before pushing anything.
 
 ### Activating *GitHub Pages*
-Back on *GitHub*, go in the `username.github.io` repository, choose `Settings`, then the `GitHub Pages` section in order to activate the website generation. 
+Back on *GitHub*, go in the `username.github.io` repository, choose `Settings`, then the `GitHub Pages` section in order to activate the website generation.
 
 Within a few moments (the first time, it can take a dozen of minutes, but then the website will be generated in a couple of seconds each time you push a commit), your website will be available on `http://username.github.io`[[it is also available in HTTPS on `https://username.github.io`]].
 
@@ -118,7 +118,7 @@ This page must have been removed or had its name changed.
 
 ## To go further
 
-### Writing and editing your articles online with *Prose* 
+### Writing and editing your articles online with *Prose*
 One of the main disadvantages of static websites is the impossibility to edit them online without your computer.
 
 Because your website is hosted on *GitHub*, it is possible to modify files directly online. Jekyll generates *Pages* each time you modify a page. You can also use the *[Prose.io](http://prose.io/)* website, which provides a nice interface, a great syntax highlighting and a preview system in order to write your articles.

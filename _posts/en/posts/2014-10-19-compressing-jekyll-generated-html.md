@@ -48,7 +48,7 @@ To do this, the easiest way is to create a file `compress.html` in the `layout` 
 ```r
 ---
 layout: compress
---- 
+---
 <html>
 ...
 </html>
@@ -91,7 +91,7 @@ We can then, based on this, either only apply filters to code blocks[[by adding 
 
 ## Compressing HTML code
 
-Now, we just have to compress the HTML code. In the code blocks, we will transform new lines in `<br/>` in order to preserve line breaks with the `newline_to_br` filter. We will remove all multiple spaces and line breaks for the rest of the code. For this, we will use `split` on each spaces, then `join`. 
+Now, we just have to compress the HTML code. In the code blocks, we will transform new lines in `<br/>` in order to preserve line breaks with the `newline_to_br` filter. We will remove all multiple spaces and line breaks for the rest of the code. For this, we will use `split` on each spaces, then `join`.
 
 With the previous code, we get:
 

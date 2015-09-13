@@ -11,9 +11,9 @@ It was then that appeared *dynamic sites*: the different programming languages, 
 - they badly handle significant increases in workload, so they are very sensitive to DDoS attacks or huge influx of visitors[[it is not uncommon that a website become unavailable because of an important event or a link from a news website]];
 - they tend to be a labyrinthine system, largely overkill for their use and needing databases.
 
-For a couple of years, *static websites* has come back into favor with the emergence of the *static website generators*. With simple text files, a program generates a website made entirely from static pages you just have to host. Security problems are thus virtually non-existent, it is possible to host your website on a very modest server or rather the opposite, to get excellent performances and handle huge increases in workload using a [CDN](https://en.wikipedia.org/wiki/Content_delivery_network) like [*Cloudflare*](https://www.cloudflare.com/) or [*Cloudfront*](http://aws.amazon.com/cloudfront/)[[ways to host a static website on [*Amazon S3*](http://aws.amazon.com/s3/) and [*Cloudfront*](http://aws.amazon.com/cloudfront/) are explained in "[Static website with *Cloudfront*]({{site.base}}/static-website-with-cloudfront/)"]]. 
+For a couple of years, *static websites* has come back into favor with the emergence of the *static website generators*. With simple text files, a program generates a website made entirely from static pages you just have to host. Security problems are thus virtually non-existent, it is possible to host your website on a very modest server or rather the opposite, to get excellent performances and handle huge increases in workload using a [CDN](https://en.wikipedia.org/wiki/Content_delivery_network) like [*Cloudflare*](https://www.cloudflare.com/) or [*Cloudfront*](http://aws.amazon.com/cloudfront/)[[ways to host a static website on [*Amazon S3*](http://aws.amazon.com/s3/) and [*Cloudfront*](http://aws.amazon.com/cloudfront/) are explained in "[Static website with *Cloudfront*]({{site.base}}/static-website-with-cloudfront/)"]].
 
-In addition, it is possible to follow the changes and to work collaboratively thanks to `git`, to write the articles online and to generate the website on the fly with services like [*GitHub*](https://pages.github.com/) and [*Prose*](http://prose.io), or to have a commenting system with [*Disqus*](https://disqus.com/). 
+In addition, it is possible to follow the changes and to work collaboratively thanks to `git`, to write the articles online and to generate the website on the fly with services like [*GitHub*](https://pages.github.com/) and [*Prose*](http://prose.io), or to have a commenting system with [*Disqus*](https://disqus.com/).
 
 This article will show how to install (I) and use (II) the [*Jekyll*](http://jekyllrb.com/) website static generator to create and modify a simple website.
 
@@ -21,7 +21,7 @@ This article will show how to install (I) and use (II) the [*Jekyll*](http://jek
 
 As a first step, we will see how to install *Jekyll* on your computer, in order to create your first website and get a local host allowing us to watch it in your browser.
 
-### Installation of *Jekyll* 
+### Installation of *Jekyll*
 
 *On Linux*, directly install the last stable version of [*Ruby*](https://packages.debian.org/stable/ruby)[[it is also possible to install [Ruby version manager](http://rvm.io/)]], with its [developpement tools](https://packages.debian.org/stable/ruby-dev) and [gem](https://packages.debian.org/stable/rubygems). On *Debian*, you just have to install the following packages:
 
@@ -50,7 +50,7 @@ With a single command, it is possible to generate the website and create a local
 
 ### Tree structure
 
-*Jekyll* uses several folders: 
+*Jekyll* uses several folders:
 
 - *`_posts/`* in which the articles are stored[[you can freely organize your files in `_post`]], with names such as `yyyy-mm-dd-post-name.md`;
 - *`_layouts/`* which contains the layout of the website, that is to say everythin that will surround the articles;
@@ -76,11 +76,11 @@ mysite/
         _config.yml
 ```
 
-You can add any folder or file in your website folder. If they don't start with an underscore, *Jekyll* will generate them on the same location. 
+You can add any folder or file in your website folder. If they don't start with an underscore, *Jekyll* will generate them on the same location.
 
 ## Using *Jekyll*
 
-Now that the first website is created, we will see how to make it evolve, how to write articles and use metadata. 
+Now that the first website is created, we will see how to make it evolve, how to write articles and use metadata.
 
 In order to create an article, juste create in `_posts` folder a file with a name with the following format: `yyyy-mm-dd-post-name.md`[[it is also possible to create articles in the folder `_drafts`, without any date in the file name: thus, it will create drafts invisible in the posts list but available with their URL]]. This file is divided into two sections: the *frontmatter* where the metadata are stored, and the *content* of the article.
 
@@ -112,14 +112,14 @@ defaults:
 
 By default, *Jekyll* use [*Markdown*](http://daringfireball.net/projects/markdown/basics). The purpose of this language is to provide a very simple syntax to replace the most commons HTML tags. For example, `*italic*` gives "*italic*" and `**bold**` gives "**bold**". It is however still quite possible to use HTML in posts.
 
-From its second version, *Jekyll* uses *Kramdown* which add many features like the possibility of giving CSS classes to elements, footnotes, definition lists, tables... 
+From its second version, *Jekyll* uses *Kramdown* which add many features like the possibility of giving CSS classes to elements, footnotes, definition lists, tables...
 
 
 ### Using metadata
 
-Any metadata "`variable`", declared in the frontmatter or as a default, can be called anywhere in the website, with the tag `{%raw%}{{page.variable}}{%endraw%}`, which returns its value. 
+Any metadata "`variable`", declared in the frontmatter or as a default, can be called anywhere in the website, with the tag `{%raw%}{{page.variable}}{%endraw%}`, which returns its value.
 
-It is also possible to do some tests: 
+It is also possible to do some tests:
 
 ```r{% raw %}
 {% if page.variable == 'value' %}
@@ -136,7 +136,7 @@ We can also, for example, make loops on each article satisfying some conditions:
 {% assign posts=site.posts | where: "variable", "value" %}
 {% for post in posts %}
     {{ post.lang }}
-{% endfor %} 
+{% endfor %}
 {% endraw %}
 ```
 
@@ -147,7 +147,7 @@ Although the [syntax](https://github.com/Shopify/liquid/wiki/Liquid-for-Designer
 
 ### And much more...
 
-This article doesn't claim to be more than a very short introduction to *Jekyll*. To go further, read the [*Jekyll* excellent documentation](http://jekyllrb.com/docs/home/) first, regularly updated, and the numerous references you will find on the web. 
+This article doesn't claim to be more than a very short introduction to *Jekyll*. To go further, read the [*Jekyll* excellent documentation](http://jekyllrb.com/docs/home/) first, regularly updated, and the numerous references you will find on the web.
 
 You may also read three other articles written on this website about *Jekyll*:
 
@@ -155,4 +155,4 @@ You may also read three other articles written on this website about *Jekyll*:
 - [website delivery with *CloudFront*]({{site.base}}/website-delivery-with-cloudfront/) in order to get excellent performances and handle huge increases in workload;
 - [hosting *Jekyll* on GitHub]({{site.base}}/using-github-to-serve-jekyll/) in order to edit your website online and generate it on the fly.
 
-Lastly, browsing [website using *Jekyll* source codes](https://github.com/jekyll/jekyll/wiki/Sites)[[feel free to browse the [source code of this website](https://github.com/sylvaindurand/sylvaindurand.org) to find out how it works]], in order to find inspiration, can only be a good idea. 
+Lastly, browsing [website using *Jekyll* source codes](https://github.com/jekyll/jekyll/wiki/Sites)[[feel free to browse the [source code of this website](https://github.com/sylvaindurand/sylvaindurand.org) to find out how it works]], in order to find inspiration, can only be a good idea.

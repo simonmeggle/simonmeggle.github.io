@@ -30,7 +30,7 @@ end
 
 Ce n'est pas illogique : *Liquid* lit l'ensemble des caractères présents dans la boucle, y compris les espaces et les sauts de ligne, et les restitue sans se poser de questions.
 
-Pour l'éviter, le plus simple est encore de compresser le code source produit, en supprimer tous les sauts de ligne et tous les espaces multiples qui ne sont pas nécessaires. 
+Pour l'éviter, le plus simple est encore de compresser le code source produit, en supprimer tous les sauts de ligne et tous les espaces multiples qui ne sont pas nécessaires.
 
 Nous avons pour cela deux contraintes :
 
@@ -48,7 +48,7 @@ Pour ce faire, le plus simple est de créer un fichier `compress.html` dans le d
 ```r
 ---
 layout: compress
---- 
+---
 <html>
 ...
 </html>

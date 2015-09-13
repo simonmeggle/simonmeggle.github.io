@@ -50,7 +50,7 @@ In `Origin Domain Name`, we provide the address previously copied, similar to `w
 
 Leave the other field as default, except `Alternate Domain Names` where we provide our domain name: `www.domain.tld`. Indicate the homepage in `Default Root Object`: `index.html`.
 
-Our distribution is now created: we can now activate it with `Enable`. `InProgress`  status means *Cloudfront* is currently propagating our data; when it's over, the status will become `Deployed`. 
+Our distribution is now created: we can now activate it with `Enable`. `InProgress`  status means *Cloudfront* is currently propagating our data; when it's over, the status will become `Deployed`.
 
 
 ## Domain name with *Route 53*
@@ -67,7 +67,7 @@ Back to *Route 53*, in `domain.tld`, create 3 records set with `Create Record Se
 * `domain.tld` (put  `www` in `name`), `A` type: in `Alias`, select our *Cloudfront* distribution;
 * `domain.tld`, `A` type: select the same name bucket.
 
-Of course, it is possible to redirect sub-domains to other services (with NS, A and CNAME records) and to use mails (MX records). 
+Of course, it is possible to redirect sub-domains to other services (with NS, A and CNAME records) and to use mails (MX records).
 
 
 Now, an user going to `domain.tld` or `www.domain.tld` will target the same name buckets (thanks to *Route 53*) which redirect to `www.domain.tld` (thanks to *S3*). This address directly leads (thanks to *Route 53*) to the *Cloudfront* distribution, which provides our files stored in the  bucket `www.domain.tld`. Now, we just have to send our website to *Amazon S3*.
@@ -133,7 +133,7 @@ find _site -path _site/static -prune -o -type f \
 We use `s3cmd` to upload the website; only the updated files will be sent. We use the following options:
 
 * `acl-public` make our files public;
-* `cf-invalidate` warn *Cloudfront* files have to be updated; 
+* `cf-invalidate` warn *Cloudfront* files have to be updated;
 * `add-header` defines headers (compression, cache duration...);
 * `delete-sync` delete files removed locally;
 * `M` defines files MIME type.
@@ -144,7 +144,7 @@ We first send static files, stored in `static/`, assigning them a 10 weeks cache
 s3cmd --acl-public --cf-invalidate -M \
       --add-header="Cache-Control: max-age=6048000" \
       --cf-invalidate \
-      sync _site/static s3://www.domain.tld/ 
+      sync _site/static s3://www.domain.tld/
 ```
 
 Then we send the other files (HTML, CSS, JS...) with a 48 hours cache duration:
@@ -155,14 +155,14 @@ s3cmd --acl-public --cf-invalidate -M \
       --add-header="Cache-Control: max-age=604800" \
       --cf-invalidate \
       --exclude="/static/*" \
-      sync _site/ s3://www.domain.tld/ 
+      sync _site/ s3://www.domain.tld/
 ```
 
-Finally we clean the bucket by deleting files which have been deleted in the local folder, and we invalidate the home page on *Cloudfront* (`cf-invalidate` doesn't do it): 
+Finally we clean the bucket by deleting files which have been deleted in the local folder, and we invalidate the home page on *Cloudfront* (`cf-invalidate` doesn't do it):
 
 ```bat
 s3cmd --delete-removed --cf-invalidate-default-index \
-      sync _site/ s3://www.domain.tld/ 
+      sync _site/ s3://www.domain.tld/
 ```
 
 
@@ -187,7 +187,7 @@ find _site -name '*.png' -exec optipng -o5 {} \;
 s3cmd --acl-public --cf-invalidate -M \
       --add-header="Cache-Control: max-age=6048000" \
       --cf-invalidate \
-      sync _site/static s3://www.domain.tld/ 
+      sync _site/static s3://www.domain.tld/
 
 # Sync media
 s3cmd --acl-public --cf-invalidate -M \
@@ -195,11 +195,11 @@ s3cmd --acl-public --cf-invalidate -M \
       --add-header="Cache-Control: max-age=604800" \
       --cf-invalidate \
       --exclude="/static/*" \
-      sync _site/ s3://www.domain.tld/ 
+      sync _site/ s3://www.domain.tld/
 
 # Delete removed files
 s3cmd --delete-removed --cf-invalidate-default-index \
-      sync _site/ s3://www.domain.tld/ 
+      sync _site/ s3://www.domain.tld/
 ```
 
 You only have to execute `sh _deploy.sh` to update the website. A few minutes may be required in order to update *CloudFront* data.
@@ -219,7 +219,7 @@ We create locally a folder that will retrieve these logs, then we can then retri
 mkdir ~/awstats
 mkdir ~/awstats/logs
 s3cmd get --recursive s3://statistics/ ~/awstats/logs/
-s3cmd del --recursive --force s3://statistics/ 
+s3cmd del --recursive --force s3://statistics/
 ```
 
 ### Installing and configuring *Awstats*
@@ -272,7 +272,7 @@ To automate the generation of statistics at regular intervals, creating a `stats
 #!/bin/sh
 # Retrieving logs
 s3cmd get --recursive s3://statistics/ ~/awstats/logs/
-s3cmd del --recursive --force s3://statistics/ 
+s3cmd del --recursive --force s3://statistics/
 # Generating stats
 /usr/share/awstats/tools/awstats_buildstaticpages.pl \
     -dir=~/awstats/ -update -config=www.domain.tld \

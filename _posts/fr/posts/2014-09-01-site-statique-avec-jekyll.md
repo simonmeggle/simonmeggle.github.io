@@ -11,9 +11,9 @@ C'est alors que sont apparus les *sites dynamiques* : les langages de programmat
 - ils supportent mal les montées en charge, et sont ainsi très sensibles aux attaques DDoS ou aux affluences de visiteurs[[il n'est pas rare qu'un site devienne indisponible, par exemple lors d'un événement important ou en raison d'un lien publié sur un site d'actualités]] ;
 - ils constituent souvent de vraies usines à gaz, surdimensionnées vis-à-vis des besoins et nécessitant des bases de données.
 
-Depuis quelques années, les *sites statiques* font leur retour en grâce avec l'apparition des *générateurs de sites statiques*. Sur la base de simples fichiers textes, un programme génère un site composé uniquement de pages statiques qu'il suffit ensuite d'héberger. Ainsi, les problèmes de sécurité sont presque inexistants, il est possible de s'héberger sur un serveur très modeste ou au contraire d'obtenir d'excellentes performances et de supporter de très fortes montées en charge en utilisant un [CDN](https://fr.wikipedia.org/wiki/Content_delivery_network) comme [*Cloudflare*](https://www.cloudflare.com/) ou [*Cloudfront*](http://aws.amazon.com/fr/cloudfront/)[[les façons d'héberger un site statique sur [*Amazon S3*](http://aws.amazon.com/fr/s3/) et [*Cloudfront*](http://aws.amazon.com/fr/cloudfront/) sont détaillés dans "[Site statique avec *Cloudfront*]({{site.base}}/site-statique-avec-cloudfront/)"]]. 
+Depuis quelques années, les *sites statiques* font leur retour en grâce avec l'apparition des *générateurs de sites statiques*. Sur la base de simples fichiers textes, un programme génère un site composé uniquement de pages statiques qu'il suffit ensuite d'héberger. Ainsi, les problèmes de sécurité sont presque inexistants, il est possible de s'héberger sur un serveur très modeste ou au contraire d'obtenir d'excellentes performances et de supporter de très fortes montées en charge en utilisant un [CDN](https://fr.wikipedia.org/wiki/Content_delivery_network) comme [*Cloudflare*](https://www.cloudflare.com/) ou [*Cloudfront*](http://aws.amazon.com/fr/cloudfront/)[[les façons d'héberger un site statique sur [*Amazon S3*](http://aws.amazon.com/fr/s3/) et [*Cloudfront*](http://aws.amazon.com/fr/cloudfront/) sont détaillés dans "[Site statique avec *Cloudfront*]({{site.base}}/site-statique-avec-cloudfront/)"]].
 
-Il est de plus possible de suivre toutes les modifications et de travailler collaborativement grâce à `git`, de rédiger ses articles en ligne et de générer son site à la volée à l'aide de services comme [*GitHub*](https://pages.github.com/) et [*Prose*](http://prose.io), ou d'avoir un système de commentaires avec [*Disqus*](https://disqus.com/). 
+Il est de plus possible de suivre toutes les modifications et de travailler collaborativement grâce à `git`, de rédiger ses articles en ligne et de générer son site à la volée à l'aide de services comme [*GitHub*](https://pages.github.com/) et [*Prose*](http://prose.io), ou d'avoir un système de commentaires avec [*Disqus*](https://disqus.com/).
 
 Dans cet article, nous allons voir comment installer (I) et utiliser (II) le générateur de site statiques [*Jekyll*](http://jekyllrb.com/) pour créer et modifier un site simple.
 
@@ -21,7 +21,7 @@ Dans cet article, nous allons voir comment installer (I) et utiliser (II) le gé
 
 Dans un premier temps, nous allons voir comment installer *Jekyll* sur votre machine, pour créer votre premier site et obtenir un serveur local permettant de l'observer dans votre navigateur.
 
-### Installation de *Jekyll* 
+### Installation de *Jekyll*
 
 *Sur Linux*, installez directement la dernière version stable de [*Ruby*](https://packages.debian.org/stable/ruby)[[il est également possible d'installer [Ruby version manager](http://rvm.io/)]], accompagné de ses [outils de développement](https://packages.debian.org/stable/ruby-dev) et de [gem](https://packages.debian.org/stable/rubygems). Sous *Debian*, il suffit d'installer les paquets suivants :
 
@@ -76,11 +76,11 @@ monsite/
         _config.yml
 ```
 
-Vous pouvez ajouter n'importe quel autre dossier, ou fichier, dans le répertoire de votre site. Tant qu'ils ne commencent pas par un tiret bas, ceux-ci seront directement générés au même emplacement par *Jekyll*. 
+Vous pouvez ajouter n'importe quel autre dossier, ou fichier, dans le répertoire de votre site. Tant qu'ils ne commencent pas par un tiret bas, ceux-ci seront directement générés au même emplacement par *Jekyll*.
 
 ## Utilisation de *Jekyll*
 
-Maintenant ce premier site créé, nous allons voir comment le faire évoluer en rédigeant des articles et en utilisant leurs métadonnées. 
+Maintenant ce premier site créé, nous allons voir comment le faire évoluer en rédigeant des articles et en utilisant leurs métadonnées.
 
 Pour créer un article, il suffit de créer dans le dossier `_posts` un fichier dont le nom est au format `aaaa-mm-jj-nom-du-post.md`[[il est également possible de créer des articles dans le dossier `_drafts` sans date dans le nom de fichier : cela permet de créer des brouillons d'article, qui n'apparaîtront pas dans la liste des articles disponibles mais restent accessibles depuis leur adresse directe]]. Ce fichier se compose de deux parties : l'*en-tête* où sont situées les métadonnées de l'article, et le *contenu* de l'article à proprement parler.
 
@@ -112,12 +112,12 @@ defaults:
 
 Par défaut, les articles s'écrivent en [*Markdown*](http://daringfireball.net/projects/markdown/basics). L'objectif de ce langage est de proposer une syntaxe très simple permettant de rédiger les articles en évitant les balises HTML les plus courantes. Ainsi, "*italique*" s'obtient avec `*italique*`, et "**gras**" avec `**gras**`. Il reste cependant toujours possible d'utiliser HTML au sein des articles.
 
-Depuis sa deuxième version, *Jekyll* utilise *Kramdown* qui ajoute de nombreuses fonctionnalités telles que la possibilité d'attribuer des classes aux éléments, les notes de bas de page, les listes de définition, les tableaux... 
+Depuis sa deuxième version, *Jekyll* utilise *Kramdown* qui ajoute de nombreuses fonctionnalités telles que la possibilité d'attribuer des classes aux éléments, les notes de bas de page, les listes de définition, les tableaux...
 
 
 ### Utilisation des métadonnées
 
-Toute métadonnée "`variable`" déclarée dans l'entête peut être appelée, dans n'importe quel fichier, à l'aide d'une balise `{%raw%}{{page.variable}}{%endraw%}` qui retournera alors sa valeur. 
+Toute métadonnée "`variable`" déclarée dans l'entête peut être appelée, dans n'importe quel fichier, à l'aide d'une balise `{%raw%}{{page.variable}}{%endraw%}` qui retournera alors sa valeur.
 
 Il est également possible d'effectuer des tests :
 
@@ -136,7 +136,7 @@ Nous pouvons aussi, par exemple, effectuer des boucles sur l'ensemble des articl
 {% assign posts=site.posts | where: "variable", "value" %}
 {% for post in posts %}
     {{ post.lang }}
-{% endfor %} 
+{% endfor %}
 {% endraw %}
 ```
 
@@ -147,7 +147,7 @@ Bien que la [syntaxe](https://github.com/Shopify/liquid/wiki/Liquid-for-Designer
 
 ### Et bien plus...
 
-Cet article n'a pas prétention à constituer davantage qu'une très brève introduction à *Jekyll*. Pour personnaliser votre site davantage, lisez en priorité l'[excellente documentation de *Jekyll*](http://jekyllrb.com/docs/home/), bien tenue à jour, ainsi que les nombreuses références que vous trouverez sur Internet. 
+Cet article n'a pas prétention à constituer davantage qu'une très brève introduction à *Jekyll*. Pour personnaliser votre site davantage, lisez en priorité l'[excellente documentation de *Jekyll*](http://jekyllrb.com/docs/home/), bien tenue à jour, ainsi que les nombreuses références que vous trouverez sur Internet.
 
 Vous pouvez également consulter sur ce site trois autres articles à propos de *Jekyll* :
 
@@ -155,4 +155,4 @@ Vous pouvez également consulter sur ce site trois autres articles à propos de 
 - [servir son site à l'aide de *CloudFront*]({{site.base}}/servir-son-site-avec-cloudfront/) pour obtenir des performances maximales en termes de disponibilité et de vitesse ;
 - [héberger _Jekyll_ sur GitHub]({{site.base}}/utiliser-github-pour-servir-jekyll/) pour pouvoir suivre et modifier votre site en ligne, en le générant à la volée.
 
-Enfin, parcourir les [codes sources de sites utilisant *Jekyll*](https://github.com/jekyll/jekyll/wiki/Sites)[[vous êtes notamment libres de consulter le [code source du présent site](https://github.com/sylvaindurand/sylvaindurand.org) pour voir comment celui-ci est conçu]], pour vous inspirer, ne peut être qu'une excellente idée. 
+Enfin, parcourir les [codes sources de sites utilisant *Jekyll*](https://github.com/jekyll/jekyll/wiki/Sites)[[vous êtes notamment libres de consulter le [code source du présent site](https://github.com/sylvaindurand/sylvaindurand.org) pour voir comment celui-ci est conçu]], pour vous inspirer, ne peut être qu'une excellente idée.

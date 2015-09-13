@@ -5,7 +5,7 @@ redirect_from: /site-statique-avec-cloudfront/
 
 Les sites statiques ont pour principal intérêt de pouvoir être stockés dans le *nuage*, c'est-à-dire sur des serveurs de contenu permettant de les délivrer très rapidement, à moindre coût, avec une fiabilité et une sécurité extraordinaire.
 
-Ce billet montrera comment un site statique[[qu'il soit produit par un générateur comme [*Jekyll*](http://jekyllrb.com), [*Pelican*](http://docs.getpelican.com/) ou encore [*Hyde*](http://hyde.github.io), ou réalisé à la main]] peut être hébergé sur les [services web d'*Amazon*](http://aws.amazon.com/fr/) (*AWS*), et notamment hébergé sur [*S3*](http://aws.amazon.com/fr/s3/) et servi à l'aide de [*Cloudfront*](http://aws.amazon.com/fr/cloudfront/). De cette façon, le site sera disponible très rapidement depuis n'importe où, supportera n'importe quelle montée en charge, sans préoccupation de maintenance ou de sécurité, et cela à un coût presque nul[[avec un faible trafic, il ne vous en coûtera qu'environ un dollar]]. 
+Ce billet montrera comment un site statique[[qu'il soit produit par un générateur comme [*Jekyll*](http://jekyllrb.com), [*Pelican*](http://docs.getpelican.com/) ou encore [*Hyde*](http://hyde.github.io), ou réalisé à la main]] peut être hébergé sur les [services web d'*Amazon*](http://aws.amazon.com/fr/) (*AWS*), et notamment hébergé sur [*S3*](http://aws.amazon.com/fr/s3/) et servi à l'aide de [*Cloudfront*](http://aws.amazon.com/fr/cloudfront/). De cette façon, le site sera disponible très rapidement depuis n'importe où, supportera n'importe quelle montée en charge, sans préoccupation de maintenance ou de sécurité, et cela à un coût presque nul[[avec un faible trafic, il ne vous en coûtera qu'environ un dollar]].
 
 Nous utiliserons pour cela :
 
@@ -24,8 +24,8 @@ Après avoir créé un compte [*AWS*](http://aws.amazon.com/fr/), allons dans la
 ### Création des *buckets*
 Dans notre exemple, les pages seront accessibles depuis l'adresse `www.domain.tld`. Pour éviter de perdre des utilisateurs, la racine `domain.tld` redirigera vers celle-ci. Créons deux buckets (avec `Create bucket`) portant exactement ces mêmes noms  : `www.domain.tld` et `domain.tld`.
 
-### Paramètre du *bucket* hébergeant le site 
-Dans les propriétés de `www.domain.tld`, activons l'hébergement de fichiers (`Static Website Hosting` puis `Enable website hosting`) : c'est l'occasion de choisir des pages d'accueil (`index.html`) et d'erreur (`erreur.html`). Ce site sera disponible depuis l'adresse `Endpoint` qui est indiquée : *notez-là*, nous en aurons besoin à la section suivante. 
+### Paramètre du *bucket* hébergeant le site
+Dans les propriétés de `www.domain.tld`, activons l'hébergement de fichiers (`Static Website Hosting` puis `Enable website hosting`) : c'est l'occasion de choisir des pages d'accueil (`index.html`) et d'erreur (`erreur.html`). Ce site sera disponible depuis l'adresse `Endpoint` qui est indiquée : *notez-là*, nous en aurons besoin à la section suivante.
 
 ### Paramètres de l'autre *bucket* pour rediriger vers le site
 Dans les propriétés de `domain.tld`, on va également dans `Static Website Hosting` mais pour y sélectionner `Redirect all requests` : on indique `www.domain.tld`. Ce *buckets* restera vide.
@@ -70,7 +70,7 @@ Revenu dans *Route 53*, dans `domain.tld`, nous allons créer trois enregistreme
 * `www.domain.tld` (entrez  `www` dans `name`), sera de type `A` ; dans `Alias`, sélectionnez la distribution *Cloudfront* qui devrait être proposée ;
 * `domain.tld` (laissez `name` vide) sera également de type `A` : son alias redirigera vers le *bucket* de même nom, proposé automatiquement.
 
-Il reste bien sûr possible de rediriger des sous-domaines vers d'autres services (avec les champs NS, A ou CNAME) ou d'utiliser un service de mails (avec les champs MX). 
+Il reste bien sûr possible de rediriger des sous-domaines vers d'autres services (avec les champs NS, A ou CNAME) ou d'utiliser un service de mails (avec les champs MX).
 
 
 
@@ -134,8 +134,8 @@ find _site -path _site/static -prune -o -type f \
 
 Nous pouvons alors utiliser `s3cmd` pour déployer notre site en ligne. Seuls les fichiers mis à jour depuis la dernière synchronisation sont envoyés. Nous utiliserons notamment les options suivantes :
 
-* `acl-public` rend public les fichiers envoyés ; 
-* `cf-invalidate` actualise les fichiers servis par *Cloudfront* ; 
+* `acl-public` rend public les fichiers envoyés ;
+* `cf-invalidate` actualise les fichiers servis par *Cloudfront* ;
 * `add-header` définit les entêtes (compression, durée de cache...) ;
 * `delete-sync` supprime les fichiers distants inexistants en local ;
 * `M` définit automatiquement le type MIME des fichiers.
@@ -146,7 +146,7 @@ Nous commençons ainsi par envoyer tous les fichiers multimédias stockés dans 
 s3cmd --acl-public --cf-invalidate -M \
       --add-header="Cache-Control: max-age=6048000" \
       --cf-invalidate \
-      sync _site/static s3://www.domain.tld/ 
+      sync _site/static s3://www.domain.tld/
 ```
 
 Nous envoyons tous les autres fichiers (HTML, CSS, JS), auxquels nous affectons une durée de cache de 48 heures, et nous indiquons que le contenu est compressé :
@@ -157,14 +157,14 @@ s3cmd --acl-public --cf-invalidate -M \
       --add-header="Cache-Control: max-age=604800" \
       --cf-invalidate \
       --exclude="/static/*" \
-      sync _site/ s3://www.domain.tld/ 
+      sync _site/ s3://www.domain.tld/
 ```
 
-Enfin, nous faisons le ménage en supprimant en ligne tout ce qui n'existe plus dans notre dossier local, et on actualise la page d'accueil `index.html` sur *Cloudfront* (ce que ne fait pas `cf-invalidate`) : 
+Enfin, nous faisons le ménage en supprimant en ligne tout ce qui n'existe plus dans notre dossier local, et on actualise la page d'accueil `index.html` sur *Cloudfront* (ce que ne fait pas `cf-invalidate`) :
 
 ```bat
 s3cmd --delete-removed --cf-invalidate-default-index \
-      sync _site/ s3://www.domain.tld/ 
+      sync _site/ s3://www.domain.tld/
 ```
 
 ### En une seule commande
@@ -186,7 +186,7 @@ find _site -name '*.png' -exec optipng -o5 {} \;
 s3cmd --acl-public --cf-invalidate -M \
       --add-header="Cache-Control: max-age=6048000" \
       --cf-invalidate \
-      sync _site/static s3://www.domain.tld/ 
+      sync _site/static s3://www.domain.tld/
 
 # Synchronisation des autres fichiers
 s3cmd --acl-public --cf-invalidate -M \
@@ -194,11 +194,11 @@ s3cmd --acl-public --cf-invalidate -M \
       --add-header="Cache-Control: max-age=604800" \
       --cf-invalidate \
       --exclude="/static/*" \
-      sync _site/ s3://www.domain.tld/ 
+      sync _site/ s3://www.domain.tld/
 
 # Suppression des fichiers retirés en local
 s3cmd --delete-removed --cf-invalidate-default-index \
-      sync _site/ s3://www.domain.tld/ 
+      sync _site/ s3://www.domain.tld/
 ```
 
 Il suffit alors d'exécuter la commande `sh _deploy.sh` pour mettre à jour notre site en une seule commande. Quelques minutes peuvent s'écouler avant que la mise à jour ne soit effective sur *Cloudfront*.
@@ -206,7 +206,7 @@ Il suffit alors d'exécuter la commande `sh _deploy.sh` pour mettre à jour notr
 
 ## Statistiques
 
-Bien que notre site soit statique et servi par un serveur de contenu, il est tout à fait possible d'analyser les logs si l'on ne souhaite pas utiliser de système basé sur un code javascript, tel [Piwik](http://piwik.org/) ou [Google Analytics](https://www.google.fr/intl/fr/analytics/). Ici, nous automatiserons la tâche (récupération des logs, traitement et affichage des statistiques) depuis un serveur (dans notre exemple, un Raspberry Pi sous Raspbian) et nous utiliserons [*Awstats*](http://awstats.sourceforge.net/). 
+Bien que notre site soit statique et servi par un serveur de contenu, il est tout à fait possible d'analyser les logs si l'on ne souhaite pas utiliser de système basé sur un code javascript, tel [Piwik](http://piwik.org/) ou [Google Analytics](https://www.google.fr/intl/fr/analytics/). Ici, nous automatiserons la tâche (récupération des logs, traitement et affichage des statistiques) depuis un serveur (dans notre exemple, un Raspberry Pi sous Raspbian) et nous utiliserons [*Awstats*](http://awstats.sourceforge.net/).
 
 ### Récupération des logs
 
@@ -218,7 +218,7 @@ Nous créons en local un dossier qui va récupérer ces logs, puis nous pouvons 
 mkdir ~/awstats
 mkdir ~/awstats/logs
 s3cmd get --recursive s3://statistiques/ ~/awstats/logs/
-s3cmd del --recursive --force s3://statistiques/ 
+s3cmd del --recursive --force s3://statistiques/
 ```
 
 ### Installation et configuration d'*Awstats*
@@ -253,7 +253,7 @@ sudo cp -r /usr/share/awstats/icon/ ~/awstats/awstats-icon/
 
 ### Génération des statistiques
 
-Une fois cette configuration faite, il est possible de générer les statistiques sous forme d'un fichier HTML statique l'aide de : 
+Une fois cette configuration faite, il est possible de générer les statistiques sous forme d'un fichier HTML statique l'aide de :
 
 ```bat
 /usr/share/awstats/tools/awstats_buildstaticpages.pl \
@@ -271,7 +271,7 @@ Pour automatiser la génération de statistiques à intervalles réguliers, cré
 #!/bin/sh
 # Récupération des logs
 s3cmd get --recursive s3://statistiques/ ~/awstats/logs/
-s3cmd del --recursive --force s3://statistiques/ 
+s3cmd del --recursive --force s3://statistiques/
 # Génération des logs
 /usr/share/awstats/tools/awstats_buildstaticpages.pl \
     -dir=~/awstats/ -update -config=www.domain.tld \

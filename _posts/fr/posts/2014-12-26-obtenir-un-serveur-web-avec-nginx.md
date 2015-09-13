@@ -23,11 +23,11 @@ Il est alors possible de démarrer manuellement *Nginx* avec :
 systemctl start nginx
 ```
 
-En ouvrant l'adresse IP[[ou le nom de domaine qui pointe vers votre Raspberry Pi]] de votre Raspberry Pi, vous devriez alors voir apparaître une page attestant que *Nginx* est bien fonctionnel. 
+En ouvrant l'adresse IP[[ou le nom de domaine qui pointe vers votre Raspberry Pi]] de votre Raspberry Pi, vous devriez alors voir apparaître une page attestant que *Nginx* est bien fonctionnel.
 
 ## Site statique
 
-Nous allons commencer par créer un premier site, entièrement statique. Les fichiers seront situés dans `/srv/http/monsite`, qui sera disponible à l'URL `monsite.tld`. 
+Nous allons commencer par créer un premier site, entièrement statique. Les fichiers seront situés dans `/srv/http/monsite`, qui sera disponible à l'URL `monsite.tld`.
 
 Pour cela, nous éditons le fichier de configuration de *Nginx* :
 
@@ -158,7 +158,7 @@ extension=mysql.so
 
 *Miniflux* est une application web de lecture de flux RSS que j'apprécie particulièrement pour sa simplicité et son design minimaliste. Il constitue le remplaçant à *Google Reader* que j'ai recherché pendant longtemps.
 
-Comme indiqué précédemment, créons un site dynamique pour le dossier `/srv/http/miniflux/` en prenant garde d'installer *sqlite* que *Miniflux* nécessite. 
+Comme indiqué précédemment, créons un site dynamique pour le dossier `/srv/http/miniflux/` en prenant garde d'installer *sqlite* que *Miniflux* nécessite.
 
 L'installation se fait alors simplement : on télécharge *Miniflux*, qu'on décompresse, et on donne les droits de lecture au dossier `data/`.
 
@@ -177,7 +177,7 @@ Puis, pour activer la surveillance des flux RSS toutes les heures, on créée un
 crontab -e
 ```
 
-On y inscrit alors : 
+On y inscrit alors :
 
 ```bash
 0 */1 * * *  cd /srv/http/miniflux && php cronjob.php >/dev/null 2>&1
@@ -188,7 +188,7 @@ On y inscrit alors :
 
 Synchroniser ses calendriers, contacts et différents fichiers entre différents périphériques -- ordinateurs, tablettes, téléphones -- est aujourd'hui très courant. Du fait du caractère très personnel, voire sensible, de ces données, il peut être intéressant d'installer un outil comme *OwnCloud* sur son Raspberry Pi.
 
-À nouveau, créons un site dynamique pour le dossier `/srv/http/owncloud/`. Nous y téléchargeons alors *OwnCloud* : 
+À nouveau, créons un site dynamique pour le dossier `/srv/http/owncloud/`. Nous y téléchargeons alors *OwnCloud* :
 
 ```bash
 mkdir -p /srv/http/owncloud
@@ -212,9 +212,9 @@ On y inscrit alors :
 ```
 
 
-Depuis notre réseau local, nous pouvons accéder à l'interface web d'OwnCloud en allant sur l'adresse de notre Raspberry Pi (l'IP externe ou le nom de domaine). 
+Depuis notre réseau local, nous pouvons accéder à l'interface web d'OwnCloud en allant sur l'adresse de notre Raspberry Pi (l'IP externe ou le nom de domaine).
 
-Dans _Applications_, décochez toutes les applications qui ne seront pas utilisées pour rendre OwnCloud plus fluide. Je ne conserve pour ma part que "Calendrier" et "Contacts". 
+Dans _Applications_, décochez toutes les applications qui ne seront pas utilisées pour rendre OwnCloud plus fluide. Je ne conserve pour ma part que "Calendrier" et "Contacts".
 
 Dans _Administration_, décochez les autorisations de partage qui ne sont pas utiles, et sélectionnez `cron` dans le mode de mise à jour.
 

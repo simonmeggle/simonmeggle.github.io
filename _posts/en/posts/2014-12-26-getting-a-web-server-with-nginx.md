@@ -27,9 +27,9 @@ By opening the IP address[[or the domain name that points to your Raspberry Pi]]
 
 ## Static website
 
-We will start by creating a first site entirely static. The files will be located in `/srv/http/mysite`, which will be available at `mysite.tld`. 
+We will start by creating a first site entirely static. The files will be located in `/srv/http/mysite`, which will be available at `mysite.tld`.
 
-For this, we edit the *Nginx* configuration file: 
+For this, we edit the *Nginx* configuration file:
 
 ```bash
 nano /etc/nginx/nginx.conf
@@ -157,7 +157,7 @@ extension=mysql.so
 
 *Miniflux* is a web application for reading RSS feeds that I particularly appreciated for its simplicity and minimalist design. It is the replacement for *Google Reader* I've searched for a long time.
 
-As previously stated, creating a dynamic site for the folder `/srv/http/miniflux/` taking care to install *sqlite*, needed by *Miniflux*. 
+As previously stated, creating a dynamic site for the folder `/srv/http/miniflux/` taking care to install *sqlite*, needed by *Miniflux*.
 
 Installation is simple: download *Miniflux*, extract it, and give write access to the folder `data/`.
 
@@ -210,7 +210,7 @@ Then enter therein:
 */15  *  *  *  * php -f /srv/http/owncloud/cron.php
 ```
 
-From our local network, we can access the web interface OwnCloud by going to the address of our Raspberry Pi (the external IP or the domain name). 
+From our local network, we can access the web interface OwnCloud by going to the address of our Raspberry Pi (the external IP or the domain name).
 
 In *Applications* uncheck all applications you won’t use, in order to make OwnCloud more fluid. I only keep “Calendar” and “Contacts”.
 

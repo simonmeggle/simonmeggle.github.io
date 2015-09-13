@@ -2,7 +2,7 @@
 title: Numéroter les lignes <br/> de code avec <em>CSS</em>
 ---
 
-Lorsque l'on souhaite afficher un bloc de lignes de code en HTML, on utilise une balise `<pre>`, pour indiquer que le texte est préformaté[[et donc en particulier que les espaces et sauts de ligne doivent être respectés]] dans laquelle on place une balise ou plusieurs balises `<code>`, pour indiquer qu'il s'agit bien de code. 
+Lorsque l'on souhaite afficher un bloc de lignes de code en HTML, on utilise une balise `<pre>`, pour indiquer que le texte est préformaté[[et donc en particulier que les espaces et sauts de ligne doivent être respectés]] dans laquelle on place une balise ou plusieurs balises `<code>`, pour indiquer qu'il s'agit bien de code.
 
 Sur ce site, la numérotation des lignes apparaît à gauche de chacune d'entres elles, comme le permettent la plupart des traitements de texte. Les techniques pour obtenir ce résultat sont très variables : beaucoup utilisent *jQuery* ou *Javascript*, des codes HTML douteux, voire même des tableaux...
 
@@ -56,7 +56,7 @@ Il ne vous reste qu'à améliorer leur style à votre gré. C'est tout !
 
 ## Et avec *Jekyll* ?
 
-Par défaut, le moteur *Markdown* de *Jekyll* ne place qu'un seul élément `<code>` dans les balises `<pre>`, alors qu'il nous en faudrait un pour chaque ligne. 
+Par défaut, le moteur *Markdown* de *Jekyll* ne place qu'un seul élément `<code>` dans les balises `<pre>`, alors qu'il nous en faudrait un pour chaque ligne.
 
 Nous avons vu, dans l'article "[compresser le HTML produit par *Jekyll*]({{site.base}}/compresser-le-code-html-de-jekyll/)", qu'il était possible de compresser notre code HTML en créant un fichier `compress.html` dans `_layout/`[[en ajoutant ensuite `layout: compress` dans l'entête des fichiers présents dans `_layout` concernés]] qui contenait :
 

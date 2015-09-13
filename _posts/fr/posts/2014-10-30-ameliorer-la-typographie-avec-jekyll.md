@@ -29,10 +29,10 @@ Avant la version 2.0, *Jekyll* utilisait par défaut le moteur *Redcarpet*. Si v
 markdown: redcarpet
 ```
 
-*Markdown* vient avec l'extension *SmartyPants*, qu'il vous est possible d'utiliser avec *Jekyll* bien qu'elle ne soit pas activée par défaut. 
+*Markdown* vient avec l'extension *SmartyPants*, qu'il vous est possible d'utiliser avec *Jekyll* bien qu'elle ne soit pas activée par défaut.
 *SmartyPants* permet notamment de :
 
-* transformer les points de suspensions `...` en leur symbole ... 
+* transformer les points de suspensions `...` en leur symbole ...
 * convertir les guillemets `""` en guillemets anglais “” ;
 * convertir les tirets semi-longs  `--` en -- ;
 * convertir les tirets longs  `---` en ---.
@@ -55,7 +55,7 @@ Il faut prendre garde de n'appliquer les modifications que dans les paragraphes 
 
 Nous avons vu, dans l'article "[compresser le HTML produit par *Jekyll*]({{site.base}}/compresser-le-code-html-de-jekyll/)", qu'il était possible de compresser le code HTML en créant un fichier `compress.html` dans `_layout/`[[en ajoutant ensuite `layout: compress` dans l'entête des fichiers présents dans `_layout` concernés]] qui contenait :
 
-```r 
+```r
 {% raw %}
 {% capture compress %}
 {% assign temp1 = content | split: '<pre>' %}

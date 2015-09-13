@@ -39,16 +39,16 @@ In order to show neighbouring countries, we will use data provided by [Natural E
 
 ```r
 # Reading country and selecting Europe
-europe <- readOGR(dsn="shp/ne/cultural", layer="ne_10m_admin_0_countries") 
+europe <- readOGR(dsn="shp/ne/cultural", layer="ne_10m_admin_0_countries")
  <- europe[europe$REGION_UN=="Europe",]
 ```
 
 
 ### Projection and plot
 
-The map will use the [French official projection](http://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000387816&fastPos=1&fastReqId=2039166907&categorieLien=cid&oldAction=rechTexte), already declared in the Geofla `.prj` files. `spTransform` will be used for the European coutries. 
+The map will use the [French official projection](http://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000387816&fastPos=1&fastReqId=2039166907&categorieLien=cid&oldAction=rechTexte), already declared in the Geofla `.prj` files. `spTransform` will be used for the European coutries.
 
-Then, we will first plot French boundaries, in order to center the map on France. Borders colors are defined in `border`, their tickness in `lwd` and the filling color in `col`. 
+Then, we will first plot French boundaries, in order to center the map on France. Borders colors are defined in `border`, their tickness in `lwd` and the filling color in `col`.
 
 ```r
 
@@ -66,7 +66,7 @@ plot(bounderies,  col="#D8D6D4", lwd=6, add=TRUE)
 plot(departements,col="#FFFFFF", border="#CCCCCC",lwd=.7, add=TRUE)
 plot(bounderies,  col="#666666", lwd=1, add=TRUE)
 
-dev.off() 
+dev.off()
 ```
 
 [![France blank map]({{site.base}}/medias/carto/france.jpg)]({{site.base}}/medias/carto/france.pdf)
@@ -87,10 +87,10 @@ communes$DENSITY <- communes$POPULATION/communes$SUPERFICIE*100000
 ```
 
 
-### Color scale 
+### Color scale
 In order to create a color scale, we will assign shades of blue to each percentile. `classIntervals` calculates percentiles, `smoothColors` create the blue scale, and `findColours` assigns blues depending on each commune depending on their population density. Then, we create a legend, with only five colors.
 
- 
+
 
 ```r
 # Color scale
@@ -101,7 +101,7 @@ col <- findColours(classIntervals(
 leg <- findColours(classIntervals(
             round(communes$DENSITY), 5, style="quantile"),
             smoothColors("#0C3269",3,"white"),
-            under="less than", over="more than", between="–", 
+            under="less than", over="more than", between="–",
             cutlabels=FALSE)
 ```
 
@@ -111,7 +111,7 @@ We can now plot the map. In order to use an embedded font in the PDF, we will us
 ```r
 # Exporting in PDF
 cairo_pdf('densite.pdf',width=6,height=4.7)
-par(mar=c(0,0,0,0),family="Myriad Pro",ps=8) 
+par(mar=c(0,0,0,0),family="Myriad Pro",ps=8)
 
 # Ploting the map
 plot(bounderies, col="#FFFFFF")
@@ -123,14 +123,14 @@ plot(bounderies, col="#666666", lwd=1, add=TRUE)
 # Ploting the legend
 legend(-10000,6387500,fill=attr(leg, "palette"),
         legend=names(attr(leg,"table")),
-        title = "Density (p/km²):") 
+        title = "Density (p/km²):")
 
-dev.off() 
+dev.off()
 ```
 
 [![Population density in France]({{site.base}}/medias/carto/density.jpg)]({{site.base}}/medias/carto/density.pdf)
 
-## Visualizing an external data : incomes 
+## Visualizing an external data : incomes
 The main value is to plot data provided by external files. We will plot the median taxable income per consumption unit ([provided by INSEE](http://www.insee.fr/fr/themes/detail.asp?reg_id=99&ref_id=base-cc-rev-fisc-loc-menage)). [We convert it in CSV]({{site.base}}/medias/carto/revenus.csv).
 
 ### Reading and supplementing data
@@ -166,7 +166,7 @@ col <- findColours(classIntervals(
 leg <- findColours(classIntervals(
             round(communes$REVENUS,0), 4, style="quantile"),
             smoothColors("#FFFFD7",2,"#F3674C"),
-            under="moins de", over="plus de", between="–", 
+            under="moins de", over="plus de", between="–",
             cutlabels=FALSE)
 ```
 
@@ -175,7 +175,7 @@ And we plot:
 
 ```r
 cairo_pdf('incomes.pdf',width=6,height=4.7)
-par(mar=c(0,0,0,0),family="Myriad Pro",ps=8) 
+par(mar=c(0,0,0,0),family="Myriad Pro",ps=8)
 
 plot(boundaries, col="#FFFFFF")
 plot(europe,     col="#F5F5F5", border="#AAAAAA",lwd=1, add=TRUE)
@@ -187,7 +187,7 @@ legend(-10000,6337500,fill=attr(leg, "palette"),
     legend=gsub("\\.", ",", names(attr(leg,"table"))),
     title = "Median income:")
 
-dev.off() 
+dev.off()
 ```
 
 [![Median taxable income per consumption unit in France in 2010]({{site.base}}/medias/carto/incomes.jpg)]({{site.base}}/medias/carto/incomes.pdf)
@@ -199,13 +199,13 @@ We can also add map data: cities, urban areas, rivers, forests... We will here p
 
 ```r
 roads <- readOGR(dsn="shp/geofla",  layer="TRONCON_ROUTE")
-local     <- roads[roads$VOCATION=="Liaison locale",] 
-principal <- roads[roads$VOCATION=="Liaison principale",] 
-regional  <- roads[roads$VOCATION=="Liaison r\xe9gionale",] 
-highway <- roads[roads$VOCATION=="Type autoroutier",] 
+local     <- roads[roads$VOCATION=="Liaison locale",]
+principal <- roads[roads$VOCATION=="Liaison principale",]
+regional  <- roads[roads$VOCATION=="Liaison r\xe9gionale",]
+highway <- roads[roads$VOCATION=="Type autoroutier",]
 
 cairo_pdf('roads.pdf',width=6,height=4.7)
-par(mar=c(0,0,0,0),family="Myriad Pro",ps=8) 
+par(mar=c(0,0,0,0),family="Myriad Pro",ps=8)
 
 plot(boundaries,  col="#FFFFFF")
 plot(europe,      col="#F5F5F5", border="#AAAAAA",lwd=1, add=TRUE)
@@ -217,7 +217,7 @@ plot(regional,    col="#BBBBBB", lwd=.5, add=TRUE)
 plot(highway,     col="#AAAAAA", lwd=.7, add=TRUE)
 plot(boundaries,  col="#666666", lwd=1, add=TRUE)
 
-dev.off() 
+dev.off()
 ```
 
 [![French roads network]({{site.base}}/medias/carto/routes.jpg)]({{site.base}}/medias/carto/routes.pdf)
@@ -228,12 +228,12 @@ dev.off()
 
 ### Reading shapefiles
 
-We will load the following [Natural Earth](http://www.naturalearthdata.com/downloads) shapefiles: 
+We will load the following [Natural Earth](http://www.naturalearthdata.com/downloads) shapefiles:
 
 ```r
 # Loading Shapefiles
 countries   <- readOGR(dsn="shp/ne/cultural",layer="ne_110m_admin_0_countries")
-graticules  <- readOGR(dsn="shp/ne/physical",layer="ne_110m_graticules_10") 
+graticules  <- readOGR(dsn="shp/ne/physical",layer="ne_110m_graticules_10")
 bbox        <- readOGR(dsn="shp/ne/physical",layer="ne_110m_wgs84_bounding_box")
 ```
 
@@ -285,9 +285,9 @@ leg <- findColours(classIntervals(round(countries$hdi,3), 7, style="pretty"),
                        smoothColors("#ffffe5",5,"#00441b"),
                        under="less than", over="more than", between="–", cutlabels=FALSE)
 
-# Ploting 
+# Ploting
 cairo_pdf('hdi.pdf',width=10,height=6)
-par(mar=c(0,0,0,0),family="Myriad Pro",ps=8) 
+par(mar=c(0,0,0,0),family="Myriad Pro",ps=8)
 
 plot(bbox, col="white", border="grey90",lwd=1)
 plot(countries,  col=col, border=col,lwd=.8, add=TRUE)
@@ -296,7 +296,7 @@ plot(graticules,col="#00000009",lwd=1, add=TRUE)
 legend(-15000000,-3000000,fill=attr(leg, "palette"),
     legend= names(attr(leg,"table")),
     title = "HDI in 2012 :")
-dev.off() 
+dev.off()
 ```
 
 [![Human Development Index (HDI) in 2012]({{site.base}}/medias/carto/hdi.jpg)]({{site.base}}/medias/carto/hdi.pdf)
@@ -309,12 +309,12 @@ An other kind of visualization is given by circles. Population of most populated
 
 ```r
 # Loading shapefile
-cities <- readOGR(dsn="shp/ne/cultural",layer="ne_110m_populated_places") 
-cities <- spTransform(cities,  CRS("+proj=wintri")) 
+cities <- readOGR(dsn="shp/ne/cultural",layer="ne_110m_populated_places")
+cities <- spTransform(cities,  CRS("+proj=wintri"))
 ```
 
 ### Circle size
-   
+
 The data shall be proportionate to the circles areas, not the radius; so the radius is the square root of the population:
 
 ```r
@@ -336,7 +336,7 @@ plot(countries,  col="#E6E6E6",  border="#AAAAAA",lwd=1, add=TRUE)
 points(cities,col="#8D111766",bg="#8D111766",lwd=1, pch=21,cex=cities$radius)
 plot(graticules,col="#CCCCCC33",lwd=1, add=TRUE)
 
-dev.off() 
+dev.off()
 ```
 
 [![Most populated cities in the world]({{site.base}}/medias/carto/villes.jpg)]({{site.base}}/medias/carto/villes.pdf)
@@ -356,7 +356,7 @@ plot(bbox, col="#000000",    border="#000000",lwd=1)
 plot(countries,  col="#000000",  border="#000000",lwd=1, add=TRUE)
 plot(areas,  col="#FFFFFF",  border="#FFFFFF66",lwd=1.5, add=TRUE)
 
-dev.off() 
+dev.off()
 ```
 
 [![World map (Winkel Tripel projection)]({{site.base}}/medias/carto/urbain.jpg)]({{site.base}}/medias/carto/urbain.pdf)
