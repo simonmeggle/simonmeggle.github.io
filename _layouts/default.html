@@ -6,31 +6,29 @@ layout: typo
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=0.85">
-  <meta name="description" content="{% if page.desc %}{{ page.desc | strip_html }}{% else %}{{ page.excerpt | strip_html | replace: "[[", " ("  | replace: "]]", ")" }}{% endif %}">
+  <meta name="description" content="{% if page.desc %}{{ page.desc | strip_html }}{% else %}{{ page.excerpt | strip_html | replace: "[[", " ("  | replace: "]]", ")" | strip_newlines }}{% endif %}">
   <title>{{page.title | strip_html}} – Sylvain Durand</title>
   <link rel="icon" href="/medias/elements/favicon.ico" />
   <link rel="alternate" href="/rss.xml" type="application/rss+xml" />
-  <link rel="stylesheet" href="/style.css">
-  {% assign posts=site.posts | where:"date", page.date %}
-  {% for post in posts %}
-    {% if post.lang != page.lang %}
-      <link rel="alternate" hreflang="{{post.lang}}" href="{{post.url}}" />
-    {% endif %}
-  {% endfor %}
+  <link rel="stylesheet" href="/style.css">{% capture hide %}
+    {% assign posts=site.posts | where:"date", page.date %}
+    {% for post in posts %}
+      {% if post.lang != page.lang %}
+        {% assign url = post.url %}
+        {% assign lang = post.lang %}
+      {% endif %}
+    {% endfor %}
+  {% endcapture %}{% if url %}
+  <link rel="alternate" hreflang="{{ lang }}" href="{{ url }}" />{% endif %}
 </head>
 
 <body class="{{ page.lang }}{% if page.type == 'pages' %} page{% endif %}">
 
 <div class="nav">
-  <ul>
-    {% for menu in site.data.navigation[page.lang] %}
-      <li><a href="{{ menu[1].url }}">{{ menu[1].title }}</a></li>
-    {% endfor %}
-    <li class="lang">
-      {% assign posts=site.posts | where:"date", page.date | sort: 'path' %}
-      {% for post in posts %}
-        <a href="{{ post.url }}" class="{{ post.lang }}">{{ post.lang }}</a>
-      {% endfor %}
+  <ul>{% for menu in site.data.navigation[page.lang] %}
+      <li><a href="{{ menu[1].url }}">{{ menu[1].title }}</a></li>{% endfor %}
+      <li class="lang">{% assign posts=site.posts | where:"date", page.date | sort: 'path' %}{% for post in posts %}
+        <a href="{{ post.url }}" class="{{ post.lang }}">{{ post.lang }}</a>{% endfor %}
     </li>
   </ul>
 </div>
@@ -46,8 +44,7 @@ layout: typo
 </div>
 
 <div class="foot">
-  {{ site.data.translations[page.lang].created }} <span>{% include date.html date=page.date %}</span>
-  {{ site.data.translations[page.lang].author }}  <a href="http://sylvaindurand.org/">Sylvain Durand</a>.
+  {{ site.data.translations[page.lang].created }} <span>{% include date.html date=page.date %}</span> {{ site.data.translations[page.lang].author }} <a href="http://sylvaindurand.org/">Sylvain Durand</a>.
 </div>
 
 <div class="bg" style="background-image: url('data:image/jpg;base64,{% assign d = page.date|date:'%Y-%m-%d' %}{{ site.data.headers[d].img }}')">{{ page.title }}</div>
