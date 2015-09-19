@@ -1,3 +1,4 @@
+{% capture date %}
 {% if include.mode != 'month' %}
   {% assign d = include.date | date: "%-d" %}
   {% if page.lang == 'fr' %}
@@ -15,20 +16,21 @@
 {% if page.lang == 'fr' %}
  {% assign m = include.date | date: "%-m" %}
  {% case m %}
-    {% when '1' %}janvier
-    {% when '2' %}février
-    {% when '3' %}mars
-    {% when '4' %}avril
-    {% when '5' %}mai
-    {% when '6' %}juin
-    {% when '7' %}juillet
-    {% when '8' %}août
-    {% when '9' %}septembre
-    {% when '10' %}octobre
-    {% when '11' %}novembre
-    {% when '12' %}décembre
+    {% when  '1' %} janvier
+    {% when  '2' %} février
+    {% when  '3' %} mars
+    {% when  '4' %} avril
+    {% when  '5' %} mai
+    {% when  '6' %} juin
+    {% when  '7' %} juillet
+    {% when  '8' %} août
+    {% when  '9' %} septembre
+    {% when '10' %} octobre
+    {% when '11' %} novembre
+    {% when '12' %} décembre
   {% endcase %}
 {% else %}
-  {{ include.date | date: "%B"}}
+  {{ include.date | date: " %B"}}
 {% endif %}
-{{ include.date | date: "%Y"}}
+{{ include.date | date: " %Y"}}
+{% endcapture %}{{ date | strip_newlines | replace: '  ','' }}

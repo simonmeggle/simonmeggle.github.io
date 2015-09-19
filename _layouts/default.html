@@ -39,9 +39,7 @@ layout: typo
 
 <div class="article">
 {% if page.type != 'pages' %}
-<p class="date">
-    {% include date.html date=page.date %}
-</p>
+<p class="date">{% include date.html date=page.date %}</p>
 {% endif %}
 {{ content }}
 <hr/>
