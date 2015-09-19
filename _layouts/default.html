@@ -33,7 +33,7 @@ layout: typo
   </ul>
 </div>
 
-<h1>{{ page.title }}</h1>
+<h1 style="background-image: url('/medias/headers/{{ page.date | date:'%Y-%m-%d' }}.jpg')">{{ page.title }}</h1>
 
 <div class="article">
 {% if page.type != 'pages' %}
@@ -47,6 +47,5 @@ layout: typo
   {{ site.data.translations[page.lang].created }} <span>{% include date.html date=page.date %}</span> {{ site.data.translations[page.lang].author }} <a href="http://sylvaindurand.org/">Sylvain Durand</a>.
 </div>
 
-<div class="bg" style="background-image: url('data:image/jpg;base64,{% assign d = page.date|date:'%Y-%m-%d' %}{{ site.data.headers[d].img }}')">{{ page.title }}</div>
 </body>
 </html>
