@@ -5,7 +5,7 @@
 {% for temp2 in temp1 %}
 {% assign temp3 = temp2 | split: '</pre>' %}
 {% if temp3.size == 2 %}
-<pre>{{ temp3.first | newline_to_br | replace: "<br />", "</code><br /><code>" | strip_newlines | replace: "<code></code>", ""}}</pre>
+<pre>{{ temp3.first }}</pre>
 {% endif %}
 
 {% assign t = temp3.last %}
@@ -20,7 +20,7 @@
 {% assign t = t | replace: ' !', '<span style="white-space:nowrap">&thinsp;</span>!' %}
 {% assign t = t | replace: ' ?', '<span style="white-space:nowrap">&thinsp;</span>?' %}
 {% endif %}
-{{ t | split: ' ' | join: ' ' }}
+{{ t }}
 
 {% endfor %}
-{% endcapture %}{{ compress | strip_newlines }}
+{% endcapture %}{{ compress }}
