@@ -28,7 +28,7 @@ unterbinden:
 
 {% highlight bash %}
 
-echo "AUTOSTART=0" \> /etc/default/omd
+root@nagios1:~# echo "AUTOSTART=0" > /etc/default/omd
 
 {% endhighlight %}
 
@@ -37,19 +37,18 @@ per init-Script von nun an nicht mehr möglich ist:
 
 {% highlight bash %}
 
-root@nagios1:/etc/rc2.d\# invoke-rc.d omd start [enter]
+root@nagios1:~# invoke-rc.d omd start [enter]
 OMD autostart disabled, skipping ...
 
 {% endhighlight %}
 
 #### Erzeugen der Symlinks
 
-
 Auf jedem Node sollte das Verzeichnis von OMD nun so aussehen:
 
 {% highlight bash %}
 
-root@nagios1:/opt/omd\# ls [enter]
+root@nagios1:/opt/omd# ls [enter]
 apache sites versions
 
 {% endhighlight %}
@@ -66,7 +65,7 @@ Erklärung zu den Verzeichnissen:
 -   **sites** ist das Verzeichnis, welches pro angelegter OMD-Site ein
     Unterverzeichnis beherbergt.
 
-Zunächst muss auf beiden Nodes die testhalber gestartete OMD-Site
+Zunächst muss auf *beiden* Nodes die testhalber gestartete OMD-Site
 *siteA* wieder gestoppt werden:
 
 {% highlight bash %}
@@ -85,28 +84,25 @@ umount tmpfs
 
 #### Anpassungen auf dem DRBD-Primary-Node
 
-Auf dem DRBD-Primary (also dort, wo derzeit das DRBD-Blockdevice unter
-/mnt/omddata gemountet ist) werden beiden zuletzt genannten
+Auf dem DRBD-**Primary** (also auf dem Node, wo derzeit das DRBD-Blockdevice unter
+`/mnt/omddata` gemountet ist, hier: **Node2**) werden beiden zuletzt genannten
 Verzeichnisse *apache* und *sites* nun ins DRBD verschoben (dies sind
 die Daten, die sich beide Nodes „teilen“ sollen, und an deren Stelle
 Softlinks erzeugt, die an die neue Position zeigen:
 
 {% highlight bash %}
-
-cd /opt/omd/ [enter]
-mv apache/ /mnt/omddata/ [enter]
-ln -s /mnt/omddata/apache/ apache [enter]
-mv sites/ /mnt/omddata/ [enter]
-ln -s /mnt/omddata/sites/ sites [enter]
-root@nagios2:/opt/omd\# ls -la [enter]
-insgesamt 12
-drwxr-xr-x 3 root root 4096 2011-04-28 17:21 .
-drwxr-xr-x 4 root root 4096 2011-04-28 12:35 ..
-lrwxrwxrwx 1 root root 20 2011-04-28 17:21 apache -\>
-/mnt/omddata/apache/
-lrwxrwxrwx 1 root root 19 2011-04-28 17:21 sites -\>
-/mnt/omddata/sites/
-drwxr-xr-x 3 root root 4096 2011-04-28 12:35 versions
+root@nagios2:# cd /opt/omd/
+root@nagios2:/opt/omd# mv apache/ /mnt/omddata/
+root@nagios2:/opt/omd# ln -s /mnt/omddata/apache/ apache
+root@nagios2:/opt/omd# mv sites/ /mnt/omddata/
+root@nagios2:/opt/omd# ln -s /mnt/omddata/sites/ sites
+root@nagios2:/opt/omd# ls -la
+  insgesamt 12
+  drwxr-xr-x 3 root root 4096 2011-04-28 17:21 .
+  drwxr-xr-x 4 root root 4096 2011-04-28 12:35 ..
+  lrwxrwxrwx 1 root root 20 2011-04-28 17:21 apache -> /mnt/omddata/apache/
+  lrwxrwxrwx 1 root root 19 2011-04-28 17:21 sites -> /mnt/omddata/sites/
+  drwxr-xr-x 3 root root 4096 2011-04-28 12:35 versions
 
 {% endhighlight %}
 
@@ -145,35 +141,33 @@ zeigt:
 
 {% highlight bash %}
 
-cd /mnt/omddata [enter]
-mkdir versions [enter]
-ln -s /opt/omd/versions/0.46 versions/0.46 [enter]
+root@nagios2:# cd /mnt/omddata [enter]
+root@nagios2:/mnt/omddata# cmkdir versions [enter]
+root@nagios2:/mnt/omddata# ln -s /opt/omd/versions/0.46 versions/0.46 [enter]
 
 {% endhighlight %}
 
 #### Anpassungen auf dem DRBD-Secondary-Node
 
-Auf dem DRBD-Secondary (also dem Node, auf dem das DRBD-Device im Status
-secondary ist) löschen wir die Verzeichnisse, die wir auf dem
+Auf dem DRBD-**Secondary** (also dem Node, auf dem das DRBD-Device im Status
+"secondary" ist, hier: **Node1**) löschen wir die Verzeichnisse, die wir auf dem
 Master-Node ins DRBD-verschoben haben und legen ebenfalls Softlinks an,
 die ins (auf diesem Node nicht gemountete) DRBD zeigen:
 
 {% highlight bash %}
 
-cd /opt/omd [enter]
-rm -rf apache [enter]
-ln -s /mnt/omddata/apache/ apache [enter]
-rm -rf sites [enter]
-ln -s /mnt/omddata/sites/ sites [enter]
-root@nagios2:/opt/omd\# ls -la [enter]
-insgesamt 12
-drwxr-xr-x 3 root root 4096 2011-04-28 17:21 .
-drwxr-xr-x 4 root root 4096 2011-04-28 12:35 ..
-lrwxrwxrwx 1 root root 20 2011-04-28 17:21 apache -\>
-/mnt/omddata/apache/
-lrwxrwxrwx 1 root root 19 2011-04-28 17:21 sites -\>
-/mnt/omddata/sites/
-drwxr-xr-x 3 root root 4096 2011-04-28 12:35 versions
+root@nagios1:~# cd /opt/omd [enter]
+root@nagios1:/opt/omd# rm -rf apache [enter]
+root@nagios1:/opt/omd# ln -s /mnt/omddata/apache/ apache [enter]
+root@nagios1:/opt/omd# rm -rf sites [enter]
+root@nagios1:/opt/omd# ln -s /mnt/omddata/sites/ sites [enter]
+root@nagios1:/opt/omd# ls -la [enter]
+  insgesamt 12
+  drwxr-xr-x 3 root root 4096 2011-04-28 17:21 .
+  drwxr-xr-x 4 root root 4096 2011-04-28 12:35 ..
+  lrwxrwxrwx 1 root root 20 2011-04-28 17:21 apache -> /mnt/omddata/apache/
+  lrwxrwxrwx 1 root root 19 2011-04-28 17:21 sites -> /mnt/omddata/sites/
+  drwxr-xr-x 3 root root 4096 2011-04-28 12:35 versions
 
 {% endhighlight %}
 
@@ -181,59 +175,58 @@ drwxr-xr-x 3 root root 4096 2011-04-28 12:35 versions
 
 Wie eingangs beschrieben, benötigen wir nun eine Möglichkeit, einzelne
 OMD-Sites vom Cluster verwalten (start/stop/monitor) zu lassen.
- Hierzu habe ich einen eigenen OCF-Agent geschrieben, welcher den
+Hierzu habe ich einen eigenen OCF-Agent geschrieben, welcher den
 sitename als Shellvariablen-Argument entgegennimmt. Für *start* und
 *stop* der Site werden intern die bekannten Kommandos verwendet;
 *monitor* wertet das Endresultat des Kommandos `omd status [sitename]`
 aus.
- Im Verzeichnis für die Ressource Agents legen wir uns nun auf beiden
+
+Im Verzeichnis für die Ressource Agents legen wir uns nun auf *beiden*
 Nodes jeweils einen eigenen Provider an, der ganz einfach durch ein
 neues Verzeichnis neben `linbit`, `pacemaker` und `heartbeat`
 repräsentiert wird:
 
 {% highlight bash %}
 
-root@nagios1:/usr/lib/ocf/resource.d\# mkdir myprovider
+root@nagios1:/usr/lib/ocf/resource.d# mkdir myprovider
 
 {% endhighlight %}
 
-Laden Sie sich den [OCF-Agenten
-“OMD”](https://web.archive.org/web/20141003024855/http://blog.simon-meggle.de/wp-content/uploads/2011/05/OMD)
+Laden Sie sich den [OCF-Agenten “OMD”](https://web.archive.org/web/20141003024855/http://blog.simon-meggle.de/wp-content/uploads/2011/05/OMD)
 herunter (z.b. mit wget), entfernen Sie die Endung “.sh”.
- Kopieren Sie nun den Agenten in das neu erstellte Agenten-Verzeichnis:
+Kopieren Sie nun den Agenten in das neu erstellte Agenten-Verzeichnis:
 
 {% highlight bash %}
 
-root@nagios1:/usr/lib/ocf/resource.d\# cp -p /root/OMD myprovider/
-[enter]
+root@nagios1:/usr/lib/ocf/resource.d# cp -p /root/OMD myprovider/
 
 {% endhighlight %}
 
-Ein erster Trockentest auf der Shell des DRBD-Master-Nodes (nur dort,
+Ein erster Trockentest auf der Shell des DRBD-*Master*-Nodes (nur dort,
 weil auf dem anderen Node die Verzeichnisse sites und apache nicht
 zugreifbar sind!):
 
 {% highlight bash %}
 
-cd myprovider [enter]
-export OCF_ROOT=/usr/lib/ocf [enter]
-export OCF_RESKEY_site=siteA [enter]
-./OMD monitor [enter]
-OMD[30291]: DEBUG: OMD site siteA is stopped.
-OMD[30291]: DEBUG: default monitor : 7
-./OMD start [enter]
-OMD[31381]: DEBUG: OMD site siteA is stopped.
-OMD[31381]: INFO: Starting OMD site siteA...
-Creating temporary filesystem...OK
-Starting dedicated Apache for site siteA... .OK.
-Starting rrdcached...OK
-Starting npcd: done.
-Starting nagios... OK.
-Initializing Crontab done.
-OMD[31381]: DEBUG: default start : 0
-./OMD monitor [enter]
-OMD[31790]: DEBUG: OMD site siteA is running properly.
-OMD[31790]: DEBUG: default monitor : 0
+root@nagios2:~# cd myprovider
+root@nagios2:# export OCF_ROOT=/usr/lib/ocf
+root@nagios2:# export OCF_RESKEY_site=siteA
+root@nagios2:# ./OMD monitor
+  OMD[30291]: DEBUG: OMD site siteA is stopped.
+  OMD[30291]: DEBUG: default monitor : 7
+root@nagios2:# ./OMD start
+  OMD[31381]: DEBUG: OMD site siteA is stopped.
+  OMD[31381]: INFO: Starting OMD site siteA...
+  Creating temporary filesystem...OK
+  Starting dedicated Apache for site siteA... .OK.
+  Starting rrdcached...OK
+  Starting npcd: done.
+  Starting nagios... OK.
+  Initializing Crontab done.
+  OMD[31381]: DEBUG: default start : 0
+root@nagios2:# ./OMD monitor
+  OMD[31790]: DEBUG: OMD site siteA is running properly.
+  OMD[31790]: DEBUG: default monitor : 0
 
 {% endhighlight %}
 
@@ -243,13 +236,12 @@ Testen Sie nun, ob Sie siteA auf dem Master-Node öffnen können:
 
 {% highlight bash %}
 
-crm(live)configure\# primitive pri_omd_siteA ocf:myprovider:OMD \
-[enter]
- op monitor interval="10s" timeout="20s" \\ [enter]
- op start interval="0s" timeout="90s" \\ [enter]
- op stop interval="0s" timeout="100s" \\ [enter]
+crm(live)configure# primitive pri_omd_siteA ocf:myprovider:OMD
+ op monitor interval="10s" timeout="20s" [enter]
+ op start interval="0s" timeout="90s" [enter]
+ op stop interval="0s" timeout="100s"  [enter]
  params site="siteA" [enter]
-commit [enter]
+crm(live)# commit [enter]
 
 {% endhighlight %}
 
@@ -264,36 +256,38 @@ Aktualisierungen für existierende RRD-Dateien, sammelt diese und
 schreibt die Aktualisierungen zeitversetzt weg. Der Daemon wurde für
 große Installationen geschrieben, welche häufig in E/A-Probleme laufen.
 RRDCacheD soll diese Probleme mildern.
+
  Im Cluster ist ein guter Kompromiss zu treffen zwischen Caching der
 Daten und rechtzeitigem Schreiben aufs DRBD-Device – schließlich könnten
 die wertvollen Daten im Cache durch einen plötzlichen Ausfall des
 aktiven Knotens für immer verloren gehen, weil sie nicht mehr
 rechtzeitig den Weg aufs DRBD-Device (und damit in die Replikation)
 finden.
+
  Aus diesem Grund ist es ratsam, die Timing-Werte des rrdcacheD in jeder
 geclusterten Site etwas straffer zu ziehen:
 
 {% highlight bash %}
 
-vim /opt/omd/sites/[sitename]/etc/rrdcached.conf [enter]
-\# Data is written to disk every TIMEOUT seconds. If this option is
-\# not specified the default interval of 300 seconds will be used.
-\#TIMEOUT=3600
+root@nagios2:# vim /opt/omd/sites/[sitename]/etc/rrdcached.conf
+# Data is written to disk every TIMEOUT seconds. If this option is
+# not specified the default interval of 300 seconds will be used.
+#TIMEOUT=3600
 TIMEOUT=180
 
-\# rrdcached will delay writing of each RRD for a random
-\# number of seconds in the range [0,delay). This will avoid too many
-\# writes being queued simultaneously. This value should be no
-\# greater than the value specified in TIMEOUT.
-\#RANDOM_DELAY=1800
+# rrdcached will delay writing of each RRD for a random
+# number of seconds in the range [0,delay). This will avoid too many
+# writes being queued simultaneously. This value should be no
+# greater than the value specified in TIMEOUT.
+#RANDOM_DELAY=1800
 RANDOM_DELAY=90
 
-\# Every FLUSH_TIMEOUT seconds the entire cache is searched for old
+# Every FLUSH_TIMEOUT seconds the entire cache is searched for old
 values
-\# which are written to disk. This only concerns files to which
-\# updates have stopped, so setting this to a high value, such as
-\# 3600 seconds, is acceptable in most cases.
-\#FLUSH_TIMEOUT=7200
+# which are written to disk. This only concerns files to which
+# updates have stopped, so setting this to a high value, such as
+# 3600 seconds, is acceptable in most cases.
+#FLUSH_TIMEOUT=7200
 FLUSH_TIMEOUT=360
 
 {% endhighlight %}
@@ -302,7 +296,7 @@ Danach nur noch die Konfiguration des rrdcached reloaden:
 
 {% highlight bash %}
 
-omd reload [sitename] rrdcached [enter]
+root@nagios2:# omd reload [sitename] rrdcached [enter]
 
 {% endhighlight %}
 

@@ -40,31 +40,26 @@ unter
 
 {% highlight bash %}
 
-root@nagios2:/usr/lib/ocf/resource.d/myprovider\# omd create siteB
-[enter]
-Adding /omd/sites/siteB/tmp to /etc/fstab.
-Created new site siteB with version 0.46.
-Restarting Apache...OK
-Creating temporary filesystem...OK
-Successfully created site siteB.
-root@nagios2:\# omd start siteB [enter]
+root@nagios2:/usr/lib/ocf/resource.d/myprovider# omd create siteB [enter]
+  Adding /omd/sites/siteB/tmp to /etc/fstab.
+  Created new site siteB with version 0.46.
+  Restarting Apache...OK
+  Creating temporary filesystem...OK
+  Successfully created site siteB.
+root@nagios2:# omd start siteB [enter]
 
 {% endhighlight %}
 
-(Preisfrage: warum wird dieser Befehl auf Nagios1 fehlschlagen? Wenn Sie
-die Antwort nicht wissen, gehen Sie über Los und fangen Sie am besten
-von vorn an.)
+(Preisfrage: warum wird dieser Befehl auf Nagios1 fehlschlagen? )
 
 Wir lesen nun die fstab und passwd-Dateien aus – notieren Sie sich die
 Ausgaben folgender Befehle:
 
 {% highlight bash %}
 
-root@nagios2:\# cat /etc/fstab | grep siteB && cat /etc/passwd | grep
-siteB [enter]
-tmpfs /omd/sites/siteB/tmp tmpfs
-noauto,user,mode=755,uid=siteB,gid=siteB 0 0
-siteB:x:1002:1002:OMD site siteB:/omd/sites/siteB:/bin/bash
+root@nagios2:# cat /etc/fstab | grep siteB && cat /etc/passwd | grep siteB [enter]
+  tmpfs /omd/sites/siteB/tmp tmpfs noauto,user,mode=755,uid=siteB,gid=siteB 0 0
+  siteB:x:1002:1002:OMD site siteB:/omd/sites/siteB:/bin/bash
 
 {% endhighlight %}
 
@@ -78,10 +73,9 @@ Werte vergeben):
 
 {% highlight bash %}
 
-groupadd -g [GID] siteB [enter]
-usermod -aG siteB www-data [enter]
-useradd -u [UID] siteB -d '/omd/sites/siteB' -c 'OMD site siteB' -g
-siteB -G omd -s '/bin/bash' [enter]
+root@nagios2:# groupadd -g [GID] siteB
+root@nagios2:# usermod -aG siteB www-data
+root@nagios2:# useradd -u [UID] siteB -d '/omd/sites/siteB' -c 'OMD site siteB' -g siteB -G omd -s '/bin/bash'
 
 {% endhighlight %}
 
@@ -90,13 +84,12 @@ an (sie sollten die Site danach bereits in der GUI sehen)…
 
 {% highlight bash %}
 
-crm(live)configure\# primitive pri_omd_siteB ocf:myprovider:OMD \
-[enter]
-op monitor interval="10s" timeout="20s" \\ [enter]
-op start interval="0s" timeout="90s" \\ [enter]
-op stop interval="0s" timeout="100s" \\ [enter]
+crm(live)configure# primitive pri_omd_siteB ocf:myprovider:OMD [enter]
+op monitor interval="10s" timeout="20s"  [enter]
+op start interval="0s" timeout="90s"  [enter]
+op stop interval="0s" timeout="100s"  [enter]
 params site="siteB" [enter]
-crm(live)configure\# commit [enter]
+crm(live)configure# commit [enter]
 
 {% endhighlight %}
 
@@ -104,11 +97,9 @@ crm(live)configure\# commit [enter]
 
 {% highlight bash %}
 
-crm(live)configure\# colocation col_omd_siteB_follows_drbd inf:
-pri_omd_siteB ms_drbd_omd:Master [enter]
-crm(live)configure\# order ord_omd_before_siteB inf: group_omd:start
-pri_omd_siteB:start [enter]
-crm(live)configure\# commit [enter]
+crm(live)configure# colocation col_omd_siteB_follows_drbd inf:pri_omd_siteB ms_drbd_omd:Master [enter]
+crm(live)configure# order ord_omd_before_siteB inf: group_omd:start pri_omd_siteB:start [enter]
+crm(live)configure# commit [enter]
 
 {% endhighlight %}
 
@@ -119,9 +110,9 @@ crm(live)configure\# commit [enter]
 #### Schlusswort/Ausblick
 
 
-Ausgehend vom Endresultat dieses Tutorials lassen sich natürlich noch
+Ausgehend von diesem Tutorial lassen sich natürlich noch
 viele Dinge tunen, dazubauen, überwachen, automatisieren etc. Mein Ziel
-war es vielmehr, Ihnen einen ersten “Durchstich” zu ermöglichen, um von
+war es vielmehr, einen ersten “Durchstich” zu ermöglichen, um von
 hier ausgehend selbst weiterzubauen.
 
 Wärmstens empfehlen möchte ich an dieser Stelle das Buch [“Linux
