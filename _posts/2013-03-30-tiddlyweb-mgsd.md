@@ -36,9 +36,9 @@ sind:
     in die Cloud zu schieben.
 
 Ich verwende seit mehreren Jahren beruflich und privat
-[mGSD](https://web.archive.org/web/20150219105457/http://mgsd.tiddlyspot.com/#mGSD "mGSD")
+[mGSD](http://mgsd.tiddlyspot.com/#mGSD "mGSD")
 (‘[Getting Things
-Done](https://web.archive.org/web/20150219105457/http://www.davidco.com/ "Getting Things Done")-System
+Done](http://www.davidco.com/ "Getting Things Done")-System
 auf TiddlyWiki-Basis; eigener Artikel hierzu folgt), welches ich über
 die zweite Lösung, also Dropbox, auf allen Arbeitsstationen synchron
 gehalten habe.
@@ -51,7 +51,7 @@ zu haben, übers Web an einem gemeinsamen mGSD arbeiten zu können.
 
 *Doch, es gibt sie.* Ich habe sie wahrscheinlich nur viel zu spät
 entdeckt. Die Lösung heißt
-[TiddlyWeb](https://web.archive.org/web/20150219105457/http://tiddlyweb.com/).
+[TiddlyWeb](http://tiddlyweb.com/).
 In diesem Tutorial möchte ich aufzeigen, wie ein TiddlyWiki (+ Derivate)
 auf einem Debian/Ubuntu-System mit dem Webserver CherryPy im Netz
 betrieben werden kann, inclusive Authentifizierung und Datensicherung.
@@ -72,7 +72,7 @@ lokalen Filesystem liegende html-Datei gespeichert; für Sync-Dienste wie
 z.b. Dropbox ist das wie oben erwähnt Grund genug, die *komplette Datei*
 (als kleinste Informationseinheit) zu synchronisieren:
 
-[![](TiddlyWeb%20-%20TiddlyWiki%20und%20mGSD%20im%20Netz-Dateien/tiddlywiki.png "tiddlywiki")](https://web.archive.org/web/20150219105457/http://blog.simon-meggle.de/wp-content/uploads/2012/12/tiddlywiki.png)
+[![](TiddlyWeb%20-%20TiddlyWiki%20und%20mGSD%20im%20Netz-Dateien/tiddlywiki.png "tiddlywiki")](http://blog.simon-meggle.de/wp-content/uploads/2012/12/tiddlywiki.png)
 
 Gemeinsames Arbeiten an einem über Dropbox gesharten TiddlyWiki kann nur
 schiefgehen. User A müsste bereits vor dem Öffnen des Wikis immer
@@ -97,7 +97,7 @@ sog. *Recipes* zusammengefasst werden. In der folgenden Grafik sehen
 Sie, dass sich vom Browser aus auf jeden einzelnen Tiddler zugreifen
 lässt:
 
-[![](TiddlyWeb%20-%20TiddlyWiki%20und%20mGSD%20im%20Netz-Dateien/tiddlyweb.png "tiddlyweb")](https://web.archive.org/web/20150219105457/http://blog.simon-meggle.de/wp-content/uploads/2012/12/tiddlyweb.png)
+[![](TiddlyWeb%20-%20TiddlyWiki%20und%20mGSD%20im%20Netz-Dateien/tiddlyweb.png "tiddlyweb")](http://blog.simon-meggle.de/wp-content/uploads/2012/12/tiddlyweb.png)
 
 Damit ergeben sich Möglichkeiten, von denen man als (noch-)Benutzer
 einer lokalen Instanz nur träumen kann:
@@ -236,7 +236,7 @@ Starting CherryPy at http://ip.or.fqdn:8080
 Wenn bisher alles geklappt hat, bekommen Sie ein Ergebnis wie dieses
 hier:
 
-[![](TiddlyWeb%20-%20TiddlyWiki%20und%20mGSD%20im%20Netz-Dateien/tw_home.png "tw_home")](https://web.archive.org/web/20150219105457/http://blog.simon-meggle.de/wp-content/uploads/2012/12/tw_home.png)
+[![](TiddlyWeb%20-%20TiddlyWiki%20und%20mGSD%20im%20Netz-Dateien/tw_home.png "tw_home")](http://blog.simon-meggle.de/wp-content/uploads/2012/12/tw_home.png)
 
 Zugegeben, das ist noch nicht sonderlich spektakulär. Aber bedenken Sie,
 dass Sie momentan bereits direkt mit der API Ihres neuen TiddlyWikis
@@ -244,7 +244,7 @@ sprechen!
  Klicken Sie sich weiter durch die Punkte *“recipes” -\> “default” -\>
 “Tiddlers in Recipe”*.
 
-[![](TiddlyWeb%20-%20TiddlyWiki%20und%20mGSD%20im%20Netz-Dateien/tw_2_tiddlers1.png "tw_2_tiddlers")](https://web.archive.org/web/20150219105457/http://blog.simon-meggle.de/wp-content/uploads/2012/12/tw_2_tiddlers1.png)
+[![](TiddlyWeb%20-%20TiddlyWiki%20und%20mGSD%20im%20Netz-Dateien/tw_2_tiddlers1.png "tw_2_tiddlers")](http://blog.simon-meggle.de/wp-content/uploads/2012/12/tw_2_tiddlers1.png)
 
 Nun wird es spannender: klicken Sie sich (am besten in jeweils neuen
 Tabs) durch die im Screenshot mit Nummern versehenen Links; Sie bekommen
@@ -341,7 +341,7 @@ policy: {"read": ["R:USER"], "create": ["R:USER"], "manage":
 Führen Sie nun einen Reload auf der Wiki-Seite aus; Sie sollten
 stattdessen nun eine Anmeldemaske angezeigt bekommen…
 
-[![](TiddlyWeb%20-%20TiddlyWiki%20und%20mGSD%20im%20Netz-Dateien/tw_auth.png "tw_auth")](https://web.archive.org/web/20150219105457/http://blog.simon-meggle.de/wp-content/uploads/2012/12/tw_auth.png)
+[![](TiddlyWeb%20-%20TiddlyWiki%20und%20mGSD%20im%20Netz-Dateien/tw_auth.png "tw_auth")](http://blog.simon-meggle.de/wp-content/uploads/2012/12/tw_auth.png)
 
 …über die Sie sich nun über den vorhin erstellen User erneut anmelden
 können.
@@ -354,7 +354,7 @@ beenden; in diesem Abschnitt soll der automatische Start des Servers
 eingerichtet werden.
  Speichern Sie im Verzeichnis /twebroot/bin das Script start.sh ab,
 welches Sie
-[hier](https://web.archive.org/web/20150219105457/http://blog.simon-meggle.de/wp-content/uploads/2012/12/start.sh_1.txt)
+[hier](http://blog.simon-meggle.de/wp-content/uploads/2012/12/start.sh_1.txt)
 zum Download finden, und machen Sie es ausführbar:
 
 {% highlight bash %}
@@ -394,7 +394,7 @@ gehts zum eigentlichen Kern dieses Tutorials: wie machen Sie aus diesem
 TiddlyWiki nun ein mGSD-Wiki?
 
 Laden Sie sich von
-[http://monkeygtd.tiddlyspot.com/downloadempty](https://web.archive.org/web/20150219105457/http://monkeygtd.tiddlyspot.com/downloadempty)
+[http://monkeygtd.tiddlyspot.com/downloadempty](http://monkeygtd.tiddlyspot.com/downloadempty)
 die *leere* Datei des mGSD-Wikis auf Ihren Server:
 
 {% highlight bash %}
@@ -418,10 +418,10 @@ Der Import dürfte nach wenigen Sekunden abgeschlossen sein. Wenn Sie nun
 Ihr TiddlyWiki im Browser reloaden, haben Sie ein **mGSD**, an dem
 mehrere User zur gleichen Zeit arbeiten können!  -\> Knüller!
 
-[![](TiddlyWeb%20-%20TiddlyWiki%20und%20mGSD%20im%20Netz-Dateien/mgsd.png "mgsd")](https://web.archive.org/web/20150219105457/http://blog.simon-meggle.de/wp-content/uploads/2012/12/mgsd.png)
+[![](TiddlyWeb%20-%20TiddlyWiki%20und%20mGSD%20im%20Netz-Dateien/mgsd.png "mgsd")](http://blog.simon-meggle.de/wp-content/uploads/2012/12/mgsd.png)
 
 Etwas
-[Vorwissen](https://web.archive.org/web/20150219105457/http://de.wikipedia.org/wiki/Getting_Things_Done "Vorwissen")
+[Vorwissen](http://de.wikipedia.org/wiki/Getting_Things_Done "Vorwissen")
 zu *Getting Things Done* schadet bei der Verwendung eines so genialen
 Tools wie *mGSD* gewiss nicht. Ich möchte es beruflich – und “wir” nun
 auch privat nicht mehr missen. In einem der nächsten Artikel werde ich

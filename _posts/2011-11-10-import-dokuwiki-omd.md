@@ -16,7 +16,7 @@ Anpassungsmöglichkeiten (CSS, Templates, Plugins, etc…) den Rahmen
 sprengen würde. Die folgend genannten Migrations-Punkte beziehen sich
 auf eine bei mir produktiv laufende Dokuwiki-Seite, die ich in eine nach
 meinem
-[Tutorial](https://web.archive.org/web/20150219101314/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil1/ "Nagios/OMD-Cluster mit Pacemaker/DRBD")
+[Tutorial](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil1/ "Nagios/OMD-Cluster mit Pacemaker/DRBD")
 geclusterte OMD-Site “siteB” gezogen und somit – wie Nagios selbst –
 hochverfügbar gemacht habe. Natürlich ist das Tutorial auch auf
 OMD-Sites anwendbar, die nicht im Cluster laufen.
@@ -28,7 +28,7 @@ die Daten migrieren – oder nach Methode “Augen zu und durch” mit der
 Migration gleich einen Versionssprung hinlegen. Wenn Sie die Migration
 mit einem Klon der produktiven OMD-Site testen (oder unter omd-local;
 weitere Infos hierzu in meinem [Tutorial zu
-OMD-Cluster-Updates](https://web.archive.org/web/20150219101314/http://blog.simon-meggle.de/tutorials/omd-updates-im-pacemaker-cluster/ "OMD-Updates im Pacemaker-Cluster")),
+OMD-Cluster-Updates](http://blog.simon-meggle.de/tutorials/omd-updates-im-pacemaker-cluster/ "OMD-Updates im Pacemaker-Cluster")),
 können Sie durchaus zu zweiter Methode greifen.
  Wie bei OMD sind auch in Dokuwiki die Nutzerdaten strikt von den
 Installationsdateien getrennt, was den Aufwand, unsere kostbaren
@@ -70,7 +70,7 @@ chown -R siteB.siteB data [enter]
 {% endhighlight %}
 
 Wenn Sie nun die Seite
-[http://nagios2/siteB/wiki/doku.php](https://web.archive.org/web/20150219101314/http://nagios2/siteB/wiki/doku.php)
+[http://nagios2/siteB/wiki/doku.php](http://nagios2/siteB/wiki/doku.php)
 öffnen, sollten Sie bereits den Inhalt des Quellsystems sehen. Machen
 wir uns ans Feintuning, dass unser neues OMD-Dokuwiki seinem Vorgänger
 möglichst ähnelt.
@@ -95,7 +95,7 @@ Einstellungen” aktivieren.
 
 Wie Sie die installierten Templates bei einem OMD-Update behalten,
 erfahren Sie
-[hier](https://web.archive.org/web/20150219101314/http://blog.simon-meggle.de/tutorials/import-von-dokuwiki-in-eine-omd-site#update).
+[hier](http://blog.simon-meggle.de/tutorials/import-von-dokuwiki-in-eine-omd-site#update).
 
 Plugins
 =======
@@ -128,7 +128,7 @@ OMD-Version gespeichert und gelten somit für alle Sites:
 
 Wie Sie die installierten Plugins bei einem OMD-Update behalten,
 erfahren Sie
-[hier](https://web.archive.org/web/20150219101314/http://blog.simon-meggle.de/tutorials/import-von-dokuwiki-in-eine-omd-site#update).
+[hier](http://blog.simon-meggle.de/tutorials/import-von-dokuwiki-in-eine-omd-site#update).
 
 (So eine Wiki-Migration ist übrigens ein guter Zeitpunkt, sich von
 Plugins wieder zu trennen, die in gutem Willen installiert und doch nie
@@ -164,7 +164,7 @@ vim
 {% endhighlight %}
 
 Wie Sie die CSS-Änderungen bei einem OMD-Update behalten, erfahren Sie
-[hier](https://web.archive.org/web/20150219101314/http://blog.simon-meggle.de/tutorials/import-von-dokuwiki-in-eine-omd-site#update).
+[hier](http://blog.simon-meggle.de/tutorials/import-von-dokuwiki-in-eine-omd-site#update).
 
 Globale Einstellungen
 =====================
@@ -243,7 +243,7 @@ komfortabel: Dokuwiki als User-Backend
 Für den Fall, dass jeder auf der Site angemeldete User auch Zugriff aufs
 Wiki haben soll (den Zugriff auf Seiten/User-Ebene können Sie mit
 sogenannten
-[ACLs](https://web.archive.org/web/20150219101314/http://www.dokuwiki.org/de:acl)
+[ACLs](http://www.dokuwiki.org/de:acl)
 steuern), bietet sich die zweite Methode an. Dabei wird die Datei
 “htpasswd” durch einen Symlink auf die Datei “users.auth.php” von
 Dokuwiki ersetzt – mit anderen Worten: User, die Sie über den
@@ -261,7 +261,7 @@ omd config [enter]
 
 Über den Punkt “DOKUWIKI_AUTH” gelangen Sie in ein neues Fenster:
 
-[![](Import%20von%20Dokuwiki%20in%20eine%20Nagios_OMD-Site-Dateien/omdconfigsiteB.png "omdconfigsiteB")](https://web.archive.org/web/20150219101314/http://blog.simon-meggle.de/wp-content/uploads/2011/06/omdconfigsiteB.png)
+[![](Import%20von%20Dokuwiki%20in%20eine%20Nagios_OMD-Site-Dateien/omdconfigsiteB.png "omdconfigsiteB")](http://blog.simon-meggle.de/wp-content/uploads/2011/06/omdconfigsiteB.png)
 
 Wählen Sie “on”, um Dokuwiki zum zentralen User-Backend zu machen und
 beenden sie den Assistenten. Was hat sich nun geändert? Ein
@@ -295,6 +295,6 @@ OMD-Updates und Dokuwiki
 Wie Sie CSS-Layout-Anpassungen, installierte Plugins und Templates in
 einer neue OMD-Version übernehmen, habe ich in meinem Tutorial
 [OMD-Updates im
-Pacemaker-Cluster](https://web.archive.org/web/20150219101314/http://blog.simon-meggle.de/tutorials/omd-updates-im-pacemaker-cluster#dokuwiki "OMD-Updates im Pacemaker-Cluster")
+Pacemaker-Cluster](http://blog.simon-meggle.de/tutorials/omd-updates-im-pacemaker-cluster#dokuwiki "OMD-Updates im Pacemaker-Cluster")
 unter Punkt FIXME beschrieben. Dieser Abschnitt ist auch für
 nicht-geclusterte OMD-Installationen gültig.

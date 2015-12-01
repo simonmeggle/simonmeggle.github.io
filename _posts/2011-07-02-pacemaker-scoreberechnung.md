@@ -42,9 +42,9 @@ Dominik Klein hat ein nützliches Shell-Skript geschrieben, welches die
 Punkte-Stände aller Ressourcen übersichtlich in einer Tabelle ausgibt.
 Da ich selbst einige Zeit damit verbracht habe, eine funktionierende
 Version zu finden, habe ich das Script in den
-[Download-Bereich](https://web.archive.org/web/20150219173818/http://blog.simon-meggle.de/wp-content/uploads/2011/06/showscores.txt)
+[Download-Bereich](http://blog.simon-meggle.de/wp-content/uploads/2011/06/showscores.txt)
 aufgenommen (siehe auch [Linux HA Mailing
-List](https://web.archive.org/web/20150219173818/http://www.mail-archive.com/linux-ha@lists.linux-ha.org/msg07258.html)).
+List](http://www.mail-archive.com/linux-ha@lists.linux-ha.org/msg07258.html)).
  Laden Sie das Script per wget auf mindestens einen Cluster-Node
 (bennenen Sie .txt in .sh um) und machen Sie es ausführbar. Ein Testlauf
 im leeren Cluster sollte folgendes zutage fördern:

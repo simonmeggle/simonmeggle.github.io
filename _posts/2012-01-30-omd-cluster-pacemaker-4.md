@@ -193,7 +193,7 @@ root@nagios1:/usr/lib/ocf/resource.d# mkdir myprovider
 
 {% endhighlight %}
 
-Laden Sie sich den [OCF-Agenten “OMD”](https://web.archive.org/web/20141003024855/http://blog.simon-meggle.de/wp-content/uploads/2011/05/OMD)
+Laden Sie sich den [OCF-Agenten “OMD”](http://blog.simon-meggle.de/wp-content/uploads/2011/05/OMD)
 herunter (z.b. mit wget), entfernen Sie die Endung “.sh”.
 Kopieren Sie nun den Agenten in das neu erstellte Agenten-Verzeichnis:
 
@@ -232,7 +232,7 @@ root@nagios2:# ./OMD monitor
 {% endhighlight %}
 
 Testen Sie nun, ob Sie siteA auf dem Master-Node öffnen können:
-[http://nagios1/siteA](https://web.archive.org/web/20141003024855/http://nagios1/siteA)
+[http://nagios1/siteA](http://nagios1/siteA)
  Nun können wir siteA als Pacemaker-Ressource definieren:
 
 {% highlight bash %}
@@ -306,19 +306,19 @@ wenden wir uns den Constraints zu, mit denen Beziehungen und
 Abhängigketen abbilden.
 
 [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 1 (Installation der
-Nodes)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil1/)
+Nodes)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil1/)
 
  [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 2 (Konfiguration der
-Pakete)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-2/)
+Pakete)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-2/)
 
  [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 3 (Einrichtung der
-Clusterressourcen)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-3/)
+Clusterressourcen)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-3/)
 
  [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 4 (OMD-Sites als
-Clusterressource)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-4/)
+Clusterressource)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-4/)
 
  [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 5
-(Constraints)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-5/)
+(Constraints)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-5/)
 
  [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 6
-(Besonderheiten)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-6/)
+(Besonderheiten)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-6/)

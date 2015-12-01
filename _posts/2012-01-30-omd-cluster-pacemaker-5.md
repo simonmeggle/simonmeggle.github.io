@@ -26,7 +26,7 @@ DRBD-Device. Ohne dieses kein Mount, ohne diesen kein Apache, der
 starten kann, ohne diesen wiederum kein OMD, und die IP-Adresse ist dann
 auch schon egal…
  Wir haben ja bereits die [Ping-Ressource
-definiert](https://web.archive.org/web/20141003024900/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-3),
+definiert](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-3),
 welche dem Cluster mittles Score seine Netzwerkkonnektivität mitteilen
 kann: Also lassen wir doch ein location-Contraint anhand des Scores
 entscheiden, auf welchem Node das DRBD „promoted“ werden soll:
@@ -69,7 +69,7 @@ crm(live)resource# stop pri_fs_omd [enter]
 Aktueller Status “vorher” ist nun: Ping-Score auf beiden Nodes 3000,
 DRBD-Master auf node1.
 
-[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%205%20-%20Simon%20Meggle-Dateien/vorher.png "vorher")](https://web.archive.org/web/20141003024900/http://blog.simon-meggle.de/wp-content/uploads/2011/05/vorher.png)
+[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%205%20-%20Simon%20Meggle-Dateien/vorher.png "vorher")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/vorher.png)
 
 Auf dem DRBD-Primary-Node verbieten wir nun per iptables alle Pings:
 
@@ -96,7 +96,7 @@ Die location-Regel für den DRBD-Master auf Node 2 hat sehr viel mehr
 Gewicht als die gleiche Regel auf Node 1. Deshalb zieht der Master auf
 node2 um:
 
-[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%205%20-%20Simon%20Meggle-Dateien/nachher.png "nachher")](https://web.archive.org/web/20141003024900/http://blog.simon-meggle.de/wp-content/uploads/2011/05/nachher.png)
+[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%205%20-%20Simon%20Meggle-Dateien/nachher.png "nachher")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/nachher.png)
  Nun erlauben wir nagios1 wieder, zu pingen und flushen (leeren) die
 iptables:
 
@@ -108,7 +108,7 @@ root@nagios1:~# iptables -F
 
 Der Ping-Score von Nagios1 „erholt“ sich wieder auf 3000. Dass die
 DRBD-Master-Rolle nicht wieder zurückschwenkt, liegt an der in [Teil
-3](https://web.archive.org/web/20141003024900/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-3/ "Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 3")
+3](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-3/ "Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 3")
 definierten `default-resource-stickiness` größer Null (1). Eine resource
 stickiness von > 0 bewirkt, dass die Ressource “lieber” dort bleibt, wo
 sie gerade läuft; ist die stickiness kleiner 0, hat die Ressource den
@@ -151,7 +151,7 @@ derzeit aktuelle Version hat einen Bug: nach dem commit bleiben die
 Ressourcen, die in einer Gruppe zusammengefasst werden, als Zombies
 stehen). Folgende Gruppe sollte nun angezeigt werden:
 
-[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%205%20-%20Simon%20Meggle-Dateien/group_omd.png "group_omd")](https://web.archive.org/web/20141003024900/http://blog.simon-meggle.de/wp-content/uploads/2011/05/group_omd.png)
+[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%205%20-%20Simon%20Meggle-Dateien/group_omd.png "group_omd")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/group_omd.png)
  Mittels Colocation weisen wir nun den Cluster an, "group_omd" immer dort
 mitzustarten, wo der DRBD-Master läuft – und das mit einem Score von
 inf, d.h. unbedingt.
@@ -168,7 +168,7 @@ commit [enter]
 
 {% endhighlight %}
 
-[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%205%20-%20Simon%20Meggle-Dateien/omdfollowsdrbd.png "omdfollowsdrbd")](https://web.archive.org/web/20141003024900/http://blog.simon-meggle.de/wp-content/uploads/2011/05/omdfollowsdrbd.png)
+[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%205%20-%20Simon%20Meggle-Dateien/omdfollowsdrbd.png "omdfollowsdrbd")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/omdfollowsdrbd.png)
 
 Wir müssen Pacemaker jetzt mit einem "order" constraint mitteilen, dass
 zwischen dem Start der group_omd und dem Promoten des DRBD-Masters eine
@@ -205,13 +205,13 @@ commit [enter]
 
 Lassen Sie uns das Ergebnis in der GUI bewundern:
 
-[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%205%20-%20Simon%20Meggle-Dateien/sitaincluded.png "sitaincluded")](https://web.archive.org/web/20141003024900/http://blog.simon-meggle.de/wp-content/uploads/2011/05/sitaincluded.png)
+[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%205%20-%20Simon%20Meggle-Dateien/sitaincluded.png "sitaincluded")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/sitaincluded.png)
 
 #### Stunde der Wahrheit: der Test
 
 
 Öffnen Sie im Browser die URL
-[http://nagios/siteA](https://web.archive.org/web/20141003024900/http://nagios/siteA),
+[http://nagios/siteA](http://nagios/siteA),
 um siteA über die Service-IP des Clusters zu öffnen. Testen Sie nun
 bitte selbst das Verhalten des Clusters, indem Sie dem aktiven Node per
 iptables einen schlechten Ping-Score geben und verfolgen Sie das schöne
@@ -222,19 +222,19 @@ beim Erstellen weiterer OMD-Sites wichtig sind.
 
 
 [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 1 (Installation der
-Nodes)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil1/)
+Nodes)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil1/)
 
  [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 2 (Konfiguration der
-Pakete)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-2/)
+Pakete)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-2/)
 
  [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 3 (Einrichtung der
-Clusterressourcen)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-3/)
+Clusterressourcen)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-3/)
 
  [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 4 (OMD-Sites als
-Clusterressource)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-4/)
+Clusterressource)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-4/)
 
  [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 5
-(Constraints)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-5/)
+(Constraints)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-5/)
 
  [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 6
-(Besonderheiten)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-6/)
+(Besonderheiten)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-6/)

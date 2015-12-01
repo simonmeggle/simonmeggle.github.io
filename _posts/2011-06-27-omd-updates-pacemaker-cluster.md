@@ -7,7 +7,7 @@ comments: true
 ---
 
 Aufbauend auf dem Tutorial [“Nagios/OMD-Cluster mit
-Pacemaker/DRBD”](https://web.archive.org/web/20150219092132/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil1/ "Nagios/OMD-Cluster mit Pacemaker/DRBD")
+Pacemaker/DRBD”](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil1/ "Nagios/OMD-Cluster mit Pacemaker/DRBD")
 zeigt dieses Tutorial, wie Sie OMD Site-Updates sicher im Cluster
 ausführen.
  Ich habe diesen Prozess in folgende Schritte unterteilt:
@@ -40,7 +40,7 @@ sehen Sie den Output von ls -la auf den inaktiven Node mit den rot
 eingefärbten “defekten” Softlinks, links auf dem aktiven Node mit
 intakten Softlinks:
 
-[![](OMD-Updates%20im%20Pacemaker-Cluster-Dateien/deadlinks.png "deadlinks")](https://web.archive.org/web/20150219092132/http://blog.simon-meggle.de/wp-content/uploads/2011/05/deadlinks.png)
+[![](OMD-Updates%20im%20Pacemaker-Cluster-Dateien/deadlinks.png "deadlinks")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/deadlinks.png)
 
 1. Lokale Sites: omd-local
 ==========================
@@ -121,7 +121,7 @@ root@nagios2:/mnt/omddata\#
 Kein Output ist guter Output – es sind ja noch keine lokalen Sites
 vorhanden. Erstellen Sie kurzerhand eine Test-Site “foosite” und testen
 Sie, ob Sie diese unter
-[http://nagios2/foosite](https://web.archive.org/web/20150219092132/http://nagios2/foosite)
+[http://nagios2/foosite](http://nagios2/foosite)
 aufrufen können:
 
 {% highlight bash %}
@@ -142,7 +142,7 @@ Nodes zu installieren. Dieser Vorgang ist relativ unkritisch, werden
 doch bestehende Sites nicht angefasst, sondern die neue Version einfach
 “neben” die bestehende installiert.
  Laden Sie sich also von der OMD-Seite das
-[.deb-Paket](https://web.archive.org/web/20150219092132/http://omdistro.org/attachments/download/96/omd-0.48_0.lucid_i386.deb)
+[.deb-Paket](http://omdistro.org/attachments/download/96/omd-0.48_0.lucid_i386.deb)
 für OMD 0.48 herunter und installieren Sie es auf beiden Nodes mit
 
 {% highlight bash %}
@@ -183,7 +183,7 @@ Wenn Sie Dokuwiki mit Templates und/oder Plugins erweitert, bzw.
 ist dieser Abschnitt für Sie wichtig (das gilt auch für
 nicht-geclusterte OMD-Installationen und damit evt. die Leser, die vom
 Tutorial “[Import von Dokuwiki in eine
-OMD-Site](https://web.archive.org/web/20150219092132/http://blog.simon-meggle.de/tutorials/import-von-dokuwiki-in-eine-omd-site/ "Import von Dokuwiki in eine OMD-Site")”
+OMD-Site](http://blog.simon-meggle.de/tutorials/import-von-dokuwiki-in-eine-omd-site/ "Import von Dokuwiki in eine OMD-Site")”
 hierher geleitet wurden). Informieren Sie sich vorher anhand der
 Dokumentationen der Plugins/Templates, ob diese mit dem Dokuwiki der
 neuen OMD-Version zusammenarbeiten.
@@ -244,7 +244,7 @@ aber zunächst angehalten werden muss. Wer nun mit den Fingern knackt und
 “omd stop siteA” eintippt, um sie im nächsten Schritt zu klonen, hat
 vergessen, dass wir es nicht mehr “nur” mit OMD alleine, sondern mit
 einem OMD-Cluster zu tun haben! Dieser hat dank unseres
-[OCF-OMD-Agenten](https://web.archive.org/web/20150219092132/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-4/)
+[OCF-OMD-Agenten](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-4/)
 ein wachsames Auge auf siteA und würde sofort merken, wenn diese nicht
 oder nur teilweise läuft und demnach sofort versuchen, die Site neu zu
 starten. Deshalb nehmen wir siteA mit folgendem one-shot-Kommando
@@ -304,7 +304,7 @@ nagios2:/opt/omd-local/apache/
 {% endhighlight %}
 
 Schritt 3 und 4 können Sie dem Abschnitt [“Anlegen neuer
-Sites”](https://web.archive.org/web/20150219092132/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-6#newsite/ "Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 6")
+Sites”](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-6#newsite/ "Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 6")
 in Teil 6 meines OMD-Cluster-Tutorials nachlesen.
  Mit “ls -la” im Verzeichnis “/opt/omd-local/sites/” auf dem inaktiven
 Node vergewissern Sie sich, dass das Verzeichnis “siteAclone” nun
@@ -318,7 +318,7 @@ omd start siteAclone [enter]
 {% endhighlight %}
 
 und rufen Sie seine Startseite unter
-[http://nagios2/siteAclone](https://web.archive.org/web/20150219092132/http://nagios2/siteAclone)
+[http://nagios2/siteAclone](http://nagios2/siteAclone)
 auf. Dort sollten Sie nun Ihre vertraute Nagios/OMD-Umgebung
 vorfinden -  jedoch als vollwertigen Klon und damit Testkaninchen fürs
 bevorstehende Update:
@@ -365,7 +365,7 @@ Punkt 3), bevor sie sie anhalten. Sie führen ansonsten einen eher
 aussichtslosen Kampf gegen den Cluster Resource Manager, der die Site
 sofort wieder starten will.
  Mathias Kettner hat die Update-Prozedur an sich sehr [detailliert
-dokumentiert](https://web.archive.org/web/20150219092132/http://mathias-kettner.de/omd_update.html),
+dokumentiert](http://mathias-kettner.de/omd_update.html),
 sodass ich mir und Ihnen diese Erklärung hier erspare.
 
 Ausblick/Hinweis

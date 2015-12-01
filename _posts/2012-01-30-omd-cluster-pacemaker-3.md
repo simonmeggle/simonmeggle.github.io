@@ -10,7 +10,7 @@ comments: true
 ### Teil 3 – Einrichtung der Ressourcen
 
 Nachdem wir in [Teil
-2](https://web.archive.org/web/20150219144620/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-2/ "Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 2")
+2](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-2/ "Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 2")
 die Grundlagen für den Cluster (Netzwerkkonfiguration, Corosync-Ring)
 geschaffen haben, können wir uns nun den einzelnen Ressourcen im Cluster
 zuwenden.
@@ -122,7 +122,7 @@ crm(live)configure# commit
 der erfolgreich gepingten Hosts multipliziert. Der hieraus errechnete
 Score sollte bei jedem Host 3000 betragen (3×1000):
 
-[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%203%20-%20Simon%20Meggle-Dateien/greenshot_2011-05-12_23-40-46.png "primitive ping")](https://web.archive.org/web/20150219144620/http://blog.simon-meggle.de/wp-content/uploads/2011/05/greenshot_2011-05-12_23-40-46.png)
+[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%203%20-%20Simon%20Meggle-Dateien/greenshot_2011-05-12_23-40-46.png "primitive ping")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/greenshot_2011-05-12_23-40-46.png)
  Weil wir uns nicht mit der GUI zufrieden geben, sondern auch auf der
 Konsole prüfen wollen, wie es dem Cluster geht, rufen wir auf einem der
 beiden Nodes das Kommando “crm_mon” auf – achten Sie auf die Scores,
@@ -169,7 +169,7 @@ Im Abschnitt „Storage (DRBD)“ sehen Sie alle Blockdevices der beiden
 Nodes untereinander. Klicken Sie mit der rechten Maustaste auf das
 logical volume “lvomd” von nagios1 und wählen Sie
 
-[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%203%20-%20Simon%20Meggle-Dateien/addmirroreddevice.png "addmirroreddevice")](https://web.archive.org/web/20150219144620/http://blog.simon-meggle.de/wp-content/uploads/2011/05/addmirroreddevice.png)
+[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%203%20-%20Simon%20Meggle-Dateien/addmirroreddevice.png "addmirroreddevice")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/addmirroreddevice.png)
 Im folgenden Assistenten definieren wir die DRBD-Ressource “romd” (‘r’
 wie ‘resource’, ich bin ein Freund von Prefixen):
 
@@ -195,13 +195,13 @@ Kommandozeilen-Leiste sehen, dass DRBD-MC die Ressource bereits mittels
 Klicken wir auf “Next”, und lassen auf der DRBD-Ressource gleich ein
 ext4-Filesystem erzeugen:
 
-[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%203%20-%20Simon%20Meggle-Dateien/Bildschirmfoto-2.png "createfilesystem")](https://web.archive.org/web/20150219144620/http://blog.simon-meggle.de/wp-content/uploads/2011/05/Bildschirmfoto-2.png)
+[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%203%20-%20Simon%20Meggle-Dateien/Bildschirmfoto-2.png "createfilesystem")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/Bildschirmfoto-2.png)
 
 Nach einer Weile ist das Filesystem auf dem Blockdevice erzeugt – und
 nach einem Click auf „Finish“ sollte das Endresultat sollte in etwa so
 aussehen:
 
-[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%203%20-%20Simon%20Meggle-Dateien/drbdinitial.png "drbdinitial")](https://web.archive.org/web/20150219144620/http://blog.simon-meggle.de/wp-content/uploads/2011/05/drbdinitial.png)Wie
+[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%203%20-%20Simon%20Meggle-Dateien/drbdinitial.png "drbdinitial")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/drbdinitial.png)Wie
 Sie an der Prozentangabe unter der Verbindungslinie erkennen können, ist
 die Synchronisation der beiden Devices bereits in vollem Gange. Auf der
 Shell lässt sich dies überprüfen, in dem Sie ‘/proc/drbd’ per ‘cat’
@@ -221,14 +221,14 @@ root@nagios2:~# watch -n 1 cat /proc/drbd
 
 Wie Sie vielleicht erkennen können, ist die Syncer rate nicht gerade
 schnell. Der Artikel [“Configuring the rate of
-synchronisation”](https://web.archive.org/web/20150219144620/http://www.drbd.org/users-guide/s-configure-sync-rate.html)
+synchronisation”](http://www.drbd.org/users-guide/s-configure-sync-rate.html)
 auf der DRBD-Seite erläutert detailliert, wie man die für sein System
 passende Syncer rate errechnet. Sie können diesen Wert nun entweder auf
 beiden Nodes in die Datei “/etc/drbd.d/romd.res” eintragen, oder hierzu
 einmal die GUI verwenden (=> Optionsleiste auf der rechten Seite), die
 dies gleich auf beiden Nodes für Sie erledigt:
 
-[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%203%20-%20Simon%20Meggle-Dateien/syncerrate.png "syncerrate")](https://web.archive.org/web/20150219144620/http://blog.simon-meggle.de/wp-content/uploads/2011/05/syncerrate.png)
+[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%203%20-%20Simon%20Meggle-Dateien/syncerrate.png "syncerrate")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/syncerrate.png)
 
 Derzeit sind beide DRBD-Volumes im Status “secondary”:
 
@@ -271,7 +271,7 @@ mehreren Nodes, wobei
 In der DRBD-MC werden Sie nach dem commit nun unter “Cluster
 Manager”-”Services” eine neue Ressource entdecken:
 
-[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%203%20-%20Simon%20Meggle-Dateien/drbdneures.png "drbdneures")](https://web.archive.org/web/20150219144620/http://blog.simon-meggle.de/wp-content/uploads/2011/05/drbdneures.png)Dort,
+[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%203%20-%20Simon%20Meggle-Dateien/drbdneures.png "drbdneures")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/drbdneures.png)Dort,
 wo DRBD im Status Primary (bzw. die Multistate-Ressource im Status
 “Master”) läuft, wollen wir außerdem, dass das DRBD-Device gemountet
 wird. Legen Sie auf beiden Nodes einen Mountpunkt an:
@@ -296,7 +296,7 @@ crm(live)# commit [enter]
 
 Und schon zeigt die GUI eine weitere Ressource an:
 
-[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%203%20-%20Simon%20Meggle-Dateien/erstercluster.png "erstercluster")](https://web.archive.org/web/20150219144620/http://blog.simon-meggle.de/wp-content/uploads/2011/05/erstercluster.png)
+[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%203%20-%20Simon%20Meggle-Dateien/erstercluster.png "erstercluster")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/erstercluster.png)
 Falls “crm_mon” meldet, dass die Filesystem-Ressource auf keinem Node
 gestartet werden konnte…
 
@@ -370,7 +370,7 @@ Node 1 ausgefallen ist und Node 2 nun möglichst schnell einspringen
 soll. Schreiben Sie also direkt hinter “ext3|” noch “ext4|”, sodass fsck
 fortan auch für ext4-Filesysteme überprungen wird.
  (Siehe auch Dokumentation des Bugs auf
-[launchpad.net](https://web.archive.org/web/20150219144620/https://bugs.launchpad.net/ubuntu/+source/heartbeat/+bug/544051)).
+[launchpad.net](https://bugs.launchpad.net/ubuntu/+source/heartbeat/+bug/544051)).
 
 #### Service-IP
 
@@ -427,7 +427,7 @@ regex “body” prüft er, ob eine gültige HTML-Seite zurückgeliefert wird
  Wieder ein Blick in die DRBD-MC – Ihr Cluster sollte mittlerweile so
 aussehen:
 
-[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%203%20-%20Simon%20Meggle-Dateien/clusterweiter.png "clusterweiter")](https://web.archive.org/web/20150219144620/http://blog.simon-meggle.de/wp-content/uploads/2011/05/clusterweiter.png)
+[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%203%20-%20Simon%20Meggle-Dateien/clusterweiter.png "clusterweiter")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/clusterweiter.png)
  Wie Sie sehen, hat Pacemaker die Service-IP auf nagios2 gestartet. Im
 übernächsten Kapitel werden wir diesem Zustand mit constraints zuleibe
 rücken und die Ressourcen in ihrer Zusammengehörigkeit und
@@ -436,19 +436,19 @@ Zusammenhang laufen. Zunächst aber wenden wir uns OMD zu, welches wir
 fürs Clustering vorbereiten müssen.
 
 [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 1 (Installation der
-Nodes)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil1/)
+Nodes)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil1/)
 
  [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 2 (Konfiguration der
-Pakete)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-2/)
+Pakete)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-2/)
 
  [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 3 (Einrichtung der
-Clusterressourcen)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-3/)
+Clusterressourcen)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-3/)
 
  [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 4 (OMD-Sites als
-Clusterressource)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-4/)
+Clusterressource)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-4/)
 
  [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 5
-(Constraints)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-5/)
+(Constraints)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-5/)
 
  [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 6
-(Besonderheiten)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-6/)
+(Besonderheiten)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-6/)

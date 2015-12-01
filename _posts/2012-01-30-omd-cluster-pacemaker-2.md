@@ -11,7 +11,7 @@ comments: true
 
 
 In [Teil
-1](https://web.archive.org/web/20150219183656/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil1/ "Nagios/OMD-Cluster mit Pacemaker/DRBD")
+1](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil1/ "Nagios/OMD-Cluster mit Pacemaker/DRBD")
 dieses Tutorials haben Sie die beiden Clusternodes mit Ubuntu 10.04
 installiert, die Netzwerkkarten eingerichtet und die Pakete installiert,
 die im weiteren Verlauf nun konfiguriert werden.
@@ -21,7 +21,7 @@ die im weiteren Verlauf nun konfiguriert werden.
 
 Auch wenn Sie den Cluster hauptsächlich auf der Kommandozeile
 konfigurieren werden, wollen wir dem Cluster mit der [DRBD-MC
-(Management Console)](https://web.archive.org/web/20150219183656/http://oss.linbit.com/drbd-mc/) auf die Finger schauen. Die DRBD-MC wird, wie auch DRBD selbst, von
+(Management Console)](http://oss.linbit.com/drbd-mc/) auf die Finger schauen. Die DRBD-MC wird, wie auch DRBD selbst, von
 Linbit HA Solutions (Wien) entwickelt. Ursprünglich als reine DRBD-GUI
 gedacht, hat sich die Java-basierte Applikation zu einem echten
 Multitalent gemausert und beherrscht die Einrichtung und Verwaltung von
@@ -130,28 +130,28 @@ logging {
 
 Starten Sie nun die DRBD-MC und klicken Sie auf den “Host Wizard”.
 
-[![Hostwizard](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%202%20-%20Simon%20Meggle-Dateien/hostwiz.jpg "Hostwizard")](https://web.archive.org/web/20150219183656/http://blog.simon-meggle.de/wp-content/uploads/2011/05/hostwiz.jpg)
+[![Hostwizard](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%202%20-%20Simon%20Meggle-Dateien/hostwiz.jpg "Hostwizard")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/hostwiz.jpg)
  Geben Sie den Namen des ersten Nodes (“nagios1″) an; DRBD-MC wird Sie
 nach dem root-Passwort fragen und sich auf den Node verbinden. Nachdem
 Systeminformationen abgefragt sind, sollten Sie dank vorheriger
 Installation aller Pakete den folgenden Hinweis sehen:
 
-[![DRBD-MC-allinstalled](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%202%20-%20Simon%20Meggle-Dateien/allinstalled.jpg "allinstalled")](https://web.archive.org/web/20150219183656/http://blog.simon-meggle.de/wp-content/uploads/2011/05/allinstalled.jpg)
+[![DRBD-MC-allinstalled](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%202%20-%20Simon%20Meggle-Dateien/allinstalled.jpg "allinstalled")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/allinstalled.jpg)
  Nachdem Sie diesen Schritt mittels “Add Another Host” für den Node
 “nagios2″ wiederholt haben, sind wir bereit, den Cluster zu bilden:
  [![DRBD-MC configure
-cluster](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%202%20-%20Simon%20Meggle-Dateien/configcluster.jpg "configcluster")](https://web.archive.org/web/20150219183656/http://blog.simon-meggle.de/wp-content/uploads/2011/05/configcluster.jpg)
+cluster](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%202%20-%20Simon%20Meggle-Dateien/configcluster.jpg "configcluster")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/configcluster.jpg)
  Im anschließend gestarteten *“Cluster Wizard”* benennen Sie die eben
 erzeugten Hosts zu Clustermembern:
 
-[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%202%20-%20Simon%20Meggle-Dateien/nodeselect.jpg "nodeselect")](https://web.archive.org/web/20150219183656/http://blog.simon-meggle.de/wp-content/uploads/2011/05/nodeselect.jpg)
+[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%202%20-%20Simon%20Meggle-Dateien/nodeselect.jpg "nodeselect")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/nodeselect.jpg)
  Im Dialog “Corosync/OpenAIS Config File” klicken wir getrost auf
 “Next/Keep Old Config” – wir haben bereits alles notwendige in der
 corosync.conf manuell konfiguriert. Im abschließenden Dialog “Cluster
 Initialization” lässt sich nun Corosync starten, sodass der Asistent am
 Ende folgendes spricht:
 
-[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%202%20-%20Simon%20Meggle-Dateien/greenshot_2011-05-12_23-05-22.png "allesinstalliert")](https://web.archive.org/web/20150219183656/http://blog.simon-meggle.de/wp-content/uploads/2011/05/greenshot_2011-05-12_23-05-22.png)
+[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%202%20-%20Simon%20Meggle-Dateien/greenshot_2011-05-12_23-05-22.png "allesinstalliert")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/greenshot_2011-05-12_23-05-22.png)
  Beenden Sie den Assistenten. Nun können Sie überprüfen, ob die beiden
 Rings, über sich die Nodes überwachen, funktionieren. Die Ring-id muss
 der IP-Adresse des Interfaces entsprechen:
@@ -193,27 +193,27 @@ Der Vollständigkeit halber werfen wir noch einen Blick in die DRBD-MC –
 sie sollte nun die beiden noch jungfräulichen Nodes im Status “online”
 anzeigen:
 
-[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%202%20-%20Simon%20Meggle-Dateien/greenshot_2011-05-12_23-09-28.png "DRBD-MC Nodes online")](https://web.archive.org/web/20150219183656/http://blog.simon-meggle.de/wp-content/uploads/2011/05/greenshot_2011-05-12_23-09-28.png)
+[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%202%20-%20Simon%20Meggle-Dateien/greenshot_2011-05-12_23-09-28.png "DRBD-MC Nodes online")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/greenshot_2011-05-12_23-09-28.png)
 
 In [Teil
-3](https://web.archive.org/web/20150219183656/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-3/ "Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 3")
+3](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-3/ "Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 3")
 werden wir nun das DRBD-Device einrichten, sowie mit der Definition von
 Cluster-Ressourcen beginnen.
 
 [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 1 (Installation der
-Nodes)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil1/)
+Nodes)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil1/)
 
  [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 2 (Konfiguration der
-Pakete)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-2/)
+Pakete)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-2/)
 
  [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 3 (Einrichtung der
-Clusterressourcen)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-3/)
+Clusterressourcen)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-3/)
 
  [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 4 (OMD-Sites als
-Clusterressource)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-4/)
+Clusterressource)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-4/)
 
  [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 5
-(Constraints)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-5/)
+(Constraints)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-5/)
 
  [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 6
-(Besonderheiten)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-6/)
+(Besonderheiten)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-6/)

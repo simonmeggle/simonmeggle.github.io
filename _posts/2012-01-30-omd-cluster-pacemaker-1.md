@@ -47,7 +47,7 @@ darunterliegenden Hardwareschicht.
 Wir bauen uns also einen Cluster, in dem folgende Technologien zum
 Einsatz kommen werden:
 
--   **[OMD](https://web.archive.org/web/20150219181042/http://omdistro.org/ "OMD")
+-   **[OMD](http://omdistro.org/ "OMD")
     – Open Monitoring Distribution**: Nagios aufzusetzen, war nie
     leichter. Wer die Installations/Konfigurations-Orgie kennt, die ein
     vollständig ausgestatter Nagios-Server mit Datenbankanbindung,
@@ -57,12 +57,12 @@ Einsatz kommen werden:
     Installationsaufwand drastisch minimiert. (Natürlich auch empfohlen
     in nicht geclusterten Umgebungen)
      Weitere Infos zu OMD finden sich auf der Projektseite.
--   **[DRBD](https://web.archive.org/web/20150219181042/http://drbd.org/)
+-   **[DRBD](http://drbd.org/)
     – Distributed Replicated Block Device**: “RAID1 übers Netzwerk”
 -   **LVM – Logical Volume Manager**: Abstraktionsebene unter
     Unix/Linux, welche die Erstellung von dynamisch veränderbaren
     Partitionen (Logical Volumes) erlaubt.
--   [**Pacemaker/Corosync**](https://web.archive.org/web/20150219181042/http://clusterlabs.org/): Früher Teil des Linux-HA-Projektes, ist Pacemaker seit 2008 der
+-   [**Pacemaker/Corosync**](http://clusterlabs.org/): Früher Teil des Linux-HA-Projektes, ist Pacemaker seit 2008 der
     offizielle Nachfolger des bekannten *Heartbeats.* Die Kommunikation
     der Nodes untereinander wird durch Corosync geregelt.
 
@@ -283,7 +283,7 @@ Die variablen Daten, auf die beide Nagios-Nodes später zugreifen sollen,
 werden auf einer Partition auf der Datenplatte sdb gehalten werden, die
 wir mit LVM verwalten lassen. Sollten Sie mit LVM nicht vertraut sein,
 kann ich Ihnen die
-[LVM-Erklärung](https://web.archive.org/web/20150219181042/http://blog.zugschlus.de/archives/65-LVM-unter-Linux.html)
+[LVM-Erklärung](http://blog.zugschlus.de/archives/65-LVM-unter-Linux.html)
 von Marc ‘Zugschlus’ Haber nahelegen.
 
 Installieren Sie LVM auf *beiden* Nodes über
@@ -507,7 +507,7 @@ root@nagios1:~# omd start siteA
 {% endhighlight %}
 
 Nun überzeugen Sie sich davon, dass sich die OMD-WUI
-([http://nagios1/siteA](https://web.archive.org/web/20150219181042/http://nagios1/siteA),
+([http://nagios1/siteA](http://nagios1/siteA),
 Default-Login mit „omdadmin“/„omd“) aufrufen lässt und funktioniert.
 
 Stoppen Sie die Sites nun wieder auf *beiden* Nodes:
@@ -519,19 +519,19 @@ root@nagios1:~# omd stop siteA
 {% endhighlight %}
 
 [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 1 (Installation der
-Nodes)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil1/)
+Nodes)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil1/)
 
  [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 2 (Konfiguration der
-Pakete)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-2/)
+Pakete)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-2/)
 
  [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 3 (Einrichtung der
-Clusterressourcen)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-3/)
+Clusterressourcen)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-3/)
 
  [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 4 (OMD-Sites als
-Clusterressource)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-4/)
+Clusterressource)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-4/)
 
  [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 5
-(Constraints)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-5/)
+(Constraints)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-5/)
 
  [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 6
-(Besonderheiten)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-6/)
+(Besonderheiten)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-6/)

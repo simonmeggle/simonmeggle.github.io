@@ -37,7 +37,7 @@ verwaltet werden soll.
 
 Erstellen Sie die neue Site, starten Sie sie und testen Sie den Zugriff
 unter
-[http://nagios/siteB/](https://web.archive.org/web/20150219094202/http://nagios/siteB/):
+[http://nagios/siteB/](http://nagios/siteB/):
 
 {% highlight bash %}
 
@@ -106,7 +106,7 @@ crm(live)configure# commit [enter]
 
 …und bewundern Sie das Ergebnis in der GUI:
 
-[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%206%20-%20Simon%20Meggle-Dateien/2sites.png "2sites")](https://web.archive.org/web/20150219094202/http://blog.simon-meggle.de/wp-content/uploads/2011/05/2sites.png)
+[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%206%20-%20Simon%20Meggle-Dateien/2sites.png "2sites")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/2sites.png)
 
 #### Schlusswort/Ausblick
 
@@ -117,7 +117,7 @@ war es vielmehr, einen ersten “Durchstich” zu ermöglichen, um von
 hier ausgehend selbst weiterzubauen.
 
 Wärmstens empfehlen möchte ich an dieser Stelle das Buch [“Linux
-Hochverfügbarkeit”](https://web.archive.org/web/20150219094202/http://www.amazon.de/Linux-Hochverf%C3%BCgbarkeit-Einsatzszenarien-Praxisl%C3%B6sungen-Computing/dp/3836213397)
+Hochverfügbarkeit”](http://www.amazon.de/Linux-Hochverf%C3%BCgbarkeit-Einsatzszenarien-Praxisl%C3%B6sungen-Computing/dp/3836213397)
 von Oliver Liebel, erschienen im Verlag “Galileo Computing”, erschienen
 2011.
 
@@ -126,19 +126,19 @@ Fragen hierzu haben, freue ich mich auf Ihre Nachricht: Entweder hier
 über die Kommentarfunktion oder unter info@simon-meggle.de.
 
 [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 1 (Installation der
-Nodes)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil1/)
+Nodes)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil1/)
 
  [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 2 (Konfiguration der
-Pakete)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-2/)
+Pakete)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-2/)
 
  [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 3 (Einrichtung der
-Clusterressourcen)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-3/)
+Clusterressourcen)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-3/)
 
  [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 4 (OMD-Sites als
-Clusterressource)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-4/)
+Clusterressource)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-4/)
 
  [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 5
-(Constraints)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-5/)
+(Constraints)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-5/)
 
  [Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 6
-(Besonderheiten)](https://web.archive.org/web/20150219181042/http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-6/)
+(Besonderheiten)](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-6/)
