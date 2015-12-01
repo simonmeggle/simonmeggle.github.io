@@ -3,6 +3,7 @@ layout: post
 title:  "Score-Berechnung im Pacemaker-Cluster (Colocation Constraints)"
 date:   2011-07-02 12:58:14 +0100
 categories: tutorials
+comments: true
 ---
 
 Viel ist nicht mehr übrig geblieben von Heartbeat-1, wo ein “Node 2

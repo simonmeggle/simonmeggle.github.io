@@ -3,10 +3,8 @@ layout: post
 title:  "Nagios/OMD-Cluster mit Pacemaker/DRBD Teil 1"
 date:   2012-01-30 12:58:14 +0100
 categories: tutorials
+comments: true
 ---
-enter raus wo  nicht notwendig
-korrekter prompt
-\#
 
 
 Zum Thema

@@ -3,6 +3,7 @@ layout: post
 title:  "Import von Dokuwiki in eine OMD-Site"
 date:   2011-11-10 12:58:14 +0100
 categories: tutorials
+comments: true
 ---
 
 Einleitung

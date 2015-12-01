@@ -3,6 +3,7 @@ layout: post
 title:  "Nagios/OMD-Cluster mit Pacemaker/DRBD Teil 5"
 date:   2012-01-30 12:58:14 +0100
 categories: tutorials
+comments: true
 ---
 
 
@@ -151,7 +152,7 @@ Ressourcen, die in einer Gruppe zusammengefasst werden, als Zombies
 stehen). Folgende Gruppe sollte nun angezeigt werden:
 
 [![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%205%20-%20Simon%20Meggle-Dateien/group_omd.png "group_omd")](https://web.archive.org/web/20141003024900/http://blog.simon-meggle.de/wp-content/uploads/2011/05/group_omd.png)
- Mittels Colocation weisen wir nun den Cluster an, group_omd immer dort
+ Mittels Colocation weisen wir nun den Cluster an, "group_omd" immer dort
 mitzustarten, wo der DRBD-Master läuft – und das mit einem Score von
 inf, d.h. unbedingt.
 
