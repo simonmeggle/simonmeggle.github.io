@@ -4,8 +4,8 @@ title:  "Nagios/OMD-Cluster mit Pacemaker/DRBD Teil 1"
 date:   2012-01-30 12:58:14 +0100
 categories: tutorials
 comments: true
+permalink: /tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-1/
 ---
-
 
 Zum Thema
 =========

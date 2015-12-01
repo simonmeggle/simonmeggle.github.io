@@ -4,6 +4,7 @@ title:  "Nagios/OMD-Cluster mit Pacemaker/DRBD Teil 2"
 date:   2012-01-30 12:58:14 +0100
 categories: tutorials
 comments: true
+permalink: /tutorials/score-berechnung-im-pacemaker-cluster-teil-2/
 ---
 
 
