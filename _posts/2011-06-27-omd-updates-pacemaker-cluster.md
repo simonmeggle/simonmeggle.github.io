@@ -5,6 +5,7 @@ date:   2011-06-27 12:58:14 +0100
 categories: tutorials
 comments: true
 permalink: /tutorials/omd-updates-im-pacemaker-cluster/
+excerpt: auf was zu achten ist, wenn OMD im Cluster aktualisiert wird
 ---
 
 Aufbauend auf dem Tutorial [“Nagios/OMD-Cluster mit

@@ -5,6 +5,7 @@ date:   2014-07-13 12:58:14 +0100
 categories: tutorials
 comments: true
 permalink: /tutorials/gmail-backup-mit-gmvault-auf-synology-diskstation/
+excerpt: sichere, was heilig...
 ---
 In diesem Tutorial möchte ich zeigen, wie ein vollautomatisches Backup eines googlemail-Accounts auf einer Synology Diskstation einzurichten ist. In meinem Beispiel handelt es sich um eine DS-213, wobei das Modell unerheblich ist. Viel wichtiger ist eine einigermaßen aktuelle Firmware. Auch wenn dieses Tutorial mit DSM 4.x funktionieren sollte, wäre jetzt eine gute Gelegenheit, noch schnell die neue Version 5 aufzuspielen (hat bei mir gerade mal 7 Minuten gedauert).
 

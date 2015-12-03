@@ -5,6 +5,7 @@ date:   2013-03-30 12:58:14 +0100
 categories: tutorials
 comments: true
 permalink: /tutorials/tiddlyweb-tiddlywiki-und-mgsd-im-netz/
+excerpt: Wie man das 1-file-Wiki fit fürs Netzwerk und Multiuser-Betrieb macht
 ---
 
 

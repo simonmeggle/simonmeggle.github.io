@@ -5,6 +5,7 @@ date:   2011-11-10 12:58:14 +0100
 categories: tutorials
 comments: true
 permalink: /tutorials/import-von-dokuwiki-in-eine-omd-site/
+excerpt: Templates, CSS, Plugins, Authentifizierung
 ---
 
 Einleitung
