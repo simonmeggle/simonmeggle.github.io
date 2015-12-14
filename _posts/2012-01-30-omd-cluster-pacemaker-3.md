@@ -21,7 +21,7 @@ zuwenden.
 
 Ressourcen sind im Cluster-Jargon die Teile eines geclusterten Dienstes,
 welche auf einem oder mehreren Nodes zu laufen haben. Dahinter verbirgt
-sich mehr als nur der Aufruf von “omd start/stop” – der Cluster hat z.B.
+sich mehr als nur der Aufruf von `omd start/stop` – der Cluster hat z.B.
 dafür zu sorgen, dass die virtuelle IP-Adresse, unter der der Server
 immer ansprechbar sein soll, immer nur auf einem Node aktiv ist. Das
 Filesystem, in welche OMD die Laufzeitdaten schreibt, darf bzw. kann nur
@@ -124,6 +124,7 @@ crm(live)configure# commit
 der erfolgreich gepingten Hosts multipliziert. Der hieraus errechnete
 Score sollte bei jedem Host 3000 betragen (3×1000):
 
+![](/assets/omd-cluster-pacemaker-3/)
 [![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%203%20-%20Simon%20Meggle-Dateien/greenshot_2011-05-12_23-40-46.png "primitive ping")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/greenshot_2011-05-12_23-40-46.png)
  Weil wir uns nicht mit der GUI zufrieden geben, sondern auch auf der
 Konsole prüfen wollen, wie es dem Cluster geht, rufen wir auf einem der

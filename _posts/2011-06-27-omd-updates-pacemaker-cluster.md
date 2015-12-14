@@ -8,13 +8,13 @@ permalink: /tutorials/omd-updates-im-pacemaker-cluster/
 excerpt: auf was zu achten ist, wenn OMD im Cluster aktualisiert wird
 ---
 
-Aufbauend auf dem Tutorial [“Nagios/OMD-Cluster mit
+Aufbauend auf dem Tutorial FIXME [“Nagios/OMD-Cluster mit
 Pacemaker/DRBD”](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil1/ "Nagios/OMD-Cluster mit Pacemaker/DRBD")
 zeigt dieses Tutorial, wie Sie OMD Site-Updates sicher im Cluster
 ausführen.
  Ich habe diesen Prozess in folgende Schritte unterteilt:
 
-1.  Anlegen eines lokalen OMD-root-Ordners “/opt/omd-local” auf beiden
+1.  Anlegen eines lokalen OMD-root-Ordners `/opt/omd-local` auf beiden
     Nodes; dies macht OMD auch auf dem inaktiven Node lauffähig.
 2.  Installation der neuen OMD-Version auf beiden Nodes “neben” die
     aktuell laufende 0.46; die Sites werden dadurch noch nicht
@@ -36,15 +36,15 @@ DRBD-Device im Status “Master” läuft – soweit, so gut.
 Aktuell könnten Sie Updates jedoch nur auf dem Node einspielen, der
 gerade der aktive ist, denn auf dem inaktiven Node ist unsere
 OMD-Installation nicht überlebensfähig: dort verweisen die Softlinks
-“sites” und “apache” unterhalb von /opt/omd/ ins Leere, sprich: an eine
+“sites” und “apache” unterhalb von `/opt/omd/` ins Leere, sprich: an eine
 Stelle, an der ja gerade nicht das DRBD-Device gemountet ist. Rechts
-sehen Sie den Output von ls -la auf den inaktiven Node mit den rot
+sehen Sie den Output von `ls -la` auf den inaktiven Node mit den rot
 eingefärbten “defekten” Softlinks, links auf dem aktiven Node mit
 intakten Softlinks:
 
-[![](OMD-Updates%20im%20Pacemaker-Cluster-Dateien/deadlinks.png "deadlinks")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/deadlinks.png)
+![](/assets/omd-updates-pacemaker/deadlinks.png)
 
-1. Lokale Sites: omd-local
+Lokale Sites: omd-local
 ==========================
 
 Um auf dem jeweils inaktiven Node OMD aktualisieren zu können, muss es
@@ -76,16 +76,16 @@ ln -s /opt/omd/versions/0.46/ /opt/omd-local/versions/0.46
 
 Nun wollen wir OMD auf dem inaktiven Node das Laufen beibringen. Wie Sie
 im Screenshot oben gesehen haben, sind dort (hier: nagios2) die
-Softlinks “/opt/omd/apache” bzw. “sites” defekt, weil das DRBD unter dem
-Mount-Verzeichnis /mnt/omddata nicht eingehängt ist und dieses
+Softlinks `/opt/omd/apache` bzw. `sites` defekt, weil das DRBD unter dem
+Mount-Verzeichnis `/mnt/omddata` nicht eingehängt ist und dieses
 demzufolge leer ist – was uns aber nicht hindert, hier wiederum
 Softlinks “apache” und “sites” abzulegen, die auf unser eben erzeugtes
 “omd-local”-Verzeichnis verweisen!
 
 {% highlight bash %}
 
-root@nagios2:\~\# ln -s /opt/omd-local/apache/ /mnt/omddata/apache
-root@nagios2:\~\# ln -s /opt/omd-local/sites/ /mnt/omddata/sites
+root@nagios2:~# ln -s /opt/omd-local/apache/ /mnt/omddata/apache
+root@nagios2:~# ln -s /opt/omd-local/sites/ /mnt/omddata/sites
 
 {% endhighlight %}
 
@@ -98,13 +98,13 @@ OMD den Weg in das Verzeichnis omd-local zeigen:
 
 {% highlight bash %}
 
-root@nagios2:/mnt/omddata\# ls -la
+root@nagios2:/mnt/omddata# ls -la
 insgesamt 8
 drwxr-xr-x 2 root root 4096 2011-05-27 09:35 .
 drwxr-xr-x 4 root root 4096 2011-05-13 09:56 ..
-lrwxrwxrwx 1 root root 22 2011-05-27 09:35 apache -\>
+lrwxrwxrwx 1 root root 22 2011-05-27 09:35 apache ->
 /opt/omd-local/apache/
-lrwxrwxrwx 1 root root 21 2011-05-27 09:35 sites -\>
+lrwxrwxrwx 1 root root 21 2011-05-27 09:35 sites ->
 /opt/omd-local/sites/
 
 {% endhighlight %}
@@ -115,8 +115,8 @@ eingefangen, weil /mnt/omddata leer war):
 
 {% highlight bash %}
 
-root@nagios2:/mnt/omddata\# omd status
-root@nagios2:/mnt/omddata\#
+root@nagios2:/mnt/omddata# omd status
+root@nagios2:/mnt/omddata#
 
 {% endhighlight %}
 
@@ -128,18 +128,18 @@ aufrufen können:
 
 {% highlight bash %}
 
-root@nagios2:\~\# omd create foosite && omd start foosite
+root@nagios2:~# omd create foosite && omd start foosite
 
 {% endhighlight %}
 
 Stoppen und löschen Sie die Site foosite gleich wieder.
 
-2. Installation von OMD 0.48
+Installation von OMD 0.48
 ============================
 
 OMD ist nun auf beiden Nodes lauffähig – auf dem aktiven ohnehin (mit
 den Daten im DRBD), und dank Punkt 1 auch auf dem inaktiven Node (mti
-den Daten in /op/omd-local). Wir sind nun bereit, OMD 0.48 auf beiden
+den Daten in `/opt/omd-local`). Wir sind nun bereit, OMD 0.48 auf beiden
 Nodes zu installieren. Dieser Vorgang ist relativ unkritisch, werden
 doch bestehende Sites nicht angefasst, sondern die neue Version einfach
 “neben” die bestehende installiert.
@@ -153,11 +153,11 @@ dpkg -i omd-0.48_0.lucid_i386.deb
 
 {% endhighlight %}
 
-Wenn Sie sich anschließend den Verzeichnisinhalt von /opt/omd/versions
+Wenn Sie sich anschließend den Verzeichnisinhalt von `/opt/omd/versions`
 ansehen, werden Sie feststellen, dass neben Version 0.46 nun auch ein
 Verzeichnis für Version 0.48 existiert. Wir müssen auf dieses nun von
 drei Stellen aus verlinken:
- Einmal auf dem aktiven Node aus “sites” in /mnt/omddata:
+ Einmal auf dem aktiven Node aus “sites” in `/mnt/omddata`:
 
 {% highlight bash %}
 
@@ -174,8 +174,8 @@ ln -s /opt/omd/versions/0.48/ /opt/omd-local/versions/0.48
 {% endhighlight %}
 
 (Das ist die Konsequenz davon, dass wir die Sites nicht, wie von OMD
-erwartet, unter /opt/omd/sites ablegen, sondern im DRBD, bzw. unter
-omd-local).
+erwartet, unter `/opt/omd/sites` ablegen, sondern im DRBD, bzw. unter
+`omd-local`).
 
 Angepasstes Dokuwiki?
 ---------------------
@@ -184,7 +184,7 @@ Wenn Sie Dokuwiki mit Templates und/oder Plugins erweitert, bzw.
 Änderungen am Layout durch Editieren der CSS-Dateien vorgenommen haben,
 ist dieser Abschnitt für Sie wichtig (das gilt auch für
 nicht-geclusterte OMD-Installationen und damit evt. die Leser, die vom
-Tutorial “[Import von Dokuwiki in eine
+Tutorial FIXME “[Import von Dokuwiki in eine
 OMD-Site](http://blog.simon-meggle.de/tutorials/import-von-dokuwiki-in-eine-omd-site/ "Import von Dokuwiki in eine OMD-Site")”
 hierher geleitet wurden). Informieren Sie sich vorher anhand der
 Dokumentationen der Plugins/Templates, ob diese mit dem Dokuwiki der
@@ -206,15 +206,15 @@ OMD-Version ist:
 
 {% highlight bash %}
 
-/opt/omd/sites/siteA\# ls -la share [enter]
-lrwxrwxrwx 1 siteA siteA 13 2011-05-13 12:51 share -\> version/share
-lrwxrwxrwx 1 siteA siteA 19 2011-05-13 12:51 version -\>
+/opt/omd/sites/siteA# ls -la share [enter]
+lrwxrwxrwx 1 siteA siteA 13 2011-05-13 12:51 share -> version/share
+lrwxrwxrwx 1 siteA siteA 19 2011-05-13 12:51 version ->
 ../../versions/0.46
 
 {% endhighlight %}
 
 In Wirklichkeit also sind die Dokuwiki-Templates und Plugins innerhalb
-einer OMD-0.46-Site   unterhalb dieses Pfades installiert:
+einer OMD-0.46-Site unterhalb dieses Pfades installiert:
 
 {% highlight bash %}
 
@@ -222,7 +222,7 @@ einer OMD-0.46-Site   unterhalb dieses Pfades installiert:
 
 {% endhighlight %}
 
-In den Unterverzeichnissen “tpl” und “plugins” finden Sie die Ordner der
+In den Unterverzeichnissen `tpl` und `plugins` finden Sie die Ordner der
 jeweils in Ihrer Umgebung installierten Erweiterungen. Was Sie davon in
 OMD 0.48 mitnehmen möchten, kopieren Sie *zunächst nur auf dem inaktiven
 Node* in
@@ -236,17 +236,17 @@ Node* in
 Die jew. Ordner enthalten z.T. auch Einstellungen der Plugins/Templates,
 welche somit gleich übernommen werden.
 
-3. Klonen der Site zum inaktiven Node
+Klonen der Site zum inaktiven Node
 =====================================
 
 In unserem Test soll ein Klon von siteA auf dem inaktiven Node
 hochgefahren und dort auf Version 0.48 aktualisiert werden. Das Klonen
-erledigen wir mit dem Kommando “omd cp [sitename] [newsite]“, wozu siteA
-aber zunächst angehalten werden muss. Wer nun mit den Fingern knackt und
-“omd stop siteA” eintippt, um sie im nächsten Schritt zu klonen, hat
+erledigen wir mit dem Kommando `omd cp [sitename] [newsite]`, wozu siteA
+aber zunächst angehalten werden muss. Wer nun in die Hände spuckt und
+`omd stop siteA` eintippt, um sie im nächsten Schritt zu klonen, hat
 vergessen, dass wir es nicht mehr “nur” mit OMD alleine, sondern mit
 einem OMD-Cluster zu tun haben! Dieser hat dank unseres
-[OCF-OMD-Agenten](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-4/)
+FIXME [OCF-OMD-Agenten](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-4/)
 ein wachsames Auge auf siteA und würde sofort merken, wenn diese nicht
 oder nur teilweise läuft und demnach sofort versuchen, die Site neu zu
 starten. Deshalb nehmen wir siteA mit folgendem one-shot-Kommando
@@ -266,7 +266,7 @@ sofort wieder gestartet:
 
 {% highlight bash %}
 
-root@nagios1:/opt/omd/sites\# omd stop siteA && omd cp siteA siteAclone
+root@nagios1:/opt/omd/sites# omd stop siteA && omd cp siteA siteAclone
 && omd start siteA [enter]
 Removing Crontab
 Stopping nagios.....OK.
@@ -292,15 +292,15 @@ Schritte notwendig:
 1.  Kopieren des entspr. Site-Verzeichnisses
 2.  Kopieren der entspr. Apache-Config-Datei
 3.  Anlegen des Site-Users
-4.  Anlegen des tmpfs-Eintrags in /etc/fstab
+4.  Anlegen des tmpfs-Eintrags in `/etc/fstab`
 
 Schritt 1 und 2 erledigen Sie wie folgt:
 
 {% highlight bash %}
 
-root@nagios1:\# rsync -az /opt/omd/sites/siteAclone
+root@nagios1:# rsync -az /opt/omd/sites/siteAclone
 nagios2:/opt/omd-local/sites/ [enter]
-root@nagios1:\# rsync -az /opt/omd/apache/siteAclone.conf
+root@nagios1:# rsync -az /opt/omd/apache/siteAclone.conf
 nagios2:/opt/omd-local/apache/
 
 {% endhighlight %}
@@ -308,7 +308,7 @@ nagios2:/opt/omd-local/apache/
 Schritt 3 und 4 können Sie dem Abschnitt [“Anlegen neuer
 Sites”](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-6#newsite/ "Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 6")
 in Teil 6 meines OMD-Cluster-Tutorials nachlesen.
- Mit “ls -la” im Verzeichnis “/opt/omd-local/sites/” auf dem inaktiven
+ Mit `ls -la` im Verzeichnis `/opt/omd-local/sites/` auf dem inaktiven
 Node vergewissern Sie sich, dass das Verzeichnis “siteAclone” nun
 vollständig “siteAclone” zugeordnet ist. Starten Sie nun den Klon mit
 dem bekannten Kommando
@@ -325,7 +325,7 @@ auf. Dort sollten Sie nun Ihre vertraute Nagios/OMD-Umgebung
 vorfinden -  jedoch als vollwertigen Klon und damit Testkaninchen fürs
 bevorstehende Update:
 
-4. Update des Site-Klones (Test)
+Update des Site-Klones (Test)
 ================================
 
 Am Testkaninchen “siteAclone” können wir auf dem inaktiven Node nun nach
@@ -333,27 +333,27 @@ Belieben testen, ob ein Upgrade von Version 0.46 auf 0.48 funktioniert:
 
 {% highlight bash %}
 
-root@nagios2:\# omd stop siteAclone [enter]
+root@nagios2:# omd stop siteAclone [enter]
 ...
-root@nagios2:\# omd update siteAclone [enter]
+root@nagios2:# omd update siteAclone [enter]
 ...
 ...
 \* Identical var/nagvis/userfiles/templates/default.login.html
 Updating precompiled host checks for Check_MK...OK
-root@nagios2:\# omd sites
+root@nagios2:# omd sites
 SITE VERSION
 siteAclone 0.48 (default)
-root@nagios2:\# omd start siteAclone [enter]
+root@nagios2:# omd start siteAclone [enter]
 
 {% endhighlight %}
 
-Es kann sich evt. lohnen, den Site-Clone vor dem Update per “omd cp” zu
+Es kann sich evt. lohnen, den Site-Clone vor dem Update per `omd cp` zu
 sichern; schlägt das Update fehl, müssen Sie hiervon lediglich einen
 neuen lokalen Klon erzeugen, anstatt alles nocheinmal per rsync zu
 kopieren.
  Prüfen Sie nun, ob die Site nach dem Update fehlerfrei arbeitet.
 
-5. Update der produktiv-Site
+Update der produktiv-Site
 ============================
 
 Wenn Sie sichergestellt haben, dass die Site korrekt arbeitet, geht es
@@ -366,9 +366,6 @@ denken Sie daran, eine geclusterte Site stets zuerst “unmanagen” (siehe
 Punkt 3), bevor sie sie anhalten. Sie führen ansonsten einen eher
 aussichtslosen Kampf gegen den Cluster Resource Manager, der die Site
 sofort wieder starten will.
- Mathias Kettner hat die Update-Prozedur an sich sehr [detailliert
-dokumentiert](http://mathias-kettner.de/omd_update.html),
-sodass ich mir und Ihnen diese Erklärung hier erspare.
 
 Ausblick/Hinweis
 ================

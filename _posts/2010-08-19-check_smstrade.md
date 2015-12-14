@@ -7,8 +7,11 @@ comments: true
 permalink: /tutorials/check-smstrade/
 excerpt: ein Nagios-Plugin zum Monitoring des Restguthabens bei SMS-Providern
 ---
+<div class='pull-right' markdown="1">
 
 ![](/assets/check_smstrade/blackberry.png)
+
+</div>
 
 Damit Nagios stets SMS versenden kann, sollte auch das Guthaben bei
 einem SMS-Provider wie
@@ -20,7 +23,7 @@ versendeten SMS resp. das verbleibende Guthaben auch im Graphen
 bewundern kann.
 
 In dieser Kurzbesprechung will ich auf die Verwendung des Perl-Moduls
-Nagios::Plugin eingehen, mit dem neue Nagios-Checks in Windeseile gebaut
+*Nagios::Plugin* eingehen, mit dem neue Nagios-Checks in Windeseile gebaut
 sind und auch gleich den Nagios-Konventionen entsprechen.
 
 {% highlight bash %}
@@ -31,7 +34,7 @@ use Math::Round qw/nearest/;
 
 {% endhighlight %}
 
-Hiermit werden drei Perl-Module importiert; von Math::Round wird nur die
+Hiermit werden drei Perl-Module importiert; von *Math::Round* wird nur die
 Funktion `nearest` benötigt. Sie rundet den von SMStrade dreistellig
 ausgegebenen Betrag auf einen zweistelligen.
 
@@ -70,7 +73,7 @@ Guthaben zu überweisen.',
 Per Konstruktor `->new()` wird ein neues Objekt `np` vom Typ
 `Nagios::Plugin` erzeugt. `Usage` wird angezeigt, wenn der Pluginaufruf
 fehlschlägt bzw. das Plugin mit `–-help` oder `–-usage` aufgerufen wird.
-`blurb` ist ein Text, der kurz den Zweck des Plugins beschreiben soll.
+`blurb` ist ein Text, der kurz den Zweck des Plugins beschreiben soll:
 
 {% highlight bash %}
 
@@ -110,7 +113,7 @@ geschrieben.
 
 {% highlight bash %}
 
-if ($np->opts->warning \< $np->opts->critical ) {
+if ($np->opts->warning < $np->opts->critical ) {
         $np->nagios_exit(3, "Warning threshold darf nicht kleiner sein als Critical threshold.");
 }
 
@@ -129,7 +132,7 @@ if ($content !\~ m/\^\d+\.\d{3}$/) {
 {% endhighlight %}
 
 Holt den Zahlenwert von der URL ab (`get` ist eine LWP-Methode). Sollte
-dieser Wert nicht der Regex `\^\d+\.\d{3}$` (= ‘ein oder mehrere
+dieser Wert nicht der Regex `^\d+\.\d{3}$` (= ‘ein oder mehrere
 Ziffern, ein Punkt, gefolgt von genau drei Ziffern’) entsprechen, bricht
 das Script ebenfalls mit UNKNOWN ab.
 
@@ -137,10 +140,10 @@ das Script ebenfalls mit UNKNOWN ab.
 
 $content = nearest('0.01', $content);
 
-if ($content \< $np->opts->critical) {
+if ($content < $np->opts->critical) {
         $np->add_message(CRITICAL, "Guthaben bei SMSTrade beträgt nur noch $content Euro (critical bei ".$np->opts->critical.").");
 } else {
-        if ($content \< $np->opts->warning) {
+        if ($content < $np->opts->warning) {
            $np->add_message(WARNING, "Guthaben bei SMSTrade beträgt nur noch $content Euro (warning bei ".$np->opts->warning.").")
         } else {
            $np->add_message(OK, "Guthaben bei SMSTrade beträgt $content Euro.")
@@ -178,14 +181,12 @@ $np->nagios_exit(
 Wertet den `Messages`-Stack aus und beendet das Script mit dem
 entsprechenden Exitcode und Output-String – fertig:
 
-![](/assets/check_smstrade/service.png)
+![](/assets/check_smstrade/service.png "Der fertige Check in der Service overview")
 
 Und so sieht ein braver Nagios aus:
 
-![](/assets/check_smstrade/graph.png)
-
-FIXME
+![](/assets/check_smstrade/graph.png "PNP4Nagios")
 
 Das Plugin check_smstrade.pl steht
-[hier](http://blog.simon-meggle.de/wp-content/uploads/2011/08/check_smstrade.txt)
+[hier](/assets/check_smstrade/check_smstrade.pl)
 zum Download bereit.

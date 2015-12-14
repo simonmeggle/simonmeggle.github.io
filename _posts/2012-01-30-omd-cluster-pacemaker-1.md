@@ -8,13 +8,11 @@ permalink: /tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-1/
 excerpt: Bau eines hochverfügbaren Monitoring-Systems
 ---
 
-Zum Thema
-=========
+### Zum Thema
 
-Motivation
-----------
+#### Motivation
 
-[OMD](www.omdistro.org) (Open Monitoring Distribution) macht die Installation eines
+[OMD](http://www.omdistro.org) (Open Monitoring Distribution) macht die Installation eines
 kompletten Monitoring-Systems zum Kinderspiel. Das Konzept, die
 komplette Nagios-Installation incl. (fast) aller Schikanen in einem
 einzigen Verzeichnis unterzubringen, Sites einfach zu klonen oder
@@ -31,22 +29,12 @@ war mir, die Architektur von OMD dabei nicht zu durchbrechen und nur so
 viel zu modifizieren, dass die OMD-Installation in sich konsistent (und
 somit auch updatefähig) bleibt.
 
-Inhalt
-------
+#### Inhalt
 
 In diesem mehrteiligen Tutorial lernen Sie, mit DRBD, Pacemaker, OMD und
 LVM ein hochverfügbares Monitoring-System aufzubauen. Wir starten
 tatsächlich “bei Null” mit der Installation der Server und enden mit
-einem hochverfügbaren Monitoringsystem – ich hoffe, ich kann damit all
-denen helfen, die die Vorteile von OMD auf einem ausfallsicheren System
-nutzen wollen. Ich denke da z.b. an *Dienstleister*, die “Monitoring as
-a Service” anbieten und dem Kunden Zugriff auf “seine” Nagios-Umgebung
-bieten möchten. Mit einer OMD-Site ist ein solcher Service zwar schnell
-aufgesetzt, jedoch hängt dieser dann an einem seidenen Faden: der
-darunterliegenden Hardwareschicht.
-
-Wir bauen uns also einen Cluster, in dem folgende Technologien zum
-Einsatz kommen werden:
+einem hochverfügbaren Monitoringsystem. Der Cluster besteht aus
 
 -   **[OMD](http://omdistro.org/ "OMD")
     – Open Monitoring Distribution**: Nagios aufzusetzen, war nie
