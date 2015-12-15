@@ -10,10 +10,9 @@ excerpt: Wie man das 1-file-Wiki fit fürs Netzwerk und Multiuser-Betrieb macht
 
 
 
-Einleitung
-==========
+### Einleitung
 
-Wohl jeder TiddlyWiki-Anwender kennt das Problem: wie kann ich von
+TiddlyWiki-Anwender kennen das Problem: wie kann ich von
 mehreren Rechnern aus mein TiddlyWiki bearbeiten? Für den Hausgebrauch
 bieten sich hier zwei Lösungswege an, die jeweils auch schnell umgesetzt
 sind:
@@ -21,9 +20,9 @@ sind:
 -   **USB-Stick:** Die Wiki-Datei wird auf einem USB-Stick
     abgespeichert, der einfach “mitgenommen” wird. *Vorteil*: Das
     Problem der Synchronisierung stellt sich gar nicht erst. *Nachteil*:
-    ein solcher mobilder Datenträger ist physischen Einflüssen
-    ausgesetzt (Schäden aller Art, Vergessen, Verlieren, …) und muss
-    entsprechend artig gesichert werden.
+    ein solcher mobiler Datenträger ist vielerlei Einflüssen
+    ausgesetzt (Beschädigung/Abnutzung, Vergessen, Verlieren, …) und muss
+    entsprechend artig gesichert werden. Geht, aber... geht besser.
 -   **Dropbox:** Die Wiki-Datei wird in einen Dropbox-Cloudspeicher
     verschoben. Eine Änderung am Wiki stößt automatisch eine
     Synchronisation in die Cloud an, von aus die Datei wiederum an alle
@@ -34,15 +33,15 @@ sind:
     wegschreibt, Dropbox hingegen aber lediglich eine Änderung auf
     File-Ebene erkennt (klar, was soll Dropbox von Tiddlern verstehen…)
     und jeweils die komplette Datei in die Cloud lädt. Es reicht also,
-    einen Buchstaben eines Tiddlers zu ändern, um Dropbox ein knappes MB
-    in die Cloud zu schieben.
+    einen Buchstaben eines Tiddlers zu ändern, und Dropbox schiebt ein knappes MB
+    in die Cloud. Geht, aber geht ebenfalls besser.
 
 Ich verwende seit mehreren Jahren beruflich und privat
 [mGSD](http://mgsd.tiddlyspot.com/#mGSD "mGSD")
-(‘[Getting Things
-Done](http://www.davidco.com/ "Getting Things Done")-System
-auf TiddlyWiki-Basis; eigener Artikel hierzu folgt), welches ich über
-die zweite Lösung, also Dropbox, auf allen Arbeitsstationen synchron
+("[Getting Things
+Done](http://www.davidco.com/")-System
+auf TiddlyWiki-Basis), welches ich über
+die zweite Lösung, also Dropbox, auf allen Rechnern synchron
 gehalten habe.
 
 Meine bessere Hälfte ist seit ca. zwei Jahren ebenfalls vom
@@ -54,17 +53,17 @@ zu haben, übers Web an einem gemeinsamen mGSD arbeiten zu können.
 *Doch, es gibt sie.* Ich habe sie wahrscheinlich nur viel zu spät
 entdeckt. Die Lösung heißt
 [TiddlyWeb](http://tiddlyweb.com/).
+
 In diesem Tutorial möchte ich aufzeigen, wie ein TiddlyWiki (+ Derivate)
 auf einem Debian/Ubuntu-System mit dem Webserver CherryPy im Netz
 betrieben werden kann, inclusive Authentifizierung und Datensicherung.
 Wie alle meine Tutorials beginnt auch dieses “bei null”, d.h. alles was
 Sie brauchen ist eine solche Linux-Maschine mit Internetzugang.
 
-Was ist Tiddlyweb?
-==================
+### Was ist Tiddlyweb?
 
-Sehen wir uns zunächst an, wie der Zugriff auf ein herkömmliches
-TiddlyWiki erfolgt:
+Zunächst beschreibe ich den Zugriff auf ein herkömmliches
+TiddlyWiki:
 
 Die TiddlyWiki-Datei wird vom Browser über das *lokale Filesystem*
 geöffnet; sämtliche im Wiki enthaltenen Tiddler sind in dieser Datei
@@ -74,7 +73,7 @@ lokalen Filesystem liegende html-Datei gespeichert; für Sync-Dienste wie
 z.b. Dropbox ist das wie oben erwähnt Grund genug, die *komplette Datei*
 (als kleinste Informationseinheit) zu synchronisieren:
 
-[![](TiddlyWeb%20-%20TiddlyWiki%20und%20mGSD%20im%20Netz-Dateien/tiddlywiki.png "tiddlywiki")](http://blog.simon-meggle.de/wp-content/uploads/2012/12/tiddlywiki.png)
+![](/assets/tiddlyweb-mgsd/tiddlywiki.png)
 
 Gemeinsames Arbeiten an einem über Dropbox gesharten TiddlyWiki kann nur
 schiefgehen. User A müsste bereits vor dem Öffnen des Wikis immer
@@ -99,10 +98,9 @@ sog. *Recipes* zusammengefasst werden. In der folgenden Grafik sehen
 Sie, dass sich vom Browser aus auf jeden einzelnen Tiddler zugreifen
 lässt:
 
-[![](TiddlyWeb%20-%20TiddlyWiki%20und%20mGSD%20im%20Netz-Dateien/tiddlyweb.png "tiddlyweb")](http://blog.simon-meggle.de/wp-content/uploads/2012/12/tiddlyweb.png)
+![](/assets/tiddlyweb-mgsd/tiddlyweb.png)
 
-Damit ergeben sich Möglichkeiten, von denen man als (noch-)Benutzer
-einer lokalen Instanz nur träumen kann:
+Damit ergeben sich gleich viel mehr Möglichkeiten:
 
 -   Speichern von Tiddlern in einem *zugangsgeschützt*en Bereich im Web.
     Der bei TiddlyWeb von Haus aus startbare Mini-Webserver CherryPy
@@ -131,16 +129,13 @@ nicht nur für TiddlyWikis incl. seiner Abkömmlinge zu gebrauchen ist.
 TiddlySpace, TiddlyHoster und WikiData sind weitere Anwendungen von
 TiddlyWeb.
 
-Installation
-============
+### Installation
 
-TiddlyWeb wird am einfachsten mit *virtualenv* betrieben, einem Tool,
-welches eine vom global installierten Python vollkommen getrennte und
-lokale Python-Umgebung erzeugt. Installieren Sie diese (also root):
+TiddlyWeb wird am einfachsten mit *virtualenv* betrieben, einer vom global installierten Python vollkommen getrennten Python-Umgebung. Installieren Sie diese (also root):
 
 {% highlight bash %}
-root@vserver:\~ \# apt-get update [enter]
-\~ \# apt-get install python-virtualenv [enter]
+root@vserver:~ # apt-get update [enter]
+root@vserver:~ # apt-get install python-virtualenv [enter]
 {% endhighlight %}
 
 Erzeugen Sie auf ihrem System einen *User* (hier: tweb), unter dem Ihre
@@ -149,8 +144,8 @@ dessen Profil:
 
 {% highlight bash %}
 
-root@vserver:\~ \# adduser tweb [enter]
-\~ \# su - tweb [enter]
+root@vserver:~ # adduser tweb [enter]
+root@vserver:~ # su - tweb [enter]
 
 {% endhighlight %}
 
@@ -159,9 +154,9 @@ welchem Sie anschließend die virtualenv-Umgebung aufbauen:
 
 {% highlight bash %}
 
-tweb@vserver:\~\$ mkdir twebroot [enter]
+tweb@vserver:~$ mkdir twebroot [enter]
 ...
-tweb@vserver:\~\$ virtualenv twebroot/ [enter]
+tweb@vserver:~$ virtualenv twebroot/ [enter]
 New python executable in twebroot/bin/python
 Installing
 distribute.............................................................................................................................................................................................done.
@@ -174,9 +169,9 @@ Nun wird das virtualenv-Environment gelesen und über *pip* das Paket
 
 {% highlight bash %}
 
-tweb@vserver:\~\$ cd twebroot [enter]
-tweb@vserver:\~/twebroot\$ source bin/activate [enter]
-(twebroot)tweb@vserver:\~/twebroot\$ pip install -U tiddlywebwiki
+tweb@vserver:~$ cd twebroot [enter]
+tweb@vserver:~/twebroot$ source bin/activate [enter]
+(twebroot)tweb@vserver:~/twebroot$ pip install -U tiddlywebwiki
 [enter]
 ...
 ...
@@ -195,7 +190,7 @@ Nun erzeugen wir unsere TiddlyWiki-Instanz…
 
 {% highlight bash %}
 
-(twebroot)tweb@vserver:\~/twebroot\$ twinstance mytw [enter]
+(twebroot)tweb@vserver:~/twebroot$ twinstance mytw [enter]
 
 {% endhighlight %}
 
@@ -206,21 +201,21 @@ soll. (Hinweis: *tweb* als normaler User ist es nur gestattet, Ports
 
 {% highlight bash %}
 
-(twebroot)tweb@vserver:\~/twebroot\$ cd mytw/ [enter]
-(twebroot)tweb@vserver:\~/twebroot/mytw\$ vim tiddlywebconfig.py
+(twebroot)tweb@vserver:~/twebroot$ cd mytw/ [enter]
+(twebroot)tweb@vserver:~/twebroot/mytw$ vim tiddlywebconfig.py
 [enter]
-\# A basic configuration.
-\# Run "pydoc tiddlyweb.config" for details on configuration items.
+# A basic configuration.
+# Run "pydoc tiddlyweb.config" for details on configuration items.
 
 config = {
-'system_plugins': ['tiddlywebwiki'],
-'secret': '63de751568ad679ae48e369f55bf68f91af15c92',
-'twanager_plugins': ['tiddlywebwiki'],
-'server_host': {
-'scheme': 'http',
-'host': 'ip.or.fqdn',
-'port': '8080'
-}
+  'system_plugins': ['tiddlywebwiki'],
+  'secret': '63de751568ad679ae48e369f55bf68f91af15c92',
+  'twanager_plugins': ['tiddlywebwiki'],
+  'server_host': {
+    'scheme': 'http',
+    'host': 'ip.or.fqdn',
+    'port': '8080'
+  }
 }
 
 {% endhighlight %}
@@ -229,7 +224,7 @@ Starten Sie nun manuell den Webserver…
 
 {% highlight bash %}
 
-(twebroot)tweb@vserver:\~/twebroot/mytw\$ twanager server
+(twebroot)tweb@vserver:~/twebroot/mytw$ twanager server
 Starting CherryPy at http://ip.or.fqdn:8080
 
 {% endhighlight %}
@@ -238,15 +233,14 @@ Starting CherryPy at http://ip.or.fqdn:8080
 Wenn bisher alles geklappt hat, bekommen Sie ein Ergebnis wie dieses
 hier:
 
-[![](TiddlyWeb%20-%20TiddlyWiki%20und%20mGSD%20im%20Netz-Dateien/tw_home.png "tw_home")](http://blog.simon-meggle.de/wp-content/uploads/2012/12/tw_home.png)
+![](/assets/tiddlyweb-mgsd/tw_home.png)
 
-Zugegeben, das ist noch nicht sonderlich spektakulär. Aber bedenken Sie,
-dass Sie momentan bereits direkt mit der API Ihres neuen TiddlyWikis
-sprechen!
- Klicken Sie sich weiter durch die Punkte *“recipes” -\> “default” -\>
+Zugegeben, das ist noch nicht sonderlich spektakulär. Aber immerhin sprechen wir bereits mit der API der neuen TiddlyWiki-Instanz.
+
+Klicken Sie sich weiter durch die Punkte *“recipes” -\> “default” -\>
 “Tiddlers in Recipe”*.
 
-[![](TiddlyWeb%20-%20TiddlyWiki%20und%20mGSD%20im%20Netz-Dateien/tw_2_tiddlers1.png "tw_2_tiddlers")](http://blog.simon-meggle.de/wp-content/uploads/2012/12/tw_2_tiddlers1.png)
+![](/assets/tiddlyweb-mgsd/tw_2_tiddlers1.png)
 
 Nun wird es spannender: klicken Sie sich (am besten in jeweils neuen
 Tabs) durch die im Screenshot mit Nummern versehenen Links; Sie bekommen
@@ -265,8 +259,7 @@ Die Punkte 2-5 sind insbesondere für Entwickler interessant, die das
 Wiki nicht “von Hand” anfassen wollen, sondern über Automatismen
 lesen/schreiben wollen.
 
-User anlegen
-============
+### User anlegen
 
 Wie Sie sehen, kommen Sie ohne vorherige Anmeldung an das neu erstellte
 Wiki, was wir sofort ändern sollten. TiddlyWeb bringt das
@@ -277,9 +270,9 @@ führen Sie die folgenden Befehle am besten in einer neuen Shell aus):
 
 {% highlight bash %}
 
-(twebroot)tweb@vserver:\~/twebroot/mytw\$ twanager adduser admin
+(twebroot)tweb@vserver:~/twebroot/mytw$ twanager adduser admin
 adminpassword ADMIN
-(twebroot)tweb@vserver:\~/twebroot/mytw\$ twanager adduser simon
+(twebroot)tweb@vserver:~/twebroot/mytw$ twanager adduser simon
 simonpassword USER
 
 {% endhighlight %}
@@ -289,7 +282,7 @@ allen im Kommando eingegebenen Informationen an:
 
 {% highlight bash %}
 
-(twebroot)tweb@vserver:\~/twebroot/mytw\$ tree -L 3
+(twebroot)tweb@vserver:~/twebroot/mytw$ tree -L 3
 .
 ├── store
 │ ├── bags
@@ -313,12 +306,11 @@ nun einen eigenen, der ebenfalls die Rolle ADMIN innehält:
 
 {% highlight bash %}
 
-(twebroot)tweb@vserver:\~/twebroot/mytw\$ rm store/users/administrator
+(twebroot)tweb@vserver:~/twebroot/mytw$ rm store/users/administrator
 
 {% endhighlight %}
 
-Recipe ändern
-=============
+### Recipe ändern
 
 Wie oben beschrieben, bestimmen *Recipes*, welche *User* (bzw. welche
 Rollen) welchen *Zugriff* auf welche *bags* haben. Das default Recipe
@@ -328,8 +320,7 @@ auch ohne jegliche Anmeldung an alle Inhalte des Wikis kamen. Dies
 
 {% highlight bash %}
 
-(twebroot)tweb@vserver:\~/twebroot/mytw\$ vim store/recipes/default
-[enter]
+(twebroot)tweb@vserver:~/twebroot/mytw$ vim store/recipes/default [enter]
 desc: standard TiddlyWebWiki environment
 policy: {"read": ["R:USER"], "create": ["R:USER"], "manage":
 ["R:ADMIN"], "accept": [], "write": ["R:ADMIN"], "owner":
@@ -343,13 +334,12 @@ policy: {"read": ["R:USER"], "create": ["R:USER"], "manage":
 Führen Sie nun einen Reload auf der Wiki-Seite aus; Sie sollten
 stattdessen nun eine Anmeldemaske angezeigt bekommen…
 
-[![](TiddlyWeb%20-%20TiddlyWiki%20und%20mGSD%20im%20Netz-Dateien/tw_auth.png "tw_auth")](http://blog.simon-meggle.de/wp-content/uploads/2012/12/tw_auth.png)
+![](/assets/tiddlyweb-mgsd/tw_auth.png)
 
 …über die Sie sich nun über den vorhin erstellen User erneut anmelden
 können.
 
-Automatischer Start
-===================
+### Automatischer Start
 
 Nun können Sie den manuell gestarteten CherryPy-Webserver mit Ctrl-C
 beenden; in diesem Abschnitt soll der automatische Start des Servers
@@ -361,7 +351,7 @@ zum Download finden, und machen Sie es ausführbar:
 
 {% highlight bash %}
 
-(twebroot)tweb@vserver:\~/twebroot/bin\$ chmod +x start.sh [enter]
+(twebroot)tweb@vserver:~/twebroot/bin$ chmod +x start.sh [enter]
 
 {% endhighlight %}
 
@@ -373,10 +363,10 @@ tweb:
 
 {% highlight bash %}
 
-(twebroot)tweb@vserver:\~/twebroot/bin\$ crontab -e [enter]
+(twebroot)tweb@vserver:~/twebroot/bin$ crontab -e [enter]
 ...
-\# Tiddlywiki Auto-Starter
-\* \* \* \* \* \~/twebroot/bin/start.sh mytw
+# Tiddlywiki Auto-Starter
+* * * * * ~/twebroot/bin/start.sh mytw
 
 {% endhighlight %}
 
@@ -384,8 +374,7 @@ Sobald Sie den crontab-Editor verlassen haben, sollte innerhalb einer
 Minute der CherryPy-Webserver wieder anspringen. Falls nicht, testen Sie
 den Aufruf des Scriptes manuell.
 
-Getting Things Done – mGSD TiddlyWiki
-=====================================
+### Getting Things Done – mGSD TiddlyWiki
 
 Wie Sie Ihr TiddlyWiki nun verwenden, ist natürlich Ihr Bier. Wärmstens
 empfehlen kann ich *mGSD*. Es bohrt TiddlyWiki zu einem *Projekt- und
@@ -401,8 +390,7 @@ die *leere* Datei des mGSD-Wikis auf Ihren Server:
 
 {% highlight bash %}
 
-(twebroot)tweb@vserver:\~/twebroot/mytw\$ wget -O mGSD_leer.html
-http://monkeygtd.tiddlyspot.com/downloadempty
+(twebroot)tweb@vserver:~/twebroot/mytw$ wget -O mGSD_leer.html http://monkeygtd.tiddlyspot.com/downloadempty
 
 {% endhighlight %}
 
@@ -411,16 +399,15 @@ TiddlyWeb-basierte Instanz importiert:
 
 {% highlight bash %}
 
-(twebroot)tweb@vserver:\~/twebroot/mytw\$ twanager twimport common
-file:./mGSD_leer.html [enter]
+(twebroot)tweb@vserver:~/twebroot/mytw$ twanager twimport common file:./mGSD_leer.html [enter]
 
 {% endhighlight %}
 
 Der Import dürfte nach wenigen Sekunden abgeschlossen sein. Wenn Sie nun
 Ihr TiddlyWiki im Browser reloaden, haben Sie ein **mGSD**, an dem
-mehrere User zur gleichen Zeit arbeiten können!  -\> Knüller!
+mehrere User zur gleichen Zeit arbeiten können! 
 
-[![](TiddlyWeb%20-%20TiddlyWiki%20und%20mGSD%20im%20Netz-Dateien/mgsd.png "mgsd")](http://blog.simon-meggle.de/wp-content/uploads/2012/12/mgsd.png)
+![](/assets/tiddlyweb-mgsd/mgsd.png)
 
 Etwas
 [Vorwissen](http://de.wikipedia.org/wiki/Getting_Things_Done "Vorwissen")
