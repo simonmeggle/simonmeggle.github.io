@@ -30,7 +30,7 @@ auch schon egal…
  Wir haben ja bereits die [Ping-Ressource
 definiert](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-3),
 welche dem Cluster mittles Score seine Netzwerkkonnektivität mitteilen
-kann: Also lassen wir doch ein location-Contraint anhand des Scores
+kann: nun soll ein location-Contraint anhand des Scores
 entscheiden, auf welchem Node das DRBD „promoted“ werden soll:
 
 {% highlight bash %}
@@ -43,13 +43,12 @@ rule $id="loc_drbdmaster_ping-rule" $role="Master" pingd: defined pingd [enter]
 Überstetzt bedeutet dieses Constraint so viel wie:
 
 -   erstelle für den Status „Master“ der Multistate-Ressource
-    ms_drbd_omd ein location constraint
--   Die interne id soll loc_drbdmaster_ping-rule lauten (opt.)
--   Wenn die interne Variable pingd gültig ist (defined pingd), dann
-    soll sie den Score dieses Constraints bestimmen (pingd:)
+    `ms_drbd_omd` ein location constraint
+-   Die interne id soll `loc_drbdmaster_ping-rule` lauten (opt.)
+-   Wenn die interne Variable pingd gültig ist (`defined pingd`), dann
+    soll sie den Score dieses Constraints bestimmen (`pingd:`)
 
-Nach einem commit sehen wir aber erst mal gar nichts. **Warum**?
- Die Ping-Scores sind aktuell gleich (3000). Es gibt für Pacemaker
+Nach einem commit sehen wir aber erst mal gar nichts. Der Grund: Die Ping-Scores sind aktuell gleich (3000). Es gibt für Pacemaker
 keinen Grund, die Ressource zu schwenken. Um genau diesen Schwenk zu
 testen, öffnen wir ein neues Konsolenfenster und lassen uns mit
 `crm_mon -f` den Cluster-Status, sowie die Scores der pingd-Variablen
@@ -58,7 +57,7 @@ dauerhaft anzeigen.
  Wichtig: Sollte die Ressource *pri_fs_omd* gestartet sein, ist auf dem
 DRBD noch das Filesystem gemountet. Damit der DRBD-Master testweise auf
 den anderen Node ziehen kann, muss das Filesystem natürlich erst
-ungemounted, sprich, die entspr. Ressource gestoppt werden:
+unmounted, sprich, die entspr. Ressource gestoppt werden:
 
 {% highlight bash %}
 
@@ -71,7 +70,7 @@ crm(live)resource# stop pri_fs_omd [enter]
 Aktueller Status “vorher” ist nun: Ping-Score auf beiden Nodes 3000,
 DRBD-Master auf node1.
 
-[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%205%20-%20Simon%20Meggle-Dateien/vorher.png "vorher")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/vorher.png)
+![](/assets/omd-cluster-pacemaker-3/vorher.png)
 
 Auf dem DRBD-Primary-Node verbieten wir nun per iptables alle Pings:
 
@@ -81,7 +80,7 @@ root@nagios1:~# iptables -A OUTPUT -p icmp -j DROP
 
 {% endhighlight %}
 
-Nach kurzer Zeit sollte der Ping-Score im Output von crm_mon so
+Nach kurzer Zeit sollte der Ping-Score im Output von `crm_mon` so
 aussehen:
 
 {% highlight bash %}
@@ -98,8 +97,9 @@ Die location-Regel für den DRBD-Master auf Node 2 hat sehr viel mehr
 Gewicht als die gleiche Regel auf Node 1. Deshalb zieht der Master auf
 node2 um:
 
-[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%205%20-%20Simon%20Meggle-Dateien/nachher.png "nachher")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/nachher.png)
- Nun erlauben wir nagios1 wieder, zu pingen und flushen (leeren) die
+![](/assets/omd-cluster-pacemaker-3/nachher.png)
+
+Nun erlauben wir nagios1 wieder das Pingen indem und flushen (leeren) die
 iptables:
 
 {% highlight bash %}
@@ -111,14 +111,13 @@ root@nagios1:~# iptables -F
 Der Ping-Score von Nagios1 „erholt“ sich wieder auf 3000. Dass die
 DRBD-Master-Rolle nicht wieder zurückschwenkt, liegt an der in [Teil
 3](http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-3/ "Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 3")
-definierten `default-resource-stickiness` größer Null (1). Eine resource
+definierten *default-resource-stickiness > 0* (=1). Eine resource
 stickiness von > 0 bewirkt, dass die Ressource “lieber” dort bleibt, wo
-sie gerade läuft; ist die stickiness kleiner 0, hat die Ressource den
-Drang, den Node zu verlassen; eine stickiness von “0″ hat keine
+sie gerade läuft; ist die stickiness < 0, hat die Ressource den
+Drang, den Node zu verlassen; eine stickiness = 0 hat keine
 Auswirkung.
 
-Abschließend starten wir die Ressource *pri_fs_omd* auf node 1 wieder –
-dass der Mount evt. fehlschlägt, weil er jetzt auf dem Node passiert,
+Abschließend starten wir die Ressource *pri_fs_omd* auf node 1 wieder. Dass der Mount evt. fehlschlägt, weil er jetzt auf dem Node passiert,
 der nicht (mehr) DRBD-Master ist, spielt keine Rolle. Wichtig ist im
 Moment nur, dass die Ressource nicht gestoppt ist – Pacemaker würde
 sonst auf keinen Fall versuchen, sie zu starten – und das würde ggf. die
@@ -139,7 +138,7 @@ Der nächste große Schritt ist nun, alle anderen Ressourcen dazu zu
 bringen, dem DRBD-Master zu folgen. Wir fassen hierzu den
 Filesystem-Mount, den Webserver und die Service-IP in einer Gruppe
 zusammen (Achtung: die Reihenfolge, in der die Elemente einer Resource
-Group genannt werden, bestimmt zugleich deren Startreihenfolge!)
+Group genannt werden, bestimmt zugleich deren Startreihenfolge).
 
 {% highlight bash %}
 
@@ -153,15 +152,15 @@ derzeit aktuelle Version hat einen Bug: nach dem commit bleiben die
 Ressourcen, die in einer Gruppe zusammengefasst werden, als Zombies
 stehen). Folgende Gruppe sollte nun angezeigt werden:
 
-[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%205%20-%20Simon%20Meggle-Dateien/group_omd.png "group_omd")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/group_omd.png)
- Mittels Colocation weisen wir nun den Cluster an, "group_omd" immer dort
+![](/assets/omd-cluster-pacemaker-3/group_omd.png)
+
+Mittels Colocation weisen wir nun den Cluster an, "group_omd" immer dort
 mitzustarten, wo der DRBD-Master läuft – und das mit einem Score von
 inf, d.h. unbedingt.
 
  Zu beachten: Ein colocation constraint wird durch zwei Ressourcen, plus
 optional ihre Rollen (z.b. Master) definiert. Die Reihenfolge der
-Nennung bestimmt, welche Ressource welcher folgt: “res_a res_b“
-bedeutet: „res_a folgt res_b“!
+Nennung bestimmt, welche Ressource welcher folgt: `A B` = "A folgt B".
 
 {% highlight bash %}
 
@@ -170,15 +169,15 @@ commit [enter]
 
 {% endhighlight %}
 
-[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%205%20-%20Simon%20Meggle-Dateien/omdfollowsdrbd.png "omdfollowsdrbd")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/omdfollowsdrbd.png)
+![](/assets/omd-cluster-pacemaker-3/omdfollowsdrbd.png)
 
 Wir müssen Pacemaker jetzt mit einem "order" constraint mitteilen, dass
 zwischen dem Start der group_omd und dem Promoten des DRBD-Masters eine
 Reihenfolge einzuhalten ist.
 
- *Merke:* Die colocation bestimmt, dass "group_omd" und DRBD-Master
-zusammen laufen sollen. Die order legt fest, in welcher Reihnefolge
-sie gestartet werden!
+Merke: Die _colocation_ bestimmt, dass *group_omd* und DRBD-Master
+zusammen laufen sollen. Die _order_ legt fest, in welcher Reihnefolge
+sie gestartet werden.
 
 {% highlight bash %}
 
@@ -205,12 +204,11 @@ commit [enter]
 
 {% endhighlight %}
 
-Lassen Sie uns das Ergebnis in der GUI bewundern:
+Das Ergebnis in der GUI:
 
-[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%205%20-%20Simon%20Meggle-Dateien/sitaincluded.png "sitaincluded")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/sitaincluded.png)
+![](/assets/omd-cluster-pacemaker-3/sitaincluded.png)
 
-#### Stunde der Wahrheit: der Test
-
+#### und jetzt: "Smoke Test"
 
 Öffnen Sie im Browser die URL
 [http://nagios/siteA](http://nagios/siteA),

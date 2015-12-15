@@ -15,7 +15,9 @@ Im letzten Teil dieses Tutorials haben Sie die Ressourcen definiert, die
 OMD zum Betrieb benötigt: Service-IP-Adresse, Apache, DRBD, Mount des
 DRBD-Devices, sowie der Ping zur Berechnung des Scores, anhand dessen
 der Cluster ein Schwenk der Resourcen auf einen anderen Node beschließen
-kann. Wenden wir uns nun OMD selbst zu. Unser Ziel ist es, nicht OMD mit
+kann.
+
+Wenden wir uns nun OMD selbst zu. Unser Ziel ist es, nicht OMD mit
 all seinen Sites als Ressource starten zu lassen (hierzu müssten wir ja
 nur das LSB-initscript verwenden), sondern die einzelnen Sites. Jede
 Site soll für Pacemaker als eigene Ressource start-/stopp/-überwachbar
@@ -88,7 +90,7 @@ umount tmpfs
 #### Anpassungen auf dem DRBD-Primary-Node
 
 Auf dem DRBD-**Primary** (also auf dem Node, wo derzeit das DRBD-Blockdevice unter
-`/mnt/omddata` gemountet ist, hier: **Node2**) werden beiden zuletzt genannten
+*/mnt/omddata* gemountet ist, hier: **Node2**) werden beiden zuletzt genannten
 Verzeichnisse *apache* und *sites* nun ins DRBD verschoben (dies sind
 die Daten, die sich beide Nodes „teilen“ sollen, und an deren Stelle
 Softlinks erzeugt, die an die neue Position zeigen:
@@ -178,6 +180,7 @@ root@nagios1:/opt/omd# ls -la [enter]
 
 Wie eingangs beschrieben, benötigen wir nun eine Möglichkeit, einzelne
 OMD-Sites vom Cluster verwalten (start/stop/monitor) zu lassen.
+
 Hierzu habe ich einen eigenen OCF-Agent geschrieben, welcher den
 sitename als Shellvariablen-Argument entgegennimmt. Für *start* und
 *stop* der Site werden intern die bekannten Kommandos verwendet;
@@ -195,8 +198,8 @@ root@nagios1:/usr/lib/ocf/resource.d# mkdir myprovider
 
 {% endhighlight %}
 
-Laden Sie sich den [OCF-Agenten “OMD”](http://blog.simon-meggle.de/wp-content/uploads/2011/05/OMD)
-herunter (z.b. mit wget), entfernen Sie die Endung “.sh”.
+Laden Sie sich den [OCF-Agenten “OMD”](/assets/omd-cluster-pacemaker-3/OMD.txt)
+herunter (z.b. mit wget), ersetzen Sie die Endung ".txt" mit ".sh".
 Kopieren Sie nun den Agenten in das neu erstellte Agenten-Verzeichnis:
 
 {% highlight bash %}
@@ -233,9 +236,7 @@ root@nagios2:# ./OMD monitor
 
 {% endhighlight %}
 
-Testen Sie nun, ob Sie siteA auf dem Master-Node öffnen können:
-[http://nagios1/siteA](http://nagios1/siteA)
- Nun können wir siteA als Pacemaker-Ressource definieren:
+Testen Sie nun, ob Sie siteA auf dem Master-Node öffnen können ([http://nagios1/siteA](http://nagios1/siteA)). Nun können wir diese Site als Pacemaker-Ressource definieren:
 
 {% highlight bash %}
 
@@ -256,11 +257,9 @@ Vorschein bringen.
 Sofern nicht anders konfiguriert, verwendet jede OMD-Site eine eigene
 Instanz des RRD Caching Daemons. Der Daemon RRDCacheD empfängt
 Aktualisierungen für existierende RRD-Dateien, sammelt diese und
-schreibt die Aktualisierungen zeitversetzt weg. Der Daemon wurde für
-große Installationen geschrieben, welche häufig in E/A-Probleme laufen.
-RRDCacheD soll diese Probleme mildern.
+schreibt die Aktualisierungen zeitversetzt weg. I/O wird dadurch deutlich gemindert.
 
- Im Cluster ist ein guter Kompromiss zu treffen zwischen Caching der
+Im Cluster ist ein guter Kompromiss zu treffen zwischen Caching der
 Daten und rechtzeitigem Schreiben aufs DRBD-Device – schließlich könnten
 die wertvollen Daten im Cache durch einen plötzlichen Ausfall des
 aktiven Knotens für immer verloren gehen, weil sie nicht mehr

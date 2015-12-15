@@ -49,15 +49,15 @@ crm(live)#
 
 {% endhighlight %}
 
-Durch Eingabe von “configure” gelangen Sie eine Ebene tiefer, um die
-live-CIB zu konfigurieren, “help” liefert allerlei nützliche Infos, “up”
-befördert Sie wieder eine Ebene höher, während “quit” die Shell
+Durch Eingabe von `configure` gelangen Sie eine Ebene tiefer, um die
+live-CIB zu konfigurieren, `help` liefert allerlei nützliche Infos, `up`
+befördert Sie wieder eine Ebene höher, während `quit` die Shell
 verlässt.
 
 #### Globale Parameter
 
 
-Zunächst definieren wir im “configure”-Modus die Parameter, welche für
+Zunächst definieren wir im `configure`-Modus die Parameter, welche für
 den ganzen Cluster gelten sollen.
 
 {% highlight bash %}
@@ -69,7 +69,7 @@ rsc_defaults resource-stickiness="1" [enter]
 {% endhighlight %}
 
 Die crm-Shell schluckt so lange alle Kommandos, bis Sie diese committen.
-Das Schlüsselwort “show” zeigt Ihnen die nun aktuelle Konfiguration:
+Das Schlüsselwort `show` zeigt Ihnen die nun aktuelle Konfiguration:
 
 {% highlight bash %}
 
@@ -90,12 +90,12 @@ crm(live)configure# show [enter]
 
 #### ping – die erste Cluster-Ressource
 
-Mit ping steht dem Cluster eine einfache aber wirksame Methode zur
+Mit "ping" steht dem Cluster eine einfache aber wirksame Methode zur
 Verfügung, seine, nennen wir es “Netzwerkgesundheit” festzustellen:
-verinfacht gesagt, lassen wir jeden Node eine Reihe Hosts im LAN im
+vereinfacht gesagt lassen wir jeden Node eine Reihe Hosts im LAN im
 10s-Intervall pingen (pro Ping default 5 Versuche). Damit ein kleiner
 Netzwerk-Schluckauf nicht gleich für einen Cluster-Schwenk sorgt,
-definieren wir mit “dampen” eine Teergrube von 20 Sekunden. Erst nach
+definieren wir mit “dampen” ein Delay von 20 Sekunden. Erst nach
 Ablauf dieser Gnadenfrist gilt ein negatives Ergebnis.
 
 (Gehen Sie bei der Wahl der Ping-Hosts mit Bedacht vor und wählen Sie
@@ -124,14 +124,14 @@ crm(live)configure# commit
 der erfolgreich gepingten Hosts multipliziert. Der hieraus errechnete
 Score sollte bei jedem Host 3000 betragen (3×1000):
 
-![](/assets/omd-cluster-pacemaker-3/)
-[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%203%20-%20Simon%20Meggle-Dateien/greenshot_2011-05-12_23-40-46.png "primitive ping")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/greenshot_2011-05-12_23-40-46.png)
- Weil wir uns nicht mit der GUI zufrieden geben, sondern auch auf der
+![](/assets/omd-cluster-pacemaker-3/pri_ping.png)
+
+Weil wir uns nicht mit der GUI zufrieden geben, sondern auch auf der
 Konsole prüfen wollen, wie es dem Cluster geht, rufen wir auf einem der
-beiden Nodes das Kommando “crm_mon” auf – achten Sie auf die Scores,
-die sollten beiden 3000 betragen (bzw. entsprechend der Anzahl der
-Hosts, die Sie ihren Cluster pingen lassen). “watch -n 1″ ruft für uns
-im 1-Sekunden-Interval “crm_mon -1 -f” auf, sodass wir den Status des
+beiden Nodes das Kommando `crm_mon` auf – achten Sie auf die Scores,
+die sollten beiden *3000* betragen (bzw. entsprechend der Anzahl der
+Hosts, die Sie ihren Cluster pingen lassen). `watch -n 1` ruft für uns
+im 1-Sekunden-Interval `crm_mon -1 -f` auf, sodass wir den Status des
 Cluster sekundengenau mitverfolgen können:
 
 {% highlight bash %}
@@ -157,22 +157,23 @@ Migration summary:
 
 {% endhighlight %}
 
-Mit diesem Score werden wir nun Regeln verknüpft werden. Wir möchten,
-dass der Node, der den „besseren“ Ping-Score hat, gewinnt – alle
+Mit diesem Score werden nun Regeln verknüpft. Wir möchten,
+dass der Node, der den „besseren“ Ping-Score hat, gewinnt: alle
 Ressourcen sollen zu ihm umgezogen werden.
 
 #### DRBD-Synchronisation
 
-Zunächst werden wir das logical Volume lvomd zum Blockdevice des DRBDs
+Zunächst werden wir das logical Volume "lvomd" zum Blockdevice des DRBDs
 ernennen, sowie ein Filesystem darauf einrichten. Diese Aufgabe nimmt
 einem die DRBD-MC in so kompakter Weise ab, dass wir diesmal –
-ausnahmsweise – die Shell meiden:
+ausnahmsweise – die Shell meiden.
 
 Im Abschnitt „Storage (DRBD)“ sehen Sie alle Blockdevices der beiden
 Nodes untereinander. Klicken Sie mit der rechten Maustaste auf das
 logical volume “lvomd” von nagios1 und wählen Sie
 
-[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%203%20-%20Simon%20Meggle-Dateien/addmirroreddevice.png "addmirroreddevice")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/addmirroreddevice.png)
+![](/assets/omd-cluster-pacemaker-3/addmirroreddevice.png)
+
 Im folgenden Assistenten definieren wir die DRBD-Ressource “romd” (‘r’
 wie ‘resource’, ich bin ein Freund von Prefixen):
 
@@ -198,16 +199,17 @@ Kommandozeilen-Leiste sehen, dass DRBD-MC die Ressource bereits mittels
 Klicken wir auf “Next”, und lassen auf der DRBD-Ressource gleich ein
 ext4-Filesystem erzeugen:
 
-[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%203%20-%20Simon%20Meggle-Dateien/Bildschirmfoto-2.png "createfilesystem")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/Bildschirmfoto-2.png)
+![](/assets/omd-cluster-pacemaker-3/ext4_create.png)
 
 Nach einer Weile ist das Filesystem auf dem Blockdevice erzeugt – und
 nach einem Click auf „Finish“ sollte das Endresultat sollte in etwa so
 aussehen:
 
-[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%203%20-%20Simon%20Meggle-Dateien/drbdinitial.png "drbdinitial")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/drbdinitial.png)Wie
-Sie an der Prozentangabe unter der Verbindungslinie erkennen können, ist
+![](/assets/omd-cluster-pacemaker-3/drbdinitial.png)
+
+Wie Sie an der Prozentangabe unter der Verbindungslinie erkennen können, ist
 die Synchronisation der beiden Devices bereits in vollem Gange. Auf der
-Shell lässt sich dies überprüfen, in dem Sie ‘/proc/drbd’ per ‘cat’
+Shell lässt sich dies überprüfen, in dem Sie */proc/drbd* per `cat`
 auslesen:
 
 {% highlight bash %}
@@ -222,7 +224,7 @@ root@nagios2:~# watch -n 1 cat /proc/drbd
 
 {% endhighlight %}
 
-Wie Sie vielleicht erkennen können, ist die Syncer rate nicht gerade
+Wie Sie vielleicht erkennen können, ist die "Syncer rate" nicht gerade
 schnell. Der Artikel [“Configuring the rate of
 synchronisation”](http://www.drbd.org/users-guide/s-configure-sync-rate.html)
 auf der DRBD-Seite erläutert detailliert, wie man die für sein System
@@ -231,7 +233,7 @@ beiden Nodes in die Datei “/etc/drbd.d/romd.res” eintragen, oder hierzu
 einmal die GUI verwenden (=> Optionsleiste auf der rechten Seite), die
 dies gleich auf beiden Nodes für Sie erledigt:
 
-[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%203%20-%20Simon%20Meggle-Dateien/syncerrate.png "syncerrate")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/syncerrate.png)
+![](/assets/omd-cluster-pacemaker-3/syncerrate.png)
 
 Derzeit sind beide DRBD-Volumes im Status “secondary”:
 
@@ -258,24 +260,25 @@ crm(live)# commit [enter]
 {% endhighlight %}
 
 Die “primitive”-Deklaration definiert zunächst einmal die
-Cluster-Ressource vom Typ ocf:linbit:drbd und weist sie an, die
+Cluster-Ressource vom Typ *ocf:linbit:drbd* und weist sie an, die
 DRBD-Ressource “romd” zu verwenden. Alle 5 Sekunden soll der Status
-überprüft werden. Die “ms”-Deklaration weist pri_drbd_omd als
+überprüft werden. Die “ms”-Deklaration weist *pri_drbd_omd* als
 MultiState-Ressource aus, soll heißen: starte die Ressource zwar auf
 mehreren Nodes, wobei
 
--   im ganzen Cluster nur 1 Master existieren darf (master-max)
+-   im ganzen Cluster nur 1 Master existieren darf (`master-max`)
 -   im ganzen Cluster genau zwei Instanzen dieses primitives laufen
-    dürfen (clone-max)
+    dürfen (`clone-max`)
 -   pro Node nur eine Instanz dieses primitives laufen darf
-    (clone-node-max)
--   pro Node nur 1 Master existieren darf (master-node-max)
+    (`clone-node-max`)
+-   pro Node nur 1 Master existieren darf (`master-node-max`)
 
 In der DRBD-MC werden Sie nach dem commit nun unter “Cluster
 Manager”-”Services” eine neue Ressource entdecken:
 
-[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%203%20-%20Simon%20Meggle-Dateien/drbdneures.png "drbdneures")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/drbdneures.png)Dort,
-wo DRBD im Status Primary (bzw. die Multistate-Ressource im Status
+![](/assets/omd-cluster-pacemaker-3/drbdneures.png)
+
+Dort, wo DRBD im Status Primary (bzw. die Multistate-Ressource im Status
 “Master”) läuft, wollen wir außerdem, dass das DRBD-Device gemountet
 wird. Legen Sie auf beiden Nodes einen Mountpunkt an:
 
@@ -299,7 +302,8 @@ crm(live)# commit [enter]
 
 Und schon zeigt die GUI eine weitere Ressource an:
 
-[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%203%20-%20Simon%20Meggle-Dateien/erstercluster.png "erstercluster")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/erstercluster.png)
+![](/assets/omd-cluster-pacemaker-3/erstercluster.png)
+
 Falls “crm_mon” meldet, dass die Filesystem-Ressource auf keinem Node
 gestartet werden konnte…
 
@@ -313,7 +317,7 @@ not installed
 
 {% endhighlight %}
 
-…sollten Sie prüfen, ob die fuse-utils tatsächlich installiert sind.
+…sollten Sie prüfen, ob die *fuse-utils* tatsächlich installiert sind.
  Es kann durchaus sein, dass sich die Filesystem-Ressource rot färbt,
 wenn pacemaker versucht hat, sie vor DRBD zu starten. Das sollte auch
 nicht verwundern – schließlich liegt das zu mountende Filesystem ja im
@@ -329,7 +333,8 @@ crm resource cleanup pri_fs_romd
 bzw. per Rechtsklick in der GUI > „Reset Fail-Count“. Damit startet
 Pacemaker einen neuen Versuch, die Ressource – diesmal natürlich
 erfolgreich mit darunterliegendem DRBD – noch einmal zu starten.
- Der aktuelle Zustand ist, das sollte nicht vergessen werden, momentan
+
+Der aktuelle Zustand ist, das sollte nicht vergessen werden, momentan
 noch ein „Zufallsprodukt“. Pacemaker muss noch lernen, in welchen
 Abhängigkeiten die Ressourcen zueinander stehen.
 
@@ -430,8 +435,9 @@ regex “body” prüft er, ob eine gültige HTML-Seite zurückgeliefert wird
  Wieder ein Blick in die DRBD-MC – Ihr Cluster sollte mittlerweile so
 aussehen:
 
-[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%203%20-%20Simon%20Meggle-Dateien/clusterweiter.png "clusterweiter")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/clusterweiter.png)
- Wie Sie sehen, hat Pacemaker die Service-IP auf nagios2 gestartet. Im
+![](/assets/omd-cluster-pacemaker-3/clusterweiter.png)
+
+Wie Sie sehen, hat Pacemaker die Service-IP auf nagios2 gestartet. Im
 übernächsten Kapitel werden wir diesem Zustand mit constraints zuleibe
 rücken und die Ressourcen in ihrer Zusammengehörigkeit und
 Startreihenfolge so verzurren, dass sie in einem für uns konsistenten

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Nagios/OMD-Cluster mit Pacemaker/DRBD Teil 3</title>
+  <meta name="description" content="Bau eines hochverfügbaren Monitoring-Systems">
+
+  <link rel="stylesheet" href="Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20Teil%203-Dateien/main.css">
+  <link rel="canonical" href="http://yourdomain.com/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-3/">
+  <link rel="alternate" type="application/rss+xml" title="SIMON MEGGLE" href="http://yourdomain.com/feed.xml">
+<script data-timestamp="1450123875102" src="Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20Teil%203-Dateien/embed.js"></script></head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="http://localhost:4000/">SIMON MEGGLE</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"></path>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"></path>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"></path>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="http://localhost:4000/404.html">404</a>
+          
+        
+          
+          <a class="page-link" href="http://localhost:4000/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Nagios/OMD-Cluster mit Pacemaker/DRBD Teil 3</h1>
+
+    <span class="post-excerpt">Bau eines hochverfügbaren Monitoring-Systems</span>
+    <p class="post-meta"><time datetime="2012-01-30T12:58:14+01:00" itemprop="datePublished">30 January 2012</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <h3 id="teil-3--einrichtung-der-ressourcen">Teil 3 – Einrichtung der Ressourcen</h3>
+
+<p>Nachdem wir in <a href="http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-2/" title="Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 2">Teil
+2</a>
+die Grundlagen für den Cluster (Netzwerkkonfiguration, Corosync-Ring)
+geschaffen haben, können wir uns nun den einzelnen Ressourcen im Cluster
+zuwenden.</p>
+
+<h4 id="was-sind-ressourcen">Was sind Ressourcen?</h4>
+
+<p>Ressourcen sind im Cluster-Jargon die Teile eines geclusterten Dienstes,
+welche auf einem oder mehreren Nodes zu laufen haben. Dahinter verbirgt
+sich mehr als nur der Aufruf von <code>omd start/stop</code> – der Cluster hat z.B.
+dafür zu sorgen, dass die virtuelle IP-Adresse, unter der der Server
+immer ansprechbar sein soll, immer nur auf einem Node aktiv ist. Das
+Filesystem, in welche OMD die Laufzeitdaten schreibt, darf bzw. kann nur
+auf dem Node gemountet werden, auf dem auch der DRBD zum Master promoted
+ist – und wenn, dann nur nach dem Promoten. Einen solch “atomaren”
+Bestandteil wie z.b. den Mountvorgang des DRBD-Devices nennt man
+<em>Ressource</em>. Wie in unserem OMD-Cluster die Ressourcen konstruiert und
+in Abhängigkeit zueinander gebracht werden müssen, lesen Sie im
+folgenden Absatz.</p>
+
+<h4 id="definition-von-ressourcen">Definition von Ressourcen</h4>
+
+<p>Pacemaker bietet zur Definition von Ressourcen die komfortable crm-Shell
+(CRM= Cluster Resource Manager), die sogar die Vervollständigung von
+Schlüsselwörtern per Tabulator-Taste versteht. Kommandos in der
+crm-Shell sind immer nur auf einem Node abzusetzen, da die dadurch
+konfigurierte CIB (Cluster Information Base, eine XML-Datei, die Sie
+besser gar nicht erst suchen, geschweige denn von Hand editieren)
+automatisch auf alle Clusternodes repliziert. Starten Sie die crm-Shell:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">root@nagios1:~# </span>crm
+crm<span class="o">(</span>live<span class="o">)</span><span class="c">#</span></code></pre></figure>
+
+<p>Durch Eingabe von <code>configure</code> gelangen Sie eine Ebene tiefer, um die
+live-CIB zu konfigurieren, <code>help</code> liefert allerlei nützliche Infos, <code>up</code>
+befördert Sie wieder eine Ebene höher, während <code>quit</code> die Shell
+verlässt.</p>
+
+<h4 id="globale-parameter">Globale Parameter</h4>
+
+<p>Zunächst definieren wir im <code>configure</code>-Modus die Parameter, welche für
+den ganzen Cluster gelten sollen.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">crm(live)# </span>property stonith-enabled<span class="o">=</span><span class="s2">"false"</span> <span class="o">[</span>enter]
+property no-quorum-policy<span class="o">=</span><span class="s2">"ignore"</span> <span class="o">[</span>enter]
+rsc_defaults resource-stickiness<span class="o">=</span><span class="s2">"1"</span> <span class="o">[</span>enter]</code></pre></figure>
+
+<p>Die crm-Shell schluckt so lange alle Kommandos, bis Sie diese committen.
+Das Schlüsselwort <code>show</code> zeigt Ihnen die nun aktuelle Konfiguration:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">crm(live)configure# </span>commit <span class="o">[</span>enter]
+<span class="gp">crm(live)configure# </span>show <span class="o">[</span>enter]
+  node nagios1
+  node nagios2
+  property <span class="nv">$id</span><span class="o">=</span><span class="s2">"cib-bootstrap-options"</span>
+  dc-version<span class="o">=</span><span class="s2">"1.0.8-042548a451fce8400660f6031f4da6f0223dd5dd"</span>
+  cluster-infrastructure<span class="o">=</span><span class="s2">"openais"</span>
+  expected-quorum-votes<span class="o">=</span><span class="s2">"2"</span>
+  stonith-enabled<span class="o">=</span><span class="s2">"false"</span>
+  no-quorum-policy<span class="o">=</span><span class="s2">"ignore"</span>
+  rsc_defaults <span class="nv">$id</span><span class="o">=</span><span class="s2">"rsc-options"</span>
+  resource-stickiness<span class="o">=</span><span class="s2">"1"</span></code></pre></figure>
+
+<h4 id="ping--die-erste-cluster-ressource">ping – die erste Cluster-Ressource</h4>
+
+<p>Mit “ping” steht dem Cluster eine einfache aber wirksame Methode zur
+Verfügung, seine, nennen wir es “Netzwerkgesundheit” festzustellen:
+vereinfacht gesagt lassen wir jeden Node eine Reihe Hosts im LAN im
+10s-Intervall pingen (pro Ping default 5 Versuche). Damit ein kleiner
+Netzwerk-Schluckauf nicht gleich für einen Cluster-Schwenk sorgt,
+definieren wir mit “dampen” ein Delay von 20 Sekunden. Erst nach
+Ablauf dieser Gnadenfrist gilt ein negatives Ergebnis.</p>
+
+<p>(Gehen Sie bei der Wahl der Ping-Hosts mit Bedacht vor und wählen Sie
+nur IP-Adressen, die in unmittelbarer Nähe zum Cluster und entsprechend
+erreichbar sind – schließlich soll das Verhalten der Clusters ja nicht
+schon dadurch beeinflusst werden, dass Ihr Kollege einen kleinen
+Windows-Server herunterfährt…)</p>
+
+<p>Der Node mit dem besseren End-Resultat gewinnt. Würden wir diesen Ping
+nur als “primitive” definieren, liefe er jeweils nur auf einem Node –
+deshalb wird der Cluster mit der Direktive “clone” angewiesen, diese
+Ressource auf allen Nodes laufen zu lassen:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">crm(live)configure# </span>primitive pri_ping ocf:pacemaker:ping
+<span class="gp">&gt; </span>params <span class="nv">dampen</span><span class="o">=</span><span class="s2">"20s"</span> <span class="nv">multiplier</span><span class="o">=</span><span class="s2">"1000"</span>
+<span class="gp">&gt; </span><span class="nv">host_list</span><span class="o">=</span><span class="s2">"192.168.1.240 192.168.1.23 192.168.1.2"</span>
+<span class="gp">&gt; </span>op monitor <span class="nv">interval</span><span class="o">=</span><span class="s2">"5s"</span>
+<span class="gp">crm(live)configure# </span>clone clone_ping pri_ping
+<span class="gp">crm(live)configure# </span>commit</code></pre></figure>
+
+<p>“Multiplier” gehört hier das Augenmerk: mit diesem Wert wird die Anzahl
+der erfolgreich gepingten Hosts multipliziert. Der hieraus errechnete
+Score sollte bei jedem Host 3000 betragen (3×1000):</p>
+
+<p><img src="Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20Teil%203-Dateien/pri_ping.png" alt=""></p>
+
+<p>Weil wir uns nicht mit der GUI zufrieden geben, sondern auch auf der
+Konsole prüfen wollen, wie es dem Cluster geht, rufen wir auf einem der
+beiden Nodes das Kommando <code>crm_mon</code> auf – achten Sie auf die Scores,
+die sollten beiden <em>3000</em> betragen (bzw. entsprechend der Anzahl der
+Hosts, die Sie ihren Cluster pingen lassen). <code>watch -n 1</code> ruft für uns
+im 1-Sekunden-Interval <code>crm_mon -1 -f</code> auf, sodass wir den Status des
+Cluster sekundengenau mitverfolgen können:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">watch -n 1 <span class="s1">'crm_mon -1 -f'</span> <span class="o">[</span>enter]
+<span class="o">============</span>
+Last updated: Thu May 12 23:46:56 2011
+Stack: openais
+Current DC: nagios1 - partition with quorum
+Version: 1.0.8-042548a451fce8400660f6031f4da6f0223dd5dd
+2 Nodes configured, 2 expected votes
+1 Resources configured.
+<span class="o">============</span>
+&nbsp;
+Online: <span class="o">[</span> nagios1 nagios2 <span class="o">]</span>
+
+Clone Set: clone_ping
+Started: <span class="o">[</span> nagios1 nagios2 <span class="o">]</span>
+
+Migration summary:
+<span class="k">*</span> Node nagios2: <span class="nv">pingd</span><span class="o">=</span>3000
+<span class="k">*</span> Node nagios1: <span class="nv">pingd</span><span class="o">=</span>3000</code></pre></figure>
+
+<p>Mit diesem Score werden nun Regeln verknüpft. Wir möchten,
+dass der Node, der den „besseren“ Ping-Score hat, gewinnt: alle
+Ressourcen sollen zu ihm umgezogen werden.</p>
+
+<h4 id="drbd-synchronisation">DRBD-Synchronisation</h4>
+
+<p>Zunächst werden wir das logical Volume “lvomd” zum Blockdevice des DRBDs
+ernennen, sowie ein Filesystem darauf einrichten. Diese Aufgabe nimmt
+einem die DRBD-MC in so kompakter Weise ab, dass wir diesmal –
+ausnahmsweise – die Shell meiden.</p>
+
+<p>Im Abschnitt „Storage (DRBD)“ sehen Sie alle Blockdevices der beiden
+Nodes untereinander. Klicken Sie mit der rechten Maustaste auf das
+logical volume “lvomd” von nagios1 und wählen Sie</p>
+
+<p><img src="Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20Teil%203-Dateien/addmirroreddevice.png" alt=""></p>
+
+<p>Im folgenden Assistenten definieren wir die DRBD-Ressource “romd” (‘r’
+wie ‘resource’, ich bin ein Freund von Prefixen):</p>
+
+<ul>
+  <li>Name: romd</li>
+  <li>Device: /dev/drbd0</li>
+  <li>Protocol: C/Synchronous</li>
+  <li>On io error: detach</li>
+</ul>
+
+<p>Im nächsten Dialog möchte der Assistent wissen, über welche Interfaces
+Sie das Device synchronisieren möchten. Für Nagios 1 und 2 ist jeweils
+anzugeben</p>
+
+<ul>
+  <li>Interface: eth1 (10.1.1.10) bzw. (10.1.1.20)</li>
+  <li>DRBD Meta disk: internal</li>
+  <li>Port: 7788</li>
+</ul>
+
+<p>Im darauffolgenden Fenster wählen wir “Create new meta-data &amp; destroy
+data” und klicken auf “Create Meta-Data”. Nach einem klick auf “Next”
+können Sie in der im unteren Bildschirmrand eingeblendeten
+Kommandozeilen-Leiste sehen, dass DRBD-MC die Ressource bereits mittels
+“drbdadm up romd” hochgefahren hat.</p>
+
+<p>Klicken wir auf “Next”, und lassen auf der DRBD-Ressource gleich ein
+ext4-Filesystem erzeugen:</p>
+
+<p><img src="Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20Teil%203-Dateien/ext4_create.png" alt=""></p>
+
+<p>Nach einer Weile ist das Filesystem auf dem Blockdevice erzeugt – und
+nach einem Click auf „Finish“ sollte das Endresultat sollte in etwa so
+aussehen:</p>
+
+<p><img src="Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20Teil%203-Dateien/drbdinitial.png" alt=""></p>
+
+<p>Wie Sie an der Prozentangabe unter der Verbindungslinie erkennen können, ist
+die Synchronisation der beiden Devices bereits in vollem Gange. Auf der
+Shell lässt sich dies überprüfen, in dem Sie ‘/proc/drbd’ per ‘cat’
+auslesen:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">root@nagios2:~# </span>watch -n 1 cat /proc/drbd
+  version: 8.3.10 <span class="o">(</span>api:88/proto:86-96<span class="o">)</span>
+  GIT-hash: 680ee9418871ccf23f46069b14fd5bef4e7c1e34 build by root@nagios2, 2011-05-12 17:28:45
+  0: cs:SyncTarget ro:Secondary/Secondary ds:Inconsistent/UpToDate C r-----
+     ns:0 nr:190540 dw:190540 dr:0 al:0 bm:11 lo:0 pe:0 ua:0 ap:0 ep:1 wo:b oos:212200
+     <span class="o">[========</span>&gt;...........] synced: 48.0% <span class="o">(</span>212200/401356<span class="o">)</span>K
+     finish: 0:02:41 speed: 1,308 <span class="o">(</span>1,388<span class="o">)</span> want: 250 K/sec</code></pre></figure>
+
+<p>Wie Sie vielleicht erkennen können, ist die Syncer rate nicht gerade
+schnell. Der Artikel <a href="http://www.drbd.org/users-guide/s-configure-sync-rate.html">“Configuring the rate of
+synchronisation”</a>
+auf der DRBD-Seite erläutert detailliert, wie man die für sein System
+passende Syncer rate errechnet. Sie können diesen Wert nun entweder auf
+beiden Nodes in die Datei “/etc/drbd.d/romd.res” eintragen, oder hierzu
+einmal die GUI verwenden (=&gt; Optionsleiste auf der rechten Seite), die
+dies gleich auf beiden Nodes für Sie erledigt:</p>
+
+<p><a href="http://blog.simon-meggle.de/wp-content/uploads/2011/05/syncerrate.png"><img src="Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20Teil%203-Dateien/syncerrate.html" alt="" title="syncerrate"></a></p>
+
+<p>Derzeit sind beide DRBD-Volumes im Status “secondary”:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">root@nagios2:~# </span>drbd-overview
+  0:romd Connected Secondary/Secondary UpToDate/UpToDate C r-----</code></pre></figure>
+
+<p>Lassen Sie uns nun eine Cluster-Ressource einrichten, die das Volume auf
+einem Node zum “primary” promoted. Wechseln Sie in die crm-shell und
+definieren Sie:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">crm(live)configure# </span>primitive pri_drbd_omd ocf:linbit:drbd <span class="o">[</span>enter]
+  params <span class="nv">drbd_resource</span><span class="o">=</span><span class="s2">"romd"</span>  <span class="o">[</span>enter]
+  op monitor <span class="nv">interval</span><span class="o">=</span><span class="s2">"5"</span> <span class="o">[</span>enter]
+  ms ms_drbd_omd pri_drbd_omd  <span class="o">[</span>enter]
+  meta master-max<span class="o">=</span><span class="s2">"1"</span> master-node-max<span class="o">=</span><span class="s2">"1"</span> clone-max<span class="o">=</span><span class="s2">"2"</span> clone-node-max<span class="o">=</span><span class="s2">"1"</span> <span class="nv">notify</span><span class="o">=</span><span class="s2">"true"</span> <span class="o">[</span>enter]
+<span class="gp">crm(live)# </span>commit <span class="o">[</span>enter]</code></pre></figure>
+
+<p>Die “primitive”-Deklaration definiert zunächst einmal die
+Cluster-Ressource vom Typ ocf:linbit:drbd und weist sie an, die
+DRBD-Ressource “romd” zu verwenden. Alle 5 Sekunden soll der Status
+überprüft werden. Die “ms”-Deklaration weist pri_drbd_omd als
+MultiState-Ressource aus, soll heißen: starte die Ressource zwar auf
+mehreren Nodes, wobei</p>
+
+<ul>
+  <li>im ganzen Cluster nur 1 Master existieren darf (master-max)</li>
+  <li>im ganzen Cluster genau zwei Instanzen dieses primitives laufen
+dürfen (clone-max)</li>
+  <li>pro Node nur eine Instanz dieses primitives laufen darf
+(clone-node-max)</li>
+  <li>pro Node nur 1 Master existieren darf (master-node-max)</li>
+</ul>
+
+<p>In der DRBD-MC werden Sie nach dem commit nun unter “Cluster
+Manager”-”Services” eine neue Ressource entdecken:</p>
+
+<p><a href="http://blog.simon-meggle.de/wp-content/uploads/2011/05/drbdneures.png"><img src="Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20Teil%203-Dateien/drbdneures.html" alt="" title="drbdneures"></a>Dort,
+wo DRBD im Status Primary (bzw. die Multistate-Ressource im Status
+“Master”) läuft, wollen wir außerdem, dass das DRBD-Device gemountet
+wird. Legen Sie auf beiden Nodes einen Mountpunkt an:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">mkdir /mnt/omddata</code></pre></figure>
+
+<p>Der Mount-Vorgang ist eine eigene Cluster-Ressource, die Sie in der
+crm-Shell anlegen:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">crm(live)configure# </span>primitive pri_fs_omd ocf:heartbeat:Filesystem <span class="o">[</span>enter]
+  params <span class="nv">device</span><span class="o">=</span><span class="s2">"/dev/drbd0"</span> <span class="nv">fstype</span><span class="o">=</span><span class="s2">"ext4"</span> <span class="nv">directory</span><span class="o">=</span><span class="s2">"/mnt/omddata/"</span> <span class="o">[</span>enter]
+  meta target-role<span class="o">=</span><span class="s2">"Started"</span> <span class="o">[</span>enter]
+<span class="gp">crm(live)# </span>commit <span class="o">[</span>enter]</code></pre></figure>
+
+<p>Und schon zeigt die GUI eine weitere Ressource an:</p>
+
+<p><a href="http://blog.simon-meggle.de/wp-content/uploads/2011/05/erstercluster.png"><img src="Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20Teil%203-Dateien/erstercluster.html" alt="" title="erstercluster"></a>
+Falls “crm_mon” meldet, dass die Filesystem-Ressource auf keinem Node
+gestartet werden konnte…</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">Failed actions:
+pri_fs_omd_start_0 <span class="o">(</span><span class="nv">node</span><span class="o">=</span>nagios1, <span class="nv">call</span><span class="o">=</span>10, <span class="nv">rc</span><span class="o">=</span>5, <span class="nv">status</span><span class="o">=</span><span class="nb">complete</span><span class="o">)</span>:
+not installed
+pri_fs_omd_start_0 <span class="o">(</span><span class="nv">node</span><span class="o">=</span>nagios2, <span class="nv">call</span><span class="o">=</span>13, <span class="nv">rc</span><span class="o">=</span>5, <span class="nv">status</span><span class="o">=</span><span class="nb">complete</span><span class="o">)</span>:
+not installed</code></pre></figure>
+
+<p>…sollten Sie prüfen, ob die fuse-utils tatsächlich installiert sind.
+ Es kann durchaus sein, dass sich die Filesystem-Ressource rot färbt,
+wenn pacemaker versucht hat, sie vor DRBD zu starten. Das sollte auch
+nicht verwundern – schließlich liegt das zu mountende Filesystem ja im
+DRBD. Setzen Sie in diesem Fall den Fehlerzähler der
+Filesystem-Ressource zurück:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">crm resource cleanup pri_fs_romd</code></pre></figure>
+
+<p>bzw. per Rechtsklick in der GUI &gt; „Reset Fail-Count“. Damit startet
+Pacemaker einen neuen Versuch, die Ressource – diesmal natürlich
+erfolgreich mit darunterliegendem DRBD – noch einmal zu starten.
+ Der aktuelle Zustand ist, das sollte nicht vergessen werden, momentan
+noch ein „Zufallsprodukt“. Pacemaker muss noch lernen, in welchen
+Abhängigkeiten die Ressourcen zueinander stehen.</p>
+
+<p>Während meiner Tests fiel mir auf, dass der Cluster urplötzlich auf
+keinem der beiden Nodes mehr /dev/drbd0 mounten wollte, obwohl Mounten
+von Hand weiterhin funktionierte. Dem Logfile konnte ich nur noch
+entnehmen:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">May 3 14:30:21 nagios1 Filesystem[4645]: ERROR: Couldn<span class="s1">'t sucessfully fsck filesystem for /dev/drbd0
+May 3 14:34:50 nagios2 Filesystem[21338]: ERROR: Couldn'</span>t sucessfully fsck filesystem <span class="k">for</span> /dev/drbd0
+...</code></pre></figure>
+
+<p>Irgendwann entdeckte ich, dass der Ressource-Agent “Filesystem” noch
+kein ext4-Filesystem zu berücksichtigen scheint. Öffnen Sie auf beiden
+Nodes das Agent-Script:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">vim /usr/lib/ocf/resource.d/heartbeat/Filesystem
+...
+<span class="k">case</span> <span class="nv">$FSTYPE</span> <span class="k">in</span>
+&nbsp;&nbsp;&nbsp;ext3|reiserfs|reiser4| bla...bla|gfs2|none|lustre<span class="p">)</span>&nbsp;&nbsp;&nbsp;
+      <span class="nb">false</span><span class="p">;;</span>
+&nbsp;&nbsp;&nbsp;<span class="k">*</span><span class="p">)</span>&nbsp;&nbsp;&nbsp;
+      <span class="nb">true</span><span class="p">;;</span>
+<span class="k">esac</span>
+<span class="k">then</span>
+&nbsp;&nbsp;&nbsp;ocf_log info <span class="s2">"Starting filesystem check on </span><span class="nv">$DEVICE</span><span class="s2">"</span>
+...</code></pre></figure>
+
+<p>Wenn das zu mountende Filesystem also nicht unter den genannten ist,
+möchte der Cluster zunächst eine Überprüfung durchführen. Sie können
+sich vorstellen, wie erwünscht dieser Effekt in dem Moment ist, in dem
+Node 1 ausgefallen ist und Node 2 nun möglichst schnell einspringen
+soll. Schreiben Sie also direkt hinter “ext3|” noch “ext4|”, sodass fsck
+fortan auch für ext4-Filesysteme überprungen wird.
+ (Siehe auch Dokumentation des Bugs auf
+<a href="https://bugs.launchpad.net/ubuntu/+source/heartbeat/+bug/544051">launchpad.net</a>).</p>
+
+<h4 id="service-ip">Service-IP</h4>
+
+<p>Natürlich wollen wir unseren Cluster nicht je nach aktivem Node mit
+unterschiedlicher IP-Adresse ansprechen müssen, und spendieren ihm
+deshalb eine Service-IP, die immer auf dem aktiven Node aktiviert werden
+soll. Dies bewerkstelligt die Ressource IPaddr2, welche auch gleich noch
+per ARP-Broadcast veranlasst, dass alle Clients ihren ARP-Cache mit der
+neuen MAC-Adresse aktualisieren. Die Parameter sollten weitgehend
+selbsterklärend sein:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">crm(live)configure# </span>primitive pri_nagiosIP ocf:heartbeat:IPaddr2 <span class="o">[</span>enter]
+  op monitor <span class="nv">interval</span><span class="o">=</span><span class="s2">"5s"</span> <span class="nv">timeout</span><span class="o">=</span><span class="s2">"20s"</span>  <span class="o">[</span>enter]
+  params <span class="nv">ip</span><span class="o">=</span><span class="s2">"192.168.55.30"</span> <span class="nv">cidr_netmask</span><span class="o">=</span><span class="s2">"24"</span> <span class="nv">iflabel</span><span class="o">=</span><span class="s2">"NagiosIP"</span> <span class="o">[</span>enter]
+<span class="gp">crm(live)# </span>commit <span class="o">[</span>enter]</code></pre></figure>
+
+<h4 id="apache2">Apache2</h4>
+
+<p>Der eingangs installierte Apache ist ebenfalls eine Cluster-Ressource,
+denn er nimmt als Proxy alle Anfragen an und weiß, an welchen der pro
+Site gestarteten Schwesterprozesse er den Request weiterleiten muss.
+Stoppen Sie ihn und unterbinden Sie ebenfalls seinen Start wenn das
+System bootet:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">invoke-rc.d apache2 stop <span class="o">[</span>enter]
+update-rc.d -f apache2 remove <span class="o">[</span>enter]</code></pre></figure>
+
+<p>Nun legen wir ihn als Cluster-Ressource an:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">crm(live)configure# </span>primitive pri_apache ocf:heartbeat:apache <span class="o">[</span>enter]
+  op monitor <span class="nv">interval</span><span class="o">=</span><span class="s2">"5"</span> <span class="nv">timeout</span><span class="o">=</span><span class="s2">"20"</span>  <span class="o">[</span>enter]
+  op start <span class="nv">interval</span><span class="o">=</span><span class="s2">"0"</span> <span class="nv">timeout</span><span class="o">=</span><span class="s2">"60"</span>  <span class="o">[</span>enter]
+  op stop <span class="nv">interval</span><span class="o">=</span><span class="s2">"0"</span> <span class="nv">timeout</span><span class="o">=</span><span class="s2">"60"</span>  <span class="o">[</span>enter]
+  params <span class="nv">configfile</span><span class="o">=</span><span class="s2">"/etc/apache2/apache2.conf"</span> <span class="nv">testregex</span><span class="o">=</span><span class="s2">"body"</span> <span class="o">[</span>enter]
+  <span class="nv">statusurl</span><span class="o">=</span><span class="s2">"http://localhost/server-status"</span> <span class="o">[</span>enter]
+<span class="gp">crm(live)# </span>commit <span class="o">[</span>enter]</code></pre></figure>
+
+<p>Pacemaker überwacht Apache, indem er seine status-Page aufruft. Per
+regex “body” prüft er, ob eine gültige HTML-Seite zurückgeliefert wird
+(natürlich können Sie den regex verfeinern).
+ Wieder ein Blick in die DRBD-MC – Ihr Cluster sollte mittlerweile so
+aussehen:</p>
+
+<p><a href="http://blog.simon-meggle.de/wp-content/uploads/2011/05/clusterweiter.png"><img src="Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20Teil%203-Dateien/clusterweiter.html" alt="" title="clusterweiter"></a>
+ Wie Sie sehen, hat Pacemaker die Service-IP auf nagios2 gestartet. Im
+übernächsten Kapitel werden wir diesem Zustand mit constraints zuleibe
+rücken und die Ressourcen in ihrer Zusammengehörigkeit und
+Startreihenfolge so verzurren, dass sie in einem für uns konsistenten
+Zusammenhang laufen. Zunächst aber wenden wir uns OMD zu, welches wir
+fürs Clustering vorbereiten müssen.</p>
+
+<p><a href="http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil1/">Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 1 (Installation der
+Nodes)</a></p>
+
+<p><a href="http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-2/">Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 2 (Konfiguration der
+Pakete)</a></p>
+
+<p><a href="http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-3/">Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 3 (Einrichtung der
+Clusterressourcen)</a></p>
+
+<p><a href="http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-4/">Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 4 (OMD-Sites als
+Clusterressource)</a></p>
+
+<p><a href="http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-5/">Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 5
+(Constraints)</a></p>
+
+<p><a href="http://blog.simon-meggle.de/tutorials/nagiosomd-cluster-mit-pacemakerdrbd-teil-6/">Nagios/OMD-Cluster mit Pacemaker/DRBD – Teil 6
+(Besonderheiten)</a></p>
+
+  </div>
+
+</article>
+
+
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+    /*
+    var disqus_config = function () {
+        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+
+        s.src = '//blogsimonmegglede.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">SIMON MEGGLE</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>SIMON MEGGLE</li>
+          <li><a href="mailto:mail@simon-meggle.de">mail@simon-meggle.de</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/simonmeggle"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"></path></svg>
+</span><span class="username">simonmeggle</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/simonmeggle"><span class="icon icon--twitter"><svg viewBox="0 0 16 16"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"></path></svg>
+</span><span class="username">simonmeggle</span></a>
+
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p></p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  
+
+
+</body></html>

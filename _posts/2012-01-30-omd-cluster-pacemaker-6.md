@@ -22,7 +22,7 @@ single-server-Installation unterscheidet.
 
 Die OMD-Site “siteA” aus den vorangegangenen Teilen dieses Tutorials
 funktionierte auf Anhieb auf beiden Nodes. Dies trifft nicht auf
-zukünftige Sites zu – lesen Sie, warum:
+zukünftige Sites zu.
 
 Das Kommando `omd create [site]` legt nicht nur die Verzeichnisse an,
 mit denen wir bisher zu tun hatten – pro Site wird auch ein
@@ -33,11 +33,11 @@ einfach kein allzu großer Aufwand ist, sich um diese beiden Punkte noch
 zu kümmern, und zweitens) weil das Erstellen von Sites nun wirklich kein
 täglich Brot ist.
 
-Lassen Sie uns davon ausgehen, dass Node2 aktiv ist, und wir nun im
-Durchmarsch eine neue Site erstellen möchten, die auch vom Cluster
+Wir gehen davon aus, dass Node2 aktiv ist. Nun soll im
+Durchmarsch eine neue Site erstellt werden, die ebenfalls vom Cluster
 verwaltet werden soll.
 
-Erstellen Sie die neue Site, starten Sie sie und testen Sie den Zugriff
+Erstellen Sie die neue Site "siteB", starten Sie diese und testen Sie den Zugriff
 unter
 [http://nagios/siteB/](http://nagios/siteB/):
 
@@ -55,7 +55,7 @@ root@nagios2:# omd start siteB [enter]
 
 (Preisfrage: warum wird dieser Befehl auf Nagios1 fehlschlagen? )
 
-Wir lesen nun die fstab und passwd-Dateien aus – notieren Sie sich die
+Wir lesen nun _fstab_ und _passwd_-Dateien aus – notieren Sie sich die
 Ausgaben folgender Befehle:
 
 {% highlight bash %}
@@ -67,10 +67,11 @@ root@nagios2:# cat /etc/fstab | grep siteB && cat /etc/passwd | grep siteB [ente
 {% endhighlight %}
 
 Zum Erzeugen des tmpfs auf Node1 reicht es, dort die 1. Zeile ans Ende
-der Datei /etc/fstab anzuhängen.
- Den dortigen User erzeugen Sie incl Gruppe wie folgt – ersetzen Sie GID
-und UID mit den IDs, die Sie auf Node2 ausgelesen haben (User und Gruppe
-ohne UID/GID anzulegen kann schiefgehen, da Sie sich nicht darauf
+der Datei _/etc/fstab_ anzuhängen.
+
+Den dortigen User erzeugen Sie incl Gruppe wie folgt – ersetzen Sie GID
+und UID mit den IDs, die Sie auf Node2 ausgelesen haben. User und Gruppe
+ohne UID/GID explizit anzugeben wird schiefgehen, da Sie sich nicht darauf
 verlassen können, dass beide Nodes hierfür automatisch die gleichen
 Werte vergeben):
 
@@ -106,9 +107,9 @@ crm(live)configure# commit [enter]
 
 {% endhighlight %}
 
-…und bewundern Sie das Ergebnis in der GUI:
+…und prüfen Sie das Ergebnis in der GUI:
 
-[![](Nagios_OMD-Cluster%20mit%20Pacemaker_DRBD%20-%20Teil%206%20-%20Simon%20Meggle-Dateien/2sites.png "2sites")](http://blog.simon-meggle.de/wp-content/uploads/2011/05/2sites.png)
+![](/assets/omd-cluster-pacemaker-3/2sites.png)
 
 #### Schlusswort/Ausblick
 
