@@ -70,7 +70,7 @@ crm(live)resource# stop pri_fs_omd [enter]
 Aktueller Status “vorher” ist nun: Ping-Score auf beiden Nodes 3000,
 DRBD-Master auf node1.
 
-![](/assets/omd-cluster-pacemaker-3/vorher.png)
+![](/assets/omd-cluster-pacemaker-5/vorher.png)
 
 Auf dem DRBD-Primary-Node verbieten wir nun per iptables alle Pings:
 
@@ -97,7 +97,7 @@ Die location-Regel für den DRBD-Master auf Node 2 hat sehr viel mehr
 Gewicht als die gleiche Regel auf Node 1. Deshalb zieht der Master auf
 node2 um:
 
-![](/assets/omd-cluster-pacemaker-3/nachher.png)
+![](/assets/omd-cluster-pacemaker-5/nachher.png)
 
 Nun erlauben wir nagios1 wieder das Pingen indem und flushen (leeren) die
 iptables:
@@ -152,7 +152,7 @@ derzeit aktuelle Version hat einen Bug: nach dem commit bleiben die
 Ressourcen, die in einer Gruppe zusammengefasst werden, als Zombies
 stehen). Folgende Gruppe sollte nun angezeigt werden:
 
-![](/assets/omd-cluster-pacemaker-3/group_omd.png)
+![](/assets/omd-cluster-pacemaker-5/group_omd.png)
 
 Mittels Colocation weisen wir nun den Cluster an, "group_omd" immer dort
 mitzustarten, wo der DRBD-Master läuft – und das mit einem Score von
@@ -169,7 +169,7 @@ commit [enter]
 
 {% endhighlight %}
 
-![](/assets/omd-cluster-pacemaker-3/omdfollowsdrbd.png)
+![](/assets/omd-cluster-pacemaker-5/omdfollowsdrbd.png)
 
 Wir müssen Pacemaker jetzt mit einem "order" constraint mitteilen, dass
 zwischen dem Start der group_omd und dem Promoten des DRBD-Masters eine
@@ -206,7 +206,7 @@ commit [enter]
 
 Das Ergebnis in der GUI:
 
-![](/assets/omd-cluster-pacemaker-3/sitaincluded.png)
+![](/assets/omd-cluster-pacemaker-5/siteaincluded.png)
 
 #### und jetzt: "Smoke Test"
 

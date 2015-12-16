@@ -1,0 +1,37 @@
+#!/bin/sh
+
+SCRIPT=$0
+ACCOUNT=$1
+TYPE=$2
+DIR=$3
+
+usage ()
+{
+        echo "$1 Usage: $SCRIPT mail.address@googlemail.com full|quick backup-dir"
+        exit 1
+}
+
+[ "$#" -eq 3 ] || usage "Wrong number of arguments!"
+[  -d "$DIR" ] || usage "Backup dir $DIR does not exist!"
+
+NOW=$(date +"%Y-%m-%d")
+GV_HOME="/volume1/util/gmvault"
+LOGFILE="$GV_HOME/log/$ACCOUNT-$TYPE-$NOW.log"
+[ -d $GV_HOME/log ] || mkdir "$GV_HOME/log"
+CURTIME=$(date +"%r")
+
+echo "------------------------------------" >> $LOGFILE
+echo "$CURTIME: Starting email sync..." >> $LOGFILE
+echo "------------------------------------" >> $LOGFILE
+printf "\n" >> $LOGFILE
+
+set >> $LOGFILE
+
+echo "Now executing: $GV_HOME/bin/gmvault sync -t $TYPE --db-dir $DIR $ACCOUNT" >> $LOGFILE
+sh $GV_HOME/bin/gmvault sync -t $TYPE --db-dir $DIR $ACCOUNT >> $LOGFILE
+CURTIME=$(date +"%r")
+
+printf "\n" >> $LOGFILE
+echo "------------------------------------" >> $LOGFILE
+echo "$CURTIME: email sync finished." >> $LOGFILE
+echo "------------------------------------" >> $LOGFILE
